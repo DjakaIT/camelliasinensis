@@ -1,0 +1,26 @@
+/* Tokeni pročitani iz CSS-a prototip-B.html (2.11.2026.). U prototipu se --olive zove --navy, a --olive-d --navy-d. */
+:root {
+  --paper: #f6f0e4;
+  --ink: #272a20;
+  --mute: #6b5e50;
+  --olive: #3b432e;
+  --olive-d: #262d1d;
+  --gold: #d4af37;
+  --gold-d: #8a6d14;
+  --line: #e6dcc8;
+  --err: #a33a2a;
+
+  --t-bijeli: #efe7d3;
+  --t-zeleni: #cfe0a6;
+  --t-oolong: #edc98c;
+  --t-crni: #d98c68;
+  --t-puer: #4a2e24;
+  --t-aroma: #f1cbc1;
+  --t-biljni: #dcddb8;
+  --t-pribor: #e6d8bf;
+
+  --r: 28px;
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --f-display: 'Bricolage Grotesque Variable', 'Bricolage Grotesque', system-ui, sans-serif;
+  --f-body: 'Inter Tight Variable', 'Inter Tight', system-ui, sans-serif;
+}

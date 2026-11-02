@@ -1,0 +1,79 @@
+'use client';
+
+import { useState } from 'react';
+import { IconArrow } from '@/components/Icons';
+import { beginCheckout } from '@/lib/cart/checkout';
+import { formatMoney } from '@/lib/format';
+import { useCart } from './CartContext';
+import { useCatalogIndex } from './CatalogIndex';
+
+/** Međuzbroj, upozorenja i "Na blagajnu". Dostava i porezi se ne računaju na klijentu (API-CONTRACT §2). */
+export function CheckoutPanel() {
+  const { lines, checkState, changedPrices, acceptPrices, recheck } = useCart();
+  const index = useCatalogIndex();
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState('');
+
+  const check = 'check' in checkState ? checkState.check : undefined;
+  const fresh = checkState.status === 'ready';
+  const badLines = check?.lines.filter((l) => !l.ok) ?? [];
+  const hasChanged = Object.keys(changedPrices).length > 0;
+  // Do odgovora backenda prikazujemo zbroj iz builda s jasnom napomenom.
+  const subtotal = check ? check.subtotal.amount : lines.reduce((s, l) => s + (index[l.sku]?.price ?? 0) * l.qty, 0);
+  const canPay = fresh && badLines.length === 0 && !hasChanged && !busy;
+
+  async function pay() {
+    setBusy(true);
+    setError('');
+    const r = await beginCheckout();
+    if (r.kind === 'redirect') {
+      window.location.assign(r.url);
+      return;
+    }
+    setBusy(false);
+    if (r.kind === 'blocked') {
+      setError(r.reason === 'price' ? 'Cijena se promijenila. Provjerite novu cijenu prije plaćanja.' : 'Ispravite označene artikle prije plaćanja.');
+    } else setError(r.error.message);
+    recheck();
+  }
+
+  return (
+    <>
+      <div className="x-row">
+        <span>Međuzbroj</span>
+        <b data-testid="subtotal">{formatMoney(subtotal)}</b>
+      </div>
+      {checkState.status === 'loading' && <p className="x-small" role="status">Provjeravamo cijene i zalihu…</p>}
+      {checkState.status === 'error' && (
+        <div className="x-note err" role="alert">
+          <span>{checkState.error} Cijene će se potvrditi pri plaćanju.</span>
+          <button type="button" className="x-link" onClick={recheck}>
+            Pokušaj ponovno
+          </button>
+        </div>
+      )}
+      {badLines.length > 0 && (
+        <p className="x-note err" role="alert">
+          Neki artikli nisu dostupni. Uklonite ih da biste nastavili na plaćanje.
+        </p>
+      )}
+      {hasChanged && (
+        <div className="x-note warn" role="alert">
+          <span>Cijena nekih artikala se promijenila. Nove cijene su prikazane iznad.</span>
+          <button type="button" className="x-link" onClick={acceptPrices}>
+            Prihvaćam nove cijene
+          </button>
+        </div>
+      )}
+      <p className="x-small">Dostava se odabire na stranici za plaćanje.</p>
+      <button type="button" className="x-btn x-wide" onClick={pay} disabled={!canPay} aria-busy={busy}>
+        {busy ? 'Preusmjeravamo…' : 'Na blagajnu'} <IconArrow />
+      </button>
+      {error && (
+        <p className="x-err" role="alert">
+          {error}
+        </p>
+      )}
+    </>
+  );
+}
