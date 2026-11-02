@@ -48,12 +48,13 @@ export function toCard(p: Product, typeName: string, plainDescription = ''): Car
   };
 }
 
-/** Pretraga neosjetljiva na velika slova i dijakritike ("caj" nađe "čaj"). */
+/** Pretraga neosjetljiva na velika slova, dijakritike i apostrofe ("caj" nađe "čaj", "puer" nađe "Pu'er"). */
 export function normalize(s: string): string {
   return s
     .replace(/[đĐ]/g, 'd')
     .normalize('NFD')
     .replace(/[̀-ͯ]/g, '')
+    .replace(/['’`]/g, '')
     .toLowerCase();
 }
 

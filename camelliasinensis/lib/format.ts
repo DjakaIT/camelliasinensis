@@ -7,7 +7,7 @@ export function formatMoney(m: Money | number): string {
   const cents = typeof m === 'number' ? m : m.amount;
   if (!Number.isInteger(cents)) throw new Error(`Iznos mora biti cijeli broj centi, a ne ${cents}`);
   // Intl u nekim okruženjima koristi uski razmak za tisućice; ujednačavamo na točku (hr: 1.234,50 €).
-  return `${nf.format(cents / 100).replace(/[  \s]/g, '.')} €`;
+  return `${nf.format(cents / 100).replace(/[\u00a0\u202f\s]/g, '.')}\u00a0€`;
 }
 
 /** 1 komad, 2 komada, 5 komada (hrvatska množina). */

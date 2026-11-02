@@ -14,7 +14,6 @@ type Props = {
 export function Picture({ src, alt, sizes, width, height, className, priority }: Props) {
   const s = imageSources(src);
   const common = {
-    alt,
     className,
     width: s?.width ?? width,
     height: s?.height ?? height,
@@ -22,12 +21,12 @@ export function Picture({ src, alt, sizes, width, height, className, priority }:
     decoding: 'async' as const,
     ...(priority ? { fetchPriority: 'high' as const } : {}),
   };
-  if (!s) return <img src={src} {...common} />;
+  if (!s) return <img src={src} alt={alt} {...common} />;
   return (
     <picture>
       <source type="image/avif" srcSet={s.avif} sizes={sizes} />
       <source type="image/webp" srcSet={s.webp} sizes={sizes} />
-      <img src={s.src} {...common} />
+      <img src={s.src} alt={alt} {...common} />
     </picture>
   );
 }
