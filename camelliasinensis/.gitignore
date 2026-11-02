@@ -1,24 +1,42 @@
-# Logs
-logs
+# ovisnosti
+node_modules/
+mock-server/node_modules/
+
+# Next.js
+.next/
+out/
+out-*/
+next-env.d.ts
+*.tsbuildinfo
+
+# generirano iz design-reference/ (scripts/optimize-images.mjs)
+public/img/
+
+# testovi
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
+coverage/
+.lighthouseci/
+
+# tajne i lokalne postavke
+.env
+.env.*
+!.env.example
+mock-server/.env
+mock-server/.env.*
+!mock-server/.env.example
+
+# stari Vite scaffold (lokalna kopija, ne ide u git)
+.scaffold-backup/
+
+# logovi i sustav
 *.log
 npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
-
-node_modules
-dist
-dist-ssr
-*.local
-
-# Editor directories and files
+.DS_Store
+Thumbs.db
 .vscode/*
 !.vscode/extensions.json
 .idea
-.DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+woo/

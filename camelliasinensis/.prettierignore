@@ -1,0 +1,15 @@
+.next
+out
+out-*
+node_modules
+mock-server/node_modules
+.scaffold-backup
+design-reference
+public/img
+fixtures
+woo
+docs/design-snapshots
+docs/screenshots
+test-results
+playwright-report
+*.md

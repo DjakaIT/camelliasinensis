@@ -1,27 +1,56 @@
 {
   "name": "camelliasinensis",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
+  "engines": {
+    "node": ">=22.12.0"
+  },
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
+    "assets": "node scripts/data-to-fixtures.mjs && node scripts/optimize-images.mjs",
+    "predev": "npm run assets",
+    "dev": "next dev",
+    "prebuild": "npm run assets",
+    "build": "next build",
+    "postbuild": "node scripts/postbuild.mjs",
+    "build:demo": "node scripts/with-env.mjs NEXT_PUBLIC_BACKEND=demo NEXT_PUBLIC_DEMO=1 -- npm run build",
+    "build:devserver": "node scripts/with-env.mjs NEXT_PUBLIC_BACKEND=devserver NEXT_PUBLIC_DEVSERVER_URL=http://127.0.0.1:4000 -- npm run build",
+    "serve": "sirv out --port 3000 --host 127.0.0.1 --single 404.html",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "typecheck": "tsc --noEmit",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "vitest run --project unit",
+    "test:contract": "vitest run --project contract",
+    "test:e2e": "playwright test",
+    "check:bundle": "node scripts/check-bundle.mjs",
+    "check:prerender": "node scripts/check-prerender.mjs",
+    "woo:csv": "node scripts/data-to-woo-csv.mjs",
+    "dev:mock": "npm --prefix mock-server start"
   },
   "dependencies": {
-    "react": "^19.3.1",
-    "react-dom": "^19.3.1"
+    "@fontsource-variable/bricolage-grotesque": "5.3.0",
+    "@fontsource-variable/inter-tight": "5.3.0",
+    "next": "16.4.3",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "sanitize-html": "2.18.1"
   },
   "devDependencies": {
-    "@eslint/js": "^10.0.1",
-    "@types/react": "^19.3.0",
-    "@types/react-dom": "^19.3.0",
-    "@vitejs/plugin-react": "^6.1.2",
-    "eslint": "^10.13.0",
-    "eslint-plugin-react-hooks": "^7.1.1",
-    "eslint-plugin-react-refresh": "^0.5.7",
-    "globals": "^17.13.0",
-    "vite": "^8.3.5"
+    "@axe-core/playwright": "4.14.0",
+    "@eslint/js": "9.39.5",
+    "@playwright/test": "1.64.1",
+    "@types/node": "24.19.2",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@types/sanitize-html": "2.16.2",
+    "eslint": "9.39.5",
+    "eslint-plugin-jsx-a11y": "6.10.2",
+    "prettier": "3.9.10",
+    "sharp": "0.35.5",
+    "sirv-cli": "3.0.1",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.72.1",
+    "vitest": "5.0.5"
   }
 }

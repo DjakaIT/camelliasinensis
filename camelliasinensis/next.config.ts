@@ -1,0 +1,21 @@
+import type { NextConfig } from 'next';
+
+// Statični export (FRONTEND-ODLUKA §6): bez API ruta, Server Actions, middlewarea, ISR-a i dynamicParams.
+const backend = process.env.NEXT_PUBLIC_BACKEND ?? 'demo';
+if (!['demo', 'devserver'].includes(backend)) {
+  throw new Error(`NEXT_PUBLIC_BACKEND mora biti "demo" ili "devserver", a ne "${backend}"`);
+}
+
+const config: NextConfig = {
+  output: 'export',
+  trailingSlash: true,
+  images: { unoptimized: true },
+  productionBrowserSourceMaps: false,
+  poweredByHeader: false,
+  reactStrictMode: true,
+  // Datoteke *.demo.tsx (npr. lažna stranica za plaćanje /dev/checkout/) postoje samo u demo buildu.
+  pageExtensions: backend === 'demo' ? ['tsx', 'ts', 'demo.tsx'] : ['tsx', 'ts'],
+  env: { NEXT_PUBLIC_BACKEND: backend },
+};
+
+export default config;
