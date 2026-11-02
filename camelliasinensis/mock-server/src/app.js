@@ -2,7 +2,7 @@
 import { Hono } from 'hono';
 import { bodyLimit } from 'hono/body-limit';
 import { cors } from 'hono/cors';
-import { checkLines, isAllowedReturnUrl, live, priceForCheckout, withOrderToken } from '../../lib/shop/engine.ts';
+import { checkLines, isAllowedReturnUrl, live, maskEmail, priceForCheckout, withOrderToken } from '../../lib/shop/engine.ts';
 import { ShopError } from '../../lib/shop/errors.ts';
 import { fakeCheckoutPage } from './fake-page.js';
 import { verifyWebhook } from './payments.js';
@@ -90,13 +90,30 @@ export function createApp({ config, store, payments, log = () => {} }) {
     if (order.status === 'pending' && order.sessionId) {
       try {
         const s = await payments.retrieveStatus(order.sessionId);
-        if (s === 'paid') store.markPaid(order);
-        else if (s === 'cancelled') store.markStatus(order, 'cancelled');
+        if (s?.email) order.emailMasked = s.email;
+        if (s?.status === 'paid') store.markPaid(order);
+        else if (s?.status === 'cancelled') store.markStatus(order, 'cancelled');
       } catch {
         // Stripe nedostupan: ostaje pending, frontend ponovno pita
       }
     }
-    return c.json({ status: order.status, ...(order.status === 'paid' ? { orderRef: order.ref } : {}) });
+    return c.json({
+      status: order.status,
+      ...(order.status === 'paid' ? { orderRef: order.ref, ...(order.emailMasked ? { email: order.emailMasked } : {}) } : {}),
+    });
+  });
+
+  // KONTAKT FORMA (razvoj): provjera i potvrda; sadržaj poruke, ime i e-mail se NE zapisuju
+  app.post('/contact', async (c) => {
+    const b = (await readJson(c)) ?? {};
+    const ok =
+      typeof b.name === 'string' && b.name.trim().length >= 2 && b.name.length <= 200 &&
+      typeof b.email === 'string' && /^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/.test(b.email.trim()) &&
+      typeof b.topic === 'string' && b.topic.length <= 100 &&
+      typeof b.message === 'string' && b.message.trim().length >= 10 && b.message.length <= 3000;
+    if (!ok) throw new ShopError('INVALID_REQUEST');
+    log('kontakt poruka zaprimljena');
+    return c.json({ ok: true });
   });
 
   // STRIPE WEBHOOK: potpis se uvijek provjerava; obrada idempotentna po event.id
@@ -113,6 +130,7 @@ export function createApp({ config, store, payments, log = () => {} }) {
     store.rememberEvent(event.id);
     const s = event.data?.object ?? {};
     const order = store.orderById(s.client_reference_id ?? s.metadata?.orderId);
+    if (order && s.customer_details?.email) order.emailMasked = maskEmail(s.customer_details.email);
     switch (event.type) {
       case 'checkout.session.completed':
         if (s.payment_status === 'paid' || s.payment_status === 'no_payment_required') store.markPaid(order);

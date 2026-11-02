@@ -12,7 +12,10 @@ export function getShop(): ShopBackend {
   if (instance) return instance;
   const backend = process.env.NEXT_PUBLIC_BACKEND ?? 'demo';
   if (backend === 'devserver') {
-    instance = createDevserverBackend(process.env.NEXT_PUBLIC_DEVSERVER_URL ?? 'http://127.0.0.1:4000');
+    const publicUrl = process.env.NEXT_PUBLIC_DEVSERVER_URL ?? 'http://127.0.0.1:4000';
+    // Pri buildu (Node) katalog smije doći s posebnog build mocka (scripts/build-devserver.mjs).
+    const buildUrl = typeof window === 'undefined' ? process.env.DEVSERVER_BUILD_URL : undefined;
+    instance = createDevserverBackend(buildUrl ?? publicUrl);
   } else {
     instance = createDemoBackend();
     if (typeof window !== 'undefined' && process.env.NEXT_PUBLIC_DEMO === '1') {

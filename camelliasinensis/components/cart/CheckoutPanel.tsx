@@ -3,11 +3,15 @@
 import { useState } from 'react';
 import { IconArrow } from '@/components/Icons';
 import { beginCheckout } from '@/lib/cart/checkout';
+import { FREE_SHIPPING_FROM, SHIPPING_FROM_PRICE } from '@/content/site';
 import { formatMoney } from '@/lib/format';
 import { useCart } from './CartContext';
 import { useCatalogIndex } from './CatalogIndex';
 
-/** Međuzbroj, upozorenja i "Na blagajnu". Dostava i porezi se ne računaju na klijentu (API-CONTRACT §2). */
+/**
+ * Međuzbroj, upozorenja i "Na blagajnu". Dostavu obračunava backend na stranici za plaćanje; ovdje se samo
+ * prikazuje koliko nedostaje do besplatne dostave (prag je poslovni podatak, ne šalje se backendu).
+ */
 export function CheckoutPanel() {
   const { lines, checkState, changedPrices, acceptPrices, recheck } = useCart();
   const index = useCatalogIndex();
@@ -37,8 +41,26 @@ export function CheckoutPanel() {
     recheck();
   }
 
+  const missing = Math.max(0, FREE_SHIPPING_FROM - subtotal);
+
   return (
     <>
+      <div className="x-ship" data-testid="free-shipping">
+        <p>
+          {missing > 0 ? (
+            <>
+              Još <b>{formatMoney(missing)}</b> do besplatne dostave
+            </>
+          ) : (
+            <>
+              <b>Besplatna dostava</b> je uključena
+            </>
+          )}
+        </p>
+        <div className="x-bar" aria-hidden="true">
+          <i style={{ width: `${Math.min(100, (subtotal / FREE_SHIPPING_FROM) * 100)}%` }} />
+        </div>
+      </div>
       <div className="x-row">
         <span>Međuzbroj</span>
         <b data-testid="subtotal">{formatMoney(subtotal)}</b>
@@ -65,7 +87,10 @@ export function CheckoutPanel() {
           </button>
         </div>
       )}
-      <p className="x-small">Dostava se odabire na stranici za plaćanje.</p>
+      <div className="x-row x-small">
+        <span>Dostava GLS</span>
+        <span>{missing > 0 ? `od ${formatMoney(SHIPPING_FROM_PRICE)}, odabir na blagajni` : 'Besplatno'}</span>
+      </div>
       <button type="button" className="x-btn x-wide" onClick={pay} disabled={!canPay} aria-busy={busy}>
         {busy ? 'Preusmjeravamo…' : 'Na blagajnu'} <IconArrow />
       </button>

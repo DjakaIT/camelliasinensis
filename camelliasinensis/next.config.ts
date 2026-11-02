@@ -13,7 +13,7 @@ const config: NextConfig = {
   productionBrowserSourceMaps: false,
   poweredByHeader: false,
   reactStrictMode: true,
-  // Datoteke *.demo.tsx (npr. lažna stranica za plaćanje /dev/checkout/) postoje samo u demo buildu.
+  // Datoteke *.demo.tsx (stranica za plaćanje demo backenda /blagajna/) postoje samo u demo buildu.
   pageExtensions: backend === 'demo' ? ['tsx', 'ts', 'demo.tsx'] : ['tsx', 'ts'],
   env: { NEXT_PUBLIC_BACKEND: backend },
   // CSS ugrađen u HTML: nema render-blocking zahtjeva (Lighthouse, GUIDE §4.6).

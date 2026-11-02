@@ -1,9 +1,9 @@
-// Postoji samo u demo buildu (next.config.ts: pageExtensions). Lažna stranica za plaćanje adaptera `demo`.
+// Postoji samo u demo buildu (next.config.ts: pageExtensions). Stranica za plaćanje demo backenda.
 import { DemoCheckoutPage } from '@/lib/shop/adapters/demo/checkout-page';
 
 export const metadata = {
-  title: 'Testno plaćanje',
-  description: 'Testna stranica za plaćanje demo trgovine. Ništa se ne naplaćuje.',
+  title: 'Blagajna',
+  description: 'Blagajna demo trgovine Camellia sinensis: kontakt, GLS dostava i plaćanje. Ništa se ne naplaćuje.',
   robots: { index: false, follow: false },
 };
 

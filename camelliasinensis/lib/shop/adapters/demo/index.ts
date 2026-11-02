@@ -1,9 +1,10 @@
-// Adapter `demo` (API-CONTRACT §4): sve u pregledniku nad fixtures/, lažna stranica za plaćanje /dev/checkout/.
+// Adapter `demo` (API-CONTRACT §4): sve u pregledniku nad fixtures/, stranica za plaćanje /blagajna/ (samo demo build).
 import {
   applySale,
   checkLines,
   isAllowedReturnUrl,
   live,
+  maskEmail,
   newToken,
   ORDER_TTL_MS,
   priceForCheckout,
@@ -11,6 +12,7 @@ import {
   withOrderToken,
 } from '../../engine';
 import { ShopError } from '../../errors';
+import { shippingMethod, shippingPrice, type ShippingMethodId } from '../../shipping';
 import type { Product, ProductTypeInfo, ShopBackend } from '../../types';
 import { baseHas, catalog, load, reset, save, type DemoOrder } from './state';
 
@@ -78,7 +80,8 @@ export function createDemoBackend(): ShopBackend {
           stockApplied: false,
         };
         save(o);
-        const redirect = new URL('/dev/checkout/', urls.success);
+        // Stranica za plaćanje demo backenda (postoji samo u demo buildu, app/blagajna/page.demo.tsx).
+        const redirect = new URL('/blagajna/', urls.success);
         redirect.searchParams.set('t', token);
         return { redirectUrl: redirect.toString(), orderToken: token };
       }),
@@ -86,7 +89,10 @@ export function createDemoBackend(): ShopBackend {
       tick(() => {
         const o = findOrder(token);
         if (!o) return { status: 'unknown' as const };
-        return { status: o.status, ...(o.status === 'paid' ? { orderRef: o.ref } : {}) };
+        return {
+          status: o.status,
+          ...(o.status === 'paid' ? { orderRef: o.ref, ...(o.emailMasked ? { email: o.emailMasked } : {}) } : {}),
+        };
       }),
   };
 }
@@ -94,8 +100,8 @@ export function createDemoBackend(): ShopBackend {
 /** Upravljanje demo "backendom": lažna stranica za plaćanje, testovi i window.__cs. */
 export const demoControls = {
   getOrder: (token: string) => findOrder(token),
-  /** Isto što bi napravio potpisani webhook: označi plaćeno i jednom umanji zalihu. */
-  pay(token: string): DemoOrder {
+  /** Isto što bi napravio potpisani webhook: označi plaćeno i jednom umanji zalihu. Dostavu obračunava backend. */
+  pay(token: string, details: { shipping?: ShippingMethodId; email?: string } = {}): DemoOrder {
     const o = load();
     const order = findOrder(token) && o.orders[token];
     if (!order || order.status !== 'pending') throw new ShopError('INVALID_REQUEST');
@@ -112,6 +118,11 @@ export const demoControls = {
       for (const l of order.lines) o.stock[l.sku] = applySale(cat.get(l.sku)!.stock, l.qty);
       order.stockApplied = true;
     }
+    const method = shippingMethod(details.shipping ?? 'gls-adresa')!;
+    const ship = shippingPrice(method, order.total.amount);
+    order.shipping = { id: method.id, name: method.name, price: ship };
+    order.grandTotal = { amount: order.total.amount + ship, currency: 'EUR' };
+    order.emailMasked = maskEmail(details.email);
     order.status = 'paid';
     save(o);
     return order;

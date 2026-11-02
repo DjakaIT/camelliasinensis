@@ -147,3 +147,10 @@ export function withOrderToken(url: string, token: string): string {
   u.searchParams.set('narudzba', token);
   return u.toString();
 }
+
+/** "marko.horvat@gmail.com" → "m***@gmail.com" (OrderStatus.email, API-CONTRACT §2). */
+export function maskEmail(email: unknown): string | undefined {
+  if (typeof email !== 'string') return undefined;
+  const m = email.trim().match(/^([^@\s])[^@\s]*@([^@\s]+\.[^@\s]+)$/);
+  return m ? `${m[1]}***@${m[2]}` : undefined;
+}

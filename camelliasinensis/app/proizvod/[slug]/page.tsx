@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { IconArrow, IconClock, IconScale, IconThermo } from '@/components/Icons';
+import { IconArrow, IconCard, IconClock, IconReturn, IconScale, IconThermo, IconTruck } from '@/components/Icons';
+import { FREE_SHIPPING_FROM, legalPage } from '@/content/site';
+import { formatMoney } from '@/lib/format';
 import { NoImage, Picture } from '@/components/Picture';
 import { ProductCard } from '@/components/ProductCard';
 import { BuyRow, LivePrice } from '@/components/product/BuyBox';
@@ -102,6 +104,20 @@ export default async function ProductPage({ params }: Props) {
               </div>
             )}
             <BuyRow sku={p.sku} name={p.name} buildPrice={p.price.amount} />
+            <ul className="x-perks">
+              <li>
+                <IconTruck />
+                Dostava GLS-om, besplatno od {formatMoney(FREE_SHIPPING_FROM)}
+              </li>
+              <li>
+                <IconCard />
+                Kartica, Apple Pay ili Google Pay
+              </li>
+              <li>
+                <IconReturn />
+                {legalPage('povrat') ? <Link href="/povrat/">Povrat u 14 dana</Link> : 'Povrat u 14 dana'}
+              </li>
+            </ul>
             {a.brew && (
               <div className="x-brew">
                 <h2>Priprema</h2>

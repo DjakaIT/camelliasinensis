@@ -9,12 +9,17 @@ export type DemoOrder = {
   ref: string;
   token: string;
   lines: PricedLine[];
+  /** Međuzbroj proizvoda (bez dostave). */
   total: Money;
   status: OrderStatus['status'];
   createdAt: number;
   successUrl: string;
   cancelUrl: string;
   stockApplied: boolean;
+  /** Popunjava stranica za plaćanje. Osobni podaci se ne spremaju, samo maskirani e-mail. */
+  shipping?: { id: string; name: string; price: number };
+  grandTotal?: Money;
+  emailMasked?: string;
 };
 
 type Overrides = {

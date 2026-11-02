@@ -10,7 +10,7 @@ import { getShop, ShopError, type OrderStatus } from '@/lib/shop';
 const POLL_MS = 3000;
 const POLL_FOR_MS = 30_000;
 
-type View = { kind: 'checking' } | { kind: 'paid'; ref?: string } | { kind: 'pending-timeout' } | { kind: 'failed' } | { kind: 'unknown' } | { kind: 'error'; text: string };
+type View = { kind: 'checking' } | { kind: 'paid'; ref?: string; email?: string } | { kind: 'pending-timeout' } | { kind: 'failed' } | { kind: 'unknown' } | { kind: 'error'; text: string };
 
 /**
  * Posjet stranici NIJE dokaz plaćanja (API-CONTRACT §3.5): "plaćanje potvrđeno" samo za status `paid`.
@@ -52,7 +52,7 @@ export function OrderResult() {
         } catch {
           // ništa
         }
-        setView({ kind: 'paid', ref: s.orderRef });
+        setView({ kind: 'paid', ref: s.orderRef, email: s.email });
       } else if (s.status === 'pending') {
         if (Date.now() - t0 < POLL_FOR_MS) timer = setTimeout(tick, POLL_MS);
         else setView({ kind: 'pending-timeout' });
@@ -89,6 +89,11 @@ export function OrderResult() {
               ) : null}
               .
             </p>
+            {view.email && (
+              <p>
+                Potvrdu narudžbe šaljemo na <b>{view.email}</b>. Kad GLS preuzme paket, dobit ćete poruku s poveznicom za praćenje.
+              </p>
+            )}
             <div className="x-donebtns">
               <Link href="/katalog/" className="x-btn">
                 Nastavi kupovinu

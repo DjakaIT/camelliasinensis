@@ -44,7 +44,7 @@ export default tseslint.config(
   },
   {
     // Lažna stranica za plaćanje dio je demo "backenda" (API-CONTRACT §4) i postoji samo u demo buildu.
-    files: ['app/dev/checkout/page.demo.tsx'],
+    files: ['app/blagajna/page.demo.tsx'],
     rules: { 'no-restricted-imports': ['error', { paths: backendOnly.paths }] },
   },
   {
