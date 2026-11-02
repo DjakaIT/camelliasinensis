@@ -1,0 +1,3420 @@
+{
+  "$comment": "GENERIRANO skriptom scripts/data-to-fixtures.mjs iz design-reference/src/data.js; ne uređivati ručno. CIJENE SU PRIMJERI IZ PROTOTIPA (nisu Sarine potvrđene cijene) i ne smiju se prikazivati kao akcija ni staro/novo. ZALIHA JE IZMIŠLJENA za demo (stanja: na zalihi, malo, nema).",
+  "examplePrices": true,
+  "types": [
+    {
+      "key": "bijeli",
+      "name": "Bijeli čaj",
+      "description": "Najmanje obrađen, nježan i svijetao."
+    },
+    {
+      "key": "zeleni",
+      "name": "Zeleni čaj",
+      "description": "Svjež, travnat, bistar."
+    },
+    {
+      "key": "oolong",
+      "name": "Oolong",
+      "description": "Između zelenog i crnog, cvjetan ili pečen."
+    },
+    {
+      "key": "crni",
+      "name": "Crni čaj",
+      "description": "Pun, sladan, za jutro."
+    },
+    {
+      "key": "puer",
+      "name": "Pu'er",
+      "description": "Prešan u kolače, sazrijeva godinama."
+    },
+    {
+      "key": "aroma",
+      "name": "Aromatizirani",
+      "description": "Earl Grey, chai i voćne mješavine na bazi čaja."
+    },
+    {
+      "key": "biljni",
+      "name": "Biljni i rooibos",
+      "description": "Bez čajne biljke, većinom bez kofeina."
+    },
+    {
+      "key": "pribor",
+      "name": "Pribor i knjige",
+      "description": "Gaiwani, setovi za matchu, daske, knjiga."
+    }
+  ],
+  "products": [
+    {
+      "id": "demo-1",
+      "sku": "CSTB-2",
+      "slug": "bai-mu-dan-wang",
+      "name": "Bai Mu Dan Wang",
+      "type": "bijeli",
+      "unitLabel": "50 g",
+      "price": {
+        "amount": 1190,
+        "currency": "EUR"
+      },
+      "taxIncluded": true,
+      "descriptionHtml": "<p>Klasični kineski bijeli čaj od mladih proljetnih izdanaka. Mekana, puna tekstura s cvjetnim notama djeteline i slatkim tonovima cimeta.</p>",
+      "images": [
+        {
+          "src": "/img/p/CSTB-2.jpg",
+          "alt": "Bai Mu Dan Wang",
+          "width": 460,
+          "height": 460
+        }
+      ],
+      "attributes": {
+        "origin": "Kina",
+        "caffeine": 1,
+        "flavors": [
+          "cvjetni",
+          "slatkasti"
+        ],
+        "form": "rastresiti",
+        "moods": [
+          "opust",
+          "poklon"
+        ],
+        "badges": [],
+        "brew": {
+          "temp": "85 °C",
+          "time": "3–4 min",
+          "dose": "4 g / 250 ml"
+        }
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true,
+      "updatedAt": "2026-11-02T00:00:00.000Z"
+    },
+    {
+      "id": "demo-2",
+      "sku": "CSTVI-295",
+      "slug": "gong-mei-2018",
+      "name": "Gong Mei 2018",
+      "type": "bijeli",
+      "unitLabel": "kolač 100 g",
+      "price": {
+        "amount": 2400,
+        "currency": "EUR"
+      },
+      "taxIncluded": true,
+      "descriptionHtml": "<p>Odležani bijeli čaj iz Fudinga (Fujian), sorta Fuding Da Bai. Okerasta, sirupasta šalica s notama suhe šljive, sijena i kamfora, bez gorčine.</p>",
+      "images": [
+        {
+          "src": "/img/p/CSTVI-295.jpg",
+          "alt": "Gong Mei 2018",
+          "width": 460,
+          "height": 460
+        }
+      ],
+      "attributes": {
+        "origin": "Kina",
+        "caffeine": 1,
+        "flavors": [
+          "vocni",
+          "slatkasti"
+        ],
+        "form": "kolac",
+        "moods": [
+          "opust",
+          "poklon"
+        ],
+        "badges": [
+          "rijetko"
+        ],
+        "brew": {
+          "temp": "85 °C",
+          "time": "3–4 min",
+          "dose": "4 g / 250 ml"
+        }
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true,
+      "updatedAt": "2026-11-02T00:00:00.000Z"
+    },
+    {
+      "id": "demo-3",
+      "sku": "CSTB-6",
+      "slug": "jingning-yin-zhen",
+      "name": "Jingning Yin Zhen",
+      "type": "bijeli",
+      "unitLabel": "50 g",
+      "price": {
+        "amount": 1850,
+        "currency": "EUR"
+      },
+      "taxIncluded": true,
+      "descriptionHtml": "<p>Ujednačeni, fini pupoljci majstora He. Okusi zobi, zrele banane i cvijeća s blagim paprom, svjež mentolni završetak. Ekskluzivna serija.</p>",
+      "images": [
+        {
+          "src": "/img/p/CSTB-6.jpg",
+          "alt": "Jingning Yin Zhen",
+          "width": 460,
+          "height": 460
+        }
+      ],
+      "attributes": {
+        "origin": "Kina",
+        "caffeine": 1,
+        "flavors": [
+          "vocni",
+          "cvjetni"
+        ],
+        "form": "rastresiti",
+        "moods": [
+          "opust",
+          "poklon"
+        ],
+        "badges": [
+          "rijetko"
+        ],
+        "brew": {
+          "temp": "85 °C",
+          "time": "3–4 min",
+          "dose": "4 g / 250 ml"
+        }
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true,
+      "updatedAt": "2026-11-02T00:00:00.000Z"
+    },
+    {
+      "id": "demo-4",
+      "sku": "CSTVI-294",
+      "slug": "bai-mu-dan-2021",
+      "name": "Bai Mu Dan 2021",
+      "type": "bijeli",
+      "unitLabel": "50 g (kockice 4 g)",
+      "price": {
+        "amount": 1600,
+        "currency": "EUR"
+      },
+      "taxIncluded": true,
+      "descriptionHtml": "<p>Odležani bijeli čaj iz Fujiana prešan u male kockice od 4 g. Slatki okusi suhog tropskog voća i proljetnog meda.</p>",
+      "images": [
+        {
+          "src": "/img/p/CSTVI-294.jpg",
+          "alt": "Bai Mu Dan 2021",
+          "width": 460,
+          "height": 460
+        }
+      ],
+      "attributes": {
+        "origin": "Kina",
+        "caffeine": 1,
+        "flavors": [
+          "vocni",
+          "medeni"
+        ],
+        "form": "kolac",
+        "moods": [
+          "opust",
+          "poklon"
+        ],
+        "badges": [],
+        "brew": {
+          "temp": "85 °C",
+          "time": "3–4 min",
+          "dose": "4 g / 250 ml"
+        }
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true,
+      "updatedAt": "2026-11-02T00:00:00.000Z"
+    },
+    {
+      "id": "demo-5",
+      "sku": "CSTV-178",
+      "slug": "bancha",
+      "name": "Bancha",
+      "type": "zeleni",
+      "unitLabel": "50 g",
+      "price": {
+        "amount": 790,
+        "currency": "EUR"
+      },
+      "taxIncluded": true,
+      "descriptionHtml": "<p>Organska bancha iz Shizuoke, odličan svakodnevni zeleni čaj. Osvježavajuća, travnata šalica s morskim notama. Idealan prvi japanski čaj.</p>",
+      "images": [
+        {
+          "src": "/img/p/CSTV-178.jpg",
+          "alt": "Bancha",
+          "width": 460,
+          "height": 460
+        }
+      ],
+      "attributes": {
+        "origin": "Japan",
+        "caffeine": 2,
+        "flavors": [
+          "travnati"
+        ],
+        "form": "rastresiti",
+        "moods": [
+          "jutro"
+        ],
+        "badges": [
+          "bio"
+        ],
+        "brew": {
+          "temp": "70 °C",
+          "time": "1–2 min",
+          "dose": "4 g / 250 ml"
+        }
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true,
+      "updatedAt": "2026-11-02T00:00:00.000Z"
+    },
+    {
+      "id": "demo-6",
+      "sku": "CSTV-8",
+      "slug": "genmaicha",
+      "name": "Genmaicha",
+      "type": "zeleni",
+      "unitLabel": "50 g",
+      "price": {
+        "amount": 790,
+        "currency": "EUR"
+      },
+      "taxIncluded": true,
+      "descriptionHtml": "<p>Tradicionalna japanska mješavina zelenog čaja s prženom i napuhanom rižom. Topla, utješna aroma i malo kofeina.</p>",
+      "images": [
+        {
+          "src": "/img/p/CSTV-8.jpg",
+          "alt": "Genmaicha",
+          "width": 460,
+          "height": 460
+        }
+      ],
+      "attributes": {
+        "origin": "Japan",
+        "caffeine": 1,
+        "flavors": [
+          "orasasti",
+          "slatkasti"
+        ],
+        "form": "rastresiti",
+        "moods": [
+          "vecer",
+          "opust"
+        ],
+        "badges": [
+          "bio"
+        ],
+        "brew": {
+          "temp": "70 °C",
+          "time": "1–2 min",
+          "dose": "4 g / 250 ml"
+        }
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true,
+      "updatedAt": "2026-11-02T00:00:00.000Z"
+    },
+    {
+      "id": "demo-7",
+      "sku": "CSTV-10",
+      "slug": "gunpowder",
+      "name": "Gunpowder",
+      "type": "zeleni",
+      "unitLabel": "50 g",
+      "price": {
+        "amount": 690,
+        "currency": "EUR"
+      },
+      "taxIncluded": true,
+      "descriptionHtml": "<p>Zeleni čaj snažnog okusa, temelj marokanskog čaja s mentom. Pije se sam ili sa svježim listovima mente.</p>",
+      "images": [
+        {
+          "src": "/img/p/CSTV-10.jpg",
+          "alt": "Gunpowder",
+          "width": 460,
+          "height": 460
+        }
+      ],
+      "attributes": {
+        "origin": "Kina",
+        "caffeine": 2,
+        "flavors": [
+          "travnati"
+        ],
+        "form": "rastresiti",
+        "moods": [
+          "jutro",
+          "fokus"
+        ],
+        "badges": [
+          "bio"
+        ],
+        "brew": {
+          "temp": "80 °C",
+          "time": "2–3 min",
+          "dose": "4 g / 250 ml"
+        }
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true,
+      "updatedAt": "2026-11-02T00:00:00.000Z"
+    },
+    {
+      "id": "demo-8",
+      "sku": "CSTV-22",
+      "slug": "kamairicha",
+      "name": "Kamairicha",
+      "type": "zeleni",
+      "unitLabel": "50 g",
+      "price": {
+        "amount": 1090,
+        "currency": "EUR"
+      },
+      "taxIncluded": true,
+      "descriptionHtml": "<p>Organski zeleni čaj s otoka Kyushu, pržen u tavi umjesto parenja. Orašaste note kestena i blago slatki citrusni završetak.</p>",
+      "images": [
+        {
+          "src": "/img/p/CSTV-22.jpg",
+          "alt": "Kamairicha",
+          "width": 460,
+          "height": 460
+        }
+      ],
+      "attributes": {
+        "origin": "Japan",
+        "caffeine": 2,
+        "flavors": [
+          "orasasti",
+          "citrusni"
+        ],
+        "form": "rastresiti",
+        "moods": [
+          "fokus"
+        ],
+        "badges": [
+          "bio"
+        ],
+        "brew": {
+          "temp": "70 °C",
+          "time": "1–2 min",
+          "dose": "4 g / 250 ml"
+        }
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true,
+      "updatedAt": "2026-11-02T00:00:00.000Z"
+    },
+    {
+      "id": "demo-9",
+      "sku": "CSTV-88",
+      "slug": "gyokuro-okabe",
+      "name": "Gyokuro Okabe",
+      "type": "zeleni",
+      "unitLabel": "50 g",
+      "price": {
+        "amount": 2200,
+        "currency": "EUR"
+      },
+      "taxIncluded": true,
+      "descriptionHtml": "<p>Gyokuro, čaj uzgojen u sjeni. Miris maline, glatka šalica s povrtnim notama špinata i suncokretovih sjemenki.</p>",
+      "images": [
+        {
+          "src": "/img/p/CSTV-88.jpg",
+          "alt": "Gyokuro Okabe",
+          "width": 460,
+          "height": 460
+        }
+      ],
+      "attributes": {
+        "origin": "Japan",
+        "caffeine": 3,
+        "flavors": [
+          "travnati",
+          "slatkasti"
+        ],
+        "form": "rastresiti",
+        "moods": [
+          "fokus",
+          "poklon"
+        ],
+        "badges": [
+          "rijetko"
+        ],
+        "brew": {
+          "temp": "70 °C",
+          "time": "1–2 min",
+          "dose": "4 g / 250 ml"
+        }
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true,
+      "updatedAt": "2026-11-02T00:00:00.000Z"
+    },
+    {
+      "id": "demo-10",
+      "sku": "CSTV-18",
+      "slug": "huiming",
+      "name": "Huiming",
+      "type": "zeleni",
+      "unitLabel": "50 g",
+      "price": {
+        "amount": 1390,
+        "currency": "EUR"
+      },
+      "taxIncluded": true,
+      "descriptionHtml": "<p>Zeleni čaj iz Zhejianga proizvođača He Wei Zhonga. Živahna, uljasta šalica s notama proljetnog cvijeća i breskve.</p>",
+      "images": [
+        {
+          "src": "/img/p/CSTV-18.jpg",
+          "alt": "Huiming",
+          "width": 460,
+          "height": 460
+        }
+      ],
+      "attributes": {
+        "origin": "Kina",
+        "caffeine": 2,
+        "flavors": [
+          "cvjetni",
+          "vocni"
+        ],
+        "form": "rastresiti",
+        "moods": [
+          "fokus"
+        ],
+        "badges": [],
+        "brew": {
+          "temp": "80 °C",
+          "time": "2–3 min",
+          "dose": "4 g / 250 ml"
+        }
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true,
+      "updatedAt": "2026-11-02T00:00:00.000Z"
+    },
+    {
+      "id": "demo-11",
+      "sku": "CSTV-68",
+      "slug": "long-jing-zhejiang",
+      "name": "Long Jing Zhejiang",
+      "type": "zeleni",
+      "unitLabel": "50 g",
+      "price": {
+        "amount": 1290,
+        "currency": "EUR"
+      },
+      "taxIncluded": true,
+      "descriptionHtml": "<p>Veliki kineski klasik, poznat kao Dragonwell. Svjež i ukusan, s cvjetnim i travnatim notama i dozom svježeg lješnjaka.</p>",
+      "images": [
+        {
+          "src": "/img/p/CSTV-68.jpg",
+          "alt": "Long Jing Zhejiang",
+          "width": 460,
+          "height": 460
+        }
+      ],
+      "attributes": {
+        "origin": "Kina",
+        "caffeine": 2,
+        "flavors": [
+          "orasasti",
+          "cvjetni"
+        ],
+        "form": "rastresiti",
+        "moods": [
+          "fokus",
+          "jutro"
+        ],
+        "badges": [],
+        "brew": {
+          "temp": "80 °C",
+          "time": "2–3 min",
+          "dose": "4 g / 250 ml"
+        }
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true,
+      "updatedAt": "2026-11-02T00:00:00.000Z"
+    },
+    {
+      "id": "demo-12",
+      "sku": "CSTV-40",
+      "slug": "sencha-mobata",
+      "name": "Sencha Mobata",
+      "type": "zeleni",
+      "unitLabel": "50 g",
+      "price": {
+        "amount": 990,
+        "currency": "EUR"
+      },
+      "taxIncluded": true,
+      "descriptionHtml": "<p>Sencha u tradicionalnom stilu Shizuoke. Snažan povrtni okus s blagom gorčinom i cvjetnim završetkom. Odličan svakodnevni čaj.</p>",
+      "images": [
+        {
+          "src": "/img/p/CSTV-40.jpg",
+          "alt": "Sencha Mobata",
+          "width": 460,
+          "height": 460
+        }
+      ],
+      "attributes": {
+        "origin": "Japan",
+        "caffeine": 2,
+        "flavors": [
+          "travnati",
+          "cvjetni"
+        ],
+        "form": "rastresiti",
+        "moods": [
+          "jutro",
+          "fokus"
+        ],
+        "badges": [],
+        "brew": {
+          "temp": "70 °C",
+          "time": "1–2 min",
+          "dose": "4 g / 250 ml"
+        }
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true,
+      "updatedAt": "2026-11-02T00:00:00.000Z"
+    },
+    {
+      "id": "demo-13",
+      "sku": "CSTV-41",
+      "slug": "sencha-nagashima",
+      "name": "Sencha Nagashima",
+      "type": "zeleni",
+      "unitLabel": "50 g",
+      "price": {
+        "amount": 1190,
+        "currency": "EUR"
+      },
+      "taxIncluded": true,
+      "descriptionHtml": "<p>Sencha braće Morishita iz Shizuoke. Živahan okus, intenzivne biljne arome, voćne note i topli orašasti završetak.</p>",
+      "images": [
+        {
+          "src": "/img/p/CSTV-41.jpg",
+          "alt": "Sencha Nagashima",
+          "width": 460,
+          "height": 460
+        }
+      ],
+      "attributes": {
+        "origin": "Japan",
+        "caffeine": 2,
+        "flavors": [
+          "travnati",
+          "vocni",
+          "orasasti"
+        ],
+        "form": "rastresiti",
+        "moods": [
+          "jutro",
+          "fokus"
+        ],
+        "badges": [
+          "bio"
+        ],
+        "brew": {
+          "temp": "70 °C",
+          "time": "1–2 min",
+          "dose": "4 g / 250 ml"
+        }
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true,
+      "updatedAt": "2026-11-02T00:00:00.000Z"
+    },
+    {
+      "id": "demo-14",
+      "sku": "CSTV-121",
+      "slug": "matcha-sora",
+      "name": "Matcha Sora",
+      "type": "zeleni",
+      "unitLabel": "30 g",
+      "price": {
+        "amount": 1900,
+        "currency": "EUR"
+      },
+      "taxIncluded": true,
+      "descriptionHtml": "<p>Matcha iz regije Uji, od proizvođača Koyame (16 generacija). Pristupačna i intenzivna, s okusom svježeg bilja. Odlična za latte.</p>",
+      "images": [
+        {
+          "src": "/img/p/CSTV-121.jpg",
+          "alt": "Matcha Sora",
+          "width": 460,
+          "height": 460
+        }
+      ],
+      "attributes": {
+        "origin": "Japan",
+        "caffeine": 3,
+        "flavors": [
+          "travnati"
+        ],
+        "form": "prah",
+        "moods": [
+          "fokus",
+          "jutro"
+        ],
+        "badges": [],
+        "brew": {
+          "temp": "75 °C",
+          "time": "pjenjenje metlicom",
+          "dose": "2 g / 70 ml"
+        }
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true,
+      "updatedAt": "2026-11-02T00:00:00.000Z"
+    },
+    {
+      "id": "demo-15",
+      "sku": "CSTV-237",
+      "slug": "matcha-mizukaze",
+      "name": "Matcha Mizukaze",
+      "type": "zeleni",
+      "unitLabel": "30 g",
+      "price": {
+        "amount": 2900,
+        "currency": "EUR"
+      },
+      "taxIncluded": true,
+      "descriptionHtml": "<p>Ceremonijalna matcha iz Fujiede (Shizuoka). Kremasta, s jabučno zelenom pjenom, notama rikule i kakaa te cvjetnim završetkom.</p>",
+      "images": [
+        {
+          "src": "/img/p/CSTV-237.jpg",
+          "alt": "Matcha Mizukaze",
+          "width": 460,
+          "height": 460
+        }
+      ],
+      "attributes": {
+        "origin": "Japan",
+        "caffeine": 3,
+        "flavors": [
+          "travnati",
+          "cvjetni"
+        ],
+        "form": "prah",
+        "moods": [
+          "fokus",
+          "poklon"
+        ],
+        "badges": [
+          "rijetko"
+        ],
+        "brew": {
+          "temp": "75 °C",
+          "time": "pjenjenje metlicom",
+          "dose": "2 g / 70 ml"
+        }
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true,
+      "updatedAt": "2026-11-02T00:00:00.000Z"
+    },
+    {
+      "id": "demo-16",
+      "sku": "CSTAD-561",
+      "slug": "matcha-uji",
+      "name": "Matcha Uji",
+      "type": "zeleni",
+      "unitLabel": "100 g",
+      "price": {
+        "amount": 3900,
+        "currency": "EUR"
+      },
+      "taxIncluded": true,
+      "descriptionHtml": "<p>Matcha iz regije Uji u Japanu, u pakiranju od 100 g. Za pripremu metlicom ili za matcha latte.</p>",
+      "images": [
+        {
+          "src": "/img/p/CSTAD-561.jpg",
+          "alt": "Matcha Uji",
+          "width": 460,
+          "height": 460
+        }
+      ],
+      "attributes": {
+        "origin": "Japan",
+        "caffeine": 3,
+        "flavors": [
+          "travnati"
+        ],
+        "form": "prah",
+        "moods": [
+          "fokus"
+        ],
+        "badges": [
+          "novo"
+        ],
+        "brew": {
+          "temp": "75 °C",
+          "time": "pjenjenje metlicom",
+          "dose": "2 g / 70 ml"
+        }
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true,
+      "updatedAt": "2026-11-02T00:00:00.000Z"
+    },
+    {
+      "id": "demo-17",
+      "sku": "CSTN-1",
+      "slug": "assam-breakfast",
+      "name": "Assam Breakfast",
+      "type": "crni",
+      "unitLabel": "50 g",
+      "price": {
+        "amount": 790,
+        "currency": "EUR"
+      },
+      "taxIncluded": true,
+      "descriptionHtml": "<p>Crni čaj iz vrta Banaspaty u Assamu. Puna, izravna šalica s notama duhana, slada i šljive, sa ili bez mlijeka.</p>",
+      "images": [
+        {
+          "src": "/img/p/CSTN-1.jpg",
+          "alt": "Assam Breakfast",
+          "width": 460,
+          "height": 460
+        }
+      ],
+      "attributes": {
+        "origin": "Indija",
+        "caffeine": 3,
+        "flavors": [
+          "sladni",
+          "vocni"
+        ],
+        "form": "rastresiti",
+        "moods": [
+          "jutro"
+        ],
+        "badges": [
+          "bio"
+        ],
+        "brew": {
+          "temp": "95 °C",
+          "time": "3–4 min",
+          "dose": "3 g / 250 ml"
+        }
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true,
+      "updatedAt": "2026-11-02T00:00:00.000Z"
+    },
+    {
+      "id": "demo-18",
+      "sku": "CSTN-79",
+      "slug": "assam-halmari",
+      "name": "Assam Halmari",
+      "type": "crni",
+      "unitLabel": "50 g",
+      "price": {
+        "amount": 1290,
+        "currency": "EUR"
+      },
+      "taxIncluded": true,
+      "descriptionHtml": "<p>Lijepo uvijeni listovi i pupoljci ortodoksne tradicije. Bakrena, svilenkasta i sladna šalica za ljubitelje jakog čaja.</p>",
+      "images": [
+        {
+          "src": "/img/p/CSTN-79.jpg",
+          "alt": "Assam Halmari",
+          "width": 460,
+          "height": 460
+        }
+      ],
+      "attributes": {
+        "origin": "Indija",
+        "caffeine": 3,
+        "flavors": [
+          "sladni",
+          "drvenasti"
+        ],
+        "form": "rastresiti",
+        "moods": [
+          "jutro"
+        ],
+        "badges": [],
+        "brew": {
+          "temp": "95 °C",
+          "time": "3–4 min",
+          "dose": "3 g / 250 ml"
+        }
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true,
+      "updatedAt": "2026-11-02T00:00:00.000Z"
+    },
+    {
+      "id": "demo-19",
+      "sku": "CSTN-64",
+      "slug": "ceylon-new-vithanakande",
+      "name": "Ceylon New Vithanakande",
+      "type": "crni",
+      "unitLabel": "50 g",
+      "price": {
+        "amount": 990,
+        "currency": "EUR"
+      },
+      "taxIncluded": true,
+      "descriptionHtml": "<p>Crni čaj sa Šri Lanke sa srebrnim pupoljcima. Tamna, puna šalica, sladna i slatka, s notama suhe šljive.</p>",
+      "images": [
+        {
+          "src": "/img/p/CSTN-64.jpg",
+          "alt": "Ceylon New Vithanakande",
+          "width": 460,
+          "height": 460
+        }
+      ],
+      "attributes": {
+        "origin": "Šri Lanka",
+        "caffeine": 3,
+        "flavors": [
+          "sladni",
+          "vocni"
+        ],
+        "form": "rastresiti",
+        "moods": [
+          "jutro"
+        ],
+        "badges": [],
+        "brew": {
+          "temp": "95 °C",
+          "time": "3–4 min",
+          "dose": "3 g / 250 ml"
+        }
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true,
+      "updatedAt": "2026-11-02T00:00:00.000Z"
+    },
+    {
+      "id": "demo-20",
+      "sku": "CSTN-38",
+      "slug": "zhenghe-hong-gong-fu",
+      "name": "Zhenghe Hong Gong Fu",
+      "type": "crni",
+      "unitLabel": "50 g",
+      "price": {
+        "amount": 1390,
+        "currency": "EUR"
+      },
+      "taxIncluded": true,
+      "descriptionHtml": "<p>Crni čaj iz Fujiana s mirisima božura, mošusa i slatkih začina. Gibak i uravnotežen, s notama kakaa i kikirikija.</p>",
+      "images": [
+        {
+          "src": "/img/p/CSTN-38.jpg",
+          "alt": "Zhenghe Hong Gong Fu",
+          "width": 460,
+          "height": 460
+        }
+      ],
+      "attributes": {
+        "origin": "Kina",
+        "caffeine": 3,
+        "flavors": [
+          "cvjetni",
+          "slatkasti"
+        ],
+        "form": "rastresiti",
+        "moods": [
+          "opust"
+        ],
+        "badges": [],
+        "brew": {
+          "temp": "95 °C",
+          "time": "3–4 min",
+          "dose": "3 g / 250 ml"
+        }
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true,
+      "updatedAt": "2026-11-02T00:00:00.000Z"
+    },
+    {
+      "id": "demo-21",
+      "sku": "CSTN-126",
+      "slug": "darjeeling-autumn-thurbo",
+      "name": "Darjeeling Autumn Thurbo",
+      "type": "crni",
+      "unitLabel": "50 g",
+      "price": {
+        "amount": 1390,
+        "currency": "EUR"
+      },
+      "taxIncluded": true,
+      "descriptionHtml": "<p>Jesenska berba iz vrta Thurbo. Slatka i voćna šalica s aromom muškata i lavande te karameliziranim završetkom.</p>",
+      "images": [
+        {
+          "src": "/img/p/CSTN-126.jpg",
+          "alt": "Darjeeling Autumn Thurbo",
+          "width": 460,
+          "height": 460
+        }
+      ],
+      "attributes": {
+        "origin": "Indija",
+        "caffeine": 2,
+        "flavors": [
+          "vocni",
+          "cvjetni"
+        ],
+        "form": "rastresiti",
+        "moods": [
+          "opust"
+        ],
+        "badges": [],
+        "brew": {
+          "temp": "95 °C",
+          "time": "3–4 min",
+          "dose": "3 g / 250 ml"
+        }
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true,
+      "updatedAt": "2026-11-02T00:00:00.000Z"
+    },
+    {
+      "id": "demo-22",
+      "sku": "CSTN-97",
+      "slug": "darjeeling-first-flush-thurbo",
+      "name": "Darjeeling First Flush Thurbo",
+      "type": "crni",
+      "unitLabel": "50 g",
+      "price": {
+        "amount": 1690,
+        "currency": "EUR"
+      },
+      "taxIncluded": true,
+      "descriptionHtml": "<p>Prva berba s imanja Thurbo. Zlatna, nježna šalica s aromama narančine korice i bijelog cvijeća te kremastim završetkom.</p>",
+      "images": [
+        {
+          "src": "/img/p/CSTN-97.jpg",
+          "alt": "Darjeeling First Flush Thurbo",
+          "width": 460,
+          "height": 460
+        }
+      ],
+      "attributes": {
+        "origin": "Indija",
+        "caffeine": 2,
+        "flavors": [
+          "cvjetni",
+          "citrusni"
+        ],
+        "form": "rastresiti",
+        "moods": [
+          "jutro",
+          "poklon"
+        ],
+        "badges": [],
+        "brew": {
+          "temp": "95 °C",
+          "time": "3–4 min",
+          "dose": "3 g / 250 ml"
+        }
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true,
+      "updatedAt": "2026-11-02T00:00:00.000Z"
+    },
+    {
+      "id": "demo-23",
+      "sku": "CSTN-192",
+      "slug": "darjeeling-first-flush-jungpana",
+      "name": "Darjeeling First Flush Jungpana",
+      "type": "crni",
+      "unitLabel": "50 g",
+      "price": {
+        "amount": 1790,
+        "currency": "EUR"
+      },
+      "taxIncluded": true,
+      "descriptionHtml": "<p>Prva berba poznatog himalajskog vrta Jungpana. Živahna šalica s notama muškata, jasmina i visoke trave.</p>",
+      "images": [
+        {
+          "src": "/img/p/CSTN-192.jpg",
+          "alt": "Darjeeling First Flush Jungpana",
+          "width": 460,
+          "height": 460
+        }
+      ],
+      "attributes": {
+        "origin": "Indija",
+        "caffeine": 2,
+        "flavors": [
+          "vocni",
+          "cvjetni"
+        ],
+        "form": "rastresiti",
+        "moods": [
+          "jutro",
+          "poklon"
+        ],
+        "badges": [],
+        "brew": {
+          "temp": "95 °C",
+          "time": "3–4 min",
+          "dose": "3 g / 250 ml"
+        }
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true,
+      "updatedAt": "2026-11-02T00:00:00.000Z"
+    },
+    {
+      "id": "demo-24",
+      "sku": "CSTN-219",
+      "slug": "darjeeling-second-flush-selimbong",
+      "name": "Darjeeling Second Flush Selimbong",
+      "type": "crni",
+      "unitLabel": "50 g",
+      "price": {
+        "amount": 1590,
+        "currency": "EUR"
+      },
+      "taxIncluded": true,
+      "descriptionHtml": "<p>Ljetna berba obitelji Mohan. Ružičasto jantarna šalica, od javorovog sirupa do mandarine i drvenastih nota.</p>",
+      "images": [
+        {
+          "src": "/img/p/CSTN-219.jpg",
+          "alt": "Darjeeling Second Flush Selimbong",
+          "width": 460,
+          "height": 460
+        }
+      ],
+      "attributes": {
+        "origin": "Indija",
+        "caffeine": 3,
+        "flavors": [
+          "citrusni",
+          "drvenasti"
+        ],
+        "form": "rastresiti",
+        "moods": [
+          "jutro"
+        ],
+        "badges": [],
+        "brew": {
+          "temp": "95 °C",
+          "time": "3–4 min",
+          "dose": "3 g / 250 ml"
+        }
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true,
+      "updatedAt": "2026-11-02T00:00:00.000Z"
+    },
+    {
+      "id": "demo-25",
+      "sku": "CSTN-25",
+      "slug": "jin-die",
+      "name": "Jin Die",
+      "type": "crni",
+      "unitLabel": "50 g",
+      "price": {
+        "amount": 1590,
+        "currency": "EUR"
+      },
+      "taxIncluded": true,
+      "descriptionHtml": "<p>Zlatni leptir iz Hunana, samo uvijeni zlatni pupoljci. Svilenkasta šalica s karamelom i blagim začinima.</p>",
+      "images": [
+        {
+          "src": "/img/p/CSTN-25.jpg",
+          "alt": "Jin Die",
+          "width": 460,
+          "height": 460
+        }
+      ],
+      "attributes": {
+        "origin": "Kina",
+        "caffeine": 2,
+        "flavors": [
+          "slatkasti",
+          "zacinski"
+        ],
+        "form": "rastresiti",
+        "moods": [
+          "opust",
+          "poklon"
+        ],
+        "badges": [
+          "bio"
+        ],
+        "brew": {
+          "temp": "95 °C",
+          "time": "3–4 min",
+          "dose": "3 g / 250 ml"
+        }
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true,
+      "updatedAt": "2026-11-02T00:00:00.000Z"
+    },
+    {
+      "id": "demo-26",
+      "sku": "CSTN-111",
+      "slug": "la-cumbre-bitaco",
+      "name": "La Cumbre Bitaco",
+      "type": "crni",
+      "unitLabel": "50 g",
+      "price": {
+        "amount": 1190,
+        "currency": "EUR"
+      },
+      "taxIncluded": true,
+      "descriptionHtml": "<p>Organski crni čaj s Anda na 1800 m. Note ječma i drveta, uz slatkoću šećerne trske, kakaa i meda. Klasičan jutarnji čaj.</p>",
+      "images": [
+        {
+          "src": "/img/p/CSTN-111.jpg",
+          "alt": "La Cumbre Bitaco",
+          "width": 460,
+          "height": 460
+        }
+      ],
+      "attributes": {
+        "origin": "Kolumbija",
+        "caffeine": 3,
+        "flavors": [
+          "sladni",
+          "medeni"
+        ],
+        "form": "rastresiti",
+        "moods": [
+          "jutro"
+        ],
+        "badges": [
+          "bio"
+        ],
+        "brew": {
+          "temp": "95 °C",
+          "time": "3–4 min",
+          "dose": "3 g / 250 ml"
+        }
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true,
+      "updatedAt": "2026-11-02T00:00:00.000Z"
+    },
+    {
+      "id": "demo-27",
+      "sku": "CSTN-201",
+      "slug": "kevins-breakfast-blend",
+      "name": "Kevin's Breakfast Blend",
+      "type": "crni",
+      "unitLabel": "50 g",
+      "price": {
+        "amount": 990,
+        "currency": "EUR"
+      },
+      "taxIncluded": true,
+      "descriptionHtml": "<p>Doručak mješavina čajeva iz Indije, Šri Lanke, Ruande i Kolumbije. Svjež početak, sladni naglasci i note sladića.</p>",
+      "images": [
+        {
+          "src": "/img/p/CSTN-201.jpg",
+          "alt": "Kevin's Breakfast Blend",
+          "width": 460,
+          "height": 460
+        }
+      ],
+      "attributes": {
+        "origin": "Mješavina",
+        "caffeine": 3,
+        "flavors": [
+          "sladni",
+          "slatkasti"
+        ],
+        "form": "rastresiti",
+        "moods": [
+          "jutro"
+        ],
+        "badges": [],
+        "brew": {
+          "temp": "95 °C",
+          "time": "3–4 min",
+          "dose": "3 g / 250 ml"
+        }
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true,
+      "updatedAt": "2026-11-02T00:00:00.000Z"
+    },
+    {
+      "id": "demo-28",
+      "sku": "CSTN-125",
+      "slug": "meghalaya-lakyrsiew-autumn",
+      "name": "Meghalaya Lakyrsiew Autumn",
+      "type": "crni",
+      "unitLabel": "50 g",
+      "price": {
+        "amount": 1490,
+        "currency": "EUR"
+      },
+      "taxIncluded": true,
+      "descriptionHtml": "<p>Manje poznat terroir susjedan Assamu. Okrugla šalica s teksturom kakaa, drvenastim i karameliziranim notama.</p>",
+      "images": [
+        {
+          "src": "/img/p/CSTN-125.jpg",
+          "alt": "Meghalaya Lakyrsiew Autumn",
+          "width": 460,
+          "height": 460
+        }
+      ],
+      "attributes": {
+        "origin": "Indija",
+        "caffeine": 2,
+        "flavors": [
+          "drvenasti",
+          "cvjetni"
+        ],
+        "form": "rastresiti",
+        "moods": [
+          "opust"
+        ],
+        "badges": [
+          "rijetko"
+        ],
+        "brew": {
+          "temp": "95 °C",
+          "time": "3–4 min",
+          "dose": "3 g / 250 ml"
+        }
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true,
+      "updatedAt": "2026-11-02T00:00:00.000Z"
+    },
+    {
+      "id": "demo-29",
+      "sku": "CSTN-93",
+      "slug": "yunnan-da-ye",
+      "name": "Yunnan Da Ye",
+      "type": "crni",
+      "unitLabel": "50 g",
+      "price": {
+        "amount": 1190,
+        "currency": "EUR"
+      },
+      "taxIncluded": true,
+      "descriptionHtml": "<p>Veliki listovi iz Yunnana uvijeni u zlatne spirale. Jarko crvena šalica s notama smreke, začina, kože, citrusa i slada.</p>",
+      "images": [
+        {
+          "src": "/img/p/CSTN-93.jpg",
+          "alt": "Yunnan Da Ye",
+          "width": 460,
+          "height": 460
+        }
+      ],
+      "attributes": {
+        "origin": "Kina",
+        "caffeine": 3,
+        "flavors": [
+          "drvenasti",
+          "zacinski"
+        ],
+        "form": "rastresiti",
+        "moods": [
+          "jutro"
+        ],
+        "badges": [
+          "bio"
+        ],
+        "brew": {
+          "temp": "95 °C",
+          "time": "3–4 min",
+          "dose": "3 g / 250 ml"
+        }
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true,
+      "updatedAt": "2026-11-02T00:00:00.000Z"
+    },
+    {
+      "id": "demo-30",
+      "sku": "CSTN-220",
+      "slug": "shimada-whisky-dimljeni",
+      "name": "Shimada Whisky (dimljeni)",
+      "type": "crni",
+      "unitLabel": "50 g",
+      "price": {
+        "amount": 1890,
+        "currency": "EUR"
+      },
+      "taxIncluded": true,
+      "descriptionHtml": "<p>Japanska rijetkost: crni čaj dimljen 6–8 sati drvom iz bačvi japanskog viskija. Bogata, slatka i tresetna šalica bez gorčine.</p>",
+      "images": [
+        {
+          "src": "/img/p/CSTN-220.jpg",
+          "alt": "Shimada Whisky (dimljeni)",
+          "width": 460,
+          "height": 460
+        }
+      ],
+      "attributes": {
+        "origin": "Japan",
+        "caffeine": 2,
+        "flavors": [
+          "dimljeni",
+          "slatkasti"
+        ],
+        "form": "rastresiti",
+        "moods": [
+          "opust",
+          "poklon"
+        ],
+        "badges": [
+          "rijetko"
+        ],
+        "brew": {
+          "temp": "95 °C",
+          "time": "3–4 min",
+          "dose": "3 g / 250 ml"
+        }
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true,
+      "updatedAt": "2026-11-02T00:00:00.000Z"
+    },
+    {
+      "id": "demo-31",
+      "sku": "CSTVI-298",
+      "slug": "puer-shou-2021-yongde",
+      "name": "Pu'er Shou 2021 Yongde",
+      "type": "puer",
+      "unitLabel": "50 g",
+      "price": {
+        "amount": 1490,
+        "currency": "EUR"
+      },
+      "taxIncluded": true,
+      "descriptionHtml": "<p>Shou pu'er iz 2021. godine iz regije Yongde u Yunnanu. Rastresiti listovi, tamna šalica zemljanog i mekog okusa.</p>",
+      "images": [
+        {
+          "src": "/img/p/CSTVI-298.jpg",
+          "alt": "Pu'er Shou 2021 Yongde",
+          "width": 460,
+          "height": 460
+        }
+      ],
+      "attributes": {
+        "origin": "Kina",
+        "caffeine": 2,
+        "flavors": [
+          "zemljani",
+          "drvenasti"
+        ],
+        "form": "rastresiti",
+        "moods": [
+          "fokus",
+          "opust"
+        ],
+        "badges": [
+          "rijetko"
+        ],
+        "brew": {
+          "temp": "95 °C",
+          "time": "4 min (ili 20–30 s gongfu)",
+          "dose": "5 g / 250 ml"
+        }
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true,
+      "updatedAt": "2026-11-02T00:00:00.000Z"
+    },
+    {
+      "id": "demo-32",
+      "sku": "CSTVI-281",
+      "slug": "puer-shou-2016-jingmai",
+      "name": "Pu'er Shou 2016 Jingmai",
+      "type": "puer",
+      "unitLabel": "50 g",
+      "price": {
+        "amount": 1690,
+        "currency": "EUR"
+      },
+      "taxIncluded": true,
+      "descriptionHtml": "<p>Rastresiti shou pu'er s 1600 m iz regije Lincang. Vrlo tamna šalica s notama vlažne zemlje, hrasta i suhe šljive.</p>",
+      "images": [],
+      "attributes": {
+        "origin": "Kina",
+        "caffeine": 2,
+        "flavors": [
+          "zemljani",
+          "drvenasti",
+          "vocni"
+        ],
+        "form": "rastresiti",
+        "moods": [
+          "fokus",
+          "opust"
+        ],
+        "badges": [
+          "bio",
+          "rijetko"
+        ],
+        "brew": {
+          "temp": "95 °C",
+          "time": "4 min (ili 20–30 s gongfu)",
+          "dose": "5 g / 250 ml"
+        }
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true,
+      "updatedAt": "2026-11-02T00:00:00.000Z"
+    },
+    {
+      "id": "demo-33",
+      "sku": "CSTVI-282",
+      "slug": "puer-sheng-2023-zhengwan",
+      "name": "Pu'er Sheng 2023 Zhengwan",
+      "type": "puer",
+      "unitLabel": "kolač 200 g",
+      "price": {
+        "amount": 3400,
+        "currency": "EUR"
+      },
+      "taxIncluded": true,
+      "descriptionHtml": "<p>Mladi sheng iz socijalnog projekta u Yunnanu, s drveća na 1300 m. Zlatna šalica s marelicom, kamforom i dugim medenim završetkom.</p>",
+      "images": [
+        {
+          "src": "/img/p/CSTVI-282.jpg",
+          "alt": "Pu'er Sheng 2023 Zhengwan",
+          "width": 460,
+          "height": 460
+        }
+      ],
+      "attributes": {
+        "origin": "Kina",
+        "caffeine": 2,
+        "flavors": [
+          "vocni",
+          "medeni"
+        ],
+        "form": "kolac",
+        "moods": [
+          "fokus",
+          "poklon"
+        ],
+        "badges": [
+          "bio",
+          "rijetko"
+        ],
+        "brew": {
+          "temp": "95 °C",
+          "time": "4 min (ili 20–30 s gongfu)",
+          "dose": "5 g / 250 ml"
+        }
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true,
+      "updatedAt": "2026-11-02T00:00:00.000Z"
+    },
+    {
+      "id": "demo-34",
+      "sku": "CSTVI-276",
+      "slug": "puer-sheng-2023-yongde-da-shan",
+      "name": "Pu'er Sheng 2023 Yongde Da Shan",
+      "type": "puer",
+      "unitLabel": "kolač 200 g",
+      "price": {
+        "amount": 3800,
+        "currency": "EUR"
+      },
+      "taxIncluded": true,
+      "descriptionHtml": "<p>Mladi pu'er sa starih stabala (70 godina) u šumama Yongdea. Note slame i dinje, lagani tanini i sirupast završetak. Može i odležati.</p>",
+      "images": [
+        {
+          "src": "/img/p/CSTVI-276.jpg",
+          "alt": "Pu'er Sheng 2023 Yongde Da Shan",
+          "width": 460,
+          "height": 460
+        }
+      ],
+      "attributes": {
+        "origin": "Kina",
+        "caffeine": 2,
+        "flavors": [
+          "vocni",
+          "slatkasti"
+        ],
+        "form": "kolac",
+        "moods": [
+          "fokus",
+          "poklon"
+        ],
+        "badges": [
+          "rijetko"
+        ],
+        "brew": {
+          "temp": "95 °C",
+          "time": "4 min (ili 20–30 s gongfu)",
+          "dose": "5 g / 250 ml"
+        }
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true,
+      "updatedAt": "2026-11-02T00:00:00.000Z"
+    },
+    {
+      "id": "demo-35",
+      "sku": "CSTVI-150",
+      "slug": "puer-sheng-2007-yiwu-jing-long",
+      "name": "Pu'er Sheng 2007 Yiwu Jing Long",
+      "type": "puer",
+      "unitLabel": "kolač 250 g",
+      "price": {
+        "amount": 5900,
+        "currency": "EUR"
+      },
+      "taxIncluded": true,
+      "descriptionHtml": "<p>Odležani sheng iz poznatog terroira Yiwu. Jantarna šalica s notama koprive, vanilije i kamfora, poput četinarske šume.</p>",
+      "images": [],
+      "attributes": {
+        "origin": "Kina",
+        "caffeine": 2,
+        "flavors": [
+          "vocni",
+          "zacinski"
+        ],
+        "form": "kolac",
+        "moods": [
+          "poklon"
+        ],
+        "badges": [
+          "rijetko"
+        ],
+        "brew": {
+          "temp": "95 °C",
+          "time": "4 min (ili 20–30 s gongfu)",
+          "dose": "5 g / 250 ml"
+        }
+      },
+      "stock": {
+        "status": "outofstock",
+        "quantity": 0,
+        "maxPerOrder": 20
+      },
+      "published": true,
+      "updatedAt": "2026-11-02T00:00:00.000Z"
+    },
+    {
+      "id": "demo-36",
+      "sku": "CSTW-1",
+      "slug": "ali-shan",
+      "name": "Ali Shan",
+      "type": "oolong",
+      "unitLabel": "50 g",
+      "price": {
+        "amount": 1590,
+        "currency": "EUR"
+      },
+      "taxIncluded": true,
+      "descriptionHtml": "<p>Visokoplaninski oolong s planine Ali (1400 m), majstora Chena. Note kokosa, egzotičnog voća i vanilije.</p>",
+      "images": [
+        {
+          "src": "/img/p/CSTW-1.jpg",
+          "alt": "Ali Shan",
+          "width": 460,
+          "height": 460
+        }
+      ],
+      "attributes": {
+        "origin": "Tajvan",
+        "caffeine": 2,
+        "flavors": [
+          "vocni",
+          "slatkasti"
+        ],
+        "form": "rastresiti",
+        "moods": [
+          "opust",
+          "poklon"
+        ],
+        "badges": [],
+        "brew": {
+          "temp": "95 °C",
+          "time": "3–4 min",
+          "dose": "5 g / 250 ml"
+        }
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true,
+      "updatedAt": "2026-11-02T00:00:00.000Z"
+    },
+    {
+      "id": "demo-37",
+      "sku": "CSTW-11",
+      "slug": "gaba-cha",
+      "name": "Gaba Cha",
+      "type": "oolong",
+      "unitLabel": "50 g",
+      "price": {
+        "amount": 1490,
+        "currency": "EUR"
+      },
+      "taxIncluded": true,
+      "descriptionHtml": "<p>Suvremeni tajvanski oolong s povišenim GABA sadržajem. Bogata šalica s notama pečene jabuke, cimeta i muškatnog oraščića.</p>",
+      "images": [
+        {
+          "src": "/img/p/CSTW-11.jpg",
+          "alt": "Gaba Cha",
+          "width": 460,
+          "height": 460
+        }
+      ],
+      "attributes": {
+        "origin": "Tajvan",
+        "caffeine": 2,
+        "flavors": [
+          "vocni",
+          "zacinski"
+        ],
+        "form": "rastresiti",
+        "moods": [
+          "opust"
+        ],
+        "badges": [
+          "novo"
+        ],
+        "brew": {
+          "temp": "95 °C",
+          "time": "3–4 min",
+          "dose": "5 g / 250 ml"
+        }
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true,
+      "updatedAt": "2026-11-02T00:00:00.000Z"
+    },
+    {
+      "id": "demo-38",
+      "sku": "CSTW-30",
+      "slug": "dong-ding-mr-nen-yu-peceni",
+      "name": "Dong Ding Mr. Nen Yu (pečeni)",
+      "type": "oolong",
+      "unitLabel": "50 g",
+      "price": {
+        "amount": 1690,
+        "currency": "EUR"
+      },
+      "taxIncluded": true,
+      "descriptionHtml": "<p>Pečeni Dong Ding majstora Nen Yua. Mirisi džema od maline, meda i tosta, kremasta šalica s ananasom na kraju.</p>",
+      "images": [
+        {
+          "src": "/img/p/CSTW-30.jpg",
+          "alt": "Dong Ding Mr. Nen Yu (pečeni)",
+          "width": 460,
+          "height": 460
+        }
+      ],
+      "attributes": {
+        "origin": "Tajvan",
+        "caffeine": 2,
+        "flavors": [
+          "vocni",
+          "medeni"
+        ],
+        "form": "rastresiti",
+        "moods": [
+          "opust",
+          "vecer"
+        ],
+        "badges": [],
+        "brew": {
+          "temp": "95 °C",
+          "time": "3–4 min",
+          "dose": "5 g / 250 ml"
+        }
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true,
+      "updatedAt": "2026-11-02T00:00:00.000Z"
+    },
+    {
+      "id": "demo-39",
+      "sku": "CSTP-5",
+      "slug": "dunes-du-sahara-zeleni-s-mentom",
+      "name": "Dunes du Sahara (zeleni s mentom)",
+      "type": "aroma",
+      "unitLabel": "50 g",
+      "price": {
+        "amount": 790,
+        "currency": "EUR"
+      },
+      "taxIncluded": true,
+      "descriptionHtml": "<p>Kućna mješavina organskog gunpowdera i mente. Osvježavajuća i lagana, kao u sjevernoj Africi.</p>",
+      "images": [
+        {
+          "src": "/img/p/CSTP-5.jpg",
+          "alt": "Dunes du Sahara (zeleni s mentom)",
+          "width": 460,
+          "height": 460
+        }
+      ],
+      "attributes": {
+        "origin": "Mješavina",
+        "caffeine": 2,
+        "flavors": [
+          "mentolni",
+          "travnati"
+        ],
+        "form": "rastresiti",
+        "moods": [
+          "jutro"
+        ],
+        "badges": [
+          "bio"
+        ],
+        "brew": {
+          "temp": "80 °C",
+          "time": "2–3 min",
+          "dose": "4 g / 250 ml"
+        }
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true,
+      "updatedAt": "2026-11-02T00:00:00.000Z"
+    },
+    {
+      "id": "demo-40",
+      "sku": "CSTP-6",
+      "slug": "earl-grey",
+      "name": "Earl Grey",
+      "type": "aroma",
+      "unitLabel": "50 g",
+      "price": {
+        "amount": 890,
+        "currency": "EUR"
+      },
+      "taxIncluded": true,
+      "descriptionHtml": "<p>Kvalitetni crni čaj iz Dooarsa s prirodnom aromom talijanskog bergamota. Engleski klasik.</p>",
+      "images": [
+        {
+          "src": "/img/p/CSTP-6.jpg",
+          "alt": "Earl Grey",
+          "width": 460,
+          "height": 460
+        }
+      ],
+      "attributes": {
+        "origin": "Indija",
+        "caffeine": 3,
+        "flavors": [
+          "citrusni"
+        ],
+        "form": "rastresiti",
+        "moods": [
+          "jutro"
+        ],
+        "badges": [
+          "bio"
+        ],
+        "brew": {
+          "temp": "95 °C",
+          "time": "3–4 min",
+          "dose": "3 g / 250 ml"
+        }
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true,
+      "updatedAt": "2026-11-02T00:00:00.000Z"
+    },
+    {
+      "id": "demo-41",
+      "sku": "CSTP-90",
+      "slug": "earl-grey-de-marie-antoinette",
+      "name": "Earl Grey de Marie-Antoinette",
+      "type": "aroma",
+      "unitLabel": "50 g",
+      "price": {
+        "amount": 1090,
+        "currency": "EUR"
+      },
+      "taxIncluded": true,
+      "descriptionHtml": "<p>Zeleni i crni čaj s bergamotom i laticama ruže. Intenzivan, cvjetni Earl Grey.</p>",
+      "images": [
+        {
+          "src": "/img/p/CSTP-90.jpg",
+          "alt": "Earl Grey de Marie-Antoinette",
+          "width": 460,
+          "height": 460
+        }
+      ],
+      "attributes": {
+        "origin": "Mješavina",
+        "caffeine": 2,
+        "flavors": [
+          "citrusni",
+          "cvjetni"
+        ],
+        "form": "rastresiti",
+        "moods": [
+          "opust",
+          "poklon"
+        ],
+        "badges": [
+          "bio"
+        ],
+        "brew": {
+          "temp": "90 °C",
+          "time": "3–4 min",
+          "dose": "4 g / 250 ml"
+        }
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true,
+      "updatedAt": "2026-11-02T00:00:00.000Z"
+    },
+    {
+      "id": "demo-42",
+      "sku": "CSTP-7",
+      "slug": "green-earl-grey",
+      "name": "Green Earl Grey",
+      "type": "aroma",
+      "unitLabel": "50 g",
+      "price": {
+        "amount": 890,
+        "currency": "EUR"
+      },
+      "taxIncluded": true,
+      "descriptionHtml": "<p>Earl Grey na bazi zelenog čaja sa Šri Lanke, s različkom i prirodnim bergamotom.</p>",
+      "images": [
+        {
+          "src": "/img/p/CSTP-7.jpg",
+          "alt": "Green Earl Grey",
+          "width": 460,
+          "height": 460
+        }
+      ],
+      "attributes": {
+        "origin": "Šri Lanka",
+        "caffeine": 2,
+        "flavors": [
+          "citrusni",
+          "travnati"
+        ],
+        "form": "rastresiti",
+        "moods": [
+          "jutro"
+        ],
+        "badges": [],
+        "brew": {
+          "temp": "80 °C",
+          "time": "2–3 min",
+          "dose": "4 g / 250 ml"
+        }
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true,
+      "updatedAt": "2026-11-02T00:00:00.000Z"
+    },
+    {
+      "id": "demo-43",
+      "sku": "CSTP-11",
+      "slug": "earl-grey-cream",
+      "name": "Earl Grey Cream",
+      "type": "aroma",
+      "unitLabel": "50 g",
+      "price": {
+        "amount": 990,
+        "currency": "EUR"
+      },
+      "taxIncluded": true,
+      "descriptionHtml": "<p>Cejlonski crni čaj s bergamotom i vanilijom. Svilenkast sam ili s mlijekom kao London Fog.</p>",
+      "images": [
+        {
+          "src": "/img/p/CSTP-11.jpg",
+          "alt": "Earl Grey Cream",
+          "width": 460,
+          "height": 460
+        }
+      ],
+      "attributes": {
+        "origin": "Šri Lanka",
+        "caffeine": 3,
+        "flavors": [
+          "citrusni",
+          "slatkasti"
+        ],
+        "form": "rastresiti",
+        "moods": [
+          "jutro",
+          "poklon"
+        ],
+        "badges": [],
+        "brew": {
+          "temp": "95 °C",
+          "time": "3–4 min",
+          "dose": "3 g / 250 ml"
+        }
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true,
+      "updatedAt": "2026-11-02T00:00:00.000Z"
+    },
+    {
+      "id": "demo-44",
+      "sku": "CSTP-51",
+      "slug": "lisbon-sunshine",
+      "name": "Lisbon Sunshine",
+      "type": "aroma",
+      "unitLabel": "50 g",
+      "price": {
+        "amount": 990,
+        "currency": "EUR"
+      },
+      "taxIncluded": true,
+      "descriptionHtml": "<p>Crni čaj s breskvom i đumbirom. Odličan topao ili kao hladni napitak na terasi.</p>",
+      "images": [
+        {
+          "src": "/img/p/CSTP-51.jpg",
+          "alt": "Lisbon Sunshine",
+          "width": 460,
+          "height": 460
+        }
+      ],
+      "attributes": {
+        "origin": "Mješavina",
+        "caffeine": 3,
+        "flavors": [
+          "vocni",
+          "zacinski"
+        ],
+        "form": "rastresiti",
+        "moods": [
+          "jutro"
+        ],
+        "badges": [
+          "bio"
+        ],
+        "brew": {
+          "temp": "95 °C",
+          "time": "3–4 min",
+          "dose": "3 g / 250 ml"
+        }
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true,
+      "updatedAt": "2026-11-02T00:00:00.000Z"
+    },
+    {
+      "id": "demo-45",
+      "sku": "CSTG-68",
+      "slug": "memories-from-napoli",
+      "name": "Memories from Napoli",
+      "type": "aroma",
+      "unitLabel": "50 g",
+      "price": {
+        "amount": 990,
+        "currency": "EUR"
+      },
+      "taxIncluded": true,
+      "descriptionHtml": "<p>Mediteranska mješavina zelenog čaja s ružmarinom i grejpom. Šarena i osvježavajuća.</p>",
+      "images": [
+        {
+          "src": "/img/p/CSTG-68.jpg",
+          "alt": "Memories from Napoli",
+          "width": 460,
+          "height": 460
+        }
+      ],
+      "attributes": {
+        "origin": "Mješavina",
+        "caffeine": 2,
+        "flavors": [
+          "citrusni",
+          "travnati"
+        ],
+        "form": "rastresiti",
+        "moods": [
+          "jutro",
+          "opust"
+        ],
+        "badges": [
+          "bio"
+        ],
+        "brew": {
+          "temp": "80 °C",
+          "time": "2–3 min",
+          "dose": "4 g / 250 ml"
+        }
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true,
+      "updatedAt": "2026-11-02T00:00:00.000Z"
+    },
+    {
+      "id": "demo-46",
+      "sku": "CSTP-25",
+      "slug": "moulin-rouge",
+      "name": "Moulin Rouge",
+      "type": "aroma",
+      "unitLabel": "50 g",
+      "price": {
+        "amount": 1090,
+        "currency": "EUR"
+      },
+      "taxIncluded": true,
+      "descriptionHtml": "<p>Bijeli čaj s cvijećem i voćem. Crvena šalica s kiselkastim hibiskusom i slatkoćom trešnje.</p>",
+      "images": [
+        {
+          "src": "/img/p/CSTP-25.jpg",
+          "alt": "Moulin Rouge",
+          "width": 460,
+          "height": 460
+        }
+      ],
+      "attributes": {
+        "origin": "Mješavina",
+        "caffeine": 1,
+        "flavors": [
+          "vocni",
+          "cvjetni"
+        ],
+        "form": "rastresiti",
+        "moods": [
+          "opust",
+          "poklon"
+        ],
+        "badges": [],
+        "brew": {
+          "temp": "85 °C",
+          "time": "3–4 min",
+          "dose": "4 g / 250 ml"
+        }
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true,
+      "updatedAt": "2026-11-02T00:00:00.000Z"
+    },
+    {
+      "id": "demo-47",
+      "sku": "CSTP-17",
+      "slug": "ombrelle-de-papier",
+      "name": "Ombrelle de Papier",
+      "type": "aroma",
+      "unitLabel": "50 g",
+      "price": {
+        "amount": 1090,
+        "currency": "EUR"
+      },
+      "taxIncluded": true,
+      "descriptionHtml": "<p>Bijeli i zeleni čaj s ananasom, rabarbarom i ličijem. Razigrana voćna mješavina.</p>",
+      "images": [
+        {
+          "src": "/img/p/CSTP-17.jpg",
+          "alt": "Ombrelle de Papier",
+          "width": 460,
+          "height": 460
+        }
+      ],
+      "attributes": {
+        "origin": "Mješavina",
+        "caffeine": 1,
+        "flavors": [
+          "vocni"
+        ],
+        "form": "rastresiti",
+        "moods": [
+          "opust"
+        ],
+        "badges": [],
+        "brew": {
+          "temp": "85 °C",
+          "time": "3–4 min",
+          "dose": "4 g / 250 ml"
+        }
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true,
+      "updatedAt": "2026-11-02T00:00:00.000Z"
+    },
+    {
+      "id": "demo-48",
+      "sku": "CSTP-81",
+      "slug": "raspberry-mimosa",
+      "name": "Raspberry Mimosa",
+      "type": "aroma",
+      "unitLabel": "50 g",
+      "price": {
+        "amount": 890,
+        "currency": "EUR"
+      },
+      "taxIncluded": true,
+      "descriptionHtml": "<p>Zeleni čaj s malinom i šipkom. Osvježavajuć, s nježnom voćnom notom.</p>",
+      "images": [
+        {
+          "src": "/img/p/CSTP-81.jpg",
+          "alt": "Raspberry Mimosa",
+          "width": 460,
+          "height": 460
+        }
+      ],
+      "attributes": {
+        "origin": "Mješavina",
+        "caffeine": 2,
+        "flavors": [
+          "vocni"
+        ],
+        "form": "rastresiti",
+        "moods": [
+          "opust"
+        ],
+        "badges": [
+          "bio"
+        ],
+        "brew": {
+          "temp": "80 °C",
+          "time": "2–3 min",
+          "dose": "4 g / 250 ml"
+        }
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true,
+      "updatedAt": "2026-11-02T00:00:00.000Z"
+    },
+    {
+      "id": "demo-49",
+      "sku": "CSTP-86",
+      "slug": "sencha-yuzu",
+      "name": "Sencha Yuzu",
+      "type": "aroma",
+      "unitLabel": "50 g",
+      "price": {
+        "amount": 1290,
+        "currency": "EUR"
+      },
+      "taxIncluded": true,
+      "descriptionHtml": "<p>Japanska sencha s korom yuzua iz Tokushime. Uravnotežena i osvježavajuća, za ljubitelje čaja s limunom.</p>",
+      "images": [
+        {
+          "src": "/img/p/CSTP-86.jpg",
+          "alt": "Sencha Yuzu",
+          "width": 460,
+          "height": 460
+        }
+      ],
+      "attributes": {
+        "origin": "Japan",
+        "caffeine": 2,
+        "flavors": [
+          "citrusni",
+          "travnati"
+        ],
+        "form": "rastresiti",
+        "moods": [
+          "jutro",
+          "fokus"
+        ],
+        "badges": [
+          "bio"
+        ],
+        "brew": {
+          "temp": "70 °C",
+          "time": "1–2 min",
+          "dose": "4 g / 250 ml"
+        }
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true,
+      "updatedAt": "2026-11-02T00:00:00.000Z"
+    },
+    {
+      "id": "demo-50",
+      "sku": "CSTP-88",
+      "slug": "fee-des-fleurs-jasmin",
+      "name": "Fée des Fleurs (jasmin)",
+      "type": "aroma",
+      "unitLabel": "50 g",
+      "price": {
+        "amount": 1590,
+        "currency": "EUR"
+      },
+      "taxIncluded": true,
+      "descriptionHtml": "<p>Zeleni čaj iz Sichuana mirisan jasminom u četiri navrata. Snažan miris jasmina s notom azijske kruške.</p>",
+      "images": [
+        {
+          "src": "/img/p/CSTP-88.jpg",
+          "alt": "Fée des Fleurs (jasmin)",
+          "width": 460,
+          "height": 460
+        }
+      ],
+      "attributes": {
+        "origin": "Kina",
+        "caffeine": 2,
+        "flavors": [
+          "cvjetni",
+          "vocni"
+        ],
+        "form": "rastresiti",
+        "moods": [
+          "opust",
+          "poklon"
+        ],
+        "badges": [],
+        "brew": {
+          "temp": "80 °C",
+          "time": "2–3 min",
+          "dose": "4 g / 250 ml"
+        }
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true,
+      "updatedAt": "2026-11-02T00:00:00.000Z"
+    },
+    {
+      "id": "demo-51",
+      "sku": "CSTP-36",
+      "slug": "cvjetni-caj-bozur-ljiljan-i-osmantus",
+      "name": "Cvjetni čaj: božur, ljiljan i osmantus",
+      "type": "aroma",
+      "unitLabel": "50 g",
+      "price": {
+        "amount": 1290,
+        "currency": "EUR"
+      },
+      "taxIncluded": true,
+      "descriptionHtml": "<p>Ručno vezani zeleni čaj s jasminom koji se u vodi otvara poput cvijeta. Najljepši u staklenom čajniku.</p>",
+      "images": [
+        {
+          "src": "/img/p/CSTP-36.jpg",
+          "alt": "Cvjetni čaj: božur, ljiljan i osmantus",
+          "width": 460,
+          "height": 460
+        }
+      ],
+      "attributes": {
+        "origin": "Kina",
+        "caffeine": 2,
+        "flavors": [
+          "cvjetni"
+        ],
+        "form": "rastresiti",
+        "moods": [
+          "poklon"
+        ],
+        "badges": [
+          "novo"
+        ],
+        "brew": {
+          "temp": "80 °C",
+          "time": "2–3 min",
+          "dose": "4 g / 250 ml"
+        }
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true,
+      "updatedAt": "2026-11-02T00:00:00.000Z"
+    },
+    {
+      "id": "demo-52",
+      "sku": "CSTP-92",
+      "slug": "verger-tropical",
+      "name": "Verger Tropical",
+      "type": "aroma",
+      "unitLabel": "50 g",
+      "price": {
+        "amount": 990,
+        "currency": "EUR"
+      },
+      "taxIncluded": true,
+      "descriptionHtml": "<p>Zeleni čaj s voćem, limunskom travom i cvjetovima. Note breskve i kruške, kao šetnja voćnjakom.</p>",
+      "images": [
+        {
+          "src": "/img/p/CSTP-92.jpg",
+          "alt": "Verger Tropical",
+          "width": 460,
+          "height": 460
+        }
+      ],
+      "attributes": {
+        "origin": "Mješavina",
+        "caffeine": 2,
+        "flavors": [
+          "vocni"
+        ],
+        "form": "rastresiti",
+        "moods": [
+          "opust"
+        ],
+        "badges": [],
+        "brew": {
+          "temp": "80 °C",
+          "time": "2–3 min",
+          "dose": "4 g / 250 ml"
+        }
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true,
+      "updatedAt": "2026-11-02T00:00:00.000Z"
+    },
+    {
+      "id": "demo-53",
+      "sku": "CSTC-5",
+      "slug": "chai-camellia",
+      "name": "Chai Camellia",
+      "type": "aroma",
+      "unitLabel": "50 g",
+      "price": {
+        "amount": 890,
+        "currency": "EUR"
+      },
+      "taxIncluded": true,
+      "descriptionHtml": "<p>Kućni chai na bazi crnog čaja s kardamomom, cimetom, đumbirom i muškatnim oraščićem. S vodom ili tradicionalno s mlijekom.</p>",
+      "images": [
+        {
+          "src": "/img/p/CSTC-5.jpg",
+          "alt": "Chai Camellia",
+          "width": 460,
+          "height": 460
+        }
+      ],
+      "attributes": {
+        "origin": "Mješavina",
+        "caffeine": 3,
+        "flavors": [
+          "zacinski"
+        ],
+        "form": "rastresiti",
+        "moods": [
+          "jutro",
+          "vecer"
+        ],
+        "badges": [
+          "bio"
+        ],
+        "brew": {
+          "temp": "95 °C",
+          "time": "3–4 min",
+          "dose": "3 g / 250 ml"
+        }
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true,
+      "updatedAt": "2026-11-02T00:00:00.000Z"
+    },
+    {
+      "id": "demo-54",
+      "sku": "CSTC-13",
+      "slug": "celebration-chai",
+      "name": "Celebration Chai",
+      "type": "aroma",
+      "unitLabel": "50 g",
+      "price": {
+        "amount": 990,
+        "currency": "EUR"
+      },
+      "taxIncluded": true,
+      "descriptionHtml": "<p>Svečani chai s narančom, zvjezdastim anisom, klinčićem i ružičastim paprom. Podsjeća na kuhano vino.</p>",
+      "images": [
+        {
+          "src": "/img/p/CSTC-13.jpg",
+          "alt": "Celebration Chai",
+          "width": 460,
+          "height": 460
+        }
+      ],
+      "attributes": {
+        "origin": "Mješavina",
+        "caffeine": 3,
+        "flavors": [
+          "zacinski",
+          "citrusni"
+        ],
+        "form": "rastresiti",
+        "moods": [
+          "poklon",
+          "vecer"
+        ],
+        "badges": [
+          "bio"
+        ],
+        "brew": {
+          "temp": "95 °C",
+          "time": "3–4 min",
+          "dose": "3 g / 250 ml"
+        }
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true,
+      "updatedAt": "2026-11-02T00:00:00.000Z"
+    },
+    {
+      "id": "demo-55",
+      "sku": "CSTO-2",
+      "slug": "kamilica",
+      "name": "Kamilica",
+      "type": "biljni",
+      "unitLabel": "30 g",
+      "price": {
+        "amount": 690,
+        "currency": "EUR"
+      },
+      "taxIncluded": true,
+      "descriptionHtml": "<p>Cvjetovi kamilice. Svijetlo žuta, mekana i svilenkasta šalica s dugim, slatkim cvjetnim završetkom.</p>",
+      "images": [
+        {
+          "src": "/img/p/CSTO-2.jpg",
+          "alt": "Kamilica",
+          "width": 460,
+          "height": 460
+        }
+      ],
+      "attributes": {
+        "origin": "Egipat",
+        "caffeine": 0,
+        "flavors": [
+          "cvjetni",
+          "slatkasti"
+        ],
+        "form": "rastresiti",
+        "moods": [
+          "vecer",
+          "opust"
+        ],
+        "badges": [
+          "bio"
+        ],
+        "brew": {
+          "temp": "100 °C",
+          "time": "5–7 min",
+          "dose": "3 g / 250 ml"
+        }
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true,
+      "updatedAt": "2026-11-02T00:00:00.000Z"
+    },
+    {
+      "id": "demo-56",
+      "sku": "CSTO-41",
+      "slug": "menta",
+      "name": "Menta",
+      "type": "biljni",
+      "unitLabel": "30 g",
+      "price": {
+        "amount": 690,
+        "currency": "EUR"
+      },
+      "taxIncluded": true,
+      "descriptionHtml": "<p>Kućna mješavina klasaste i paprene metvice. Osvježava ljeti, grije zimi.</p>",
+      "images": [
+        {
+          "src": "/img/p/CSTO-41.jpg",
+          "alt": "Menta",
+          "width": 460,
+          "height": 460
+        }
+      ],
+      "attributes": {
+        "origin": "Egipat",
+        "caffeine": 0,
+        "flavors": [
+          "mentolni"
+        ],
+        "form": "rastresiti",
+        "moods": [
+          "vecer"
+        ],
+        "badges": [
+          "bio"
+        ],
+        "brew": {
+          "temp": "100 °C",
+          "time": "5–7 min",
+          "dose": "3 g / 250 ml"
+        }
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true,
+      "updatedAt": "2026-11-02T00:00:00.000Z"
+    },
+    {
+      "id": "demo-57",
+      "sku": "CSTO-23",
+      "slug": "la-provencale",
+      "name": "La Provençale",
+      "type": "biljni",
+      "unitLabel": "30 g",
+      "price": {
+        "amount": 890,
+        "currency": "EUR"
+      },
+      "taxIncluded": true,
+      "descriptionHtml": "<p>Menta, ružmarin, matičnjak i lavanda. Aromatična provansalska mješavina, ugodna nakon jela.</p>",
+      "images": [
+        {
+          "src": "/img/p/CSTO-23.jpg",
+          "alt": "La Provençale",
+          "width": 460,
+          "height": 460
+        }
+      ],
+      "attributes": {
+        "origin": "Mješavina",
+        "caffeine": 0,
+        "flavors": [
+          "mentolni",
+          "cvjetni"
+        ],
+        "form": "rastresiti",
+        "moods": [
+          "vecer",
+          "opust"
+        ],
+        "badges": [
+          "bio"
+        ],
+        "brew": {
+          "temp": "100 °C",
+          "time": "5–7 min",
+          "dose": "3 g / 250 ml"
+        }
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true,
+      "updatedAt": "2026-11-02T00:00:00.000Z"
+    },
+    {
+      "id": "demo-58",
+      "sku": "CSTO-31",
+      "slug": "lemon-ginger-burst",
+      "name": "Lemon Ginger Burst",
+      "type": "biljni",
+      "unitLabel": "50 g",
+      "price": {
+        "amount": 890,
+        "currency": "EUR"
+      },
+      "taxIncluded": true,
+      "descriptionHtml": "<p>Đumbir i limun s limunskom travom i hibiskusom. Ljut i kiselkast, idealan za hladne dane.</p>",
+      "images": [
+        {
+          "src": "/img/p/CSTO-31.jpg",
+          "alt": "Lemon Ginger Burst",
+          "width": 460,
+          "height": 460
+        }
+      ],
+      "attributes": {
+        "origin": "Mješavina",
+        "caffeine": 0,
+        "flavors": [
+          "citrusni",
+          "zacinski"
+        ],
+        "form": "rastresiti",
+        "moods": [
+          "vecer"
+        ],
+        "badges": [
+          "bio"
+        ],
+        "brew": {
+          "temp": "100 °C",
+          "time": "5–7 min",
+          "dose": "3 g / 250 ml"
+        }
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true,
+      "updatedAt": "2026-11-02T00:00:00.000Z"
+    },
+    {
+      "id": "demo-59",
+      "sku": "CSTO-17",
+      "slug": "la-rose-pourpre",
+      "name": "La Rose Pourpre",
+      "type": "biljni",
+      "unitLabel": "30 g",
+      "price": {
+        "amount": 1190,
+        "currency": "EUR"
+      },
+      "taxIncluded": true,
+      "descriptionHtml": "<p>Listovi maline, ljubičasti bosiljak i pupoljci divlje ruže iz Quebeca. Duboko ljubičasta, živahna šalica.</p>",
+      "images": [],
+      "attributes": {
+        "origin": "Kanada",
+        "caffeine": 0,
+        "flavors": [
+          "cvjetni"
+        ],
+        "form": "rastresiti",
+        "moods": [
+          "vecer",
+          "poklon"
+        ],
+        "badges": [
+          "bio"
+        ],
+        "brew": {
+          "temp": "100 °C",
+          "time": "5–7 min",
+          "dose": "3 g / 250 ml"
+        }
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true,
+      "updatedAt": "2026-11-02T00:00:00.000Z"
+    },
+    {
+      "id": "demo-60",
+      "sku": "CSTO-74",
+      "slug": "la-belle-humeur",
+      "name": "La Belle Humeur",
+      "type": "biljni",
+      "unitLabel": "30 g",
+      "price": {
+        "amount": 1090,
+        "currency": "EUR"
+      },
+      "taxIncluded": true,
+      "descriptionHtml": "<p>Organska biljna mješavina bez kofeina. Pije se toplo, u bilo koje doba dana.</p>",
+      "images": [
+        {
+          "src": "/img/p/CSTO-74.jpg",
+          "alt": "La Belle Humeur",
+          "width": 460,
+          "height": 460
+        }
+      ],
+      "attributes": {
+        "origin": "Mješavina",
+        "caffeine": 0,
+        "flavors": [
+          "cvjetni"
+        ],
+        "form": "rastresiti",
+        "moods": [
+          "vecer"
+        ],
+        "badges": [
+          "bio"
+        ],
+        "brew": {
+          "temp": "100 °C",
+          "time": "5–7 min",
+          "dose": "3 g / 250 ml"
+        }
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true,
+      "updatedAt": "2026-11-02T00:00:00.000Z"
+    },
+    {
+      "id": "demo-61",
+      "sku": "CSTO-182",
+      "slug": "cerise-rubis",
+      "name": "Cerise Rubis",
+      "type": "biljni",
+      "unitLabel": "50 g",
+      "price": {
+        "amount": 890,
+        "currency": "EUR"
+      },
+      "taxIncluded": true,
+      "descriptionHtml": "<p>Voćni biljni čaj s jabukom, hibiskusom i višnjom. Okusi slatkiša i svježih jagoda.</p>",
+      "images": [
+        {
+          "src": "/img/p/CSTO-182.jpg",
+          "alt": "Cerise Rubis",
+          "width": 460,
+          "height": 460
+        }
+      ],
+      "attributes": {
+        "origin": "Mješavina",
+        "caffeine": 0,
+        "flavors": [
+          "vocni"
+        ],
+        "form": "rastresiti",
+        "moods": [
+          "vecer",
+          "poklon"
+        ],
+        "badges": [],
+        "brew": {
+          "temp": "100 °C",
+          "time": "5–7 min",
+          "dose": "3 g / 250 ml"
+        }
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true,
+      "updatedAt": "2026-11-02T00:00:00.000Z"
+    },
+    {
+      "id": "demo-62",
+      "sku": "CSTO-33",
+      "slug": "wintergreen",
+      "name": "Wintergreen",
+      "type": "biljni",
+      "unitLabel": "30 g",
+      "price": {
+        "amount": 990,
+        "currency": "EUR"
+      },
+      "taxIncluded": true,
+      "descriptionHtml": "<p>Listovi divlje gaulterije iz šuma Quebeca. Lagana, slatkasta šalica izrazitog osvježavajućeg okusa.</p>",
+      "images": [
+        {
+          "src": "/img/p/CSTO-33.jpg",
+          "alt": "Wintergreen",
+          "width": 460,
+          "height": 460
+        }
+      ],
+      "attributes": {
+        "origin": "Kanada",
+        "caffeine": 0,
+        "flavors": [
+          "mentolni"
+        ],
+        "form": "rastresiti",
+        "moods": [
+          "vecer"
+        ],
+        "badges": [
+          "rijetko"
+        ],
+        "brew": {
+          "temp": "100 °C",
+          "time": "5–7 min",
+          "dose": "3 g / 250 ml"
+        }
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true,
+      "updatedAt": "2026-11-02T00:00:00.000Z"
+    },
+    {
+      "id": "demo-63",
+      "sku": "CSTO-32",
+      "slug": "labradorski-caj",
+      "name": "Labradorski čaj",
+      "type": "biljni",
+      "unitLabel": "30 g",
+      "price": {
+        "amount": 1190,
+        "currency": "EUR"
+      },
+      "taxIncluded": true,
+      "descriptionHtml": "<p>Divlje ubran ledon s područja Lac St-Jean. Kiselkast, biljni karakter s notama jele i kopra. Zbog tanina umjerena konzumacija.</p>",
+      "images": [
+        {
+          "src": "/img/p/CSTO-32.jpg",
+          "alt": "Labradorski čaj",
+          "width": 460,
+          "height": 460
+        }
+      ],
+      "attributes": {
+        "origin": "Kanada",
+        "caffeine": 0,
+        "flavors": [
+          "drvenasti"
+        ],
+        "form": "rastresiti",
+        "moods": [
+          "vecer"
+        ],
+        "badges": [
+          "rijetko"
+        ],
+        "brew": {
+          "temp": "100 °C",
+          "time": "5–7 min",
+          "dose": "3 g / 250 ml"
+        }
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true,
+      "updatedAt": "2026-11-02T00:00:00.000Z"
+    },
+    {
+      "id": "demo-64",
+      "sku": "CSTR-3",
+      "slug": "rooibos-wupperthal",
+      "name": "Rooibos Wupperthal",
+      "type": "biljni",
+      "unitLabel": "50 g",
+      "price": {
+        "amount": 790,
+        "currency": "EUR"
+      },
+      "taxIncluded": true,
+      "descriptionHtml": "<p>Organski rooibos s planina Cederberg, bez kofeina. Jarko crvena šalica s notama kuhane trešnje i slada.</p>",
+      "images": [
+        {
+          "src": "/img/p/CSTR-3.jpg",
+          "alt": "Rooibos Wupperthal",
+          "width": 460,
+          "height": 460
+        }
+      ],
+      "attributes": {
+        "origin": "Južna Afrika",
+        "caffeine": 0,
+        "flavors": [
+          "vocni",
+          "sladni"
+        ],
+        "form": "rastresiti",
+        "moods": [
+          "vecer"
+        ],
+        "badges": [
+          "bio"
+        ],
+        "brew": {
+          "temp": "100 °C",
+          "time": "5–7 min",
+          "dose": "3 g / 250 ml"
+        }
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true,
+      "updatedAt": "2026-11-02T00:00:00.000Z"
+    },
+    {
+      "id": "demo-65",
+      "sku": "CSTR-4",
+      "slug": "rooibos-zeste-eclair",
+      "name": "Rooibos Zeste Éclair",
+      "type": "biljni",
+      "unitLabel": "50 g",
+      "price": {
+        "amount": 890,
+        "currency": "EUR"
+      },
+      "taxIncluded": true,
+      "descriptionHtml": "<p>Rooibos s grejpom, limunskom travom i začinima. Osvježavajući, bez kofeina.</p>",
+      "images": [
+        {
+          "src": "/img/p/CSTR-4.jpg",
+          "alt": "Rooibos Zeste Éclair",
+          "width": 460,
+          "height": 460
+        }
+      ],
+      "attributes": {
+        "origin": "Južna Afrika",
+        "caffeine": 0,
+        "flavors": [
+          "citrusni",
+          "zacinski"
+        ],
+        "form": "rastresiti",
+        "moods": [
+          "vecer"
+        ],
+        "badges": [],
+        "brew": {
+          "temp": "100 °C",
+          "time": "5–7 min",
+          "dose": "3 g / 250 ml"
+        }
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true,
+      "updatedAt": "2026-11-02T00:00:00.000Z"
+    },
+    {
+      "id": "demo-66",
+      "sku": "CSTAD-592",
+      "slug": "yerba-mate",
+      "name": "Yerba Maté",
+      "type": "biljni",
+      "unitLabel": "1 kg",
+      "price": {
+        "amount": 2400,
+        "currency": "EUR"
+      },
+      "taxIncluded": true,
+      "descriptionHtml": "<p>Južnoamerički napitak od biljke iz porodice božikovine, bogat kofeinom. Biljni, izravan i gorkast okus, sušen bez dima.</p>",
+      "images": [
+        {
+          "src": "/img/p/CSTAD-592.jpg",
+          "alt": "Yerba Maté",
+          "width": 460,
+          "height": 460
+        }
+      ],
+      "attributes": {
+        "origin": "Brazil",
+        "caffeine": 3,
+        "flavors": [
+          "travnati"
+        ],
+        "form": "rastresiti",
+        "moods": [
+          "jutro",
+          "fokus"
+        ],
+        "badges": [
+          "bio"
+        ],
+        "brew": {
+          "temp": "100 °C",
+          "time": "5–7 min",
+          "dose": "3 g / 250 ml"
+        }
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true,
+      "updatedAt": "2026-11-02T00:00:00.000Z"
+    },
+    {
+      "id": "demo-67",
+      "sku": "CSTHG-32",
+      "slug": "staklena-gaiwan-echo",
+      "name": "Staklena gaiwan Echo",
+      "type": "pribor",
+      "unitLabel": "kom",
+      "price": {
+        "amount": 2400,
+        "currency": "EUR"
+      },
+      "taxIncluded": true,
+      "descriptionHtml": "<p>Staklena gaiwan za sve vrste čaja. Glatke stijenke za ugodan hvat i neutralno zalijevanje, a vidite kako se listovi otvaraju.</p>",
+      "images": [
+        {
+          "src": "/img/p/CSTHG-32.jpg",
+          "alt": "Staklena gaiwan Echo",
+          "width": 460,
+          "height": 460
+        }
+      ],
+      "attributes": {
+        "flavors": [],
+        "form": "pribor",
+        "moods": [
+          "poklon"
+        ],
+        "badges": []
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true,
+      "updatedAt": "2026-11-02T00:00:00.000Z"
+    },
+    {
+      "id": "demo-68",
+      "sku": "CSTHJC-79",
+      "slug": "set-za-matchu-focus",
+      "name": "Set za matchu Focus",
+      "type": "pribor",
+      "unitLabel": "set",
+      "price": {
+        "amount": 5900,
+        "currency": "EUR"
+      },
+      "taxIncluded": true,
+      "descriptionHtml": "<p>Sve za savršenu matchu: bambusova metlica chasen, držač, zdjelica chawan i čelična žličica.</p>",
+      "images": [
+        {
+          "src": "/img/p/CSTHJC-79.jpg",
+          "alt": "Set za matchu Focus",
+          "width": 460,
+          "height": 460
+        }
+      ],
+      "attributes": {
+        "flavors": [],
+        "form": "pribor",
+        "moods": [
+          "poklon"
+        ],
+        "badges": []
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true,
+      "updatedAt": "2026-11-02T00:00:00.000Z"
+    },
+    {
+      "id": "demo-69",
+      "sku": "CSAC-516",
+      "slug": "zlicica-za-matchu",
+      "name": "Žličica za matchu",
+      "type": "pribor",
+      "unitLabel": "kom",
+      "price": {
+        "amount": 990,
+        "currency": "EUR"
+      },
+      "taxIncluded": true,
+      "descriptionHtml": "<p>Mala žličica od nehrđajućeg čelika za točno odmjerenu matchu svaki put.</p>",
+      "images": [
+        {
+          "src": "/img/p/CSAC-516.jpg",
+          "alt": "Žličica za matchu",
+          "width": 460,
+          "height": 460
+        }
+      ],
+      "attributes": {
+        "flavors": [],
+        "form": "pribor",
+        "moods": [
+          "poklon"
+        ],
+        "badges": []
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true,
+      "updatedAt": "2026-11-02T00:00:00.000Z"
+    },
+    {
+      "id": "demo-70",
+      "sku": "CSAC-463",
+      "slug": "bambusova-cajna-daska-cabaret",
+      "name": "Bambusova čajna daska Cabaret",
+      "type": "pribor",
+      "unitLabel": "kom",
+      "price": {
+        "amount": 3900,
+        "currency": "EUR"
+      },
+      "taxIncluded": true,
+      "descriptionHtml": "<p>Bambusova daska za posluživanje koja skuplja vodu pri zalijevanju i ispiranju. Moderan i elegantan dizajn.</p>",
+      "images": [
+        {
+          "src": "/img/p/CSAC-463.jpg",
+          "alt": "Bambusova čajna daska Cabaret",
+          "width": 460,
+          "height": 460
+        }
+      ],
+      "attributes": {
+        "flavors": [],
+        "form": "pribor",
+        "moods": [
+          "poklon"
+        ],
+        "badges": []
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true,
+      "updatedAt": "2026-11-02T00:00:00.000Z"
+    },
+    {
+      "id": "demo-71",
+      "sku": "CSLI-2",
+      "slug": "knjiga-tea-history-terroirs-varieties",
+      "name": "Knjiga: Tea – History, Terroirs, Varieties",
+      "type": "pribor",
+      "unitLabel": "kom",
+      "price": {
+        "amount": 3400,
+        "currency": "EUR"
+      },
+      "taxIncluded": true,
+      "descriptionHtml": "<p>Knjiga kuće Camellia Sinensis (treće izdanje, engleski): povijest, terroiri i vrste čaja.</p>",
+      "images": [
+        {
+          "src": "/img/p/CSLI-2.jpg",
+          "alt": "Knjiga: Tea – History, Terroirs, Varieties",
+          "width": 460,
+          "height": 460
+        }
+      ],
+      "attributes": {
+        "flavors": [],
+        "form": "pribor",
+        "moods": [
+          "poklon"
+        ],
+        "badges": []
+      },
+      "stock": {
+        "status": "low",
+        "quantity": 2,
+        "maxPerOrder": 20
+      },
+      "published": true,
+      "updatedAt": "2026-11-02T00:00:00.000Z"
+    }
+  ]
+}

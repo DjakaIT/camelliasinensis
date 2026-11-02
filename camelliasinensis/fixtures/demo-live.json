@@ -1,0 +1,928 @@
+{
+  "$comment": "GENERIRANO skriptom scripts/data-to-fixtures.mjs iz design-reference/src/data.js; ne uređivati ručno. CIJENE SU PRIMJERI IZ PROTOTIPA (nisu Sarine potvrđene cijene) i ne smiju se prikazivati kao akcija ni staro/novo. ZALIHA JE IZMIŠLJENA za demo (stanja: na zalihi, malo, nema).",
+  "skus": {
+    "CSTB-2": {
+      "name": "Bai Mu Dan Wang",
+      "price": {
+        "amount": 1190,
+        "currency": "EUR"
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true
+    },
+    "CSTVI-295": {
+      "name": "Gong Mei 2018",
+      "price": {
+        "amount": 2400,
+        "currency": "EUR"
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true
+    },
+    "CSTB-6": {
+      "name": "Jingning Yin Zhen",
+      "price": {
+        "amount": 1850,
+        "currency": "EUR"
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true
+    },
+    "CSTVI-294": {
+      "name": "Bai Mu Dan 2021",
+      "price": {
+        "amount": 1600,
+        "currency": "EUR"
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true
+    },
+    "CSTV-178": {
+      "name": "Bancha",
+      "price": {
+        "amount": 790,
+        "currency": "EUR"
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true
+    },
+    "CSTV-8": {
+      "name": "Genmaicha",
+      "price": {
+        "amount": 790,
+        "currency": "EUR"
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true
+    },
+    "CSTV-10": {
+      "name": "Gunpowder",
+      "price": {
+        "amount": 690,
+        "currency": "EUR"
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true
+    },
+    "CSTV-22": {
+      "name": "Kamairicha",
+      "price": {
+        "amount": 1090,
+        "currency": "EUR"
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true
+    },
+    "CSTV-88": {
+      "name": "Gyokuro Okabe",
+      "price": {
+        "amount": 2200,
+        "currency": "EUR"
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true
+    },
+    "CSTV-18": {
+      "name": "Huiming",
+      "price": {
+        "amount": 1390,
+        "currency": "EUR"
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true
+    },
+    "CSTV-68": {
+      "name": "Long Jing Zhejiang",
+      "price": {
+        "amount": 1290,
+        "currency": "EUR"
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true
+    },
+    "CSTV-40": {
+      "name": "Sencha Mobata",
+      "price": {
+        "amount": 990,
+        "currency": "EUR"
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true
+    },
+    "CSTV-41": {
+      "name": "Sencha Nagashima",
+      "price": {
+        "amount": 1190,
+        "currency": "EUR"
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true
+    },
+    "CSTV-121": {
+      "name": "Matcha Sora",
+      "price": {
+        "amount": 1900,
+        "currency": "EUR"
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true
+    },
+    "CSTV-237": {
+      "name": "Matcha Mizukaze",
+      "price": {
+        "amount": 2900,
+        "currency": "EUR"
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true
+    },
+    "CSTAD-561": {
+      "name": "Matcha Uji",
+      "price": {
+        "amount": 3900,
+        "currency": "EUR"
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true
+    },
+    "CSTN-1": {
+      "name": "Assam Breakfast",
+      "price": {
+        "amount": 790,
+        "currency": "EUR"
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true
+    },
+    "CSTN-79": {
+      "name": "Assam Halmari",
+      "price": {
+        "amount": 1290,
+        "currency": "EUR"
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true
+    },
+    "CSTN-64": {
+      "name": "Ceylon New Vithanakande",
+      "price": {
+        "amount": 990,
+        "currency": "EUR"
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true
+    },
+    "CSTN-38": {
+      "name": "Zhenghe Hong Gong Fu",
+      "price": {
+        "amount": 1390,
+        "currency": "EUR"
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true
+    },
+    "CSTN-126": {
+      "name": "Darjeeling Autumn Thurbo",
+      "price": {
+        "amount": 1390,
+        "currency": "EUR"
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true
+    },
+    "CSTN-97": {
+      "name": "Darjeeling First Flush Thurbo",
+      "price": {
+        "amount": 1690,
+        "currency": "EUR"
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true
+    },
+    "CSTN-192": {
+      "name": "Darjeeling First Flush Jungpana",
+      "price": {
+        "amount": 1790,
+        "currency": "EUR"
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true
+    },
+    "CSTN-219": {
+      "name": "Darjeeling Second Flush Selimbong",
+      "price": {
+        "amount": 1590,
+        "currency": "EUR"
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true
+    },
+    "CSTN-25": {
+      "name": "Jin Die",
+      "price": {
+        "amount": 1590,
+        "currency": "EUR"
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true
+    },
+    "CSTN-111": {
+      "name": "La Cumbre Bitaco",
+      "price": {
+        "amount": 1190,
+        "currency": "EUR"
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true
+    },
+    "CSTN-201": {
+      "name": "Kevin's Breakfast Blend",
+      "price": {
+        "amount": 990,
+        "currency": "EUR"
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true
+    },
+    "CSTN-125": {
+      "name": "Meghalaya Lakyrsiew Autumn",
+      "price": {
+        "amount": 1490,
+        "currency": "EUR"
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true
+    },
+    "CSTN-93": {
+      "name": "Yunnan Da Ye",
+      "price": {
+        "amount": 1190,
+        "currency": "EUR"
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true
+    },
+    "CSTN-220": {
+      "name": "Shimada Whisky (dimljeni)",
+      "price": {
+        "amount": 1890,
+        "currency": "EUR"
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true
+    },
+    "CSTVI-298": {
+      "name": "Pu'er Shou 2021 Yongde",
+      "price": {
+        "amount": 1490,
+        "currency": "EUR"
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true
+    },
+    "CSTVI-281": {
+      "name": "Pu'er Shou 2016 Jingmai",
+      "price": {
+        "amount": 1690,
+        "currency": "EUR"
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true
+    },
+    "CSTVI-282": {
+      "name": "Pu'er Sheng 2023 Zhengwan",
+      "price": {
+        "amount": 3400,
+        "currency": "EUR"
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true
+    },
+    "CSTVI-276": {
+      "name": "Pu'er Sheng 2023 Yongde Da Shan",
+      "price": {
+        "amount": 3800,
+        "currency": "EUR"
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true
+    },
+    "CSTVI-150": {
+      "name": "Pu'er Sheng 2007 Yiwu Jing Long",
+      "price": {
+        "amount": 5900,
+        "currency": "EUR"
+      },
+      "stock": {
+        "status": "outofstock",
+        "quantity": 0,
+        "maxPerOrder": 20
+      },
+      "published": true
+    },
+    "CSTW-1": {
+      "name": "Ali Shan",
+      "price": {
+        "amount": 1590,
+        "currency": "EUR"
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true
+    },
+    "CSTW-11": {
+      "name": "Gaba Cha",
+      "price": {
+        "amount": 1490,
+        "currency": "EUR"
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true
+    },
+    "CSTW-30": {
+      "name": "Dong Ding Mr. Nen Yu (pečeni)",
+      "price": {
+        "amount": 1690,
+        "currency": "EUR"
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true
+    },
+    "CSTP-5": {
+      "name": "Dunes du Sahara (zeleni s mentom)",
+      "price": {
+        "amount": 790,
+        "currency": "EUR"
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true
+    },
+    "CSTP-6": {
+      "name": "Earl Grey",
+      "price": {
+        "amount": 890,
+        "currency": "EUR"
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true
+    },
+    "CSTP-90": {
+      "name": "Earl Grey de Marie-Antoinette",
+      "price": {
+        "amount": 1090,
+        "currency": "EUR"
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true
+    },
+    "CSTP-7": {
+      "name": "Green Earl Grey",
+      "price": {
+        "amount": 890,
+        "currency": "EUR"
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true
+    },
+    "CSTP-11": {
+      "name": "Earl Grey Cream",
+      "price": {
+        "amount": 990,
+        "currency": "EUR"
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true
+    },
+    "CSTP-51": {
+      "name": "Lisbon Sunshine",
+      "price": {
+        "amount": 990,
+        "currency": "EUR"
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true
+    },
+    "CSTG-68": {
+      "name": "Memories from Napoli",
+      "price": {
+        "amount": 990,
+        "currency": "EUR"
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true
+    },
+    "CSTP-25": {
+      "name": "Moulin Rouge",
+      "price": {
+        "amount": 1090,
+        "currency": "EUR"
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true
+    },
+    "CSTP-17": {
+      "name": "Ombrelle de Papier",
+      "price": {
+        "amount": 1090,
+        "currency": "EUR"
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true
+    },
+    "CSTP-81": {
+      "name": "Raspberry Mimosa",
+      "price": {
+        "amount": 890,
+        "currency": "EUR"
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true
+    },
+    "CSTP-86": {
+      "name": "Sencha Yuzu",
+      "price": {
+        "amount": 1290,
+        "currency": "EUR"
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true
+    },
+    "CSTP-88": {
+      "name": "Fée des Fleurs (jasmin)",
+      "price": {
+        "amount": 1590,
+        "currency": "EUR"
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true
+    },
+    "CSTP-36": {
+      "name": "Cvjetni čaj: božur, ljiljan i osmantus",
+      "price": {
+        "amount": 1290,
+        "currency": "EUR"
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true
+    },
+    "CSTP-92": {
+      "name": "Verger Tropical",
+      "price": {
+        "amount": 990,
+        "currency": "EUR"
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true
+    },
+    "CSTC-5": {
+      "name": "Chai Camellia",
+      "price": {
+        "amount": 890,
+        "currency": "EUR"
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true
+    },
+    "CSTC-13": {
+      "name": "Celebration Chai",
+      "price": {
+        "amount": 990,
+        "currency": "EUR"
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true
+    },
+    "CSTO-2": {
+      "name": "Kamilica",
+      "price": {
+        "amount": 690,
+        "currency": "EUR"
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true
+    },
+    "CSTO-41": {
+      "name": "Menta",
+      "price": {
+        "amount": 690,
+        "currency": "EUR"
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true
+    },
+    "CSTO-23": {
+      "name": "La Provençale",
+      "price": {
+        "amount": 890,
+        "currency": "EUR"
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true
+    },
+    "CSTO-31": {
+      "name": "Lemon Ginger Burst",
+      "price": {
+        "amount": 890,
+        "currency": "EUR"
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true
+    },
+    "CSTO-17": {
+      "name": "La Rose Pourpre",
+      "price": {
+        "amount": 1190,
+        "currency": "EUR"
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true
+    },
+    "CSTO-74": {
+      "name": "La Belle Humeur",
+      "price": {
+        "amount": 1090,
+        "currency": "EUR"
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true
+    },
+    "CSTO-182": {
+      "name": "Cerise Rubis",
+      "price": {
+        "amount": 890,
+        "currency": "EUR"
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true
+    },
+    "CSTO-33": {
+      "name": "Wintergreen",
+      "price": {
+        "amount": 990,
+        "currency": "EUR"
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true
+    },
+    "CSTO-32": {
+      "name": "Labradorski čaj",
+      "price": {
+        "amount": 1190,
+        "currency": "EUR"
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true
+    },
+    "CSTR-3": {
+      "name": "Rooibos Wupperthal",
+      "price": {
+        "amount": 790,
+        "currency": "EUR"
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true
+    },
+    "CSTR-4": {
+      "name": "Rooibos Zeste Éclair",
+      "price": {
+        "amount": 890,
+        "currency": "EUR"
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true
+    },
+    "CSTAD-592": {
+      "name": "Yerba Maté",
+      "price": {
+        "amount": 2400,
+        "currency": "EUR"
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true
+    },
+    "CSTHG-32": {
+      "name": "Staklena gaiwan Echo",
+      "price": {
+        "amount": 2400,
+        "currency": "EUR"
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true
+    },
+    "CSTHJC-79": {
+      "name": "Set za matchu Focus",
+      "price": {
+        "amount": 5900,
+        "currency": "EUR"
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true
+    },
+    "CSAC-516": {
+      "name": "Žličica za matchu",
+      "price": {
+        "amount": 990,
+        "currency": "EUR"
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true
+    },
+    "CSAC-463": {
+      "name": "Bambusova čajna daska Cabaret",
+      "price": {
+        "amount": 3900,
+        "currency": "EUR"
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true
+    },
+    "CSLI-2": {
+      "name": "Knjiga: Tea – History, Terroirs, Varieties",
+      "price": {
+        "amount": 3400,
+        "currency": "EUR"
+      },
+      "stock": {
+        "status": "low",
+        "quantity": 2,
+        "maxPerOrder": 20
+      },
+      "published": true
+    }
+  }
+}
