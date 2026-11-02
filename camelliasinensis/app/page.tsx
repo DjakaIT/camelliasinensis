@@ -1,12 +1,10 @@
 import Link from 'next/link';
-import { AddButton } from '@/components/AddButton';
-import { CaffeineMeter } from '@/components/home/CaffeineMeter';
 import { Shelf } from '@/components/home/Shelf';
-import { IconArrow } from '@/components/Icons';
-import { NoImage, Picture } from '@/components/Picture';
-import { FEATURED_SKUS, PUER_SPOTLIGHT_SKU } from '@/content/site';
+import { TeinMeter } from '@/components/home/TeinMeter';
+import { IconArrow, IconGlobe, IconHand, IconLeaf, IconTruck } from '@/components/Icons';
+import { Picture } from '@/components/Picture';
+import { brandStory, FEATURED_SKUS, FREE_SHIPPING_FROM } from '@/content/site';
 import { getCards } from '@/lib/catalog-server';
-import { productHref } from '@/lib/catalog-view';
 import { formatMoney } from '@/lib/format';
 import { isDarkType, typeColor } from '@/lib/labels';
 import { getTypes } from '@/lib/shop/catalog';
@@ -15,7 +13,7 @@ import { pageMeta } from '@/lib/seo';
 export const metadata = pageMeta({
   title: 'Camellia sinensis | Čaj i pribor za čaj online, Zagreb',
   description:
-    "Camellia sinensis, trgovina čaja u Zagrebu: bijeli, zeleni, oolong, crni, pu'er i biljni čajevi te pribor za pripremu.",
+    "Camellia sinensis, trgovina čaja u Zagrebu: bijeli, zeleni, oolong, crni, pu'er i biljni čajevi te pribor za pripremu. Besplatna dostava od 50 €.",
   path: '/',
 });
 
@@ -28,7 +26,19 @@ export default async function Home() {
   const meter = cards
     .filter((c) => c.caffeine != null)
     .map((c) => ({ slug: c.slug, name: c.name, caffeine: c.caffeine!, rare: c.rare, price: c.price }));
-  const pu = cards.find((c) => c.sku === PUER_SPOTLIGHT_SKU);
+
+  // Istaknute stavke računamo iz kataloga, da su uvijek točne.
+  const teas = cards.filter((c) => c.type !== 'pribor');
+  const organic = teas.filter((c) => c.bio).length;
+  const countries = new Set(teas.map((c) => c.origin).filter((o) => o && o !== 'Mješavina')).size;
+  const freeFrom = formatMoney(FREE_SHIPPING_FROM).replace(',00', '');
+
+  // Tri fotografije po vrsti čaja (rijetkosti i istaknuti proizvodi prvi).
+  const photosFor = (key: string) =>
+    cards
+      .filter((c) => c.type === key && c.image)
+      .sort((a, b) => Number(FEATURED_SKUS.includes(b.sku)) - Number(FEATURED_SKUS.includes(a.sku)) || Number(b.rare) - Number(a.rare))
+      .slice(0, 3);
 
   let k = 0;
   return (
@@ -50,10 +60,9 @@ export default async function Home() {
             {H1.map((w, i) => {
               if (w === '|') return <br key={i} />;
               const delay = { animationDelay: `${0.1 + k++ * 0.06}s` };
-              const gold = i >= 6;
               return (
                 <span key={i}>
-                  <span className={`w${gold ? ' g' : ''}`} style={delay}>
+                  <span className={`w${i >= 6 ? ' g' : ''}`} style={delay}>
                     {w}
                   </span>{' '}
                 </span>
@@ -61,7 +70,10 @@ export default async function Home() {
             })}
           </h1>
           <div className="bottom">
-            <p>Bijeli, zeleni, oolong, crni, pu&apos;er i biljni čajevi te pribor za pripremu.</p>
+            <p>
+              Bijeli, zeleni, oolong, crni, pu&apos;er i biljni čajevi te pribor za pripremu. Dostava GLS-om u cijelu Hrvatsku,
+              besplatna od {freeFrom}.
+            </p>
             <div className="btns">
               <Link href="/katalog/" className="pill gold">
                 Otvori katalog <IconArrow />
@@ -69,7 +81,7 @@ export default async function Home() {
             </div>
           </div>
         </div>
-        <CaffeineMeter items={meter} />
+        <TeinMeter items={meter} />
       </section>
 
       <Shelf featured={featured} all={light} />
@@ -86,21 +98,32 @@ export default async function Home() {
           </Link>
         </div>
         <div className="types">
-          {types.map((t, i) => (
-            <Link
-              key={t.key}
-              className={`ty rv${isDarkType(t.key) ? ' dark' : ''}`}
-              href={`/katalog/${t.key}/`}
-              prefetch={false}
-              style={{ background: typeColor(t.key), transitionDelay: `${i * 50}ms` }}
-            >
-              <span className="c" aria-label={`${cards.filter((c) => c.type === t.key).length} proizvoda`}>
-                {cards.filter((c) => c.type === t.key).length}
-              </span>
-              <h3>{t.name}</h3>
-              <p>{t.description}</p>
-            </Link>
-          ))}
+          {types.map((t, i) => {
+            const n = cards.filter((c) => c.type === t.key).length;
+            const photos = photosFor(t.key);
+            return (
+              <Link
+                key={t.key}
+                className={`ty rv${isDarkType(t.key) ? ' dark' : ''}`}
+                href={`/katalog/${t.key}/`}
+                prefetch={false}
+                style={{ background: typeColor(t.key), transitionDelay: `${i * 50}ms` }}
+              >
+                <span className="c" aria-label={`${n} proizvoda`}>
+                  {n}
+                </span>
+                <h3>{t.name}</h3>
+                <span className="ty-ph" aria-hidden="true">
+                  {photos.map((p) => (
+                    <span key={p.sku}>
+                      <Picture src={p.image!.src} alt="" sizes="110px" />
+                    </span>
+                  ))}
+                </span>
+                <p>{t.description}</p>
+              </Link>
+            );
+          })}
         </div>
       </section>
 
@@ -130,22 +153,55 @@ export default async function Home() {
             </Link>
           </div>
         </div>
-        <div className="img">
-          <Picture src="/img/foto/puer-caj.jpg" alt="Glineni čajnik i šalica na drvenom stolu" sizes="(max-width: 820px) 100vw, 50vw" />
-          {pu && (
-            <div className="pmini">
-              <Link href={productHref(pu.slug)} className="pimg" tabIndex={-1} aria-hidden="true">
-                {pu.image ? <Picture src={pu.image.src} alt="" sizes="76px" /> : <NoImage />}
-              </Link>
-              <Link href={productHref(pu.slug)}>
-                <b>{pu.name}</b>
-                <span>
-                  {formatMoney(pu.price)} / {pu.unitLabel}
-                </span>
-              </Link>
-              <AddButton sku={pu.sku} name={pu.name} price={pu.price} />
-            </div>
-          )}
+
+        <div className="hl" aria-labelledby="hl-h">
+          <svg className="hl-art" viewBox="0 0 400 400" aria-hidden="true">
+            <circle cx="320" cy="80" r="150" />
+            <circle cx="320" cy="80" r="105" />
+            <circle cx="320" cy="80" r="60" />
+            <path d="M60 360c10-120 90-200 230-210-10 130-90 200-230 210z" />
+            <path d="M60 360c50-70 110-130 200-180" />
+          </svg>
+          <span className="lbl">Camellia sinensis · Zagreb</span>
+          <h2 className="d" id="hl-h">
+            {brandStory.title.split(' ').slice(0, 3).join(' ')}
+            <br />
+            <span className="g">{brandStory.title.split(' ').slice(3).join(' ')}</span>
+          </h2>
+          <p>{brandStory.text}</p>
+          <ul className="hl-grid">
+            <li>
+              <IconLeaf />
+              <b>{organic} organskih</b>
+              <span>čajeva s certifikatom</span>
+            </li>
+            <li>
+              <IconGlobe />
+              <b>{countries} zemalja</b>
+              <span>od Japana do Kolumbije</span>
+            </li>
+            <li>
+              <IconHand />
+              <b>Imenovani proizvođači</b>
+              <span>obiteljski vrtovi i majstori čaja</span>
+            </li>
+            <li>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
+                <path d="M4 14c3-1 5-4 6-8 2 4 6 6 10 6-2 5-6 8-11 8a5 5 0 0 1-5-6z" />
+              </svg>
+              <b>Rastresiti listovi</b>
+              <span>bez vrećica i punila</span>
+            </li>
+          </ul>
+          <div className="hl-ship">
+            <span className="hl-ring" aria-hidden="true">
+              <IconTruck size={26} />
+            </span>
+            <span>
+              <b>Besplatna dostava od {freeFrom}</b>
+              GLS na adresu ili u paketomat, u cijeloj Hrvatskoj
+            </span>
+          </div>
         </div>
       </section>
     </div>

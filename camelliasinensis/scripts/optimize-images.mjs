@@ -11,7 +11,6 @@ const force = process.argv.includes('--force');
 const jobs = [
   // [izvor, odredište bez ekstenzije, širine]
   ['design-reference/hero-tea.jpg', 'hero/hero-tea', [640, 1124]],
-  ['assets/photos/puer-caj.jpg', 'foto/puer-caj', [480, 960]],
   ['assets/photos/o-nama-ilustracija.jpg', 'foto/o-nama-ilustracija', [480, 960]],
 ];
 for (const f of readdirSync('design-reference/img').filter((f) => f.endsWith('.jpg'))) {
