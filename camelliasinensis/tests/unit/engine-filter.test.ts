@@ -62,7 +62,7 @@ describe('filtri kataloga', () => {
   });
 
   it('URL ↔ filtri', () => {
-    const f = parseFilters('?vrsta=zeleni,crni&okus=cvjetni&kofein=2&q=sencha&poredaj=cu&stranica=2&bio=1');
+    const f = parseFilters('?vrsta=zeleni,crni&okus=cvjetni&tein=2&q=sencha&poredaj=cu&stranica=2&bio=1');
     expect(f).toMatchObject({ type: ['zeleni', 'crni'], flav: ['cvjetni'], lv: ['2'], q: 'sencha', sort: 'cu', page: 2, bio: true });
     expect(parseFilters(toSearch(f))).toEqual(f);
     expect(toSearch(emptyFilters())).toBe('');

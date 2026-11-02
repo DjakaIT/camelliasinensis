@@ -9,6 +9,8 @@ const PAGES: [string, string, boolean?][] = [
   ['proizvod', '/proizvod/bai-mu-dan-wang/'],
   ['proizvod-rasprodan', '/proizvod/puer-sheng-2007-yiwu-jing-long/'],
   ['o-nama', '/o-nama/'],
+  ['kontakt', '/kontakt/'],
+  ['povrat', '/povrat/'],
   ['kosarica', '/kosarica/', true],
   ['kosarica-prazna', '/kosarica/'],
   ['uspjeh-bez-tokena', '/narudzba/uspjeh/'],
@@ -53,4 +55,23 @@ test('axe ladica košarice otvorena', async ({ page, ctl }, info) => {
   const r = await new AxeBuilder({ page }).include('.x-drawer').withTags(['wcag2a', 'wcag2aa']).analyze();
   const bad = r.violations.filter((v) => v.impact === 'serious' || v.impact === 'critical').map((v) => v.id);
   expect(bad).toEqual([]);
+});
+
+test('axe blagajna (demo)', async ({ page, ctl }, info) => {
+  test.skip(info.project.name !== 'demo', 'blagajna postoji samo u demo buildu');
+  void ctl;
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto('/proizvod/bai-mu-dan-wang/');
+  await page.getByTestId('add-to-cart').click();
+  await expect(page.locator('.badge')).toHaveText('1');
+  await page.goto('/kosarica/');
+  await page.locator('#sadrzaj').getByRole('button', { name: /Na blagajnu/ }).click();
+  await expect(page.getByRole('heading', { level: 1, name: 'Blagajna' })).toBeVisible();
+  await page.getByRole('button', { name: /^Plati karticom/ }).click(); // stanje s greškama
+  await page.waitForTimeout(300);
+  const r = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa']).analyze();
+  const bad = r.violations
+    .filter((v) => v.impact === 'serious' || v.impact === 'critical')
+    .map((v) => `${v.id}: ${v.nodes.map((n) => n.target.join(' ')).slice(0, 3).join(' | ')}`);
+  expect(bad, bad.join('\n')).toEqual([]);
 });

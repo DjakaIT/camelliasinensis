@@ -1,6 +1,6 @@
 import { test as base, expect, type Page } from '@playwright/test';
 
-const MOCK = 'http://127.0.0.1:4000';
+const MOCK = 'http://127.0.0.1:4050';
 
 export type Ctl = {
   /** Promjena zalihe "kao da ju je promijenila blagajna". */
@@ -57,7 +57,33 @@ export async function cartLines(page: Page) {
   return page.evaluate(() => JSON.parse(localStorage.getItem('cs.cart.v1') ?? '{"lines":[]}').lines as { sku: string; qty: number }[]);
 }
 
-/** Na stranici plaćanja (demo /dev/checkout/ ili FAKE mock-servera) klikni gumb. */
-export async function onPaymentPage(page: Page, action: 'Plati (test)' | 'Odustani') {
-  await page.getByRole('button', { name: action }).click();
+/** Čeka stranicu plaćanja backenda: demo blagajnu (/blagajna/) ili FAKE stranicu mock-servera. */
+export async function expectPaymentPage(page: Page) {
+  await expect(page.getByRole('heading', { level: 1, name: /^(Blagajna|Plaćanje \(test\))$/ })).toBeVisible();
+}
+
+/** Ispuni demo blagajnu ispravnim testnim podacima (dostava na adresu). */
+export async function fillDemoCheckout(page: Page, card = '4242 4242 4242 4242') {
+  await page.getByLabel('Ime i prezime').fill('Ana Horvat');
+  await page.getByLabel('E-mail (za potvrdu i račun)').fill('ana.horvat@example.com');
+  await page.getByLabel('Mobitel (za obavijest GLS-a)').fill('091 234 5678');
+  await page.getByRole('radio', { name: /GLS na adresu/ }).check();
+  await page.getByLabel('Ulica i kućni broj').fill('Ilica 10');
+  await page.getByLabel('Poštanski broj').fill('10000');
+  await page.getByLabel('Grad').fill('Zagreb');
+  await page.getByLabel('Broj kartice').fill(card);
+  await page.getByLabel('Vrijedi do').fill('12 / 34');
+  await page.getByLabel('CVC').fill('123');
+  await page.getByRole('checkbox', { name: /Prihvaćam/ }).check();
+}
+
+/** Plati ili odustani na stranici plaćanja (demo blagajna ili FAKE mock-servera). */
+export async function onPaymentPage(page: Page, action: 'pay' | 'cancel') {
+  const demo = await page.getByTestId('demo-checkout').count();
+  if (demo) {
+    if (action === 'cancel') return page.getByRole('button', { name: 'Natrag u košaricu' }).click();
+    await fillDemoCheckout(page);
+    return page.getByRole('button', { name: /^Plati karticom/ }).click();
+  }
+  await page.getByRole('button', { name: action === 'pay' ? 'Plati (test)' : 'Odustani' }).click();
 }

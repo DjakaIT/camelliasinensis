@@ -14,6 +14,9 @@ const pages = [
   ['katalog-zeleni', '/katalog/zeleni/'],
   ['proizvod', '/proizvod/bai-mu-dan-wang/'],
   ['o-nama', '/o-nama/'],
+  ['kontakt', '/kontakt/'],
+  ['povrat', '/povrat/'],
+  ['blagajna', '/kosarica/', true, false, true],
   ['kosarica', '/kosarica/', true],
   ['kosarica-ladica', '/', true, true],
   ['404', '/ne-postoji/'],
@@ -28,11 +31,15 @@ const browser = await chromium.launch();
 for (const [vname, viewport] of viewports) {
   const ctx = await browser.newContext({ viewport, reducedMotion: 'reduce' });
   const page = await ctx.newPage();
-  for (const [name, path, withCart, drawer] of pages) {
+  for (const [name, path, withCart, drawer, checkout] of pages) {
     await page.goto(base + '/');
     await page.evaluate((c) => (c ? localStorage.setItem('cs.cart.v1', c) : localStorage.clear()), withCart ? cart : null);
     await page.goto(base + path, { waitUntil: 'networkidle' });
     if (drawer) await page.locator('.cartp').click();
+    if (checkout) {
+      await page.locator('#sadrzaj').getByRole('button', { name: /Na blagajnu/ }).click();
+      await page.getByRole('heading', { level: 1, name: 'Blagajna' }).waitFor();
+    }
     await page.evaluate(async () => {
       document.querySelectorAll('.rv').forEach((el) => el.classList.add('in'));
       document.querySelectorAll('img[loading=lazy]').forEach((img) => (img.loading = 'eager'));

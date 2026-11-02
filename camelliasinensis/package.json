@@ -16,7 +16,7 @@
     "postbuild": "node scripts/postbuild.mjs",
     "build:demo": "node scripts/with-env.mjs NEXT_PUBLIC_BACKEND=demo NEXT_PUBLIC_DEMO=1 -- npm run build",
     "build:devserver": "node scripts/build-devserver.mjs",
-    "build:e2e": "npm run build:devserver && npm run build:demo",
+    "build:e2e": "node scripts/with-env.mjs MOCK_PORT=4050 -- npm run build:devserver && npm run build:demo",
     "serve": "sirv out --port 3000 --host 127.0.0.1 --single 404.html",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",

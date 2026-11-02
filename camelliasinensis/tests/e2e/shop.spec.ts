@@ -1,5 +1,5 @@
 // Funkcionalni E2E (GUIDE §4.4) nad oba adaptera; plaćanje je FAKE (demo stranica ili mock-server).
-import { cartLines, expect, onPaymentPage, openCart, test } from './fixtures';
+import { cartLines, expect, expectPaymentPage, onPaymentPage, openCart, test } from './fixtures';
 
 const BAI = { sku: 'CSTB-2', slug: 'bai-mu-dan-wang', name: 'Bai Mu Dan Wang' };
 const HUI = { sku: 'CSTV-18', slug: 'huiming', name: 'Huiming' };
@@ -40,7 +40,7 @@ test('2b. direktno otvaranje /katalog/zeleni/ i filtra iz URL-a', async ({ page,
   await page.goto('/katalog/zeleni/');
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Zeleni čaj');
   await expect(page.locator('.x-count')).toHaveText('Prikazano 1–12 od 12');
-  await page.goto('/katalog/?kofein=0&namjena=vecer');
+  await page.goto('/katalog/?tein=0&namjena=vecer');
   await expect(page.locator('.x-grid .pc').first()).toBeVisible();
   const n = Number((await page.locator('.x-count').textContent())!.match(/od (\d+)/)![1]);
   expect(n).toBeGreaterThan(0);
@@ -133,8 +133,8 @@ test('6. otkazivanje vraća na /kosarica/?otkazano=1 s netaknutom košaricom', a
   await expect(page.locator('.badge')).toHaveText('1');
   await page.goto('/kosarica/');
   await page.locator('#sadrzaj').getByRole('button', { name: /Na blagajnu/ }).click();
-  await expect(page.getByRole('heading', { name: 'Plaćanje (test)' })).toBeVisible();
-  await onPaymentPage(page, 'Odustani');
+  await expectPaymentPage(page);
+  await onPaymentPage(page, 'cancel');
   await expect(page).toHaveURL(/\/kosarica\/\?otkazano=1$/);
   await expect(page.getByTestId('cancelled')).toBeVisible();
   expect(await cartLines(page)).toEqual([{ sku: BAI.sku, qty: 1 }]);
@@ -147,12 +147,12 @@ test('6b. uspješno plaćanje: potvrda tek kad je paid, košarica se tada briše
   await expect(page.locator('.badge')).toHaveText('1');
   const d = await openCart(page);
   await d.getByRole('button', { name: /Na blagajnu/ }).click();
-  await expect(page.getByRole('heading', { name: 'Plaćanje (test)' })).toBeVisible();
+  await expectPaymentPage(page);
   // košarica se NE briše pri polasku na plaćanje
   await page.goto('/kosarica/');
   expect(await cartLines(page)).toEqual([{ sku: BAI.sku, qty: 1 }]);
   await page.goBack();
-  await onPaymentPage(page, 'Plati (test)');
+  await onPaymentPage(page, 'pay');
   await expect(page).toHaveURL(/\/narudzba\/uspjeh\/\?narudzba=[0-9a-f]{32,}/);
   await expect(page.getByTestId('order-result')).toHaveAttribute('data-state', 'paid');
   await expect(page.getByRole('heading', { name: 'Hvala na narudžbi!' })).toBeVisible();

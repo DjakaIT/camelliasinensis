@@ -17,6 +17,13 @@ const routes = [
   '/narudzba/uspjeh/',
 ];
 
+// Uz fiksne rute, provjeri i sve iz sitemap.xml (kontakt, pravne stranice…).
+const sitemapText = existsSync(join(DIR, 'sitemap.xml')) ? readFileSync(join(DIR, 'sitemap.xml'), 'utf8') : '';
+for (const [, loc] of sitemapText.matchAll(/<loc>([^<]+)<\/loc>/g)) {
+  const path = loc.replace(SITE, '');
+  if (!routes.includes(path)) routes.push(path);
+}
+
 const problems = [];
 const seen = { title: new Map(), description: new Map(), canonical: new Map() };
 const attr = (html, re) => html.match(re)?.[1]?.trim() ?? '';

@@ -1,0 +1,81 @@
+// Sadržaj: klizač teina, vrste sa slikama, istaknute stavke, kontakt, pravne stranice, podnožje.
+import { expect, openCart, test } from './fixtures';
+
+test('klizač teina: bez automatskog pomicanja, mijenja se samo ručno', async ({ page }) => {
+  await page.goto('/');
+  const meter = page.locator('.t-caf');
+  await meter.scrollIntoViewIfNeeded();
+  await expect(meter.getByRole('heading', { name: /Koliko teina\?/ })).toBeVisible();
+  await expect(meter.locator('.now b')).toHaveText('Malo teina');
+  await page.waitForTimeout(3500); // prototip je ovdje sam pomicao klizač
+  await expect(meter.locator('.now b')).toHaveText('Malo teina');
+  await meter.getByRole('button', { name: 'Puno' }).click();
+  await expect(meter.locator('.now b')).toHaveText('Puno teina');
+  await expect(meter.getByRole('link', { name: /Svih \d+: puno teina/ })).toHaveAttribute('href', '/katalog/?tein=3');
+  expect(await page.locator('body').innerText()).not.toMatch(/kofein/i);
+});
+
+test('vrste čaja imaju fotografije', async ({ page }) => {
+  await page.goto('/');
+  const tiles = page.locator('.types .ty');
+  await expect(tiles).toHaveCount(8);
+  for (let i = 0; i < 8; i++) expect(await tiles.nth(i).locator('.ty-ph img').count()).toBeGreaterThan(0);
+});
+
+test('istaknute stavke: organski, zemlje, besplatna dostava od 50 €', async ({ page }) => {
+  await page.goto('/');
+  const hl = page.locator('.hl');
+  await expect(hl.getByText(/\d+ organskih/)).toBeVisible();
+  await expect(hl.getByText(/\d+ zemalja/)).toBeVisible();
+  await expect(hl.getByText('Besplatna dostava od 50 €')).toBeVisible();
+});
+
+test('košarica pokazuje koliko nedostaje do besplatne dostave', async ({ page, ctl }) => {
+  void ctl;
+  await page.goto('/proizvod/bai-mu-dan-wang/');
+  await page.getByTestId('add-to-cart').click();
+  await expect(page.locator('.badge')).toHaveText('1');
+  const d = await openCart(page);
+  await expect(d.getByTestId('free-shipping')).toContainText('Još 38,10 € do besplatne dostave');
+});
+
+test('kontakt: forma s provjerom i potvrdom slanja', async ({ page }) => {
+  await page.goto('/kontakt/');
+  await expect(page.getByRole('heading', { level: 1, name: 'Kontakt' })).toBeVisible();
+  await expect(page.locator('#sadrzaj').getByText('Tkalčićeva ulica 18')).toBeVisible();
+  await page.getByRole('button', { name: 'Pošalji poruku' }).click();
+  await expect(page.getByLabel('Ime')).toBeFocused();
+  await expect(page.getByText('Upišite ime.')).toBeVisible();
+  await page.getByLabel('Ime').fill('Ana');
+  await page.getByLabel('E-mail').fill('ana@example.com');
+  await page.getByLabel('Tema').selectOption('Preporuka čaja');
+  await page.getByLabel('Poruka').fill('Inače pijem zeleni čaj, tražim nešto blaže za večer.');
+  await page.getByRole('checkbox', { name: /Slažem se/ }).check();
+  await page.getByRole('button', { name: 'Pošalji poruku' }).click();
+  await expect(page.getByTestId('contact-sent')).toContainText('ana@example.com');
+});
+
+test('karta se učitava tek na klik', async ({ page }) => {
+  await page.goto('/kontakt/');
+  await expect(page.locator('iframe')).toHaveCount(0);
+  await page.getByRole('button', { name: 'Prikaži kartu' }).click();
+  await expect(page.locator('iframe[title^="Karta"]')).toHaveCount(1);
+});
+
+test('podnožje: Instagram, kontakt i pravne stranice; sve vode na 200', async ({ page, request }) => {
+  await page.goto('/');
+  const foot = page.locator('footer');
+  await expect(foot.getByRole('link', { name: 'Instagram' })).toHaveAttribute('href', /instagram\.com/);
+  for (const name of ['Kontakt', 'Uvjeti kupnje', 'Pravila privatnosti', 'Dostava i povrat', 'Kolačići']) {
+    const href = await foot.getByRole('link', { name, exact: true }).getAttribute('href');
+    expect((await request.get(href!)).status(), name).toBe(200);
+  }
+  await expect(page.getByRole('navigation', { name: 'Glavna navigacija' }).getByRole('link', { name: 'Kontakt' })).toBeVisible();
+});
+
+test('pravne stranice imaju sadržaj i oznaku nacrta u demo/probnoj izvedbi', async ({ page }) => {
+  await page.goto('/povrat/');
+  await expect(page.getByRole('heading', { level: 1, name: 'Dostava i povrat' })).toBeVisible();
+  await expect(page.getByText('Besplatna dostava za narudžbe od 50 €.')).toBeVisible();
+  await expect(page.getByText('Nacrt teksta za demo verziju', { exact: false })).toBeVisible();
+});
