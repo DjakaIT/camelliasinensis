@@ -17,6 +17,16 @@
 .ty:hover .ty-ph > span:nth-child(3) { transform: translateY(-12px) rotate(9deg); }
 .ty.dark .ty-ph > span { box-shadow: 0 18px 26px -16px rgba(0, 0, 0, 0.6), 0 0 0 3px rgba(255, 255, 255, 0.15); }
 
+/* polica: povlačenje mišem i traka položaja */
+.shelf { cursor: grab; }
+.shelf.dragging { cursor: grabbing; scroll-snap-type: none; user-select: none; }
+.shelf.dragging .pc, .shelf.dragging a { pointer-events: none; }
+.shelf img { -webkit-user-drag: none; }
+.shelf-track { position: relative; height: 4px; border-radius: 2px; background: var(--line); margin-top: 8px; overflow: hidden; }
+.shelf-track i { position: absolute; top: 0; bottom: 0; border-radius: 2px; background: var(--gold-d); transition: left 0.15s linear; }
+.navs button:disabled { opacity: 0.35; cursor: default; }
+.navs button:disabled:hover { background: #fff; color: inherit; }
+
 /* istaknute stavke (desna kartica uz pu'er) */
 .hl {
   position: relative; overflow: hidden; isolation: isolate; border-radius: var(--r); padding: 40px 44px; min-height: 480px;

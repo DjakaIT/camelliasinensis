@@ -25,16 +25,6 @@ export const MOODS: Record<string, string> = {
   poklon: 'Za poklon',
 };
 
-/** Kratki nazivi za gumbe na polici naslovnice (iz prototipa). */
-export const MOODS_SHORT: [string, string][] = [
-  ['sve', 'Sve'],
-  ['jutro', 'Budno'],
-  ['fokus', 'Fokus'],
-  ['opust', 'Opušteno'],
-  ['vecer', 'Večer'],
-  ['poklon', 'Za poklon'],
-];
-
 export const FORMS: Record<string, string> = {
   rastresiti: 'Rastresiti listovi',
   kolac: 'Prešani kolač',

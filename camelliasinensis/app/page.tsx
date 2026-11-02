@@ -21,8 +21,10 @@ const H1 = ['Dobro', 'došli.', '|', 'Izaberite', 'čaj', '|', 'po', 'trenutku',
 
 export default async function Home() {
   const [cards, types] = await Promise.all([getCards(), getTypes()]);
-  const light = cards.map((c) => ({ ...c, search: '' }));
-  const featured = FEATURED_SKUS.filter((s) => cards.some((c) => c.sku === s));
+  // Polica pokazuje samo istaknute proizvode (bez opisa za pretragu, da payload bude manji).
+  const featured = FEATURED_SKUS.map((s) => cards.find((c) => c.sku === s))
+    .filter((c): c is (typeof cards)[number] => Boolean(c))
+    .map((c) => ({ ...c, search: '' }));
   const meter = cards
     .filter((c) => c.caffeine != null)
     .map((c) => ({ slug: c.slug, name: c.name, caffeine: c.caffeine!, rare: c.rare, price: c.price }));
@@ -84,7 +86,7 @@ export default async function Home() {
         <TeinMeter items={meter} />
       </section>
 
-      <Shelf featured={featured} all={light} />
+      <Shelf items={featured} />
 
       <section aria-labelledby="vrste-h">
         <div className="sh rv">

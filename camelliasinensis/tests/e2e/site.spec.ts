@@ -79,3 +79,26 @@ test('pravne stranice imaju sadržaj i oznaku nacrta u demo/probnoj izvedbi', as
   await expect(page.getByText('Besplatna dostava za narudžbe od 50 €.')).toBeVisible();
   await expect(page.getByText('Nacrt teksta za demo verziju', { exact: false })).toBeVisible();
 });
+
+test('polica "Istaknuto": bez filtara, povlačenje mišem i strelice pomiču policu', async ({ page }) => {
+  await page.goto('/');
+  const shelf = page.locator('.shelf');
+  await shelf.scrollIntoViewIfNeeded();
+  await expect(page.locator('.moods')).toHaveCount(0);
+  const prev = page.getByRole('button', { name: 'Prethodni proizvodi' });
+  const next = page.getByRole('button', { name: 'Sljedeći proizvodi' });
+  await expect(prev).toBeDisabled();
+  // povlačenje mišem
+  const box = (await shelf.boundingBox())!;
+  await page.mouse.move(box.x + box.width - 50, box.y + 100);
+  await page.mouse.down();
+  await page.mouse.move(box.x + box.width - 450, box.y + 100, { steps: 10 });
+  await page.mouse.up();
+  await expect.poll(() => shelf.evaluate((e) => e.scrollLeft)).toBeGreaterThan(250);
+  await expect(page).toHaveURL(/\/$/); // povlačenje nije otvorilo proizvod
+  await expect(prev).toBeEnabled();
+  // strelice
+  const before = await shelf.evaluate((e) => e.scrollLeft);
+  await next.click();
+  await expect.poll(() => shelf.evaluate((e) => e.scrollLeft)).toBeGreaterThan(before + 200);
+});
