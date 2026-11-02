@@ -2,6 +2,7 @@ import '@fontsource-variable/bricolage-grotesque/opsz.css';
 import '@fontsource-variable/inter-tight/wght.css';
 import '@/styles/tokens.css';
 import '@/styles/app.css';
+import '@/styles/extra.css';
 import type { Metadata, Viewport } from 'next';
 import { CartDrawer } from '@/components/cart/CartDrawer';
 import { CartProvider } from '@/components/cart/CartContext';
@@ -9,7 +10,7 @@ import { CatalogIndexProvider, type IndexEntry } from '@/components/cart/Catalog
 import { Footer } from '@/components/Footer';
 import { Header } from '@/components/Header';
 import { Reveal } from '@/components/Reveal';
-import { hasContact, SHOP_NAME, SITE_URL } from '@/content/site';
+import { DUMMY_CONTENT, hasContact, SHOP_NAME, SITE_URL } from '@/content/site';
 import { getCards } from '@/lib/catalog-server';
 import { isDemoBuild, isIndexable } from '@/lib/shop';
 
@@ -33,6 +34,10 @@ const NAV = [
 ];
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  // Izmišljeni sadržaj (content/site.ts) ne smije u javnu, indeksiranu izvedbu.
+  if (isIndexable() && DUMMY_CONTENT.length) {
+    throw new Error(`Build za produkciju odbijen, u content/site.ts je još DUMMY sadržaj: ${DUMMY_CONTENT.join('; ')}`);
+  }
   const cards = await getCards();
   const index: Record<string, IndexEntry> = Object.fromEntries(
     cards.map((c) => [

@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { ContactView } from '@/components/info/ContactView';
 import { LegalView } from '@/components/info/LegalView';
 import { contact, hasContact, legalPage, publishedLegal } from '@/content/site';
+import { isDemoBuild, isIndexable } from '@/lib/shop';
 import { pageMeta } from '@/lib/seo';
 
 export const dynamicParams = false;
@@ -28,8 +29,8 @@ export async function generateMetadata({ params }: Props) {
 
 export default async function InfoPage({ params }: Props) {
   const { stranica } = await params;
-  if (stranica === 'kontakt' && hasContact()) return <ContactView contact={contact} />;
+  if (stranica === 'kontakt' && hasContact()) return <ContactView contact={contact} demo={isDemoBuild()} />;
   const p = legalPage(stranica);
-  if (p) return <LegalView page={p} />;
+  if (p) return <LegalView page={p} draft={!isIndexable()} />;
   notFound();
 }

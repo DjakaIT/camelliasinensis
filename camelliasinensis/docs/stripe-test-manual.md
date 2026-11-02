@@ -21,7 +21,7 @@ Ovaj test provjerava stvarni Stripe hosted Checkout u **test načinu** preko lok
    npm --prefix mock-server install
    npx playwright install chromium   # samo za automatske testove
    ```
-4. **`.env` za mock-server:**
+4. **`.env` za mock-server** (*2. 11. 2026.: `STRIPE_SECRET_KEY` je već upisan u lokalni `mock-server/.env`; nedostaje samo `STRIPE_WEBHOOK_SECRET`*):
    ```bash
    cp mock-server/.env.example mock-server/.env
    ```
@@ -47,7 +47,7 @@ Ako piše `FAKE (bez ključeva)`, ključ nije učitan. Ako se poslužitelj ugasi
 
 **2.4 Frontend (terminal C).** Odaberi jedno:
 - brže, razvojni način: `npm run dev:devserver`, pa otvori <http://localhost:3000>;
-- kao produkcija (statični export): `npm run build:devserver` (koristi već pokrenuti mock-server), zatim `npm run serve:devserver`, pa otvori <http://127.0.0.1:3000>.
+- kao produkcija (statični export): `npm run build:devserver` (za build pokreće vlastiti privremeni mock na :4059; stranica zatim koristi tvoj `dev:mock` na :4000), zatim `npm run serve:devserver`, pa otvori <http://127.0.0.1:3000>.
 
 ## 3. Testni slučajevi
 
@@ -57,7 +57,7 @@ Prije svakog slučaja: dodaj 1 do 2 proizvoda u košaricu, otvori košaricu i kl
 
 | # | Slučaj | Koraci | Očekivano |
 | --- | --- | --- | --- |
-| 1 | **Uspjeh** | Kartica `4242 4242 4242 4242`, pa *Plati* | Stripe stranica je na hrvatskom. Ima jednu opciju dostave "Dostava (TESTNI PRIMJER, nije stvarna cijena)". Nakon plaćanja ide povratak na `/narudzba/uspjeh/?narudzba=…`, kratko piše "Plaćanje se obrađuje", pa "Hvala na narudžbi!" s brojem `TEST-000n`. Košarica je prazna. U terminalu A je `checkout.session.completed` s `[200]`. Zaliha je umanjena: `curl "http://127.0.0.1:4000/live?skus=CSTB-2"` pokazuje manji `quantity`. |
+| 1 | **Uspjeh** | Kartica `4242 4242 4242 4242`, pa *Plati* | Stripe stranica je na hrvatskom. Nudi dvije opcije dostave: "GLS paketomat" (3,90 €) i "GLS na adresu" (4,90 €), a za narudžbe od 50 € obje su besplatne. Traži i broj mobitela. Nakon plaćanja ide povratak na `/narudzba/uspjeh/?narudzba=…`, kratko piše "Plaćanje se obrađuje", pa "Hvala na narudžbi!" s brojem `TEST-000n` i maskiranim e-mailom (npr. `a***@example.com`). Košarica je prazna. U terminalu A je `checkout.session.completed` s `[200]`. Zaliha je umanjena: `curl "http://127.0.0.1:4000/live?skus=CSTB-2"` pokazuje manji `quantity`. |
 | 2 | **Odbijena kartica** | Kartica `4000 0000 0000 0002` | Stripe na svojoj stranici prikaže da je kartica odbijena. Nema preusmjeravanja i ništa nije naplaćeno. Pokušaj zatim s `4242…` (slučaj 1) ili klikni strelicu natrag (slučaj 4). |
 | 3 | **3D Secure** | Kartica `4000 0027 6000 3184` | Otvori se testni prozor za autentifikaciju. *Complete*: isto kao slučaj 1. *Fail*: Stripe prikaže grešku i ostaje na stranici za plaćanje. |
 | 4 | **Otkazivanje** | Na Stripe stranici klikni strelicu natrag / naziv trgovine | Povratak na `/kosarica/?otkazano=1`. Piše "Plaćanje je otkazano. Ništa nije naplaćeno…", a košarica je **netaknuta**. Narudžba ostaje `pending`; Stripe sesija ističe sama (`checkout.session.expired` → `cancelled`). |
@@ -77,5 +77,5 @@ Za svaki slučaj: prošao / nije prošao. Ako nije, priloži snimku zaslona i is
 
 - Da će raditi produkcijski backend (Woo checkout ili drugi), fiskalizacija, računi, GLS i e-mailovi (API-CONTRACT §8).
 - Ponašanje uz Thor blagajnu (POS). Dvostruka prodaja zadnjeg komada ovdje se ne može dogoditi jer mock drži zalihu u memoriji.
-- Stvarne cijene dostave i države isporuke ([ODLUKA], GLS ugovor), PDV ([ODLUKA]) ni stvarne cijene proizvoda: u fixturi su primjeri iz prototipa.
+- Stvarne cijene dostave GLS-a i odabir konkretnog paketomata (Stripe Checkout to ne nudi; dolazi s GLS integracijom na backendu) ([ODLUKA], GLS ugovor), PDV ([ODLUKA]) ni stvarne cijene proizvoda: u fixturi su primjeri iz prototipa.
 - Apple Pay / Google Pay. Stripe ih u Checkoutu prikazuje ovisno o uređaju, pregledniku i postavkama računa.

@@ -1,7 +1,8 @@
 import Link from 'next/link';
-import { hasContact, publishedLegal } from '@/content/site';
+import { contact, hasContact, PAYMENT_METHODS, publishedLegal, social } from '@/content/site';
+import { IconInstagram } from './Icons';
 
-/** Podnožje bez velikog natpisa (GUIDE §2). Linkovi samo na stranice koje postoje i imaju potvrđen sadržaj. */
+/** Podnožje bez velikog natpisa (GUIDE §2). Linkovi samo na stranice koje postoje. */
 export function Footer({ note }: { note: string | null }) {
   const legal = publishedLegal();
   const info = [
@@ -9,6 +10,7 @@ export function Footer({ note }: { note: string | null }) {
     ...(hasContact() ? [{ href: '/kontakt/', label: 'Kontakt' }] : []),
     ...legal.map((p) => ({ href: `/${p.slug}/`, label: p.title })),
   ];
+  const a = contact.address;
   return (
     <footer className="foot">
       <div className="fg">
@@ -20,22 +22,50 @@ export function Footer({ note }: { note: string | null }) {
         <nav aria-labelledby="f-shop">
           <h2 id="f-shop">Trgovina</h2>
           <Link href="/katalog/">Katalog</Link>
-          <Link href="/katalog/puer/" prefetch={false}>Pu&apos;er</Link>
-          <Link href="/katalog/pribor/" prefetch={false}>Pribor i knjige</Link>
-          <Link href="/katalog/?namjena=poklon" prefetch={false}>Pokloni</Link>
+          <Link href="/katalog/puer/" prefetch={false}>
+            Pu&apos;er
+          </Link>
+          <Link href="/katalog/pribor/" prefetch={false}>
+            Pribor i knjige
+          </Link>
+          <Link href="/katalog/?namjena=poklon" prefetch={false}>
+            Pokloni
+          </Link>
         </nav>
         <nav aria-labelledby="f-info">
           <h2 id="f-info">Informacije</h2>
           {info.map((i) => (
-            <Link key={i.href} href={i.href}>
+            <Link key={i.href} href={i.href} prefetch={false}>
               {i.label}
             </Link>
           ))}
         </nav>
-        <div />
+        {(a || contact.email || social.instagram) && (
+          <div>
+            <h2>Zagreb</h2>
+            {a && (
+              <address className="f-addr">
+                {a.street}, {a.city}
+                {contact.hours?.[0] && (
+                  <>
+                    <br />
+                    {contact.hours[0]}
+                  </>
+                )}
+              </address>
+            )}
+            {contact.email && <a href={`mailto:${contact.email}`}>{contact.email}</a>}
+            {social.instagram && (
+              <a href={social.instagram} className="f-ig" rel="noopener noreferrer" target="_blank">
+                <IconInstagram /> Instagram
+              </a>
+            )}
+          </div>
+        )}
       </div>
       <div className="fb">
         <span>© 2026 Camellia sinensis</span>
+        <span>{PAYMENT_METHODS.join(' · ')}</span>
         {note && <span data-testid="demo-note">{note}</span>}
         <span>Izrada: Perasma</span>
       </div>

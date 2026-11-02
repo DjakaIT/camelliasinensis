@@ -19,7 +19,7 @@ npm run dev                   # http://localhost:3000, adapter demo (sve u pregl
 
 | Adapter | Pokretanje | Plaćanje |
 | --- | --- | --- |
-| `demo` | `npm run dev` ili `npm run build:demo && npm run serve` | lažna stranica `/dev/checkout/` (postoji samo u demo buildu) |
+| `demo` | `npm run dev` ili `npm run build:demo && npm run serve` | demo blagajna `/blagajna/` (kontakt, GLS dostava, testne kartice; postoji samo u demo buildu) |
 | `devserver` | `npm run dev:mock` + `npm run dev:devserver` | FAKE stranica mock-servera, ili Stripe Checkout u test načinu ako je ključ u `mock-server/.env` |
 
 U demo buildu se zaliha može mijenjati iz konzole: `__cs.setStock('CSTB-2', 0)`, `__cs.setPrice('CSTB-2', 1350)`, `__cs.reset()`. Na devserveru isto radi `POST http://127.0.0.1:4000/__dev/stock` (vidi docs/stripe-test-manual.md).

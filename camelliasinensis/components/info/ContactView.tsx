@@ -1,9 +1,11 @@
 import Link from 'next/link';
-import type { Contact } from '@/content/site';
+import { IconClock, IconInstagram, IconMail, IconPhone, IconPin } from '@/components/Icons';
+import { social, type Contact } from '@/content/site';
+import { ContactForm } from './ContactForm';
 import { MapOnClick } from './MapOnClick';
 
-/** Kontakt samo s potvrđenim podacima. Kontakt forma iz prototipa je bila lažna i nije preuzeta. */
-export function ContactView({ contact }: { contact: Contact }) {
+/** Kontakt po dizajnu B: forma lijevo, podaci i karta (na klik) desno. */
+export function ContactView({ contact, demo }: { contact: Contact; demo: boolean }) {
   const a = contact.address;
   const q = a ? `${a.street}, ${a.postalCode} ${a.city}` : null;
   return (
@@ -21,39 +23,61 @@ export function ContactView({ contact }: { contact: Contact }) {
         </nav>
         <h1 className="x-h1">Kontakt</h1>
         <div className="x-ct-grid">
+          <ContactForm demo={demo} />
           <div className="x-ct-info">
             {(a || contact.hours) && (
               <div className="x-ct-card">
                 <h2>Trgovina</h2>
                 {a && (
-                  <address style={{ fontStyle: 'normal' }}>
-                    {a.street}
-                    <br />
-                    {a.postalCode} {a.city}
-                  </address>
+                  <div className="ci">
+                    <IconPin />
+                    <address style={{ fontStyle: 'normal' }}>
+                      {a.street}
+                      <br />
+                      {a.postalCode} {a.city}
+                    </address>
+                  </div>
                 )}
-                {contact.hours?.map((h) => (
-                  <p key={h}>{h}</p>
-                ))}
-              </div>
-            )}
-            {(contact.email || contact.phone) && (
-              <div className="x-ct-card">
-                <h2>Javite se</h2>
-                {contact.email && (
-                  <p>
-                    <a href={`mailto:${contact.email}`}>{contact.email}</a>
-                  </p>
-                )}
-                {contact.phone && (
-                  <p>
-                    <a href={`tel:${contact.phone.replace(/\s+/g, '')}`}>{contact.phone}</a>
-                  </p>
+                {contact.hours && (
+                  <div className="ci">
+                    <IconClock size={20} />
+                    <span>
+                      {contact.hours.map((h) => (
+                        <span key={h} style={{ display: 'block' }}>
+                          {h}
+                        </span>
+                      ))}
+                    </span>
+                  </div>
                 )}
               </div>
             )}
+            <div className="x-ct-card">
+              <h2>Javite se</h2>
+              {contact.email && (
+                <div className="ci">
+                  <IconMail />
+                  <a href={`mailto:${contact.email}`}>{contact.email}</a>
+                </div>
+              )}
+              {contact.phone && (
+                <div className="ci">
+                  <IconPhone />
+                  <a href={`tel:${contact.phone.replace(/\s+/g, '')}`}>{contact.phone}</a>
+                </div>
+              )}
+              {social.instagram && (
+                <div className="ci">
+                  <IconInstagram size={20} />
+                  <a href={social.instagram} rel="noopener noreferrer" target="_blank">
+                    Instagram
+                  </a>
+                </div>
+              )}
+              <p className="x-small">Odgovaramo na e-mail, obično isti ili sljedeći radni dan.</p>
+            </div>
+            {q && <MapOnClick query={q} />}
           </div>
-          {q && <MapOnClick query={q} />}
         </div>
       </div>
     </section>
