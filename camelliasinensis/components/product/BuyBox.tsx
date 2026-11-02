@@ -89,7 +89,8 @@ export function BuyRow({ sku, name, buildPrice }: Pick<Props, 'sku' | 'name' | '
           type="button"
           className={`x-btn x-addbig${done ? ' ok' : ''}`}
           onClick={onAdd}
-          disabled={busy || soldOut || (allowed != null && room === 0)}
+          // Dok se živa zaliha ne učita (i prije hidracije) gumb čeka; ako getLive ne uspije, gumb je aktivan (§3.2).
+          disabled={busy || state.status === 'loading' || soldOut || (allowed != null && room === 0)}
           aria-busy={busy}
           data-testid="add-to-cart"
         >

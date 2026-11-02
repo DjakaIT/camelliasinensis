@@ -19,10 +19,13 @@ export function createDevserverBackend(baseUrl: string): ShopBackend {
         body: init?.body !== undefined ? JSON.stringify(init.body) : undefined,
         signal: ctrl.signal,
         credentials: 'omit',
-        cache: 'no-store',
+        // U pregledniku uvijek svježe; pri buildu bez `no-store` (Next bi stranicu proglasio dinamičnom).
+        ...(typeof window !== 'undefined' ? { cache: 'no-store' as const } : {}),
       });
-    } catch {
-      throw new ShopError('NETWORK');
+    } catch (e) {
+      // Samo mrežne greške (TypeError, prekid) su NETWORK; ostalo (npr. greške frameworka) ne skrivamo.
+      if (e instanceof TypeError || (e as { name?: string })?.name === 'AbortError') throw new ShopError('NETWORK');
+      throw e;
     } finally {
       clearTimeout(timer);
     }

@@ -40,9 +40,11 @@ export function Header({ nav }: { nav: { href: string; label: string }[] }) {
         <Link className="ib" href="/katalog/?trazi=1" aria-label="Pretraži katalog">
           <IconSearch />
         </Link>
-        <button type="button" className="cartp" onClick={openCart} aria-label={`Otvori košaricu, artikala: ${count}`} aria-haspopup="dialog">
+        {/* Ime gumba nastaje iz vidljivog teksta ("Košarica, artikala: 2"), pa se poklapa s onim što se vidi. */}
+        <button type="button" className="cartp" onClick={openCart} aria-haspopup="dialog">
           <span className="t">Košarica</span>
-          <span className="badge" ref={badge} aria-hidden="true">
+          <span className="sr">, artikala: </span>
+          <span className="badge" ref={badge}>
             {count}
           </span>
         </button>

@@ -135,7 +135,11 @@ export function createApp({ config, store, payments, log = () => {} }) {
   if (payments.name === 'fake') {
     app.get('/fake-checkout/:token', (c) => {
       const order = store.orderByToken(c.req.param('token'));
-      c.header('Content-Security-Policy', "default-src 'none'; style-src 'unsafe-inline'; form-action 'self'; frame-ancestors 'none'");
+      // form-action mora dopustiti i preusmjeravanje natrag na frontend (success/cancel URL).
+      c.header(
+        'Content-Security-Policy',
+        `default-src 'none'; style-src 'unsafe-inline'; form-action 'self' ${config.corsOrigins.join(' ')}; frame-ancestors 'none'`,
+      );
       return c.html(fakeCheckoutPage(order), order ? 200 : 404);
     });
     app.post('/fake-checkout/:token/:action', (c) => {

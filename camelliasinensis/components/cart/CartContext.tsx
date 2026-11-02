@@ -73,6 +73,11 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const reqId = useRef(0);
   const [nonce, setNonce] = useState(0);
 
+  // Inicijalizira backend odmah (u demo buildu tada postoji i window.__cs za simulaciju zalihe).
+  useEffect(() => {
+    getShop();
+  }, []);
+
   const showToast = useCallback((text: string, action = false) => {
     setToast({ id: Date.now(), text, action });
     if (toastTimer.current) clearTimeout(toastTimer.current);

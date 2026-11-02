@@ -32,7 +32,7 @@ for (const [vname, viewport] of viewports) {
     await page.goto(base + '/');
     await page.evaluate((c) => (c ? localStorage.setItem('cs.cart.v1', c) : localStorage.clear()), withCart ? cart : null);
     await page.goto(base + path, { waitUntil: 'networkidle' });
-    if (drawer) await page.getByRole('button', { name: /Otvori košaricu/ }).click();
+    if (drawer) await page.locator('.cartp').click();
     await page.evaluate(async () => {
       document.querySelectorAll('.rv').forEach((el) => el.classList.add('in'));
       document.querySelectorAll('img[loading=lazy]').forEach((img) => (img.loading = 'eager'));
