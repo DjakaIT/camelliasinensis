@@ -25,7 +25,7 @@ export const SORTS: [SortKey, string][] = [
   ['cu', 'Cijena: niža prema višoj'],
   ['cd', 'Cijena: viša prema nižoj'],
   ['az', 'Naziv A–Ž'],
-  ['kf', 'Kofein: manje prema više'],
+  ['kf', 'Tein: manje prema više'],
 ];
 
 export const PER_PAGE = 12;
@@ -34,7 +34,7 @@ export type GroupKey = 'type' | 'lv' | 'moods' | 'flav' | 'origin' | 'form';
 /** Naziv parametra u URL-u za svaku grupu (isti kao u prototipu). */
 export const PARAM: Record<GroupKey, string> = {
   type: 'vrsta',
-  lv: 'kofein',
+  lv: 'tein',
   moods: 'namjena',
   flav: 'okus',
   origin: 'podrijetlo',

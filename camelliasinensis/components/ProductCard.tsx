@@ -43,7 +43,7 @@ export function ProductCard({
         <div className="specs">
           {p.brewTemp && <span>{p.brewTemp}</span>}
           <span>
-            Kofein <CaffeineBars level={p.caffeine} />
+            Tein <CaffeineBars level={p.caffeine} />
             <span className="sr">{['bez', 'malo', 'srednje', 'puno'][p.caffeine]}</span>
           </span>
         </div>

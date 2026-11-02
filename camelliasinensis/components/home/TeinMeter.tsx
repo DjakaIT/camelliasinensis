@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import { productHref } from '@/lib/catalog-view';
 import { CAFFEINE, CAFFEINE_SHORT } from '@/lib/labels';
 
@@ -11,34 +11,11 @@ const LIQ = ['#E9DFA8', '#D8C46A', '#B8852F', '#6E3A1C'];
 const BG = ['var(--t-biljni)', 'var(--t-bijeli)', 'var(--t-zeleni)', 'var(--t-oolong)'];
 const HINT = ['biljni čajevi, rooibos i kamilica', 'bijeli čaj i genmaicha', 'zeleni, oolong i pu’er', 'crni čaj, matcha i yerba maté'];
 
-/** "Koliko kofeina?" iz prototipa: klizač 0–3 i prijedlozi. */
-export function CaffeineMeter({ items }: { items: MeterItem[] }) {
+/** "Koliko teina?" iz prototipa: klizač 0–3 i prijedlozi. Pomiče ga samo korisnik (bez automatske demonstracije). */
+export function TeinMeter({ items }: { items: MeterItem[] }) {
   const [level, setLevel] = useState(1);
   const [touched, setTouched] = useState(false);
-  const box = useRef<HTMLDivElement>(null);
-  const touchedRef = useRef(false);
-
-  useEffect(() => {
-    const el = box.current;
-    if (!el || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    const timers: ReturnType<typeof setTimeout>[] = [];
-    const io = new IntersectionObserver(
-      (es) => {
-        if (es[0]?.isIntersecting) {
-          io.disconnect();
-          [2, 3, 0, 1].forEach((v, k) => timers.push(setTimeout(() => setLevel((cur) => (touchedRef.current ? cur : v)), 500 + k * 650)));
-        }
-      },
-      { threshold: 0.6 },
-    );
-    io.observe(el);
-    return () => {
-      io.disconnect();
-      timers.forEach(clearTimeout);
-    };
-  }, []);
   const choose = (v: number) => {
-    touchedRef.current = true;
     setTouched(true);
     setLevel(v);
   };
@@ -48,9 +25,9 @@ export function CaffeineMeter({ items }: { items: MeterItem[] }) {
   const pc = (level / 3) * 100;
 
   return (
-    <div className="tile t-caf rv" ref={box} style={{ background: BG[level] }}>
+    <div className="tile t-caf rv" style={{ background: BG[level] }}>
       <h2 className="d">
-        Koliko kofeina?<small>Povucite klizač ili odaberite razinu.</small>
+        Koliko teina?<small>Povucite klizač ili odaberite razinu.</small>
       </h2>
       <div className="cupv" aria-hidden="true">
         <svg viewBox="0 0 140 120">
@@ -98,7 +75,7 @@ export function CaffeineMeter({ items }: { items: MeterItem[] }) {
             step={1}
             value={level}
             onChange={(e) => choose(Number(e.target.value))}
-            aria-label="Razina kofeina"
+            aria-label="Razina teina"
             aria-valuetext={CAFFEINE[level]}
           />
           <div className={`knob${touched ? '' : ' hint'}`} style={{ left: `${pc}%` }} />
@@ -119,7 +96,7 @@ export function CaffeineMeter({ items }: { items: MeterItem[] }) {
             </Link>
           ))}
         </div>
-        <Link className="all" href={`/katalog/?kofein=${level}`} prefetch={false}>
+        <Link className="all" href={`/katalog/?tein=${level}`} prefetch={false}>
           Svih {all.length}: {(CAFFEINE[level] ?? '').toLowerCase()} →
         </Link>
       </div>

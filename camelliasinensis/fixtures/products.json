@@ -35,7 +35,7 @@
     {
       "key": "biljni",
       "name": "Biljni i rooibos",
-      "description": "Bez čajne biljke, većinom bez kofeina."
+      "description": "Bez čajne biljke, većinom bez teina."
     },
     {
       "key": "pribor",
@@ -300,7 +300,7 @@
         "currency": "EUR"
       },
       "taxIncluded": true,
-      "descriptionHtml": "<p>Tradicionalna japanska mješavina zelenog čaja s prženom i napuhanom rižom. Topla, utješna aroma i malo kofeina.</p>",
+      "descriptionHtml": "<p>Tradicionalna japanska mješavina zelenog čaja s prženom i napuhanom rižom. Topla, utješna aroma i malo teina.</p>",
       "images": [
         {
           "src": "/img/p/CSTV-8.jpg",
@@ -2907,7 +2907,7 @@
         "currency": "EUR"
       },
       "taxIncluded": true,
-      "descriptionHtml": "<p>Organska biljna mješavina bez kofeina. Pije se toplo, u bilo koje doba dana.</p>",
+      "descriptionHtml": "<p>Organska biljna mješavina bez teina. Pije se toplo, u bilo koje doba dana.</p>",
       "images": [
         {
           "src": "/img/p/CSTO-74.jpg",
@@ -3098,7 +3098,7 @@
         "currency": "EUR"
       },
       "taxIncluded": true,
-      "descriptionHtml": "<p>Organski rooibos s planina Cederberg, bez kofeina. Jarko crvena šalica s notama kuhane trešnje i slada.</p>",
+      "descriptionHtml": "<p>Organski rooibos s planina Cederberg, bez teina. Jarko crvena šalica s notama kuhane trešnje i slada.</p>",
       "images": [
         {
           "src": "/img/p/CSTR-3.jpg",
@@ -3147,7 +3147,7 @@
         "currency": "EUR"
       },
       "taxIncluded": true,
-      "descriptionHtml": "<p>Rooibos s grejpom, limunskom travom i začinima. Osvježavajući, bez kofeina.</p>",
+      "descriptionHtml": "<p>Rooibos s grejpom, limunskom travom i začinima. Osvježavajući, bez teina.</p>",
       "images": [
         {
           "src": "/img/p/CSTR-4.jpg",
@@ -3194,7 +3194,7 @@
         "currency": "EUR"
       },
       "taxIncluded": true,
-      "descriptionHtml": "<p>Južnoamerički napitak od biljke iz porodice božikovine, bogat kofeinom. Biljni, izravan i gorkast okus, sušen bez dima.</p>",
+      "descriptionHtml": "<p>Južnoamerički napitak od biljke iz porodice božikovine, bogat teinom. Biljni, izravan i gorkast okus, sušen bez dima.</p>",
       "images": [
         {
           "src": "/img/p/CSTAD-592.jpg",

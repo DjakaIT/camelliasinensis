@@ -17,6 +17,9 @@ const UPDATED_AT = '2026-11-02T00:00:00.000Z';
 
 const BADGE = { b: 'bio', r: 'rijetko', n: 'novo' };
 
+// U čaju se govori o teinu (Daniel, 2. 11. 2026.): kofein/kofeina/kofeinom → tein/teina/teinom u tekstovima.
+const toTein = (s) => s.replace(/([Kk])ofein/g, (_, k) => (k === 'K' ? 'Tein' : 'tein'));
+
 const escapeHtml = (s) =>
   s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
@@ -76,7 +79,7 @@ for (const [i, r] of RAW.entries()) {
     unitLabel: unit,
     price: { amount, currency: 'EUR' },
     taxIncluded: true,
-    descriptionHtml: `<p>${escapeHtml(desc)}</p>`,
+    descriptionHtml: `<p>${escapeHtml(toTein(desc))}</p>`,
     images,
     attributes,
     stock: stockFor(sku),
@@ -90,7 +93,7 @@ if (errors.length) {
   process.exit(1);
 }
 
-const types = Object.entries(TYPES).map(([key, t]) => ({ key, name: t.n, description: t.d }));
+const types = Object.entries(TYPES).map(([key, t]) => ({ key, name: t.n, description: toTein(t.d) }));
 
 mkdirSync(OUT_DIR, { recursive: true });
 const note =

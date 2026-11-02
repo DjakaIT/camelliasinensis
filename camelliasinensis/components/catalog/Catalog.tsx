@@ -40,7 +40,7 @@ export function Catalog({ cards, types, fixedType }: Props) {
 
   const groups: [GroupKey, string, [string, string][], boolean?, boolean?][] = [
     ['type', 'Vrsta čaja', types.map((t) => [t.key, t.name])],
-    ['lv', 'Razina kofeina', CAFFEINE_SHORT.map((l, i) => [String(i), l])],
+    ['lv', 'Razina teina', CAFFEINE_SHORT.map((l, i) => [String(i), l])],
     ['moods', 'Namjena', Object.entries(MOODS)],
     ['flav', 'Okus', Object.entries(FLAVORS), true],
     ['origin', 'Podrijetlo', origins.map((o) => [o, o]), false, true],

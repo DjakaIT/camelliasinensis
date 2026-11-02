@@ -42,8 +42,9 @@ export const FORMS: Record<string, string> = {
   pribor: 'Pribor',
 };
 
-export const CAFFEINE = ['Bez kofeina', 'Malo kofeina', 'Srednje kofeina', 'Puno kofeina'] as const;
-export const CAFFEINE_SHORT = ['Bez kofeina', 'Malo', 'Srednje', 'Puno'] as const;
+/** Razine teina (u čaju se govori o teinu; u podacima je to atribut `caffeine`, API-CONTRACT §2). */
+export const CAFFEINE = ['Bez teina', 'Malo teina', 'Srednje teina', 'Puno teina'] as const;
+export const CAFFEINE_SHORT = ['Bez teina', 'Malo', 'Srednje', 'Puno'] as const;
 
 export const BADGES: Record<string, string> = { bio: 'Organski', rijetko: 'Rijetko', novo: 'Novo' };
 
