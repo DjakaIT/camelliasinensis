@@ -20,9 +20,9 @@ export function Footer({ note }: { note: string | null }) {
         <nav aria-labelledby="f-shop">
           <h2 id="f-shop">Trgovina</h2>
           <Link href="/katalog/">Katalog</Link>
-          <Link href="/katalog/puer/">Pu&apos;er</Link>
-          <Link href="/katalog/pribor/">Pribor i knjige</Link>
-          <Link href="/katalog/?namjena=poklon">Pokloni</Link>
+          <Link href="/katalog/puer/" prefetch={false}>Pu&apos;er</Link>
+          <Link href="/katalog/pribor/" prefetch={false}>Pribor i knjige</Link>
+          <Link href="/katalog/?namjena=poklon" prefetch={false}>Pokloni</Link>
         </nav>
         <nav aria-labelledby="f-info">
           <h2 id="f-info">Informacije</h2>

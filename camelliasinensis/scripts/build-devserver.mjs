@@ -4,21 +4,29 @@ import { spawn, spawnSync } from 'node:child_process';
 import { cpSync, rmSync } from 'node:fs';
 
 const PORT = process.env.MOCK_PORT ?? '4000';
-const mock = spawn(process.execPath, ['src/server.js'], {
-  cwd: 'mock-server',
-  env: { PATH: process.env.PATH, PORT, MOCK_QUIET: process.env.MOCK_QUIET ?? '1' },
-  stdio: 'inherit',
-});
-const stop = () => mock.kill();
+const health = async () => {
+  try {
+    return (await fetch(`http://127.0.0.1:${PORT}/health`)).ok;
+  } catch {
+    return false;
+  }
+};
+// Ako mock-server već radi (npr. `npm run dev:mock` sa Stripe ključevima), koristi njega.
+const running = await health();
+const mock = running
+  ? null
+  : spawn(process.execPath, ['src/server.js'], {
+      cwd: 'mock-server',
+      env: { PATH: process.env.PATH, PORT, MOCK_QUIET: process.env.MOCK_QUIET ?? '1' },
+      stdio: 'inherit',
+    });
+const stop = () => mock?.kill();
 process.on('exit', stop);
 
-let up = false;
+let up = running;
 for (let i = 0; i < 100 && !up; i++) {
-  try {
-    up = (await fetch(`http://127.0.0.1:${PORT}/health`)).ok;
-  } catch {
-    await new Promise((r) => setTimeout(r, 100));
-  }
+  up = await health();
+  if (!up) await new Promise((r) => setTimeout(r, 100));
 }
 if (!up) {
   console.error('build-devserver: mock-server se nije pokrenuo');

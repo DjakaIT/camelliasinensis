@@ -16,6 +16,8 @@ const config: NextConfig = {
   // Datoteke *.demo.tsx (npr. lažna stranica za plaćanje /dev/checkout/) postoje samo u demo buildu.
   pageExtensions: backend === 'demo' ? ['tsx', 'ts', 'demo.tsx'] : ['tsx', 'ts'],
   env: { NEXT_PUBLIC_BACKEND: backend },
+  // CSS ugrađen u HTML: nema render-blocking zahtjeva (Lighthouse, GUIDE §4.6).
+  experimental: { inlineCss: true },
 };
 
 export default config;

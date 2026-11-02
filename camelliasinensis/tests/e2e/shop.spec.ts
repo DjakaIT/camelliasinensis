@@ -202,3 +202,15 @@ test('demo build nikad nije za indeksiranje', async ({ request }) => {
   expect(html).toMatch(/<meta name="robots" content="noindex, nofollow"/);
   expect(await (await request.get('/robots.txt')).text()).toMatch(/Disallow: \//);
 });
+
+test('bez grešaka u konzoli (uključujući CSP) na svim vrstama stranica', async ({ page, ctl, consoleErrors }) => {
+  void ctl;
+  for (const path of ['/', '/katalog/', '/katalog/puer/', `/proizvod/${BAI.slug}/`, '/o-nama/', '/kosarica/', '/narudzba/uspjeh/']) {
+    await page.goto(path);
+    await page.waitForLoadState('networkidle');
+  }
+  await page.getByRole('link', { name: 'Katalog', exact: true }).first().click(); // klijentska navigacija (RSC prefetch)
+  await page.waitForLoadState('networkidle');
+  expect(consoleErrors).toEqual([]);
+  expect(await page.locator('meta[http-equiv="Content-Security-Policy"]').getAttribute('content')).not.toContain('unsafe-inline\' \'self\'; style');
+});

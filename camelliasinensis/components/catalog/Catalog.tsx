@@ -258,7 +258,9 @@ export function Catalog({ cards, types, fixedType }: Props) {
           )}
           <div className="x-grid">
             {slice.length ? (
-              slice.map((p) => <ProductCard key={p.sku} p={p} headingLevel={2} sizes="(max-width: 820px) 120px, 200px" />)
+              slice.map((p, i) => (
+                <ProductCard key={p.sku} p={p} headingLevel={2} sizes="(max-width: 820px) 120px, 200px" priority={i < 2} />
+              ))
             ) : (
               <div className="x-empty">
                 <p>Nema proizvoda za odabrane filtre.</p>

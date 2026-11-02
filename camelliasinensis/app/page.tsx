@@ -91,6 +91,7 @@ export default async function Home() {
               key={t.key}
               className={`ty rv${isDarkType(t.key) ? ' dark' : ''}`}
               href={`/katalog/${t.key}/`}
+              prefetch={false}
               style={{ background: typeColor(t.key), transitionDelay: `${i * 50}ms` }}
             >
               <span className="c" aria-label={`${cards.filter((c) => c.type === t.key).length} proizvoda`}>

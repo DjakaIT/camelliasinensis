@@ -1,0 +1,39 @@
+# Camellia sinensis, frontend (statični Next export). Polazište iz GUIDE §5; [PROVJERI] na Hostingerovom stagingu.
+Options -Indexes
+DirectoryIndex index.html
+RewriteEngine On
+
+# HTTPS i bez www (301)
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://camelliasinensis.eu%{REQUEST_URI} [L,R=301]
+RewriteCond %{HTTP_HOST} ^www\. [NC]
+RewriteRule ^ https://camelliasinensis.eu%{REQUEST_URI} [L,R=301]
+
+# Putanje koje počinju točkom (.git, .env, .htaccess) su zabranjene
+RewriteRule (^|/)\. - [F]
+
+ErrorDocument 404 /404.html
+
+<IfModule mod_headers.c>
+# includeSubDomains tek kad sve poddomene imaju HTTPS; preload ne bez Danielove odluke (GUIDE §5)
+Header always set Strict-Transport-Security "max-age=31536000"
+Header always set X-Content-Type-Options "nosniff"
+Header always set Referrer-Policy "strict-origin-when-cross-origin"
+Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()"
+# CSP je podijeljen (docs/csp.md): default-src i script-src s SHA-256 hashevima inline skripti Next.js-a su u
+# <meta> svake stranice (scripts/postbuild.mjs). Ovdje su samo direktive koje <meta> ne podržava.
+# NE dodavati default-src ni script-src ovdje: politike se presijecaju i blokirale bi hashirane inline skripte.
+Header always set Content-Security-Policy "frame-ancestors 'none'; base-uri 'self'; object-src 'none'; form-action 'self' https://shop.camelliasinensis.eu"
+Header always set X-Frame-Options "DENY"
+</IfModule>
+
+<FilesMatch "\.(html|txt)$">
+Header set Cache-Control "no-cache"
+</FilesMatch>
+# Immutable samo za datoteke s hashom u imenu (/_next/static/); slike i logotipi nemaju hash.
+<If "%{REQUEST_URI} =~ m#^/_next/static/#">
+Header set Cache-Control "public, max-age=31536000, immutable"
+</If>
+<ElseIf "%{REQUEST_URI} =~ m#\.(avif|webp|jpg|png|svg|woff2)$#">
+Header set Cache-Control "public, max-age=604800"
+</ElseIf>

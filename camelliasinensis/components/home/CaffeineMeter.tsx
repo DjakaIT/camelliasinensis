@@ -114,12 +114,12 @@ export function CaffeineMeter({ items }: { items: MeterItem[] }) {
       <div className="caf-res" aria-live="polite">
         <div className="lst">
           {top.map((p, k) => (
-            <Link key={`${level}-${p.slug}`} className="c" href={productHref(p.slug)} style={{ animationDelay: `${k * 70}ms` }}>
+            <Link key={`${level}-${p.slug}`} className="c" href={productHref(p.slug)} prefetch={false} style={{ animationDelay: `${k * 70}ms` }}>
               {p.name}
             </Link>
           ))}
         </div>
-        <Link className="all" href={`/katalog/?kofein=${level}`}>
+        <Link className="all" href={`/katalog/?kofein=${level}`} prefetch={false}>
           Svih {all.length}: {(CAFFEINE[level] ?? '').toLowerCase()} →
         </Link>
       </div>

@@ -7,7 +7,17 @@ import { CaffeineBars } from './Icons';
 import { NoImage, Picture } from './Picture';
 
 /** Kartica u boji vrste čaja (dizajn B). Cijena je iz builda; potvrđuje se u košarici. */
-export function ProductCard({ p, sizes = '200px', headingLevel = 3 }: { p: CardProduct; sizes?: string; headingLevel?: 2 | 3 }) {
+export function ProductCard({
+  p,
+  sizes = '200px',
+  headingLevel = 3,
+  priority = false,
+}: {
+  p: CardProduct;
+  sizes?: string;
+  headingLevel?: 2 | 3;
+  priority?: boolean;
+}) {
   const H = `h${headingLevel}` as 'h2' | 'h3';
   const href = productHref(p.slug);
   const flag = p.rare ? 'Rijetko' : p.isNew ? 'Novo' : null;
@@ -17,11 +27,11 @@ export function ProductCard({ p, sizes = '200px', headingLevel = 3 }: { p: CardP
         <span className="tag lbl">{p.typeName}</span>
         {flag && <span className="rare lbl">{flag}</span>}
       </div>
-      <Link className="phl" href={href} tabIndex={-1} aria-hidden="true">
-        <span className="ph">{p.image ? <Picture src={p.image.src} alt="" sizes={sizes} /> : <NoImage />}</span>
+      <Link className="phl" href={href} tabIndex={-1} aria-hidden="true" prefetch={false}>
+        <span className="ph">{p.image ? <Picture src={p.image.src} alt="" sizes={sizes} priority={priority} /> : <NoImage />}</span>
       </Link>
       <div>
-        <Link className="nm" href={href}>
+        <Link className="nm" href={href} prefetch={false}>
           <H>{p.name}</H>
         </Link>
         <div className="from">

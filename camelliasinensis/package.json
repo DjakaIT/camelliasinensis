@@ -10,6 +10,7 @@
     "assets": "node scripts/data-to-fixtures.mjs && node scripts/optimize-images.mjs",
     "predev": "npm run assets",
     "dev": "next dev",
+    "dev:devserver": "node scripts/with-env.mjs NEXT_PUBLIC_BACKEND=devserver NEXT_PUBLIC_DEVSERVER_URL=http://127.0.0.1:4000 -- npm run dev",
     "prebuild": "npm run assets",
     "build": "next build",
     "postbuild": "node scripts/postbuild.mjs",
@@ -27,7 +28,9 @@
     "check:bundle": "node scripts/check-bundle.mjs",
     "check:prerender": "node scripts/check-prerender.mjs",
     "woo:csv": "node scripts/data-to-woo-csv.mjs",
-    "dev:mock": "npm --prefix mock-server start"
+    "dev:mock": "npm --prefix mock-server start",
+    "serve:devserver": "sirv out-devserver --port 3000 --host 127.0.0.1 --single 404.html",
+    "check": "npm run lint && npm run typecheck && npm test && npm run test:contract"
   },
   "dependencies": {
     "@fontsource-variable/bricolage-grotesque": "5.3.0",
