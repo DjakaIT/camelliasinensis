@@ -3,6 +3,7 @@
 // DUMMY: Daniel je 2. 11. 2026. tražio uvjerljive probne podatke (kontakt, Instagram, pravni tekstovi, priča brenda)
 // da demo izgleda kao gotova stranica. Sve što je označeno s DUMMY treba zamijeniti Sarinim podacima.
 // Build koji se smije indeksirati (produkcija) RUŠI SE dok je ijedan DUMMY uključen (scripts/postbuild.mjs).
+import izdvojeno from '@/fixtures/izdvojeno.json';
 import { FREE_SHIPPING_FROM, SHIPPING_METHODS } from '@/lib/shop/shipping';
 
 export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? 'https://camelliasinensis.eu').replace(/\/+$/, '');
@@ -133,7 +134,5 @@ export const legalPages: LegalPage[] = [
 export const publishedLegal = () => legalPages.filter((p) => p.html);
 export const legalPage = (slug: string) => legalPages.find((p) => p.slug === slug && p.html) ?? null;
 
-/** Istaknuto na polici naslovnice (redoslijed iz prototipa). */
-export const FEATURED_SKUS = ['CSTVI-282', 'CSTV-237', 'CSTN-220', 'CSTW-1', 'CSTB-6', 'CSTP-88', 'CSTHJC-79', 'CSTN-97', 'CSTO-2'];
-/** Proizvod u pločici "Pu'er" na naslovnici. */
-export const PUER_SPOTLIGHT_SKU = 'CSTVI-282';
+/** Istaknuto na polici naslovnice: uređuje se u uredništvu (Izdvojeno), stiže kroz fixtures/izdvojeno.json. */
+export const FEATURED_SKUS: string[] = izdvojeno.polica;

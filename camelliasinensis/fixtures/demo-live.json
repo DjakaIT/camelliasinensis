@@ -1,5 +1,5 @@
 {
-  "$comment": "GENERIRANO skriptom scripts/data-to-fixtures.mjs iz design-reference/src/data.js; ne uređivati ručno. CIJENE SU PRIMJERI IZ PROTOTIPA (nisu Sarine potvrđene cijene) i ne smiju se prikazivati kao akcija ni staro/novo. ZALIHA JE IZMIŠLJENA za demo (stanja: na zalihi, malo, nema).",
+  "$comment": "GENERIRANO iz design-reference/src/data.js dok uredništvo nema katalog; ne uređivati ručno. CIJENE SU PRIMJERI IZ PROTOTIPA i ne smiju se prikazivati kao akcija ni staro/novo. ZALIHA JE IZMIŠLJENA za demo.",
   "skus": {
     "CSTB-2": {
       "name": "Bai Mu Dan Wang",
@@ -200,6 +200,45 @@
       "name": "Matcha Uji",
       "price": {
         "amount": 3900,
+        "currency": "EUR"
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true
+    },
+    "CSTW-1": {
+      "name": "Ali Shan",
+      "price": {
+        "amount": 1590,
+        "currency": "EUR"
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true
+    },
+    "CSTW-11": {
+      "name": "Gaba Cha",
+      "price": {
+        "amount": 1490,
+        "currency": "EUR"
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true
+    },
+    "CSTW-30": {
+      "name": "Dong Ding Mr. Nen Yu (pečeni)",
+      "price": {
+        "amount": 1690,
         "currency": "EUR"
       },
       "stock": {
@@ -452,45 +491,6 @@
       "stock": {
         "status": "outofstock",
         "quantity": 0,
-        "maxPerOrder": 20
-      },
-      "published": true
-    },
-    "CSTW-1": {
-      "name": "Ali Shan",
-      "price": {
-        "amount": 1590,
-        "currency": "EUR"
-      },
-      "stock": {
-        "status": "instock",
-        "quantity": 24,
-        "maxPerOrder": 20
-      },
-      "published": true
-    },
-    "CSTW-11": {
-      "name": "Gaba Cha",
-      "price": {
-        "amount": 1490,
-        "currency": "EUR"
-      },
-      "stock": {
-        "status": "instock",
-        "quantity": 24,
-        "maxPerOrder": 20
-      },
-      "published": true
-    },
-    "CSTW-30": {
-      "name": "Dong Ding Mr. Nen Yu (pečeni)",
-      "price": {
-        "amount": 1690,
-        "currency": "EUR"
-      },
-      "stock": {
-        "status": "instock",
-        "quantity": 24,
         "maxPerOrder": 20
       },
       "published": true

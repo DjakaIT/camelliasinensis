@@ -1,5 +1,5 @@
 {
-  "$comment": "GENERIRANO skriptom scripts/data-to-fixtures.mjs iz design-reference/src/data.js; ne uređivati ručno. CIJENE SU PRIMJERI IZ PROTOTIPA (nisu Sarine potvrđene cijene) i ne smiju se prikazivati kao akcija ni staro/novo. ZALIHA JE IZMIŠLJENA za demo (stanja: na zalihi, malo, nema).",
+  "$comment": "GENERIRANO iz design-reference/src/data.js dok uredništvo nema katalog; ne uređivati ručno. CIJENE SU PRIMJERI IZ PROTOTIPA i ne smiju se prikazivati kao akcija ni staro/novo. ZALIHA JE IZMIŠLJENA za demo.",
   "examplePrices": true,
   "types": [
     {
@@ -45,7 +45,7 @@
   ],
   "products": [
     {
-      "id": "demo-1",
+      "id": "cs-ec14b7fe50de",
       "sku": "CSTB-2",
       "slug": "bai-mu-dan-wang",
       "name": "Bai Mu Dan Wang",
@@ -90,10 +90,10 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-02T00:00:00.000Z"
+      "updatedAt": "2026-11-03T07:30:19.519Z"
     },
     {
-      "id": "demo-2",
+      "id": "cs-bf1768ec6df5",
       "sku": "CSTVI-295",
       "slug": "gong-mei-2018",
       "name": "Gong Mei 2018",
@@ -140,10 +140,10 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-02T00:00:00.000Z"
+      "updatedAt": "2026-11-03T07:30:19.519Z"
     },
     {
-      "id": "demo-3",
+      "id": "cs-e998f3fb6b4c",
       "sku": "CSTB-6",
       "slug": "jingning-yin-zhen",
       "name": "Jingning Yin Zhen",
@@ -190,10 +190,10 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-02T00:00:00.000Z"
+      "updatedAt": "2026-11-03T07:30:19.519Z"
     },
     {
-      "id": "demo-4",
+      "id": "cs-dd4232459345",
       "sku": "CSTVI-294",
       "slug": "bai-mu-dan-2021",
       "name": "Bai Mu Dan 2021",
@@ -238,10 +238,10 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-02T00:00:00.000Z"
+      "updatedAt": "2026-11-03T07:30:19.519Z"
     },
     {
-      "id": "demo-5",
+      "id": "cs-8c2efd0369e7",
       "sku": "CSTV-178",
       "slug": "bancha",
       "name": "Bancha",
@@ -286,10 +286,10 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-02T00:00:00.000Z"
+      "updatedAt": "2026-11-03T07:30:19.519Z"
     },
     {
-      "id": "demo-6",
+      "id": "cs-80f3bd6ebc06",
       "sku": "CSTV-8",
       "slug": "genmaicha",
       "name": "Genmaicha",
@@ -336,10 +336,10 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-02T00:00:00.000Z"
+      "updatedAt": "2026-11-03T07:30:19.519Z"
     },
     {
-      "id": "demo-7",
+      "id": "cs-bed7810224d5",
       "sku": "CSTV-10",
       "slug": "gunpowder",
       "name": "Gunpowder",
@@ -385,10 +385,10 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-02T00:00:00.000Z"
+      "updatedAt": "2026-11-03T07:30:19.519Z"
     },
     {
-      "id": "demo-8",
+      "id": "cs-0885daad4cf8",
       "sku": "CSTV-22",
       "slug": "kamairicha",
       "name": "Kamairicha",
@@ -434,10 +434,10 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-02T00:00:00.000Z"
+      "updatedAt": "2026-11-03T07:30:19.519Z"
     },
     {
-      "id": "demo-9",
+      "id": "cs-8ecdf9a02a0a",
       "sku": "CSTV-88",
       "slug": "gyokuro-okabe",
       "name": "Gyokuro Okabe",
@@ -484,10 +484,10 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-02T00:00:00.000Z"
+      "updatedAt": "2026-11-03T07:30:19.519Z"
     },
     {
-      "id": "demo-10",
+      "id": "cs-e9f5ce53bed2",
       "sku": "CSTV-18",
       "slug": "huiming",
       "name": "Huiming",
@@ -531,10 +531,10 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-02T00:00:00.000Z"
+      "updatedAt": "2026-11-03T07:30:19.519Z"
     },
     {
-      "id": "demo-11",
+      "id": "cs-1f14814a0a1a",
       "sku": "CSTV-68",
       "slug": "long-jing-zhejiang",
       "name": "Long Jing Zhejiang",
@@ -579,10 +579,10 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-02T00:00:00.000Z"
+      "updatedAt": "2026-11-03T07:30:19.519Z"
     },
     {
-      "id": "demo-12",
+      "id": "cs-b9624aa63567",
       "sku": "CSTV-40",
       "slug": "sencha-mobata",
       "name": "Sencha Mobata",
@@ -627,10 +627,10 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-02T00:00:00.000Z"
+      "updatedAt": "2026-11-03T07:30:19.519Z"
     },
     {
-      "id": "demo-13",
+      "id": "cs-133009c71850",
       "sku": "CSTV-41",
       "slug": "sencha-nagashima",
       "name": "Sencha Nagashima",
@@ -678,10 +678,10 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-02T00:00:00.000Z"
+      "updatedAt": "2026-11-03T07:30:19.519Z"
     },
     {
-      "id": "demo-14",
+      "id": "cs-e0d752e03b58",
       "sku": "CSTV-121",
       "slug": "matcha-sora",
       "name": "Matcha Sora",
@@ -725,10 +725,10 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-02T00:00:00.000Z"
+      "updatedAt": "2026-11-03T07:30:19.519Z"
     },
     {
-      "id": "demo-15",
+      "id": "cs-908ba5228f92",
       "sku": "CSTV-237",
       "slug": "matcha-mizukaze",
       "name": "Matcha Mizukaze",
@@ -775,10 +775,10 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-02T00:00:00.000Z"
+      "updatedAt": "2026-11-03T07:30:19.519Z"
     },
     {
-      "id": "demo-16",
+      "id": "cs-8938ae7d55bd",
       "sku": "CSTAD-561",
       "slug": "matcha-uji",
       "name": "Matcha Uji",
@@ -823,10 +823,155 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-02T00:00:00.000Z"
+      "updatedAt": "2026-11-03T07:30:19.519Z"
     },
     {
-      "id": "demo-17",
+      "id": "cs-872c085eaf4a",
+      "sku": "CSTW-1",
+      "slug": "ali-shan",
+      "name": "Ali Shan",
+      "type": "oolong",
+      "unitLabel": "50 g",
+      "price": {
+        "amount": 1590,
+        "currency": "EUR"
+      },
+      "taxIncluded": true,
+      "descriptionHtml": "<p>Visokoplaninski oolong s planine Ali (1400 m), majstora Chena. Note kokosa, egzotičnog voća i vanilije.</p>",
+      "images": [
+        {
+          "src": "/img/p/CSTW-1.jpg",
+          "alt": "Ali Shan",
+          "width": 460,
+          "height": 460
+        }
+      ],
+      "attributes": {
+        "origin": "Tajvan",
+        "caffeine": 2,
+        "flavors": [
+          "vocni",
+          "slatkasti"
+        ],
+        "form": "rastresiti",
+        "moods": [
+          "opust",
+          "poklon"
+        ],
+        "badges": [],
+        "brew": {
+          "temp": "95 °C",
+          "time": "3–4 min",
+          "dose": "5 g / 250 ml"
+        }
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true,
+      "updatedAt": "2026-11-03T07:30:19.519Z"
+    },
+    {
+      "id": "cs-80da6bda925a",
+      "sku": "CSTW-11",
+      "slug": "gaba-cha",
+      "name": "Gaba Cha",
+      "type": "oolong",
+      "unitLabel": "50 g",
+      "price": {
+        "amount": 1490,
+        "currency": "EUR"
+      },
+      "taxIncluded": true,
+      "descriptionHtml": "<p>Suvremeni tajvanski oolong s povišenim GABA sadržajem. Bogata šalica s notama pečene jabuke, cimeta i muškatnog oraščića.</p>",
+      "images": [
+        {
+          "src": "/img/p/CSTW-11.jpg",
+          "alt": "Gaba Cha",
+          "width": 460,
+          "height": 460
+        }
+      ],
+      "attributes": {
+        "origin": "Tajvan",
+        "caffeine": 2,
+        "flavors": [
+          "vocni",
+          "zacinski"
+        ],
+        "form": "rastresiti",
+        "moods": [
+          "opust"
+        ],
+        "badges": [
+          "novo"
+        ],
+        "brew": {
+          "temp": "95 °C",
+          "time": "3–4 min",
+          "dose": "5 g / 250 ml"
+        }
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true,
+      "updatedAt": "2026-11-03T07:30:19.519Z"
+    },
+    {
+      "id": "cs-fe2173a00f88",
+      "sku": "CSTW-30",
+      "slug": "dong-ding-mr-nen-yu-peceni",
+      "name": "Dong Ding Mr. Nen Yu (pečeni)",
+      "type": "oolong",
+      "unitLabel": "50 g",
+      "price": {
+        "amount": 1690,
+        "currency": "EUR"
+      },
+      "taxIncluded": true,
+      "descriptionHtml": "<p>Pečeni Dong Ding majstora Nen Yua. Mirisi džema od maline, meda i tosta, kremasta šalica s ananasom na kraju.</p>",
+      "images": [
+        {
+          "src": "/img/p/CSTW-30.jpg",
+          "alt": "Dong Ding Mr. Nen Yu (pečeni)",
+          "width": 460,
+          "height": 460
+        }
+      ],
+      "attributes": {
+        "origin": "Tajvan",
+        "caffeine": 2,
+        "flavors": [
+          "vocni",
+          "medeni"
+        ],
+        "form": "rastresiti",
+        "moods": [
+          "opust",
+          "vecer"
+        ],
+        "badges": [],
+        "brew": {
+          "temp": "95 °C",
+          "time": "3–4 min",
+          "dose": "5 g / 250 ml"
+        }
+      },
+      "stock": {
+        "status": "instock",
+        "quantity": 24,
+        "maxPerOrder": 20
+      },
+      "published": true,
+      "updatedAt": "2026-11-03T07:30:19.519Z"
+    },
+    {
+      "id": "cs-5e0814b3d840",
       "sku": "CSTN-1",
       "slug": "assam-breakfast",
       "name": "Assam Breakfast",
@@ -872,10 +1017,10 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-02T00:00:00.000Z"
+      "updatedAt": "2026-11-03T07:30:19.519Z"
     },
     {
-      "id": "demo-18",
+      "id": "cs-3f5c338d8d37",
       "sku": "CSTN-79",
       "slug": "assam-halmari",
       "name": "Assam Halmari",
@@ -919,10 +1064,10 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-02T00:00:00.000Z"
+      "updatedAt": "2026-11-03T07:30:19.519Z"
     },
     {
-      "id": "demo-19",
+      "id": "cs-3cc15f1b467a",
       "sku": "CSTN-64",
       "slug": "ceylon-new-vithanakande",
       "name": "Ceylon New Vithanakande",
@@ -966,10 +1111,10 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-02T00:00:00.000Z"
+      "updatedAt": "2026-11-03T07:30:19.519Z"
     },
     {
-      "id": "demo-20",
+      "id": "cs-c6d4b819d43c",
       "sku": "CSTN-38",
       "slug": "zhenghe-hong-gong-fu",
       "name": "Zhenghe Hong Gong Fu",
@@ -1013,10 +1158,10 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-02T00:00:00.000Z"
+      "updatedAt": "2026-11-03T07:30:19.519Z"
     },
     {
-      "id": "demo-21",
+      "id": "cs-2a10b6f3e9a4",
       "sku": "CSTN-126",
       "slug": "darjeeling-autumn-thurbo",
       "name": "Darjeeling Autumn Thurbo",
@@ -1060,10 +1205,10 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-02T00:00:00.000Z"
+      "updatedAt": "2026-11-03T07:30:19.519Z"
     },
     {
-      "id": "demo-22",
+      "id": "cs-94d7e55000af",
       "sku": "CSTN-97",
       "slug": "darjeeling-first-flush-thurbo",
       "name": "Darjeeling First Flush Thurbo",
@@ -1108,10 +1253,10 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-02T00:00:00.000Z"
+      "updatedAt": "2026-11-03T07:30:19.519Z"
     },
     {
-      "id": "demo-23",
+      "id": "cs-5b729b56ea5c",
       "sku": "CSTN-192",
       "slug": "darjeeling-first-flush-jungpana",
       "name": "Darjeeling First Flush Jungpana",
@@ -1156,10 +1301,10 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-02T00:00:00.000Z"
+      "updatedAt": "2026-11-03T07:30:19.519Z"
     },
     {
-      "id": "demo-24",
+      "id": "cs-ec4dfa22f2e7",
       "sku": "CSTN-219",
       "slug": "darjeeling-second-flush-selimbong",
       "name": "Darjeeling Second Flush Selimbong",
@@ -1203,10 +1348,10 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-02T00:00:00.000Z"
+      "updatedAt": "2026-11-03T07:30:19.519Z"
     },
     {
-      "id": "demo-25",
+      "id": "cs-09f15d85f810",
       "sku": "CSTN-25",
       "slug": "jin-die",
       "name": "Jin Die",
@@ -1253,10 +1398,10 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-02T00:00:00.000Z"
+      "updatedAt": "2026-11-03T07:30:19.519Z"
     },
     {
-      "id": "demo-26",
+      "id": "cs-51752b088dfd",
       "sku": "CSTN-111",
       "slug": "la-cumbre-bitaco",
       "name": "La Cumbre Bitaco",
@@ -1302,10 +1447,10 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-02T00:00:00.000Z"
+      "updatedAt": "2026-11-03T07:30:19.519Z"
     },
     {
-      "id": "demo-27",
+      "id": "cs-e0a0f35a4e62",
       "sku": "CSTN-201",
       "slug": "kevins-breakfast-blend",
       "name": "Kevin's Breakfast Blend",
@@ -1349,10 +1494,10 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-02T00:00:00.000Z"
+      "updatedAt": "2026-11-03T07:30:19.519Z"
     },
     {
-      "id": "demo-28",
+      "id": "cs-64b212cb4255",
       "sku": "CSTN-125",
       "slug": "meghalaya-lakyrsiew-autumn",
       "name": "Meghalaya Lakyrsiew Autumn",
@@ -1398,10 +1543,10 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-02T00:00:00.000Z"
+      "updatedAt": "2026-11-03T07:30:19.519Z"
     },
     {
-      "id": "demo-29",
+      "id": "cs-0d0d483f6dc0",
       "sku": "CSTN-93",
       "slug": "yunnan-da-ye",
       "name": "Yunnan Da Ye",
@@ -1447,10 +1592,10 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-02T00:00:00.000Z"
+      "updatedAt": "2026-11-03T07:30:19.519Z"
     },
     {
-      "id": "demo-30",
+      "id": "cs-cd63de7b55e0",
       "sku": "CSTN-220",
       "slug": "shimada-whisky-dimljeni",
       "name": "Shimada Whisky (dimljeni)",
@@ -1497,10 +1642,10 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-02T00:00:00.000Z"
+      "updatedAt": "2026-11-03T07:30:19.519Z"
     },
     {
-      "id": "demo-31",
+      "id": "cs-b0da799a04e7",
       "sku": "CSTVI-298",
       "slug": "puer-shou-2021-yongde",
       "name": "Pu'er Shou 2021 Yongde",
@@ -1547,10 +1692,10 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-02T00:00:00.000Z"
+      "updatedAt": "2026-11-03T07:30:19.519Z"
     },
     {
-      "id": "demo-32",
+      "id": "cs-7cd199a451b6",
       "sku": "CSTVI-281",
       "slug": "puer-shou-2016-jingmai",
       "name": "Pu'er Shou 2016 Jingmai",
@@ -1592,10 +1737,10 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-02T00:00:00.000Z"
+      "updatedAt": "2026-11-03T07:30:19.519Z"
     },
     {
-      "id": "demo-33",
+      "id": "cs-aff368719031",
       "sku": "CSTVI-282",
       "slug": "puer-sheng-2023-zhengwan",
       "name": "Pu'er Sheng 2023 Zhengwan",
@@ -1643,10 +1788,10 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-02T00:00:00.000Z"
+      "updatedAt": "2026-11-03T07:30:19.519Z"
     },
     {
-      "id": "demo-34",
+      "id": "cs-73ae2f7dd204",
       "sku": "CSTVI-276",
       "slug": "puer-sheng-2023-yongde-da-shan",
       "name": "Pu'er Sheng 2023 Yongde Da Shan",
@@ -1693,10 +1838,10 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-02T00:00:00.000Z"
+      "updatedAt": "2026-11-03T07:30:19.519Z"
     },
     {
-      "id": "demo-35",
+      "id": "cs-9f0b1628b3dc",
       "sku": "CSTVI-150",
       "slug": "puer-sheng-2007-yiwu-jing-long",
       "name": "Pu'er Sheng 2007 Yiwu Jing Long",
@@ -1735,155 +1880,10 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-02T00:00:00.000Z"
+      "updatedAt": "2026-11-03T07:30:19.519Z"
     },
     {
-      "id": "demo-36",
-      "sku": "CSTW-1",
-      "slug": "ali-shan",
-      "name": "Ali Shan",
-      "type": "oolong",
-      "unitLabel": "50 g",
-      "price": {
-        "amount": 1590,
-        "currency": "EUR"
-      },
-      "taxIncluded": true,
-      "descriptionHtml": "<p>Visokoplaninski oolong s planine Ali (1400 m), majstora Chena. Note kokosa, egzotičnog voća i vanilije.</p>",
-      "images": [
-        {
-          "src": "/img/p/CSTW-1.jpg",
-          "alt": "Ali Shan",
-          "width": 460,
-          "height": 460
-        }
-      ],
-      "attributes": {
-        "origin": "Tajvan",
-        "caffeine": 2,
-        "flavors": [
-          "vocni",
-          "slatkasti"
-        ],
-        "form": "rastresiti",
-        "moods": [
-          "opust",
-          "poklon"
-        ],
-        "badges": [],
-        "brew": {
-          "temp": "95 °C",
-          "time": "3–4 min",
-          "dose": "5 g / 250 ml"
-        }
-      },
-      "stock": {
-        "status": "instock",
-        "quantity": 24,
-        "maxPerOrder": 20
-      },
-      "published": true,
-      "updatedAt": "2026-11-02T00:00:00.000Z"
-    },
-    {
-      "id": "demo-37",
-      "sku": "CSTW-11",
-      "slug": "gaba-cha",
-      "name": "Gaba Cha",
-      "type": "oolong",
-      "unitLabel": "50 g",
-      "price": {
-        "amount": 1490,
-        "currency": "EUR"
-      },
-      "taxIncluded": true,
-      "descriptionHtml": "<p>Suvremeni tajvanski oolong s povišenim GABA sadržajem. Bogata šalica s notama pečene jabuke, cimeta i muškatnog oraščića.</p>",
-      "images": [
-        {
-          "src": "/img/p/CSTW-11.jpg",
-          "alt": "Gaba Cha",
-          "width": 460,
-          "height": 460
-        }
-      ],
-      "attributes": {
-        "origin": "Tajvan",
-        "caffeine": 2,
-        "flavors": [
-          "vocni",
-          "zacinski"
-        ],
-        "form": "rastresiti",
-        "moods": [
-          "opust"
-        ],
-        "badges": [
-          "novo"
-        ],
-        "brew": {
-          "temp": "95 °C",
-          "time": "3–4 min",
-          "dose": "5 g / 250 ml"
-        }
-      },
-      "stock": {
-        "status": "instock",
-        "quantity": 24,
-        "maxPerOrder": 20
-      },
-      "published": true,
-      "updatedAt": "2026-11-02T00:00:00.000Z"
-    },
-    {
-      "id": "demo-38",
-      "sku": "CSTW-30",
-      "slug": "dong-ding-mr-nen-yu-peceni",
-      "name": "Dong Ding Mr. Nen Yu (pečeni)",
-      "type": "oolong",
-      "unitLabel": "50 g",
-      "price": {
-        "amount": 1690,
-        "currency": "EUR"
-      },
-      "taxIncluded": true,
-      "descriptionHtml": "<p>Pečeni Dong Ding majstora Nen Yua. Mirisi džema od maline, meda i tosta, kremasta šalica s ananasom na kraju.</p>",
-      "images": [
-        {
-          "src": "/img/p/CSTW-30.jpg",
-          "alt": "Dong Ding Mr. Nen Yu (pečeni)",
-          "width": 460,
-          "height": 460
-        }
-      ],
-      "attributes": {
-        "origin": "Tajvan",
-        "caffeine": 2,
-        "flavors": [
-          "vocni",
-          "medeni"
-        ],
-        "form": "rastresiti",
-        "moods": [
-          "opust",
-          "vecer"
-        ],
-        "badges": [],
-        "brew": {
-          "temp": "95 °C",
-          "time": "3–4 min",
-          "dose": "5 g / 250 ml"
-        }
-      },
-      "stock": {
-        "status": "instock",
-        "quantity": 24,
-        "maxPerOrder": 20
-      },
-      "published": true,
-      "updatedAt": "2026-11-02T00:00:00.000Z"
-    },
-    {
-      "id": "demo-39",
+      "id": "cs-7b1a4478a14e",
       "sku": "CSTP-5",
       "slug": "dunes-du-sahara-zeleni-s-mentom",
       "name": "Dunes du Sahara (zeleni s mentom)",
@@ -1929,10 +1929,10 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-02T00:00:00.000Z"
+      "updatedAt": "2026-11-03T07:30:19.519Z"
     },
     {
-      "id": "demo-40",
+      "id": "cs-cc5ccbe504a9",
       "sku": "CSTP-6",
       "slug": "earl-grey",
       "name": "Earl Grey",
@@ -1977,10 +1977,10 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-02T00:00:00.000Z"
+      "updatedAt": "2026-11-03T07:30:19.519Z"
     },
     {
-      "id": "demo-41",
+      "id": "cs-deebb231f951",
       "sku": "CSTP-90",
       "slug": "earl-grey-de-marie-antoinette",
       "name": "Earl Grey de Marie-Antoinette",
@@ -2027,10 +2027,10 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-02T00:00:00.000Z"
+      "updatedAt": "2026-11-03T07:30:19.519Z"
     },
     {
-      "id": "demo-42",
+      "id": "cs-5d192966ce25",
       "sku": "CSTP-7",
       "slug": "green-earl-grey",
       "name": "Green Earl Grey",
@@ -2074,10 +2074,10 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-02T00:00:00.000Z"
+      "updatedAt": "2026-11-03T07:30:19.519Z"
     },
     {
-      "id": "demo-43",
+      "id": "cs-94c59042b897",
       "sku": "CSTP-11",
       "slug": "earl-grey-cream",
       "name": "Earl Grey Cream",
@@ -2122,10 +2122,10 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-02T00:00:00.000Z"
+      "updatedAt": "2026-11-03T07:30:19.519Z"
     },
     {
-      "id": "demo-44",
+      "id": "cs-ee0f0e2d4158",
       "sku": "CSTP-51",
       "slug": "lisbon-sunshine",
       "name": "Lisbon Sunshine",
@@ -2171,10 +2171,10 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-02T00:00:00.000Z"
+      "updatedAt": "2026-11-03T07:30:19.519Z"
     },
     {
-      "id": "demo-45",
+      "id": "cs-56b2f5811b34",
       "sku": "CSTG-68",
       "slug": "memories-from-napoli",
       "name": "Memories from Napoli",
@@ -2221,10 +2221,10 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-02T00:00:00.000Z"
+      "updatedAt": "2026-11-03T07:30:19.519Z"
     },
     {
-      "id": "demo-46",
+      "id": "cs-9d2381bc3ea1",
       "sku": "CSTP-25",
       "slug": "moulin-rouge",
       "name": "Moulin Rouge",
@@ -2269,10 +2269,10 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-02T00:00:00.000Z"
+      "updatedAt": "2026-11-03T07:30:19.519Z"
     },
     {
-      "id": "demo-47",
+      "id": "cs-1e434ccc693b",
       "sku": "CSTP-17",
       "slug": "ombrelle-de-papier",
       "name": "Ombrelle de Papier",
@@ -2315,10 +2315,10 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-02T00:00:00.000Z"
+      "updatedAt": "2026-11-03T07:30:19.519Z"
     },
     {
-      "id": "demo-48",
+      "id": "cs-a21dba4e5d3d",
       "sku": "CSTP-81",
       "slug": "raspberry-mimosa",
       "name": "Raspberry Mimosa",
@@ -2363,10 +2363,10 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-02T00:00:00.000Z"
+      "updatedAt": "2026-11-03T07:30:19.519Z"
     },
     {
-      "id": "demo-49",
+      "id": "cs-23ba0eb6816f",
       "sku": "CSTP-86",
       "slug": "sencha-yuzu",
       "name": "Sencha Yuzu",
@@ -2413,10 +2413,10 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-02T00:00:00.000Z"
+      "updatedAt": "2026-11-03T07:30:19.519Z"
     },
     {
-      "id": "demo-50",
+      "id": "cs-ed409ad25436",
       "sku": "CSTP-88",
       "slug": "fee-des-fleurs-jasmin",
       "name": "Fée des Fleurs (jasmin)",
@@ -2461,10 +2461,10 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-02T00:00:00.000Z"
+      "updatedAt": "2026-11-03T07:30:19.519Z"
     },
     {
-      "id": "demo-51",
+      "id": "cs-35ac920281d5",
       "sku": "CSTP-36",
       "slug": "cvjetni-caj-bozur-ljiljan-i-osmantus",
       "name": "Cvjetni čaj: božur, ljiljan i osmantus",
@@ -2509,10 +2509,10 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-02T00:00:00.000Z"
+      "updatedAt": "2026-11-03T07:30:19.519Z"
     },
     {
-      "id": "demo-52",
+      "id": "cs-4bbe45aeb7a3",
       "sku": "CSTP-92",
       "slug": "verger-tropical",
       "name": "Verger Tropical",
@@ -2555,10 +2555,10 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-02T00:00:00.000Z"
+      "updatedAt": "2026-11-03T07:30:19.519Z"
     },
     {
-      "id": "demo-53",
+      "id": "cs-f8fe4b15dbe8",
       "sku": "CSTC-5",
       "slug": "chai-camellia",
       "name": "Chai Camellia",
@@ -2604,10 +2604,10 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-02T00:00:00.000Z"
+      "updatedAt": "2026-11-03T07:30:19.519Z"
     },
     {
-      "id": "demo-54",
+      "id": "cs-1f8bfd39bb35",
       "sku": "CSTC-13",
       "slug": "celebration-chai",
       "name": "Celebration Chai",
@@ -2654,10 +2654,10 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-02T00:00:00.000Z"
+      "updatedAt": "2026-11-03T07:30:19.519Z"
     },
     {
-      "id": "demo-55",
+      "id": "cs-87eaef851ee1",
       "sku": "CSTO-2",
       "slug": "kamilica",
       "name": "Kamilica",
@@ -2704,10 +2704,10 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-02T00:00:00.000Z"
+      "updatedAt": "2026-11-03T07:30:19.519Z"
     },
     {
-      "id": "demo-56",
+      "id": "cs-af0ea740db1a",
       "sku": "CSTO-41",
       "slug": "menta",
       "name": "Menta",
@@ -2752,10 +2752,10 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-02T00:00:00.000Z"
+      "updatedAt": "2026-11-03T07:30:19.519Z"
     },
     {
-      "id": "demo-57",
+      "id": "cs-e19b74b51daf",
       "sku": "CSTO-23",
       "slug": "la-provencale",
       "name": "La Provençale",
@@ -2802,10 +2802,10 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-02T00:00:00.000Z"
+      "updatedAt": "2026-11-03T07:30:19.519Z"
     },
     {
-      "id": "demo-58",
+      "id": "cs-5b2526874d46",
       "sku": "CSTO-31",
       "slug": "lemon-ginger-burst",
       "name": "Lemon Ginger Burst",
@@ -2851,10 +2851,10 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-02T00:00:00.000Z"
+      "updatedAt": "2026-11-03T07:30:19.519Z"
     },
     {
-      "id": "demo-59",
+      "id": "cs-98fb2bcbdb96",
       "sku": "CSTO-17",
       "slug": "la-rose-pourpre",
       "name": "La Rose Pourpre",
@@ -2893,10 +2893,10 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-02T00:00:00.000Z"
+      "updatedAt": "2026-11-03T07:30:19.519Z"
     },
     {
-      "id": "demo-60",
+      "id": "cs-121f54f60a21",
       "sku": "CSTO-74",
       "slug": "la-belle-humeur",
       "name": "La Belle Humeur",
@@ -2941,10 +2941,10 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-02T00:00:00.000Z"
+      "updatedAt": "2026-11-03T07:30:19.519Z"
     },
     {
-      "id": "demo-61",
+      "id": "cs-1e2acfd12e00",
       "sku": "CSTO-182",
       "slug": "cerise-rubis",
       "name": "Cerise Rubis",
@@ -2988,10 +2988,10 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-02T00:00:00.000Z"
+      "updatedAt": "2026-11-03T07:30:19.519Z"
     },
     {
-      "id": "demo-62",
+      "id": "cs-8fd803e2895b",
       "sku": "CSTO-33",
       "slug": "wintergreen",
       "name": "Wintergreen",
@@ -3036,10 +3036,10 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-02T00:00:00.000Z"
+      "updatedAt": "2026-11-03T07:30:19.519Z"
     },
     {
-      "id": "demo-63",
+      "id": "cs-9f1a79efee88",
       "sku": "CSTO-32",
       "slug": "labradorski-caj",
       "name": "Labradorski čaj",
@@ -3084,10 +3084,10 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-02T00:00:00.000Z"
+      "updatedAt": "2026-11-03T07:30:19.519Z"
     },
     {
-      "id": "demo-64",
+      "id": "cs-f31fe32dd85d",
       "sku": "CSTR-3",
       "slug": "rooibos-wupperthal",
       "name": "Rooibos Wupperthal",
@@ -3133,10 +3133,10 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-02T00:00:00.000Z"
+      "updatedAt": "2026-11-03T07:30:19.519Z"
     },
     {
-      "id": "demo-65",
+      "id": "cs-c5dd3e97c75d",
       "sku": "CSTR-4",
       "slug": "rooibos-zeste-eclair",
       "name": "Rooibos Zeste Éclair",
@@ -3180,10 +3180,10 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-02T00:00:00.000Z"
+      "updatedAt": "2026-11-03T07:30:19.519Z"
     },
     {
-      "id": "demo-66",
+      "id": "cs-0ad385a5212d",
       "sku": "CSTAD-592",
       "slug": "yerba-mate",
       "name": "Yerba Maté",
@@ -3229,10 +3229,10 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-02T00:00:00.000Z"
+      "updatedAt": "2026-11-03T07:30:19.519Z"
     },
     {
-      "id": "demo-67",
+      "id": "cs-5a875b0a5a80",
       "sku": "CSTHG-32",
       "slug": "staklena-gaiwan-echo",
       "name": "Staklena gaiwan Echo",
@@ -3266,10 +3266,10 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-02T00:00:00.000Z"
+      "updatedAt": "2026-11-03T07:30:19.519Z"
     },
     {
-      "id": "demo-68",
+      "id": "cs-0a0a5400f65d",
       "sku": "CSTHJC-79",
       "slug": "set-za-matchu-focus",
       "name": "Set za matchu Focus",
@@ -3303,10 +3303,10 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-02T00:00:00.000Z"
+      "updatedAt": "2026-11-03T07:30:19.519Z"
     },
     {
-      "id": "demo-69",
+      "id": "cs-16411b597625",
       "sku": "CSAC-516",
       "slug": "zlicica-za-matchu",
       "name": "Žličica za matchu",
@@ -3340,10 +3340,10 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-02T00:00:00.000Z"
+      "updatedAt": "2026-11-03T07:30:19.519Z"
     },
     {
-      "id": "demo-70",
+      "id": "cs-f4e9e209d426",
       "sku": "CSAC-463",
       "slug": "bambusova-cajna-daska-cabaret",
       "name": "Bambusova čajna daska Cabaret",
@@ -3377,10 +3377,10 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-02T00:00:00.000Z"
+      "updatedAt": "2026-11-03T07:30:19.519Z"
     },
     {
-      "id": "demo-71",
+      "id": "cs-7df1a83b36de",
       "sku": "CSLI-2",
       "slug": "knjiga-tea-history-terroirs-varieties",
       "name": "Knjiga: Tea – History, Terroirs, Varieties",
@@ -3414,7 +3414,7 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-02T00:00:00.000Z"
+      "updatedAt": "2026-11-03T07:30:19.519Z"
     }
   ]
 }

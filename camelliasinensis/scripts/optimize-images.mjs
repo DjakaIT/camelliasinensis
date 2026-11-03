@@ -1,7 +1,7 @@
 // Slike iz design-reference/ → public/img/ (AVIF + WebP u više širina, plus JPG za Open Graph i JSON-LD).
 // Nikakav base64 u kodu. Hero mora biti ≤ 200 KB po datoteci; inače skripta pada.
-import { existsSync, mkdirSync, readdirSync, readFileSync, statSync, writeFileSync, copyFileSync } from 'node:fs';
-import { basename, resolve } from 'node:path';
+import { existsSync, mkdirSync, readFileSync, statSync, writeFileSync, copyFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 import sharp from 'sharp';
 
 const OUT = resolve('public/img');
@@ -13,9 +13,9 @@ const jobs = [
   ['design-reference/hero-tea.jpg', 'hero/hero-tea', [640, 1124]],
   ['assets/photos/o-nama-ilustracija.jpg', 'foto/o-nama-ilustracija', [480, 960]],
 ];
-for (const f of readdirSync('design-reference/img').filter((f) => f.endsWith('.jpg'))) {
-  jobs.push([`design-reference/img/${f}`, `p/${basename(f, '.jpg')}`, [200, 460]]);
-}
+// fotografije proizvoda prema katalogu (scripts/data-to-fixtures.mjs): iz uredništva ili iz prototipa
+const izvori = JSON.parse(readFileSync(resolve('fixtures/slike-izvori.json'), 'utf8'));
+for (const [sku, src] of Object.entries(izvori)) jobs.push([src, `p/${sku}`, [200, 460]]);
 
 const manifest = {};
 let made = 0;
@@ -42,7 +42,7 @@ for (const [src, dest, widths] of jobs) {
   }
   const jpg = `${outBase}.jpg`;
   if (force || !existsSync(jpg) || statSync(jpg).mtimeMs < srcTime) {
-    if (dest.startsWith('p/')) copyFileSync(src, jpg);
+    if (dest.startsWith('p/') && src.endsWith('.jpg')) copyFileSync(src, jpg);
     else await sharp(src).jpeg({ quality: 78, mozjpeg: true }).toFile(jpg);
   }
   if (dest.startsWith('hero/')) {

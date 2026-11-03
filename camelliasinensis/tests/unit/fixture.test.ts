@@ -14,9 +14,12 @@ describe('fixtures/products.json', () => {
     expect(skus.every((s) => typeof s === 'string' && s.trim().length > 0)).toBe(true);
     expect(new Set(skus).size).toBe(71);
   });
-  it('SKU-ovi su točno prvi elementi redaka u data.js, istim redom', () => {
+  it('SKU-ovi su točno prvi elementi redaka u data.js (nepromijenjeni), poredani po vrsti', () => {
     const { RAW } = readDataJs() as { RAW: unknown[][] };
-    expect(products.map((p) => p.sku)).toEqual(RAW.map((r) => r[0]));
+    expect([...products.map((p) => p.sku)].sort()).toEqual(RAW.map((r) => r[0] as string).sort());
+    const red = fixture.types.map((t) => t.key);
+    const idx = products.map((p) => red.indexOf(p.type));
+    expect(idx).toEqual([...idx].sort((a, b) => a - b));
   });
   it('cijene su cijeli centi > 0 i označene kao primjeri', () => {
     expect(fixture.examplePrices).toBe(true);
