@@ -1,0 +1,101 @@
+# Provjere i izgradnja stranice za hosting (Hostinger: Apache/LiteSpeed + PHP). Model je preuzet iz Septilliona.
+# Projekt je u podmapi camelliasinensis/ (korijen repozitorija je mapa iznad), pa sve naredbe rade u njoj.
+#  - push na main (kod): provjere -> objava
+#  - repository_dispatch "sadrzaj" (uredništvo je spremilo katalog na granu sadrzaj): odmah objava
+#  - ručno: Actions -> Objava -> Run workflow
+# Objava: kod s grane main + katalog i fotografije s grane sadrzaj -> build -> npm run paket -> artefakt "hosting".
+# Uredništvo na hostingu (urednistvo/php/lib/instalacija.php) preuzima zadnji uspješni artefakt i postavlja ga u public_html:
+# odmah nakon spremanja, a promjene koda preko Cron Joba (svakih 5 min /urednistvo/api/osvjezi).
+# Podaci uredništva su na hostingu izvan public_html i objava ih nikad ne dira.
+#
+# Postavke: varijabla repozitorija OBJAVA_UKLJUCENA = da (Settings -> Secrets and variables -> Actions -> Variables).
+# Dok nije postavljena, radi samo posao "provjere". NIŠTA SE NE OBJAVLJUJE DOK DANIEL TO NE UKLJUČI.
+#
+# BACKEND: dok se ne odabere stvarni backend za plaćanje, stranica se gradi kao demo trgovina (build:demo, noindex,
+# probna blagajna). Kad backend postoji, ovdje ide njegov build (adapter) — vidi API-CONTRACT.md §4.
+name: Objava
+run-name: ${{ github.event_name == 'repository_dispatch' && format('Objava {0}', github.event.client_payload.sha) || format('Objava koda {0}', github.sha) }}
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  repository_dispatch:
+    types: [sadrzaj]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    working-directory: camelliasinensis
+
+concurrency:
+  group: ${{ github.event_name == 'pull_request' && github.ref || 'objava' }}
+  cancel-in-progress: false
+
+jobs:
+  provjere:
+    if: github.event_name == 'push' || github.event_name == 'pull_request'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: camelliasinensis/package-lock.json
+      - run: npm ci
+      - run: npm --prefix mock-server ci
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run test:contract
+      - run: npm run build:demo
+      - run: npm run check:bundle
+      - run: npm run check:prerender
+      - run: npm audit --omit=dev --audit-level=high
+
+  objava:
+    needs: provjere
+    if: always() && vars.OBJAVA_UKLJUCENA == 'da' && github.event_name != 'pull_request' && (needs.provjere.result == 'success' || needs.provjere.result == 'skipped')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: main
+      - name: Katalog i fotografije iz uredništva (grana sadrzaj)
+        run: |
+          if git ls-remote --exit-code --heads origin sadrzaj > /dev/null; then
+            git fetch --depth=1 origin sadrzaj
+            # grana sadrzaj ima samo podaci/ u korijenu -> camelliasinensis/podaci
+            mkdir -p podaci && git -C .. archive FETCH_HEAD:podaci | tar -x -C podaci
+            echo "katalog verzija $(node -p "require('./podaci/katalog.json').verzija")"
+          else
+            echo "Grana sadrzaj još ne postoji — stranica se gradi iz početnog kataloga (prototip)."
+          fi
+          git config --local --unset-all http.https://github.com/.extraheader || true
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: camelliasinensis/package-lock.json
+      - run: npm ci
+      - run: npm run build:demo
+        env:
+          UREDNISTVO_PODACI: podaci # katalog s grane sadrzaj (ako postoji)
+      - run: npm run check:bundle
+      - run: npm run paket
+      # paket ostaje kao artefakt "hosting", a uredništvo na hostingu ga preuzme (istim GitHub tokenom) i postavi u public_html
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: hosting
+          path: camelliasinensis/hosting/
+          include-hidden-files: true # .htaccess
+          if-no-files-found: error
+          retention-days: 30

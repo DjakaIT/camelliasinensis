@@ -20,6 +20,7 @@ export default tseslint.config(
     ignores: [
       '.next/**', 'out/**', 'out-*/**', 'node_modules/**', '.scaffold-backup/**', 'design-reference/**',
       'public/**', 'mock-server/node_modules/**', 'test-results/**', 'playwright-report/**', 'next-env.d.ts',
+      'hosting/**', 'podaci/**', 'izdanja/**', 'urednistvo/sucelje/qrcode.mjs',
     ],
   },
   js.configs.recommended,
@@ -48,7 +49,7 @@ export default tseslint.config(
     rules: { 'no-restricted-imports': ['error', { paths: backendOnly.paths }] },
   },
   {
-    files: ['scripts/**/*.mjs', 'mock-server/**/*.js', 'tests/**', '*.config.*', 'playwright.config.ts'],
+    files: ['scripts/**/*.mjs', 'mock-server/**/*.js', 'tests/**', '*.config.*', 'playwright.config.ts', 'urednistvo/**/*.mjs', 'urednistvo/sucelje/*.js'],
     languageOptions: { globals: { ...globals.node, ...globals.browser } },
   },
 );

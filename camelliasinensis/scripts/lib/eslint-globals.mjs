@@ -13,6 +13,7 @@ export default {
     'requestAnimationFrame', 'cancelAnimationFrame', 'IntersectionObserver', 'matchMedia', 'HTMLElement',
     'HTMLInputElement', 'HTMLButtonElement', 'HTMLDivElement', 'KeyboardEvent', 'MouseEvent', 'StorageEvent',
     'CustomEvent', 'scrollTo', 'addEventListener', 'removeEventListener', 'getComputedStyle',
+    'Node', 'confirm', 'createImageBitmap', 'Blob', 'HTMLElement',
   ]),
   node: ro([...shared, 'process', 'Buffer', '__dirname', '__filename', 'module', 'require']),
 };

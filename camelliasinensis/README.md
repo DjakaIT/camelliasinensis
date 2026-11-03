@@ -51,3 +51,42 @@ tests/unit, tests/contract, tests/e2e
 ```
 
 Stari Vite scaffold je u `.scaffold-backup/` (samo lokalno, u `.gitignore`).
+
+## Uredništvo (`/urednistvo`): ponuda, katalog, izdvojeno
+
+Sara uređuje proizvode (cijene, zalihu, opise, fotografije), vrste čaja i policu na naslovnici. Upute za nju:
+[docs/urednistvo-vodic.md](docs/urednistvo-vodic.md). Model i jezgra (prijava s 2FA, pozivnice, sesije, povijest verzija,
+objava preko GitHuba) preuzeti su iz Septilliona; sadržaj je `podaci/katalog.json` (oblik i pravila: `urednistvo/katalog.mjs`).
+Blagajna (Thor) i web su odvojeni: cijene i zaliha weba vode se samo ovdje.
+
+| | lokalno (`npm run urednistvo`) | hosting (Hostinger, PHP) |
+| --- | --- | --- |
+| pozadina | Node (`urednistvo/posluzitelj.mjs`) | PHP (`urednistvo/php/`) |
+| podaci | `podaci/` u projektu (nije u gitu) | `camellia-podaci/` pokraj `public_html` (izvan javne mape) |
+| objava | demo build na računalu (~1 min), stranica na `http://localhost:3300` | katalog + nove fotografije → GitHub (grana `sadrzaj`) → Actions izgradi paket → uredništvo ga postavi u `public_html` |
+
+Lokalno: `npm run urednistvo`, pa otvori `http://localhost:3300/urednistvo` i postavi svoj račun (lozinka, QR kod, rezervni kodovi).
+Build stranice koristi katalog iz uredništva samo uz `UREDNISTVO_PODACI` (to postavljaju lokalna objava i GitHub Actions);
+običan `npm run build` i testovi rade s početnim katalogom iz `data.js`.
+
+### Postavljanje na Hostingeru (jednom, Daniel)
+
+1. **PHP**: hPanel → *Napredno → PHP konfiguracija*: PHP 8.3 ili 8.4, proširenja `gd` (s WebP), `mbstring`, `curl`, `zip`, `fileinfo`.
+2. **GitHub**: repozitorij `DjakaIT/camelliasinensis` → *Settings → Secrets and variables → Actions → Variables*:
+   `OBJAVA_UKLJUCENA` = `da`. Bez toga workflow `.github/workflows/objava.yml` radi samo provjere i **ništa ne objavljuje**.
+3. **Prva objava (ručno)**: GitHub → *Actions* → zadnja zelena "Objava" → *Artifacts* → **hosting**. hPanel → *File Manager* →
+   `public_html` → *Upload* `hosting.zip` → *Extract*. (Ili lokalno: `npm run build:demo && npm run paket`.)
+4. **Prvi račun**: otvori `https://camelliasinensis.eu/urednistvo`. Kod za postavljanje je u File Manageru u
+   `camellia-podaci/PRVO-POSTAVLJANJE.txt` (pokraj `public_html`). Taj račun je administrator.
+5. **Veza s GitHubom**: u uredništvu ☰ → *Objava stranice*: repozitorij `DjakaIT/camelliasinensis`, grana `sadrzaj`, token.
+   Token: GitHub → *Settings → Developer settings → Fine-grained tokens*: samo ovaj repozitorij, **Contents: Read and write**,
+   **Actions: Read-only**, najdulji rok (prije isteka upiši novi).
+6. **Cron Job**: hPanel → *Napredno → Cron Jobs*, svakih 5 minuta:
+   `curl -s https://camelliasinensis.eu/urednistvo/api/osvjezi > /dev/null` (postavlja promjene koda s `main`).
+7. **Sara**: ☰ → *Korisnici* → `sara` → *Napravi pozivnicu*, poveznicu pošalji osobno.
+
+Dok se ne odabere stvarni backend za plaćanje, workflow gradi **demo trgovinu** (`build:demo`: noindex, probna blagajna).
+Nemoj uključivati `OBJAVA_UKLJUCENA` na produkcijskoj domeni dok to nije odluka.
+
+**Napomena:** PHP pozadina nije pokrenuta na ovom računalu (nema PHP-a); jezgra je ista kao u Septillionu (gdje je testirana),
+a dijelovi za katalog (`sadrzaj.php`, `spremiste.php`, rute `GET/PUT /katalog`) prate Node inačicu. Provjeri na stagingu.

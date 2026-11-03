@@ -40,3 +40,9 @@ Thumbs.db
 !.vscode/extensions.json
 .idea
 woo/
+
+# uredništvo: lokalni podaci (korisnici, sesije, katalog) i izgrađena izdanja; na hostingu su izvan public_html
+podaci/
+izdanja/
+hosting/
+hosting.zip
