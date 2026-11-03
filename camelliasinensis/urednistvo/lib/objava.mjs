@@ -11,6 +11,13 @@ const NEXT = path.join(ROOT, 'node_modules/next/dist/bin/next');
 const DEMO = { NEXT_PUBLIC_BACKEND: 'demo', NEXT_PUBLIC_DEMO: '1' };
 const NAJDULJE_MS = 10 * 60 * 1000;
 
+// build privremeno prepisuje fixtures/*.json (u gitu) katalogom uredništva; nakon izgradnje vraćaju se kakvi su bili,
+// da lokalno uređivanje ne mijenja datoteke projekta
+const FIXTURES = path.join(ROOT, 'fixtures');
+const sacuvajFixture = () =>
+  new Map(fs.readdirSync(FIXTURES).filter((f) => f.endsWith('.json')).map((f) => [f, fs.readFileSync(path.join(FIXTURES, f))]));
+const vratiFixture = (m) => { for (const [f, b] of m) fs.writeFileSync(path.join(FIXTURES, f), b); };
+
 function pokreni(args, env) {
   return new Promise((resolve) => {
     const p = spawn(process.execPath, args, { cwd: ROOT, env: { ...process.env, ...env }, stdio: ['ignore', 'pipe', 'pipe'] });
@@ -40,9 +47,14 @@ export function objava({ podaciDir, izdanjaDir, zapisnik = console }) {
       const izlazDir = path.join(izdanjaDir, mapa);
       const env = { UREDNISTVO_PODACI: podaciDir, ...DEMO };
       let r = { kod: 0, izlaz: '' };
-      for (const korak of [['scripts/data-to-fixtures.mjs'], ['scripts/optimize-images.mjs'], [NEXT, 'build'], ['scripts/postbuild.mjs']]) {
-        r = await pokreni(korak, { ...env, ...(korak[0] === NEXT ? { NODE_ENV: 'production' } : {}) });
-        if (r.kod !== 0) break;
+      const fixture = sacuvajFixture();
+      try {
+        for (const korak of [['scripts/data-to-fixtures.mjs'], ['scripts/optimize-images.mjs'], [NEXT, 'build'], ['scripts/postbuild.mjs']]) {
+          r = await pokreni(korak, { ...env, ...(korak[0] === NEXT ? { NODE_ENV: 'production' } : {}) });
+          if (r.kod !== 0) break;
+        }
+      } finally {
+        vratiFixture(fixture);
       }
       if (r.kod === 0) fs.cpSync(path.join(ROOT, 'out'), izlazDir, { recursive: true });
       if (r.kod !== 0 || !fs.existsSync(path.join(izlazDir, 'index.html'))) {

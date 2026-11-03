@@ -515,16 +515,24 @@ function crtajIzdvojeno() {
   return [
     h('div', { class: 'glava' }, h('div', {}, h('p', {}, 'Izdvojeno'), h('h1', { tabindex: '-1' }, 'Polica na naslovnici')),
       h('p', {}, `${polica.length} od najviše ${najvise}`)),
-    h('p', { class: 'uvod-odjeljka' }, '"Istaknuto s police" na naslovnici, ovim redom. Samo objavljeni proizvodi.'),
+    h('p', { class: 'uvod-odjeljka' }, '"Istaknuto s police" na naslovnici, ovim redom. Samo objavljeni proizvodi. Klikni na proizvod da ga urediš.'),
     polica.length ? h('ul', { class: 'popis' }, polica.map((s, i) => {
       const p = poSku(s);
-      return h('li', { class: `stavka${S.greske.polica?.[i] ? ' ima-gresku' : ''}` }, h('div', { class: 'red' },
-        p ? minijatura(p) : null,
-        h('span', { class: 'sazetak' }, h('span', { class: 'naziv' }, p?.naziv ?? s), h('span', { class: 'opis' }, p ? `${vrsta(p.vrsta).naziv} · ${eur(p.cijena)}${p.objavljeno ? '' : ' · NIJE OBJAVLJENO'}` : 'proizvod više ne postoji')),
+      // klik na proizvod otvara isti obrazac kao u Ponudi (mijenja isti proizvod)
+      const otvoreno = Boolean(p) && S.otvoreno.has(p.id);
+      const z = p ? sazetakProizvoda(p) : { naziv: s, opis: 'proizvod više ne postoji' };
+      const sazetak = p
+        ? h('button', { class: 'sazetak', type: 'button', 'aria-expanded': String(otvoreno), 'aria-controls': `obrazac-${p.id}`, onclick: () => { if (otvoreno) S.otvoreno.delete(p.id); else S.otvoreno.add(p.id); crtajUrednik(); $(`#stavka-${p.id} .sazetak`)?.focus(); } },
+          h('span', { class: 'naziv' }, z.naziv), h('span', { class: 'opis' }, z.opis))
+        : h('span', { class: 'sazetak' }, h('span', { class: 'naziv' }, z.naziv), h('span', { class: 'opis' }, z.opis));
+      const li = h('li', { class: `stavka${otvoreno ? ' otvorena' : ''}${S.greske.polica?.[i] || (p && S.greske[p.id]) ? ' ima-gresku' : ''}`, id: p ? `stavka-${p.id}` : undefined }, h('div', { class: 'red' },
+        p ? minijatura(p) : null, sazetak, p ? cijenaProizvoda(p) : null,
         h('span', { class: 'akcije' },
           h('button', { class: 'gumb ikona tih', type: 'button', 'aria-label': 'Pomakni gore', disabled: i === 0, onclick: () => pomakni(i, -1) }, ikona('gore')),
           h('button', { class: 'gumb ikona tih', type: 'button', 'aria-label': 'Pomakni dolje', disabled: i === polica.length - 1, onclick: () => pomakni(i, 1) }, ikona('dolje')),
-          h('button', { class: 'gumb ikona tih opasno', type: 'button', 'aria-label': `Makni s police: ${p?.naziv ?? s}`, onclick: () => { polica.splice(i, 1); oznaciPromjenu(); crtajUrednik(); } }, ikona('brisi')))));
+          h('button', { class: 'gumb ikona tih opasno', type: 'button', 'aria-label': `Makni s police: ${z.naziv}`, onclick: () => { polica.splice(i, 1); oznaciPromjenu(); crtajUrednik(); } }, ikona('brisi')))));
+      if (otvoreno) li.append(obrazacProizvoda(p));
+      return li;
     })) : h('p', { class: 'prazno' }, 'Polica je prazna.'),
     h('div', { class: 'dodaj' }, h('label', { class: 'polje' }, dodaj)),
   ];

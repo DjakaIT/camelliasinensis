@@ -54,6 +54,7 @@ Nazivi i kratki opisi vrsta (pločice na naslovnici) i njihov redoslijed na stra
 ## Izdvojeno: polica na naslovnici
 
 Proizvodi u "Istaknuto s police", ovim redom (najviše 12). **Dodaj proizvod na policu…** nudi samo objavljene proizvode.
+**Klik na proizvod** otvara isti obrazac kao u Ponudi (cijena, zaliha, opis…), a strelice i kanta mijenjaju samo policu.
 
 ---
 
