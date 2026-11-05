@@ -236,7 +236,13 @@ final class Objava
         if (!$gh) return; // stanje() javlja 'nije-postavljeno'
         $grana = $this->postavke()['grana'] ?? 'sadrzaj';
         $pocetak = sad_ms();
+        // dva spremanja zaredom: drugo pričeka prvo (inače oba grade na istom commitu i drugo pada na konfliktu grane)
+        $brava = @fopen($this->podaci . '/objava.lock', 'c');
+        if ($brava) flock($brava, LOCK_EX);
         try {
+            // pošalji uvijek najnoviji spremljeni katalog: spremanje koje je čekalo bravu ne smije poslati stariji
+            $tren = citaj_json($this->podaci . '/katalog.json');
+            if (is_array($tren) && (int) ($tren['verzija'] ?? 0) > (int) ($sadrzaj['verzija'] ?? 0)) $sadrzaj = $tren;
             [$st, $ref] = $gh->zahtjev('GET', '/git/ref/heads/' . rawurlencode($grana));
             if ($st !== 200 && $st !== 404) $gh->mora('GET', '/git/ref/heads/' . rawurlencode($grana));
             $roditelj = $st === 200 ? $ref['object']['sha'] : null;
@@ -263,8 +269,17 @@ final class Objava
             $this->zapisi(['stanje' => 'u-tijeku', 'sha' => $commit, 'verzija' => $sadrzaj['verzija'], 'pocetak' => $pocetak, 'provjereno' => 0,
                 'objavljeno' => citaj_json($this->stanjeDat, [])['objavljeno'] ?? null, 'poruka' => null]);
             if ($gh->istjece) pisi_json($this->postavkeDat, [...$this->postavke(), 'tokenIstjece' => $gh->istjece]);
-        } catch (Greska $e) {
-            $this->zapisi(['stanje' => 'greska', 'poruka' => $e->getMessage(), 'pocetak' => $pocetak, 'objavljeno' => citaj_json($this->stanjeDat, [])['objavljeno'] ?? null]);
+        } catch (Throwable $e) {
+            // svaka greška (ne samo GitHubova) mora se vidjeti u uredništvu, inače bi pisalo "Objavljeno" a ništa nije poslano
+            if (!$e instanceof Greska) error_log('[uredništvo] objava: ' . $e->getMessage());
+            $poruka = $e instanceof Greska ? $e->getMessage() : 'Slanje na GitHub nije uspjelo (greška na poslužitelju). Spremi ponovno.';
+            try {
+                $this->zapisi(['stanje' => 'greska', 'poruka' => $poruka, 'pocetak' => $pocetak, 'objavljeno' => citaj_json($this->stanjeDat, [])['objavljeno'] ?? null]);
+            } catch (Throwable) {
+                // ni stanje se ne može zapisati: ništa više ne možemo napraviti
+            }
+        } finally {
+            if ($brava) { flock($brava, LOCK_UN); fclose($brava); }
         }
     }
 

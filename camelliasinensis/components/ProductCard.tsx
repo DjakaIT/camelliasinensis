@@ -1,12 +1,12 @@
 import Link from 'next/link';
 import { productHref, type CardProduct } from '@/lib/catalog-view';
-import { formatMoney } from '@/lib/format';
 import { FORMS, isDarkType, typeColor } from '@/lib/labels';
 import { AddButton } from './AddButton';
+import { CardPrice } from './CardPrice';
 import { CaffeineBars } from './Icons';
 import { NoImage, Picture } from './Picture';
 
-/** Kartica u boji vrste čaja (dizajn B). Cijena je iz builda; potvrđuje se u košarici. */
+/** Kartica u boji vrste čaja (dizajn B). Cijena iz builda, zamijeni je živa iz uredništva; potvrđuje se u košarici. */
 export function ProductCard({
   p,
   sizes = '200px',
@@ -49,9 +49,7 @@ export function ProductCard({
         </div>
       )}
       <div className="buy">
-        <span className="price">
-          {formatMoney(p.price)} <small>/ {p.unitLabel}</small>
-        </span>
+        <CardPrice sku={p.sku} price={p.price} unitLabel={p.unitLabel} />
         {/* Zaliha iz builda je zastarjela (GUIDE §2), pa gumb ostaje aktivan; dodavanje provjerava zalihu uživo. */}
         <AddButton sku={p.sku} name={p.name} price={p.price} />
       </div>

@@ -75,15 +75,16 @@ običan `npm run build` i testovi rade s početnim katalogom iz `data.js`.
 2. **GitHub**: repozitorij `DjakaIT/camelliasinensis` → *Settings → Secrets and variables → Actions → Variables*:
    `OBJAVA_UKLJUCENA` = `da`. Bez toga workflow `.github/workflows/objava.yml` radi samo provjere i **ništa ne objavljuje**.
 3. **Prva objava (ručno)**: GitHub → *Actions* → zadnja zelena "Objava" → *Artifacts* → **hosting**. hPanel → *File Manager* →
-   `public_html` → *Upload* `hosting.zip` → *Extract*. (Ili lokalno: `npm run build:demo && npm run paket`.)
+   `public_html` → *Upload* `hosting.zip` → *Extract*. (Ili lokalno: `npm run build:hosting && npm run paket`.)
 4. **Prvi račun**: otvori `https://camelliasinensis.eu/urednistvo`. Kod za postavljanje je u File Manageru u
    `camellia-podaci/PRVO-POSTAVLJANJE.txt` (pokraj `public_html`). Taj račun je administrator.
 5. **Veza s GitHubom**: u uredništvu ☰ → *Objava stranice*: repozitorij `DjakaIT/camelliasinensis`, grana `sadrzaj`, token.
    Token: GitHub → *Settings → Developer settings → Fine-grained tokens*: samo ovaj repozitorij, **Contents: Read and write**,
    **Actions: Read-only**, najdulji rok (prije isteka upiši novi).
-6. **Cron Job**: hPanel → *Napredno → Cron Jobs*, svakih 5 minuta:
-   `curl -s https://camelliasinensis.eu/urednistvo/api/osvjezi` (postavlja promjene koda s `main`; bez `> /dev/null`,
-   Hostinger u običnom unosu ne voli posebne znakove). Detaljno, sa Stripeom: [docs/vodic-stripe-i-objava.md](docs/vodic-stripe-i-objava.md).
+6. **Postavljanje ide samo, Cron ne treba**: workflow `.github/workflows/postavi.yml` nakon svake uspješne "Objave"
+   pozove `/urednistvo/api/osvjezi`, a uredništvo preuzme i postavi novi paket. **Cijena, zaliha i objavljenost** ne
+   čekaju gradnju: uredništvo pri spremanju odmah zapiše `public_html/zivo.json`, a trgovina ga čita pri otvaranju
+   stranice (`lib/shop/zivo.ts`). Detaljno, sa Stripeom: [docs/vodic-stripe-i-objava.md](docs/vodic-stripe-i-objava.md).
 7. **Sara**: ☰ → *Korisnici* → `sara` → *Napravi pozivnicu*, poveznicu pošalji osobno.
 
 Dok se ne odabere stvarni backend za plaćanje, workflow gradi **demo trgovinu** (`build:demo`: noindex, probna blagajna).

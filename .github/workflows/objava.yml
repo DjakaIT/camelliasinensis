@@ -88,7 +88,8 @@ jobs:
       - run: npm ci
       # next build provjerava tipove i u tests/, a ugovorni test uvozi tipove iz mock-server/node_modules
       - run: npm --prefix mock-server ci
-      - run: npm run build:demo
+      # build:hosting = build:demo + čitanje zivo.json (živa cijena i zaliha koje uredništvo zapiše pri spremanju)
+      - run: npm run build:hosting
         env:
           UREDNISTVO_PODACI: podaci # katalog s grane sadrzaj (ako postoji)
       - run: npm run check:bundle

@@ -21,6 +21,7 @@ final class Urednistvo
     private Ogranicenja $ogranicenja;
     private Postavljanje $postavljanje;
     private Odrzavanje $odrzavanje;
+    private Zivo $zivo;
     private bool $produkcija;
 
     /** @param array{podaci:string, konfiguracija:string, sucelje:string, javno:string, lokalno:bool, githubApi:string, osvjeziMs?:int} $p */
@@ -40,6 +41,7 @@ final class Urednistvo
             'ukupno' => ['prozorMs' => 15 * 60_000, 'najvise' => 200]]);
         $this->postavljanje = new Postavljanje($p['podaci'], $this->konf->origin);
         $this->odrzavanje = new Odrzavanje($p['javno']);
+        $this->zivo = new Zivo($p['javno']);
     }
 
     // ---------------- zahtjev i odgovor ----------------
@@ -55,7 +57,7 @@ final class Urednistvo
             'Cross-Origin-Opener-Policy' => 'same-origin',
             'Cross-Origin-Resource-Policy' => 'same-origin',
             'Permissions-Policy' => 'camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()',
-        ] + ($produkcija ? ['Strict-Transport-Security' => 'max-age=31536000; includeSubDomains'] : []);
+        ] + ($produkcija ? ['Strict-Transport-Security' => 'max-age=31536000'] : []); // includeSubDomains tek kad sve poddomene imaju HTTPS (kao public/.htaccess)
     }
 
     private function posalji(int $status, string $tijelo, string $vrsta, array $dodatno = []): void
@@ -297,7 +299,9 @@ final class Urednistvo
 
             case 'GET /katalog': {
                 $this->prijavljen(false);
-                $this->json(200, ['oznake' => $this->konf->oznake, 'najviseNaPolici' => $this->konf->najviseNaPolici, 'sadrzaj' => $this->spremiste->ucitaj()]);
+                $s = $this->spremiste->ucitaj();
+                if (!$this->zivo->postoji()) $this->zivo->zapisi($s); // prvi put nakon postavljanja
+                $this->json(200, ['oznake' => $this->konf->oznake, 'najviseNaPolici' => $this->konf->najviseNaPolici, 'sadrzaj' => $s]);
                 return;
             }
 
@@ -307,6 +311,7 @@ final class Urednistvo
                 $verzija = is_int($b['verzija'] ?? null) ? $b['verzija'] : -1;
                 $opis = is_string($b['opis'] ?? null) ? $b['opis'] : '';
                 $s = $this->spremiste->spremiKatalog($b['katalog'] ?? null, $verzija, $k['ime'], $opis);
+                $this->zivo->zapisi($s); // cijena i zaliha na stranici odmah, gradnja samo za ostalo
                 $this->json(200, ['sadrzaj' => $s]);
                 $this->nakonOdgovora(fn () => $this->objava->zatrazi($s, $opis !== '' ? $opis : 'Promjena kataloga'));
                 return;
@@ -348,6 +353,7 @@ final class Urednistvo
             case 'POST /objava/ponovi': {
                 [, $k] = $this->prijavljen(true, true);
                 $s = $this->spremiste->ucitaj();
+                $this->zivo->zapisi($s);
                 $this->dnevnik($k['ime'], 'ponovna objava');
                 $this->json(200, ['ok' => true]);
                 $this->nakonOdgovora(fn () => $this->objava->zatrazi($s, 'ponovna objava'));
@@ -383,6 +389,7 @@ final class Urednistvo
                 [, $k] = $this->prijavljen(true);
                 $b = $this->jsonTijelo(1024);
                 $s = $this->spremiste->vrati($b['verzija'] ?? null, $b['trenutna'] ?? null, $k['ime']);
+                $this->zivo->zapisi($s);
                 $this->json(200, ['verzija' => $s['verzija']]);
                 $this->nakonOdgovora(fn () => $this->objava->zatrazi($s, 'vraćena verzija ' . $b['verzija']));
                 return;

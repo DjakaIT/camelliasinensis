@@ -14,15 +14,16 @@ import {
 import { ShopError } from '../../errors';
 import { shippingMethod, shippingPrice, type ShippingMethodId } from '../../shipping';
 import type { Product, ProductTypeInfo, ShopBackend } from '../../types';
-import { baseHas, catalog, load, reset, save, type DemoOrder } from './state';
+import { loadZivo } from '../../zivo';
+import { applyZivo, baseHas, catalog, load, reset, save, type DemoOrder } from './state';
 
 let offline = false;
 
 const isBrowser = () => typeof window !== 'undefined';
 
-/** Mala odgoda u pregledniku da se stanja učitavanja stvarno vide; u testovima 0. */
+/** Mala odgoda u pregledniku da se stanja učitavanja stvarno vide; u testovima 0. Prije svega živi podaci iz uredništva. */
 async function tick<T>(fn: () => T): Promise<T> {
-  if (isBrowser()) await new Promise((r) => setTimeout(r, 120));
+  if (isBrowser()) await Promise.all([new Promise((r) => setTimeout(r, 120)), loadZivo().then(applyZivo)]);
   if (offline) throw new ShopError('NETWORK');
   try {
     return fn();

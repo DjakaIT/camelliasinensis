@@ -3,6 +3,7 @@
 // Živa cijena i zaliha za jedan SKU (API-CONTRACT §3.2): dijeljeni zahtjev, keš ≤ 30 s, osvježavanje pri povratku na karticu.
 import { useCallback, useEffect, useState } from 'react';
 import { getShop, ShopError, type LiveInfo } from '../shop';
+import { forgetZivo } from '../shop/zivo';
 
 const TTL = 30_000;
 const cache = new Map<string, { at: number; p: Promise<LiveInfo | null> }>();
@@ -39,7 +40,11 @@ export function useLive(sku: string) {
 
   useEffect(() => {
     load();
-    const onVis = () => document.visibilityState === 'visible' && load();
+    const onVis = () => {
+      if (document.visibilityState !== 'visible') return;
+      forgetZivo(); // uredništvo je možda u međuvremenu promijenilo cijenu ili zalihu
+      load(true);
+    };
     document.addEventListener('visibilitychange', onVis);
     return () => document.removeEventListener('visibilitychange', onVis);
   }, [load]);

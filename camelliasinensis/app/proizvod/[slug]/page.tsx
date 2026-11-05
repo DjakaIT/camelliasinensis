@@ -8,7 +8,7 @@ import { ProductCard } from '@/components/ProductCard';
 import { BuyRow, LivePrice } from '@/components/product/BuyBox';
 import { getCards } from '@/lib/catalog-server';
 import { CAFFEINE, FLAVORS, FORMS, typeColor } from '@/lib/labels';
-import { htmlToText } from '@/lib/sanitize';
+import { htmlToText, sanitizeDescription } from '@/lib/sanitize';
 import { absoluteUrl, pageMeta } from '@/lib/seo';
 import { getProductBySlug, getProducts, getType } from '@/lib/shop/catalog';
 import { productJsonLd } from '@/lib/jsonld';
@@ -93,7 +93,7 @@ export default async function ProductPage({ params }: Props) {
               caffeineLevel={a.caffeine ?? null}
             />
             {/* Opis je sanitiziran pri buildu (lib/sanitize.ts); ovo je jedino mjesto gdje se renderira HTML. */}
-            <div className="x-pdesc" dangerouslySetInnerHTML={{ __html: p.descriptionHtml }} />
+            <div className="x-pdesc" dangerouslySetInnerHTML={{ __html: sanitizeDescription(p.descriptionHtml) }} />
             {a.flavors.length > 0 && (
               <div className="x-pflav" aria-label="Okusi">
                 {a.flavors.map((f) => (

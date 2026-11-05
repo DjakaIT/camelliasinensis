@@ -5,6 +5,7 @@ declare(strict_types=1);
 
 ini_set('display_errors', '0');
 ini_set('log_errors', '1');
+header_remove('X-Powered-By'); // ne otkrivaj verziju PHP-a
 
 $nedostaje = array_values(array_filter(['mbstring', 'gd', 'json', 'zip'], fn ($e) => !extension_loaded($e)));
 if (!extension_loaded('curl') && !ini_get('allow_url_fopen')) $nedostaje[] = 'curl';
@@ -17,7 +18,7 @@ if (PHP_VERSION_ID < 80100 || $nedostaje || !function_exists('imagewebp')) {
     exit;
 }
 
-foreach (['osnova', 'sigurnost', 'korisnici', 'sesije', 'ogranicenja', 'postavljanje', 'sadrzaj', 'spremiste', 'slike', 'instalacija', 'objava', 'odrzavanje', 'api'] as $f) require __DIR__ . "/lib/$f.php";
+foreach (['osnova', 'sigurnost', 'korisnici', 'sesije', 'ogranicenja', 'postavljanje', 'sadrzaj', 'spremiste', 'slike', 'instalacija', 'objava', 'odrzavanje', 'zivo', 'api'] as $f) require __DIR__ . "/lib/$f.php";
 
 $env = static fn (string $ime): ?string => ($v = getenv($ime)) === false || $v === '' ? null : $v;
 (new Urednistvo([

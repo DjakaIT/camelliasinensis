@@ -3,6 +3,7 @@
 import demoLive from '../../../../fixtures/demo-live.json';
 import type { Catalog, CatalogEntry, PricedLine } from '../../engine';
 import type { Money, OrderStatus, Stock } from '../../types';
+import type { Zivo } from '../../zivo';
 
 export type DemoOrder = {
   id: string;
@@ -28,6 +29,8 @@ type Overrides = {
   published: Record<string, boolean>;
   orders: Record<string, DemoOrder>;
   seq: number;
+  /** verzija kataloga iz zivo.json na koju se odnose promjene zalihe i cijene u ovom pregledniku */
+  zivoVerzija?: number;
 };
 
 const KEY = 'cs.demo.v1';
@@ -77,9 +80,21 @@ export function reset(): void {
 type Base = { name: string; price: Money; stock: Stock; published: boolean };
 const BASE = (demoLive as unknown as { skus: Record<string, Base> }).skus;
 
+/** živi podaci iz uredništva (lib/shop/zivo.ts) zamjenjuju podatke iz gradnje za SKU-ove koje stranica već ima */
+let zivo: Zivo | null = null;
+
+export function applyZivo(z: Zivo | null): void {
+  zivo = z;
+  if (!z) return;
+  // uredništvo je spremilo novu verziju: probne promjene zalihe i cijene u ovom pregledniku više ne vrijede
+  const o = load();
+  if (o.zivoVerzija !== z.verzija) save({ ...o, stock: {}, price: {}, published: {}, zivoVerzija: z.verzija });
+}
+
 export function catalog(o = load()): Catalog {
   const m = new Map<string, CatalogEntry>();
-  for (const [sku, b] of Object.entries(BASE)) {
+  for (const [sku, built] of Object.entries(BASE)) {
+    const b = zivo?.skus.get(sku) ?? built;
     m.set(sku, {
       sku,
       name: b.name,

@@ -1,16 +1,21 @@
 # Uredništvo (public_html/urednistvo): sve adrese ide kroz index.php — nijedna druga datoteka iz ove mape
-# (lib/*.php, konfiguracija.json, minijature) nije dostupna izravno. Zaglavlja (strogi CSP, noindex, no-store)
-# šalje index.php; zaglavlja stranice iz nadređenog .htaccess-a ovdje se uklanjaju da se ne zbroje.
+# (lib/*.php, konfiguracija.json, minijature) nije dostupna izravno.
+# Sigurnosna zaglavlja uredništva postavljaju se OVDJE, istim vrijednostima kao Urednistvo::zaglavlja() u lib/api.php.
+# Prije su se ovdje brisala (da se ne zbroje sa zaglavljima stranice), ali Hostingerov LiteSpeed tada obriše i ona koja
+# pošalje PHP, pa uredništvo ostane bez CSP-a i zaštite od umetanja u okvir. "set" zamijeni zaglavlje stranice iz
+# nadređenog .htaccess-a, a ako ga pošalje i PHP, vrijednost je ista.
 
 Options -Indexes -MultiViews
 
 <IfModule mod_headers.c>
-  Header always unset Content-Security-Policy
-  Header always unset X-Frame-Options
-  Header always unset Referrer-Policy
-  Header always unset Permissions-Policy
-  Header always unset X-Content-Type-Options
-  Header always unset Strict-Transport-Security
+  Header always set Content-Security-Policy "default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data: blob:; connect-src 'self'; font-src 'self'; manifest-src 'self'; form-action 'self'; frame-ancestors 'none'; base-uri 'none'"
+  Header always set X-Frame-Options "DENY"
+  Header always set Referrer-Policy "no-referrer"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Strict-Transport-Security "max-age=31536000"
+  Header always unset X-Powered-By
+  Header unset X-Powered-By
 </IfModule>
 
 <IfModule mod_rewrite.c>

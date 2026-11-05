@@ -1,7 +1,8 @@
 # Uredništvo — upute za Saru
 
 U uredništvu mijenjaš ponudu web trgovine: proizvode (nazive, opise, cijene, zalihu, fotografije), vrste čaja i proizvode
-istaknute na naslovnici. Promjene su na stranici minutu-dvije nakon što klikneš **Spremi i objavi**.
+istaknute na naslovnici. **Cijena, zaliha i "Objavljeno"** vrijede na stranici odmah kad klikneš **Spremi i objavi**;
+sve ostalo (novi proizvod, opis, fotografija, polica) za nekoliko minuta.
 
 **Adresa:** `https://camelliasinensis.eu/urednistvo`. Uvijek je ista, pa je spremi u oznake (bookmark). Radi na računalu i na mobitelu.
 
@@ -63,8 +64,9 @@ Proizvodi u "Istaknuto s police", ovim redom (najviše 12). **Dodaj proizvod na 
 ## Spremi i objavi
 
 Čim nešto promijeniš, dolje se pojavi traka **Imaš nespremljene promjene**:
-- **Spremi i objavi**: sprema sve odjednom i objavljuje stranicu. Gore desno piše **Objavljujem…**, a nakon minutu-dvije
-  **Objavljeno** i vrijeme.
+- **Spremi i objavi**: sprema sve odjednom. Cijene i zalihe su na stranici odmah. Gore desno piše **Objavljujem…**, a
+  nakon nekoliko minuta **Objavljeno** i vrijeme (tada su gotovi i opisi, fotografije i novi proizvodi). Možeš odmah
+  nastaviti uređivati i spremati: spremanja se ne blokiraju, na stranicu uvijek ide zadnje.
 - **Odbaci**: vraća sve kako je bilo pri zadnjem spremanju.
 
 **Ništa se ne može pokvariti:** ako nešto nije u redu, spremanje se odbije i polje se označi crveno s porukom što ispraviti.

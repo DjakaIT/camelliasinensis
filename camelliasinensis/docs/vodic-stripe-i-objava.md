@@ -246,7 +246,8 @@ Nema mjesečne naknade ni naknade za otvaranje i zatvaranje računa.
 
 - **Kod:** `main` na GitHubu → Actions "Objava" izgradi paket **hosting** → uredništvo na Hostingeru ga preuzme i postavi u `public_html`.
 - **Sadržaj (ponuda, vrste čaja, polica):** Sara spremi u uredništvu → katalog ide na granu `sadrzaj` → Actions izgradi paket → uredništvo ga odmah postavi.
-- **Promjene koda:** Cron svakih 5 minuta pita uredništvo ima li novi paket s `main`.
+- **Promjene koda i sadržaja:** nakon uspješne gradnje workflow **Postavi** javi uredništvu, a ono odmah postavi novi paket.
+- **Cijena, zaliha i objavljenost:** uredništvo ih pri spremanju odmah zapiše u `public_html/zivo.json`, bez čekanja gradnje.
 - **Podaci uredništva** (korisnici, katalog, fotografije, ključ za Stripe) su u `camellia-podaci/`, **pokraj** `public_html`. Objava ih nikad ne dira.
 - Dok nema backenda za plaćanje, gradi se **demo trgovina**: ne pojavljuje se na Googleu, blagajna je probna, a u podnožju piše "Demo trgovina".
 
@@ -311,7 +312,7 @@ hPanel → **Emails** → **Claim** / **Create** → `info@camelliasinensis.eu`.
 ### B7. Prvi upload (samo prvi put ručno)
 
 1. Actions → zadnje zeleno pokretanje "Objava" → dolje **Artifacts** → **hosting**. Preuzme se zip.
-   - **Alternativa lokalno:** `npm run build:demo` pa `npm run paket` → `camelliasinensis/hosting.zip`.
+   - **Alternativa lokalno:** `npm run build:hosting` pa `npm run paket` → `camelliasinensis/hosting.zip`.
 2. hPanel → **File Manager** → `public_html`: obriši Hostingerovu početnu datoteku (`default.php` ili `index.html`).
 3. **Upload** zipa → desni klik → **Extract** u **trenutnu** mapu (`public_html`).
 4. Provjeri:
@@ -343,15 +344,11 @@ Poslije prve instalacije **ne uploadaj ručno**: uredništvo samo postavlja nove
    - token → **Spremi**.
 3. **Prije isteka tokena** napravi novi i upiši ga na isto mjesto.
 
-### B10. Cron (promjene koda same dolaze na stranicu)
+### B10. Cron više ne treba
 
-1. Websites → Dashboard → **Advanced** → **Cron Jobs** → tip **Custom**.
-2. Naredba (bez `> /dev/null`, jer Hostinger u običnom unosu ne voli posebne znakove):
-   ```
-   curl -s https://camelliasinensis.eu/urednistvo/api/osvjezi
-   ```
-3. Raspored: svakih 5 minuta (`*/5 * * * *`) → **Save**. Hostinger vrijeme računa po UTC-u, što ovdje nije važno.
-4. Za provjeru u **List of Cron Jobs** klikni **View output**. Mora biti kratak JSON, a ne poruka o grešci.
+Nakon svake uspješne gradnje workflow **Postavi** (`.github/workflows/postavi.yml`) sam javi uredništvu da je paket
+spreman, i ono ga odmah postavi. Ako si Cron Job već napravio, obriši ga: hPanel → **Advanced** → **Cron Jobs** →
+u popisu kod naredbe s `osvjezi` klikni **Delete**. Cijena i zaliha ionako ne čekaju gradnju (`zivo.json`).
 
 ### B11. Pozivnica Sari
 
@@ -368,7 +365,7 @@ Poslije prve instalacije **ne uploadaj ručno**: uredništvo samo postavlja nove
   - [ ] na GitHubu se pojavi pokretanje "Objava …";
   - [ ] nakon 3–5 minuta promjena je na stranici;
   - [ ] u uredništvu gore piše **Objavljeno**.
-- [ ] Cron output je bez grešaka.
+- [ ] Na GitHubu (Actions) nakon "Objava …" zeleno prođe i "Postavi …".
 
 ### B13. Kad nešto ne radi
 
@@ -380,7 +377,7 @@ Poslije prve instalacije **ne uploadaj ručno**: uredništvo samo postavlja nove
 | `/urednistvo` javlja PHP verziju ili "nedostaje: …" | B4. |
 | U uredništvu "Objava nije uspjela" | Token je istekao ili nema dozvole (B9), ili je Actions crven (pogledaj log). Stranica ostaje kakva je bila. |
 | Na GitHubu se ništa ne pokreće | Nema varijable `OBJAVA_UKLJUCENA = da` ili workflow nije na `main` (B6). |
-| Promjena koda nije na stranici | Pričekaj do 5 minuta. Provjeri Cron output (B10) i je li Actions zelen. |
+| Promjena koda nije na stranici | Provjeri na GitHubu (Actions) jesu li "Objava" i "Postavi" zeleni. |
 | Sara je zaboravila lozinku ili izgubila mobitel | Administrator joj napravi novu pozivnicu (B11). |
 
 ---

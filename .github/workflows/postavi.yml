@@ -1,0 +1,40 @@
+# Postavljanje na hosting odmah nakon gradnje (zamjena za Cron Job).
+# Kad workflow "Objava" uspješno završi (spremanje u uredništvu ili push koda na main), ovaj posao javi uredništvu na
+# hostingu (/urednistvo/api/osvjezi), a ono preuzme novi paket "hosting" s GitHuba i postavi ga u public_html.
+# Uredništvo provjerava GitHub najviše jednom u minuti ("pricekaj"), pa se poziv ponavlja dok ne potvrdi postavljanje.
+# Ruta je javna, ali postavlja isključivo uspješne izgradnje iz ovog repozitorija (urednistvo/php/lib/objava.php).
+name: Postavi
+run-name: Postavi ${{ github.event.workflow_run.display_title }}
+
+on:
+  workflow_run:
+    workflows: [Objava]
+    types: [completed]
+
+permissions: {}
+
+concurrency:
+  group: postavi
+  cancel-in-progress: false
+
+jobs:
+  postavi:
+    if: github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event != 'pull_request' && vars.OBJAVA_UKLJUCENA == 'da'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Javi uredništvu da je paket spreman
+        env:
+          ADRESA: https://camelliasinensis.eu/urednistvo/api/osvjezi
+        run: |
+          for i in $(seq 1 15); do
+            odgovor=$(curl -s --max-time 90 "$ADRESA" || true)
+            echo "pokušaj $i: $odgovor"
+            case "$odgovor" in
+              *'"postavljeno"'*|*'"aktualno"'*) exit 0 ;;
+              *'"nije-postavljeno"'*) echo "::error::Uredništvo nema vezu s GitHubom (☰ → Objava stranice)."; exit 1 ;;
+            esac
+            sleep 20
+          done
+          echo "::error::Uredništvo nije potvrdilo postavljanje novog paketa."
+          exit 1
