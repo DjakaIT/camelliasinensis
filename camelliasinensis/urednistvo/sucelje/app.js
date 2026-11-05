@@ -236,10 +236,12 @@ function zaslonPostavljanja2fa({ uri, kljuc }) {
     }
   } }, h('label', { class: 'polje' }, h('span', {}, '3. Upiši šesteroznamenkasti kod koji aplikacija prikazuje'), unos), greska, h('button', { class: 'gumb glavni cijela', type: 'submit' }, 'Uključi dvostruku potvrdu'));
   const kljucEl = h('details', {}, h('summary', { class: 'veza' }, 'Ne mogu skenirati — upiši ključ ručno'), h('p', { class: 'tajni-kljuc' }, kljuc));
+  // uredništvo otvoreno na istom mobitelu na kojem je aplikacija: QR se ne može skenirati, otpauth: poveznica otvori aplikaciju
+  const naMobitelu = h('a', { class: 'gumb cijela', href: uri }, 'Uredništvo je otvoreno na tom mobitelu? Dodaj račun u aplikaciju');
   ekran(koraci(2), h('h1', {}, 'Dvostruka potvrda'),
     h('p', { class: 'uvod' }, '1. Na mobitel instaliraj aplikaciju za potvrdu (npr. Google Authenticator ili Microsoft Authenticator).'),
     h('p', { class: 'uvod' }, '2. U aplikaciji dodaj račun i skeniraj ovaj kod:'),
-    h('div', { class: 'qr' }, h('img', { src: qrSlika(uri), alt: 'QR kod za aplikaciju za potvrdu', width: 220, height: 220 })), kljucEl, forma);
+    h('div', { class: 'qr' }, h('img', { src: qrSlika(uri), alt: 'QR kod za aplikaciju za potvrdu', width: 220, height: 220 })), naMobitelu, kljucEl, forma);
   $('.kartica', app).classList.add('siroka');
 }
 
@@ -931,7 +933,7 @@ async function dijalogObjave() {
     h('div', { class: 'dva' }, ponovi, h('button', { class: 'gumb', type: 'button', onclick: () => d.close() }, 'Zatvori')));
 }
 
-// posjetitelji vide "Uskoro se vraćamo" (503), uredništvo radi normalno; administratorov preglednik može i dalje vidjeti stranicu
+// posjetitelji vide "Uskoro smo tu" (503), uredništvo radi normalno; administratorov preglednik može i dalje vidjeti stranicu
 async function dijalogOdrzavanja() {
   let o;
   try { o = await api('GET', '/odrzavanje'); } catch (err) { if (err.status !== 401) obavijest(err.message, { vrsta: 'greska' }); return; }
@@ -945,7 +947,7 @@ async function dijalogOdrzavanja() {
   const zatvori = h('button', { class: 'gumb', type: 'button', onclick: () => d.close() }, 'Zatvori');
   const d = o.ukljuceno
     ? dijalog(h('h2', {}, 'Održavanje stranice'),
-      h('p', { class: 'poruka upozorenje' }, `Održavanje je uključeno${o.od ? ` od ${vrijeme(o.od)}` : ''}${o.ime ? ` (${o.ime})` : ''}. Posjetitelji umjesto stranice vide poruku „Uskoro se vraćamo”.`),
+      h('p', { class: 'poruka upozorenje' }, `Održavanje je uključeno${o.od ? ` od ${vrijeme(o.od)}` : ''}${o.ime ? ` (${o.ime})` : ''}. Posjetitelji umjesto stranice vide poruku „Uskoro smo tu”.`),
       h('p', {}, o.pregled ? 'Na ovom uređaju i dalje vidiš pravu stranicu, da možeš provjeriti promjene prije nego što je otvoriš svima.' : 'Na ovom uređaju vidiš isto što i posjetitelji.'),
       h('div', { class: 'dva' },
         h('button', { class: 'gumb', type: 'button', onclick: () => postavi({ ukljuceno: true, pregled: !o.pregled }, o.pregled ? 'Sada na ovom uređaju vidiš poruku kao posjetitelji.' : 'Na ovom uređaju opet vidiš stranicu.') },
@@ -953,10 +955,10 @@ async function dijalogOdrzavanja() {
         h('button', { class: 'gumb glavni', type: 'button', onclick: () => postavi({ ukljuceno: false }, 'Održavanje je isključeno — stranica je opet vidljiva svima.') }, 'Isključi održavanje')),
       zatvori)
     : dijalog(h('h2', {}, 'Održavanje stranice'),
-      h('p', {}, 'Dok je održavanje uključeno, posjetitelji umjesto stranice vide poruku „Uskoro se vraćamo” s adresama, Woltom i telefonom. Tražilice dobiju znak da je to privremeno.'),
+      h('p', {}, 'Dok je održavanje uključeno, posjetitelji umjesto stranice vide poruku „Uskoro smo tu”. Tražilice dobiju znak da je to privremeno.'),
       h('p', {}, 'Uredništvo radi normalno i spremanja se i dalje objavljuju — svima se pokažu kad isključiš održavanje. I ti ćeš vidjeti poruku; pravu stranicu na ovom uređaju možeš otvoriti gumbom „Pokaži mi stranicu”.'),
       h('div', { class: 'dva' }, zatvori,
-        h('button', { class: 'gumb glavni', type: 'button', onclick: () => postavi({ ukljuceno: true }, 'Održavanje je uključeno — posjetitelji vide poruku „Uskoro se vraćamo”.') }, 'Uključi održavanje')));
+        h('button', { class: 'gumb glavni', type: 'button', onclick: () => postavi({ ukljuceno: true }, 'Održavanje je uključeno — posjetitelji vide poruku „Uskoro smo tu”.') }, 'Uključi održavanje')));
 }
 
 function dijalogLozinke() {

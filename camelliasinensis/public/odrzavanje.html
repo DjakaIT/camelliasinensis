@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="hr">
+<head>
+<meta charset="utf-8">
+<!-- Stranica za održavanje (uredništvo ☰ → Održavanje stranice). Posjetitelji je dobiju sa statusom 503 dok postoji
+     public_html/.odrzavanje (public/.htaccess). Ima vlastiti CSP, pa je scripts/postbuild.mjs preskače. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; img-src 'self'">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Camellia sinensis · uskoro smo tu</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<style>
+  :root { --paper: #f6f0e4; --ink: #272a20; --olive: #3b432e; --gold-d: #8a6d14; }
+  * { box-sizing: border-box; }
+  body { margin: 0; min-height: 100vh; display: grid; place-items: center; padding: 24px 16px;
+    background: var(--paper); color: var(--ink); font: 17px/1.6 Georgia, "Times New Roman", serif; text-align: center; }
+  main { max-width: 32rem; }
+  img { width: 72px; height: 72px; border-radius: 16px; }
+  p.mala { margin: 20px 0 4px; font: 600 13px/1.4 system-ui, sans-serif; letter-spacing: .14em; text-transform: uppercase; color: var(--gold-d); }
+  h1 { margin: 0 0 12px; font-size: clamp(28px, 6vw, 40px); line-height: 1.15; color: var(--olive); font-weight: 600; }
+  p { margin: 0; }
+</style>
+</head>
+<body>
+<main>
+  <img src="/favicon.svg" alt="">
+  <p class="mala">Camellia sinensis</p>
+  <h1>Uskoro smo tu.</h1>
+  <p>Pripremamo web trgovinu čaja. Navrati za koji dan.</p>
+</main>
+</body>
+</html>

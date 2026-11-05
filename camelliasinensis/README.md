@@ -82,7 +82,8 @@ običan `npm run build` i testovi rade s početnim katalogom iz `data.js`.
    Token: GitHub → *Settings → Developer settings → Fine-grained tokens*: samo ovaj repozitorij, **Contents: Read and write**,
    **Actions: Read-only**, najdulji rok (prije isteka upiši novi).
 6. **Cron Job**: hPanel → *Napredno → Cron Jobs*, svakih 5 minuta:
-   `curl -s https://camelliasinensis.eu/urednistvo/api/osvjezi > /dev/null` (postavlja promjene koda s `main`).
+   `curl -s https://camelliasinensis.eu/urednistvo/api/osvjezi` (postavlja promjene koda s `main`; bez `> /dev/null`,
+   Hostinger u običnom unosu ne voli posebne znakove). Detaljno, sa Stripeom: [docs/vodic-stripe-i-objava.md](docs/vodic-stripe-i-objava.md).
 7. **Sara**: ☰ → *Korisnici* → `sara` → *Napravi pozivnicu*, poveznicu pošalji osobno.
 
 Dok se ne odabere stvarni backend za plaćanje, workflow gradi **demo trgovinu** (`build:demo`: noindex, probna blagajna).

@@ -15,7 +15,9 @@ Od administratora (Daniel) dobit ćeš poveznicu (pozivnicu). Vrijedi 72 sata i 
 
 1. **Lozinka**: najmanje 12 znakova. Najlakše je nekoliko riječi, npr. *zeleni čaj u pet sati*.
 2. **Dvostruka potvrda**: na mobitel instaliraj **Google Authenticator** ili **Microsoft Authenticator**, dodaj račun i
-   skeniraj QR kod sa zaslona. Upiši šesteroznamenkasti kod iz aplikacije i klikni **Uključi dvostruku potvrdu**.
+   skeniraj QR kod sa zaslona. **Ako je uredništvo otvoreno na istom mobitelu**, QR se ne može skenirati: dodirni gumb
+   **Dodaj račun u aplikaciju** ispod QR koda (otvori se aplikacija), ili **Ne mogu skenirati — upiši ključ ručno**.
+   Zatim upiši šesteroznamenkasti kod iz aplikacije i klikni **Uključi dvostruku potvrdu**.
 3. **Rezervni kodovi**: dobit ćeš 8 kodova. **Preuzmi .txt** ili ih kopiraj i spremi negdje sigurno, ali **ne na isti mobitel**.
    Svaki vrijedi jednom, za dan kad nemaš mobitel pri ruci.
 
