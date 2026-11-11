@@ -1,6 +1,7 @@
-// Jedino mjesto koje zna koji je adapter aktivan (NEXT_PUBLIC_BACKEND=demo|devserver).
+// Jedino mjesto koje zna koji je adapter aktivan (NEXT_PUBLIC_BACKEND=demo|devserver|hosting).
 import { createDemoBackend, demoControls } from './adapters/demo';
 import { createDevserverBackend } from './adapters/devserver';
+import { createHostingBackend } from './adapters/hosting';
 import type { ShopBackend } from './types';
 
 export * from './types';
@@ -11,7 +12,9 @@ let instance: ShopBackend | null = null;
 export function getShop(): ShopBackend {
   if (instance) return instance;
   const backend = process.env.NEXT_PUBLIC_BACKEND ?? 'demo';
-  if (backend === 'devserver') {
+  if (backend === 'hosting') {
+    instance = createHostingBackend();
+  } else if (backend === 'devserver') {
     const publicUrl = process.env.NEXT_PUBLIC_DEVSERVER_URL ?? 'http://127.0.0.1:4000';
     // Pri buildu (Node) katalog smije doći s posebnog build mocka (scripts/build-devserver.mjs).
     const buildUrl = typeof window === 'undefined' ? process.env.DEVSERVER_BUILD_URL : undefined;

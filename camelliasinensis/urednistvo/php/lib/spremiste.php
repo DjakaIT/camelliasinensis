@@ -13,6 +13,8 @@ final class Konfiguracija
     public readonly int $najviseNaPolici;
     public readonly string $origin;
     public readonly array $lokalneSlike;
+    /** @var array{dostava:list<array{id:string,name:string,price:int}>, besplatnaDostavaOd:int, najvisePoNarudzbi:int, kontaktTeme:list<string>} */
+    public readonly array $trgovina;
 
     public function __construct(public readonly string $dir)
     {
@@ -22,6 +24,13 @@ final class Konfiguracija
         $this->najviseNaPolici = (int) $k['najviseNaPolici'];
         $this->origin = rtrim($k['origin'], '/');
         $this->lokalneSlike = array_flip($k['lokalneSlike']);
+        $t = is_array($k['trgovina'] ?? null) ? $k['trgovina'] : [];
+        $this->trgovina = [
+            'dostava' => array_values($t['dostava'] ?? []),
+            'besplatnaDostavaOd' => (int) ($t['besplatnaDostavaOd'] ?? 5000),
+            'najvisePoNarudzbi' => (int) ($t['najvisePoNarudzbi'] ?? 20),
+            'kontaktTeme' => array_values($t['kontaktTeme'] ?? []),
+        ];
     }
 
     public function pocetni(): array { return citaj_json($this->dir . '/pocetni.json'); }

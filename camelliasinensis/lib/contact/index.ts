@@ -4,7 +4,9 @@ import { ShopError } from '../shop/errors';
 
 export type ContactMessage = { name: string; email: string; topic: string; message: string; consent: boolean };
 
-export const CONTACT_TOPICS = ['Preporuka čaja', 'Pitanje o narudžbi', 'Poklon i veće narudžbe', 'Suradnja'];
+import { CONTACT_TOPICS } from './topics';
+
+export { CONTACT_TOPICS };
 
 export function validateContact(m: ContactMessage): Record<string, string> {
   const e: Record<string, string> = {};
@@ -19,8 +21,10 @@ export function validateContact(m: ContactMessage): Record<string, string> {
 
 export async function sendContactMessage(m: ContactMessage): Promise<void> {
   const backend = process.env.NEXT_PUBLIC_BACKEND ?? 'demo';
-  if (backend === 'devserver') {
-    const base = (process.env.NEXT_PUBLIC_DEVSERVER_URL ?? 'http://127.0.0.1:4000').replace(/\/+$/, '');
+  if (backend === 'devserver' || backend === 'hosting') {
+    // hosting: PHP na istoj domeni pošalje poruku na mail trgovine (urednistvo/php/lib/trgovina.php)
+    const base =
+      backend === 'hosting' ? '/urednistvo/api/trgovina' : (process.env.NEXT_PUBLIC_DEVSERVER_URL ?? 'http://127.0.0.1:4000').replace(/\/+$/, '');
     let res: Response;
     try {
       res = await fetch(`${base}/contact`, {
@@ -32,7 +36,7 @@ export async function sendContactMessage(m: ContactMessage): Promise<void> {
     } catch {
       throw new ShopError('NETWORK');
     }
-    if (!res.ok) throw new ShopError(res.status === 429 ? 'RATE_LIMITED' : 'INVALID_REQUEST');
+    if (!res.ok) throw new ShopError(res.status === 429 ? 'RATE_LIMITED' : res.status >= 500 ? 'UNKNOWN' : 'INVALID_REQUEST');
     return;
   }
   // demo: kratka odgoda da izgleda kao slanje; ništa ne izlazi iz preglednika

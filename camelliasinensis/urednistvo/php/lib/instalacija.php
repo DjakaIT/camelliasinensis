@@ -69,10 +69,13 @@ final class Instalacija
         }
     }
 
-    /** samo uobičajena relativna imena: slova, brojke, . _ - @ + i "/" između dijelova (bez "." i ".." dijelova) */
+    /**
+     * samo uobičajena relativna imena: slova, brojke, . _ - @ + $ i "/" između dijelova (bez "." i ".." dijelova).
+     * "$" treba Next.js 16: datoteke za prethodno učitavanje dinamičkih stranica (npr. __next.katalog.$d$vrsta.__PAGE__.txt).
+     */
     public static function ispravnoIme(string $ime): bool
     {
-        if (!preg_match('#^[A-Za-z0-9._@+-]+(/[A-Za-z0-9._@+-]+)*$#', $ime)) return false;
+        if (!preg_match('#^[A-Za-z0-9._@+$-]+(/[A-Za-z0-9._@+$-]+)*$#', $ime)) return false;
         foreach (explode('/', $ime) as $dio) if ($dio === '.' || $dio === '..') return false;
         return true;
     }

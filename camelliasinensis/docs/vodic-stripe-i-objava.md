@@ -182,28 +182,26 @@ Na početnoj stranici klikni **Activate payments**, **Verify your business** ili
 - **Customer emails** (Stripeove potvrde kupcu): po želji. **Stripeova potvrda nije fiskalni račun** (vidi C).
 - **Payouts:** zadani raspored je u redu. IBAN mijenja samo Sara.
 
-### A9. Ključ za stranicu (Daniel, kad backend bude spreman)
+### A9. Ključ za stranicu (Daniel, svojim Developer pristupom)
 
-Stripe preporučuje ograničeni ključ umjesto punog tajnog. Prvo se napravi i isproba u sandboxu, zatim isti takav u live načinu.
+Stripe preporučuje ograničeni ključ umjesto punog tajnog. Najprije isprobaj **testni** ključ (Sandbox), pa isti takav **live**.
 
-1. Na https://dashboard.stripe.com/apikeys prebaci na **live** način.
+1. Na https://dashboard.stripe.com/apikeys odaberi **Sandbox** (za probu) ili **live** (za pravi novac).
 2. Klikni **Create restricted key** i odaberi da kreneš od nula dozvola.
 3. **Key name:** `camelliasinensis.eu web`.
-4. Dozvole (zadano je sve **None**):
-   - **Checkout Sessions:** Write. Stranica pravi i provjerava plaćanje.
-   - **Webhook Endpoints:** Write. Stranica sama napravi webhook.
-   - Ako Stripe pri testu javi da nedostaje dozvola za cijene ili dostavu: **Products**, **Prices** i **Shipping Rates** na Write.
-   - Konačan popis bit će potvrđen testom u sandboxu prije izrade live ključa.
+4. Dozvole (zadano je sve **None**), sve na **Write**:
+   - **Checkout Sessions** (stranica pravi i provjerava plaćanje);
+   - **Webhook Endpoints** (stranica sama napravi webhook);
+   - **Products**, **Prices** i **Shipping Rates** (stavke i GLS dostava u plaćanju).
 5. Klikni **Create key** i potvrdi kodom iz 2FA.
 6. Klikni vrijednost ključa da je kopiraš. **Ključ se prikazuje samo jednom.**
-7. U polje **Add a note** upiši gdje je ključ spremljen (npr. "uredništvo, camellia-podaci na Hostingeru") i klikni **Done**.
-8. Ključ odmah upiši u uredništvo (☰ → Plaćanje, dolazi s backendom). Na hostingu se sprema izvan `public_html`.
-   - **Ne ide** u git, na GitHub, u mail ni u chat.
-9. **Webhook:** stranica ga pri spremanju ključa napravi sama. Ako ga ipak treba napraviti ručno:
-   1. Workbench → **Webhooks** → **Create an event destination** → **Your account** → format **Snapshot**.
-   2. Događaji: `checkout.session.completed`, `checkout.session.async_payment_succeeded`, `checkout.session.async_payment_failed` i `checkout.session.expired`.
-   3. **Continue** → **Webhook endpoint** → upiši adresu (dolazi s backendom).
-   4. **Reveal secret** → kopiraj `whsec_…` i upiši u uredništvo.
+7. U polje **Add a note** upiši gdje je ključ (npr. "uredništvo camelliasinensis.eu") i klikni **Done**.
+8. U uredništvu: ☰ → **Plaćanje (Stripe)** → zalijepi ključ, upiši **E-mail trgovine** → **Spremi i provjeri**.
+   - Uredništvo ključ odmah isproba na Stripeu: napravi probnu sesiju plaćanja i odmah je poništi, pa se ništa ne naplaćuje.
+   - Ako nedostaje dozvola, javit će koja (npr. `rak_shipping_rate_write`). Tada je dodaj u Stripeu (**Edit key**) i spremi ponovno.
+   - **Webhook napravi samo**, prema `https://camelliasinensis.eu/urednistvo/api/stripe/webhook`, s četiri događaja: `checkout.session.completed`, `…async_payment_succeeded`, `…async_payment_failed` i `…expired`.
+   - Ključ se sprema samo na hostingu (`camellia-podaci/placanje.json`, izvan `public_html`). **Ne ide** u git, na GitHub, u mail ni u chat.
+9. **Zamjena testnog ključa live ključem:** isti dijalog, zalijepi live ključ → **Spremi i provjeri**. Stari webhook se sam obriše, a novi napravi.
 
 **Ako zatreba druga dozvola:** API keys → ⋯ kod ključa → **Edit key**. Ključ ostaje isti, i za to ne treba Sara.
 
@@ -386,7 +384,7 @@ u popisu kod naredbe s `osvjezi` klikni **Delete**. Cijena i zaliha ionako ne č
 
 | # | Što | Tko |
 | --- | --- | --- |
-| 1 | Backend za narudžbe na Hostingeru (PHP): Stripe Checkout, webhook, skidanje zalihe, mailovi kupcu i trgovini, polje za Stripe ključ u uredništvu | Daniel (s Claudeom) |
+| 1 | ~~Backend za narudžbe~~ **Gotovo (11. 11. 2026.)**: PHP na hostingu (`urednistvo/php/lib/trgovina.php`), Stripe Checkout, webhook s potpisom, skidanje zalihe, mailovi kupcu i trgovini, ☰ → Plaćanje i ☰ → Narudžbe u uredništvu. Isproban lokalno pravim Stripe testnim plaćanjem (`tests/urednistvo/trgovina-php.mjs`). | Claude |
 | 2 | Stripe aktiviran (A3–A6), Daniel u timu (A7), live ključ (A9) | Sara pa Daniel |
 | 3 | Pravi kontakt podaci, Instagram i priča brenda umjesto probnih. Build za Google se ruši dok je ijedan probni podatak uključen. | Sara daje podatke, Daniel mijenja |
 | 4 | Pravni tekstovi (uvjeti kupnje, privatnost, dostava i povrat, kolačići). Pravnik ih napiše ili Sara odobri nacrt. | Sara |
@@ -394,7 +392,7 @@ u popisu kod naredbe s `osvjezi` klikni **Delete**. Cijena i zaliha ionako ne č
 | 6 | GLS: ugovor, cijene dostave (sada 3,90 € paketomat, 4,90 € adresa, besplatno od 50 €) i tko pakira | Sara |
 | 7 | Prave cijene i zalihe svih proizvoda u uredništvu (ili uvoz iz Thora) | Sara |
 | 8 | Probna kupnja pravom karticom pa povrat novca (A11), prije otvaranja | Daniel |
-| 9 | Prebacivanje na pravu verziju stranice (vidljiva na Googleu, prava blagajna). Dolazi s backendom. | Daniel |
+| 9 | Otvaranje: blagajna je već prava (Stripe). Za Google: varijabla repozitorija `STRANICA_JAVNA = da` (Settings → Secrets and variables → Actions → Variables), pa uredništvo → ☰ → Održavanje stranice → **Isključi održavanje**. Gradnja se sama ruši dok je u `content/site.ts` probni sadržaj. | Daniel |
 
 ---
 

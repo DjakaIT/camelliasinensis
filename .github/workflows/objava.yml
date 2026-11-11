@@ -23,6 +23,12 @@ on:
   repository_dispatch:
     types: [sadrzaj]
   workflow_dispatch:
+    inputs:
+      prijelaz:
+        description: 'Prijelazni paket bez datoteka s "$" (samo za staru instalaciju na hostingu, prije 11. 11. 2026.)'
+        type: choice
+        options: ['ne', 'da']
+        default: 'ne'
 
 permissions:
   contents: read
@@ -92,8 +98,13 @@ jobs:
       - run: npm run build:hosting
         env:
           UREDNISTVO_PODACI: podaci # katalog s grane sadrzaj (ako postoji)
+          # vidljivo Googleu tek kad je varijabla repozitorija STRANICA_JAVNA = da; build se sam ruši ako je
+          # u content/site.ts još probni (DUMMY) sadržaj
+          NEXT_PUBLIC_INDEXABLE: ${{ vars.STRANICA_JAVNA == 'da' && '1' || '' }}
       - run: npm run check:bundle
       - run: npm run paket
+        env:
+          PAKET_PRIJELAZ: ${{ inputs.prijelaz == 'da' && '1' || '' }}
       # paket ostaje kao artefakt "hosting", a uredništvo na hostingu ga preuzme (istim GitHub tokenom) i postavi u public_html
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:

@@ -18,7 +18,7 @@ if (PHP_VERSION_ID < 80100 || $nedostaje || !function_exists('imagewebp')) {
     exit;
 }
 
-foreach (['osnova', 'sigurnost', 'korisnici', 'sesije', 'ogranicenja', 'postavljanje', 'sadrzaj', 'spremiste', 'slike', 'instalacija', 'objava', 'odrzavanje', 'zivo', 'api'] as $f) require __DIR__ . "/lib/$f.php";
+foreach (['osnova', 'sigurnost', 'korisnici', 'sesije', 'ogranicenja', 'postavljanje', 'sadrzaj', 'spremiste', 'slike', 'instalacija', 'objava', 'odrzavanje', 'zivo', 'stripe', 'trgovina', 'api'] as $f) require __DIR__ . "/lib/$f.php";
 
 $env = static fn (string $ime): ?string => ($v = getenv($ime)) === false || $v === '' ? null : $v;
 (new Urednistvo([

@@ -52,7 +52,10 @@ function provjeri_katalog(mixed $k, array $oznake, int $najviseNaPolici, Closure
         if (!k_tekst($p['naziv'] ?? null, 120) || trim($p['naziv']) === '') $greska($P('naziv'), 'Upiši naziv (najviše 120 znakova)');
         if (!in_array($p['vrsta'] ?? null, VRSTE_CAJA, true)) $greska($P('vrsta'), 'Odaberi vrstu');
         if (!k_tekst($p['podrijetlo'] ?? null, 60)) $greska($P('podrijetlo'), 'Podrijetlo je predugo');
-        $tein = $p['tein'] ?? 'x';
+        // polja koja smiju biti null (pribor bez teina i pripreme, zaliha koja se ne broji, bez fotografije):
+        // "??" bi i null pretvorio u zamjensku vrijednost, pa se gleda postoji li ključ
+        $ili = static fn (string $k): mixed => array_key_exists($k, $p) ? $p[$k] : 'x';
+        $tein = $ili('tein');
         if (!($tein === null || in_array($tein, [0, 1, 2, 3], true))) $greska($P('tein'), 'Razina teina 0–3 ili bez oznake');
         foreach (['okusi' => 'okusi', 'namjene' => 'namjene', 'oznake' => 'oznake'] as $polje => $skup) {
             $v = $p[$polje] ?? null;
@@ -62,13 +65,13 @@ function provjeri_katalog(mixed $k, array $oznake, int $najviseNaPolici, Closure
         $c = $p['cijena'] ?? null;
         if (!(is_int($c) || is_float($c)) || !($c > 0) || $c > 9999 || abs(round($c * 100) - $c * 100) > 1e-6) $greska($P('cijena'), 'Cijena mora biti veća od 0, najviše dvije decimale');
         if (!k_tekst($p['pakiranje'] ?? null, 40) || trim($p['pakiranje']) === '') $greska($P('pakiranje'), 'Upiši pakiranje (npr. 50 g)');
-        $pr = $p['priprema'] ?? 'x';
+        $pr = $ili('priprema');
         if ($pr !== null && !(is_array($pr) && k_tekst($pr['temp'] ?? null, 40) && k_tekst($pr['vrijeme'] ?? null, 40) && k_tekst($pr['kolicina'] ?? null, 40))) $greska($P('priprema'), 'Neispravna priprema');
         if (!k_tekst($p['opis'] ?? null, 2000) || trim($p['opis']) === '') $greska($P('opis'), 'Upiši opis (najviše 2000 znakova)');
-        $z = $p['zaliha'] ?? 'x';
+        $z = $ili('zaliha');
         if (!($z === null || (is_int($z) && $z >= 0 && $z <= 100000))) $greska($P('zaliha'), 'Zaliha je cijeli broj ≥ 0 (ili prazno = ne broji se)');
         if (!is_bool($p['objavljeno'] ?? null)) $greska($P('objavljeno'), 'Neispravno');
-        $sl = $p['slika'] ?? 'x';
+        $sl = $ili('slika');
         if (!($sl === null || (is_string($sl) && preg_match(KLJUC_SLIKE, $sl) && $slikaPostoji($sl)))) $greska($P('slika'), 'Fotografija ne postoji');
     }
     if (!array_filter($proizvodi, fn ($p) => is_array($p) && ($p['objavljeno'] ?? false) === true)) $greska(['proizvodi'], 'Barem jedan proizvod mora biti objavljen');

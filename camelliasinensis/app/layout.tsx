@@ -13,6 +13,7 @@ import { Reveal } from '@/components/Reveal';
 import { DUMMY_CONTENT, hasContact, SHOP_NAME, SITE_URL } from '@/content/site';
 import { getCards } from '@/lib/catalog-server';
 import { isDemoBuild, isIndexable } from '@/lib/shop';
+import catalogFixture from '@/fixtures/products.json';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -57,7 +58,15 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             <main id="sadrzaj" tabIndex={-1}>
               {children}
             </main>
-            <Footer note={isIndexable() ? null : `${isDemoBuild() ? 'Demo trgovina' : 'Probna trgovina'} · cijene su primjeri`} />
+            <Footer
+              note={
+                isIndexable()
+                  ? null
+                  : isDemoBuild()
+                    ? 'Demo trgovina · cijene su primjeri'
+                    : `Probna trgovina${catalogFixture.examplePrices ? ' · cijene su primjeri' : ''}`
+              }
+            />
             <CartDrawer />
           </CartProvider>
         </CatalogIndexProvider>

@@ -22,6 +22,10 @@ final class Urednistvo
     private Postavljanje $postavljanje;
     private Odrzavanje $odrzavanje;
     private Zivo $zivo;
+    private Prodaja $prodaja;
+    private Narudzbe $narudzbe;
+    private Placanje $placanje;
+    private Trgovina $trgovina;
     private bool $produkcija;
 
     /** @param array{podaci:string, konfiguracija:string, sucelje:string, javno:string, lokalno:bool, githubApi:string, osvjeziMs?:int} $p */
@@ -38,10 +42,17 @@ final class Urednistvo
         // 'ukupno': krive prijave sa svih adresa zajedno — napad s puno IP adresa ne može zagušiti hosting (svaka provjera
         // lozinke namjerno troši ~20 MB i desetke ms); kad se prijeđe, prijava se odbija bez provjere lozinke do 15 min
         $this->ogranicenja = new Ogranicenja($p['podaci'], ['ip' => ['prozorMs' => 15 * 60_000, 'najvise' => 20], 'korisnik' => ['prozorMs' => 15 * 60_000, 'najvise' => 5],
-            'ukupno' => ['prozorMs' => 15 * 60_000, 'najvise' => 200]]);
+            'ukupno' => ['prozorMs' => 15 * 60_000, 'najvise' => 200],
+            // trgovina: pokretanje plaćanja i kontakt obrazac (zaštita od zlouporabe, ne od kupaca)
+            'narudzba' => ['prozorMs' => 10 * 60_000, 'najvise' => 30], 'narudzbaUkupno' => ['prozorMs' => 10 * 60_000, 'najvise' => 400],
+            'kontakt' => ['prozorMs' => 15 * 60_000, 'najvise' => 5], 'kontaktUkupno' => ['prozorMs' => 15 * 60_000, 'najvise' => 60]]);
         $this->postavljanje = new Postavljanje($p['podaci'], $this->konf->origin);
         $this->odrzavanje = new Odrzavanje($p['javno']);
         $this->zivo = new Zivo($p['javno']);
+        $this->prodaja = new Prodaja($p['podaci']);
+        $this->narudzbe = new Narudzbe($p['podaci']);
+        $this->placanje = new Placanje($p['podaci'], $this->konf->origin, (bool) $p['lokalno']);
+        $this->trgovina = new Trgovina($this->spremiste, $this->prodaja, $this->narudzbe, $this->placanje, $this->zivo, $this->konf->trgovina, $this->konf->origin);
     }
 
     // ---------------- zahtjev i odgovor ----------------
@@ -299,9 +310,10 @@ final class Urednistvo
 
             case 'GET /katalog': {
                 $this->prijavljen(false);
-                $s = $this->spremiste->ucitaj();
+                // zaliha u uredniku je stvarna (nakon prodaja); prodajaSeq kaže do koje prodaje je uračunata
+                [$s, $seq] = $this->prodaja->sBravom(fn () => [$this->trgovina->katalog(), $this->prodaja->seq()]);
                 if (!$this->zivo->postoji()) $this->zivo->zapisi($s); // prvi put nakon postavljanja
-                $this->json(200, ['oznake' => $this->konf->oznake, 'najviseNaPolici' => $this->konf->najviseNaPolici, 'sadrzaj' => $s]);
+                $this->json(200, ['oznake' => $this->konf->oznake, 'najviseNaPolici' => $this->konf->najviseNaPolici, 'sadrzaj' => $s, 'prodajaSeq' => $seq]);
                 return;
             }
 
@@ -310,9 +322,17 @@ final class Urednistvo
                 $b = $this->jsonTijelo(4 * 1024 * 1024);
                 $verzija = is_int($b['verzija'] ?? null) ? $b['verzija'] : -1;
                 $opis = is_string($b['opis'] ?? null) ? $b['opis'] : '';
-                $s = $this->spremiste->spremiKatalog($b['katalog'] ?? null, $verzija, $k['ime'], $opis);
+                $odSeq = is_int($b['prodajaSeq'] ?? null) ? $b['prodajaSeq'] : null;
+                // prodaje dok je urednik uređivao oduzmu se od zalihe koju je upisao; zatim su sve prodaje u katalogu
+                [$s, $seq] = $this->prodaja->sBravom(function () use ($b, $verzija, $k, $opis, $odSeq) {
+                    $katalog = $b['katalog'] ?? null;
+                    if (is_array($katalog) && is_array($katalog['proizvodi'] ?? null)) $katalog = $this->prodaja->primijeni($katalog, $odSeq ?? $this->prodaja->seq());
+                    $s = $this->spremiste->spremiKatalog($katalog, $verzija, $k['ime'], $opis);
+                    $this->prodaja->isprazni();
+                    return [$s, $this->prodaja->seq()];
+                });
                 $this->zivo->zapisi($s); // cijena i zaliha na stranici odmah, gradnja samo za ostalo
-                $this->json(200, ['sadrzaj' => $s]);
+                $this->json(200, ['sadrzaj' => $s, 'prodajaSeq' => $seq]);
                 $this->nakonOdgovora(fn () => $this->objava->zatrazi($s, $opis !== '' ? $opis : 'Promjena kataloga'));
                 return;
             }
@@ -353,7 +373,7 @@ final class Urednistvo
             case 'POST /objava/ponovi': {
                 [, $k] = $this->prijavljen(true, true);
                 $s = $this->spremiste->ucitaj();
-                $this->zivo->zapisi($s);
+                $this->trgovina->osvjeziZivo();
                 $this->dnevnik($k['ime'], 'ponovna objava');
                 $this->json(200, ['ok' => true]);
                 $this->nakonOdgovora(fn () => $this->objava->zatrazi($s, 'ponovna objava'));
@@ -389,7 +409,7 @@ final class Urednistvo
                 [, $k] = $this->prijavljen(true);
                 $b = $this->jsonTijelo(1024);
                 $s = $this->spremiste->vrati($b['verzija'] ?? null, $b['trenutna'] ?? null, $k['ime']);
-                $this->zivo->zapisi($s);
+                $this->trgovina->osvjeziZivo(); // vraćena zaliha − prodaje od zadnjeg spremanja
                 $this->json(200, ['verzija' => $s['verzija']]);
                 $this->nakonOdgovora(fn () => $this->objava->zatrazi($s, 'vraćena verzija ' . $b['verzija']));
                 return;
@@ -445,8 +465,114 @@ final class Urednistvo
                 $this->json(200, ['ok' => true]);
                 return;
             }
+
+            // ----- plaćanje (Stripe) i narudžbe -----
+            case 'GET /placanje': {
+                $this->prijavljen(false, true);
+                $this->json(200, $this->placanje->javno());
+                return;
+            }
+            case 'POST /placanje': {
+                [, $k] = $this->prijavljen(true, true);
+                $b = $this->jsonTijelo(4096);
+                $nov = is_string($b['kljuc'] ?? null) && trim($b['kljuc']) !== '';
+                $r = ($b['ukloni'] ?? false) === true ? $this->placanje->ukloni() : $this->placanje->spremi($b);
+                $this->dnevnik($k['ime'], ($b['ukloni'] ?? false) === true ? 'plaćanje isključeno' : ($nov ? "Stripe ključ postavljen ({$r['nacin']})" : 'postavke plaćanja promijenjene'));
+                $this->json(200, $r);
+                return;
+            }
+            case 'GET /narudzbe': {
+                $this->prijavljen(false);
+                $this->json(200, ['narudzbe' => $this->narudzbe->popis(), 'placanje' => ['ukljuceno' => $this->placanje->javno()['ukljuceno'], 'nacin' => $this->placanje->javno()['nacin']]]);
+                return;
+            }
+            case 'POST /narudzbe/poslano': {
+                [, $k] = $this->prijavljen(true);
+                $b = $this->jsonTijelo(1024);
+                $id = is_string($b['id'] ?? null) ? $b['id'] : '';
+                $poslano = ($b['poslano'] ?? null) === true;
+                $n = preg_match('/^CS-\d{4,9}$/', $id) ? $this->narudzbe->izmijeni($id, fn ($x) => [...$x, 'poslano' => $poslano ? iso_vrijeme() : null]) : null;
+                if (!$n) throw new Greska(404, 'Nema te narudžbe.');
+                $this->dnevnik($k['ime'], ($poslano ? 'narudžba poslana: ' : 'narudžba nije poslana: ') . $id);
+                $this->json(200, ['ok' => true, 'poslano' => $n['poslano']]);
+                return;
+            }
         }
         throw new Greska(404, 'Nepoznata adresa');
+    }
+
+    // ---------------- trgovina (javno) ----------------
+    /** greške u obliku API-CONTRACT §5; kupac nikad ne vidi sirove poruke ni identifikatore */
+    private function trgovinaGreska(int $status, string $kod, array $detalji = [], array $dodatno = []): void
+    {
+        $this->json($status, ['error' => ['code' => $kod, ...($detalji ? ['details' => $detalji] : [])]], $dodatno);
+    }
+
+    private function ogranici(string $vrsta, string $ukupno): void
+    {
+        $c = max($this->ogranicenja->cekaj($vrsta, self::ip()), $this->ogranicenja->cekaj($ukupno, '*'));
+        if ($c > 0) throw new TrgovinaGreska('RATE_LIMITED', 429, ['retryAfterSec' => $c]);
+        $this->ogranicenja->zabiljezi($vrsta, self::ip());
+        $this->ogranicenja->zabiljezi($ukupno, '*');
+    }
+
+    private function trgovinaRuta(string $metoda, string $put): void
+    {
+        try {
+            if ($metoda === 'GET' && preg_match('#^/trgovina/narudzba/([0-9a-f]{48})$#', $put, $m)) {
+                [$odg, $placena] = $this->trgovina->stanje($m[1]);
+                $this->json(200, $odg);
+                if ($placena) $this->nakonOdgovora(fn () => $this->trgovina->posaljiMailove($placena));
+                return;
+            }
+            if ($metoda === 'GET' && str_starts_with($put, '/trgovina/narudzba/')) { $this->json(200, ['status' => 'unknown']); return; }
+            if ($metoda !== 'POST' || !$this->istiIzvor()) throw new TrgovinaGreska('INVALID_REQUEST', 403);
+            if ($put === '/trgovina/narudzba') {
+                $this->ogranici('narudzba', 'narudzbaUkupno');
+                $this->json(200, $this->trgovina->zapocni($this->jsonTijelo(32 * 1024)));
+                return;
+            }
+            if ($put === '/trgovina/contact') {
+                $this->ogranici('kontakt', 'kontaktUkupno');
+                $this->trgovina->kontakt($this->jsonTijelo(16 * 1024), $this->konf->trgovina['kontaktTeme']);
+                $this->json(200, ['ok' => true]);
+                return;
+            }
+            throw new TrgovinaGreska('INVALID_REQUEST', 404);
+        } catch (TrgovinaGreska $e) {
+            $this->trgovinaGreska($e->status, $e->kod, $e->detalji, $e->kod === 'RATE_LIMITED' ? ['Retry-After' => (string) ($e->detalji['retryAfterSec'] ?? 60)] : []);
+        } catch (Greska $e) {
+            $this->trgovinaGreska(400, 'INVALID_REQUEST'); // prevelik ili neispravan JSON
+        } catch (Throwable $e) {
+            error_log('[trgovina] ' . $e->getMessage());
+            if (!headers_sent()) $this->trgovinaGreska(500, 'UNKNOWN');
+        }
+    }
+
+    /** Stripe webhook: bez prijave i bez Origina, ali s potpisom; greška u obradi = 500, pa Stripe ponovi (do 3 dana) */
+    private function stripeWebhook(): void
+    {
+        if (!$this->placanje->tajne()) { $this->json(503, ['greska' => 'Plaćanje nije postavljeno']); return; }
+        try {
+            $tijelo = $this->tijelo(512 * 1024);
+        } catch (Greska) {
+            $this->json(413, ['greska' => 'Prevelik zahtjev']);
+            return;
+        }
+        try {
+            $placena = $this->trgovina->webhook($tijelo, (string) self::zaglavlje('Stripe-Signature'));
+        } catch (StripeGreska $e) {
+            if ($e->vrsta === 'potpis' || $e->vrsta === 'tijelo') { $this->json(400, ['greska' => 'Neispravan potpis']); return; }
+            error_log("[trgovina] webhook: Stripe {$e->status} {$e->vrsta}");
+            $this->json(500, ['greska' => 'Pokušaj ponovno']);
+            return;
+        } catch (Throwable $e) {
+            error_log('[trgovina] webhook: ' . $e->getMessage());
+            $this->json(500, ['greska' => 'Pokušaj ponovno']);
+            return;
+        }
+        $this->json(200, ['received' => true]);
+        if ($placena) $this->nakonOdgovora(fn () => $this->trgovina->posaljiMailove($placena));
     }
 
     /** javna adresa za poveznice: produkcija = adresa stranice, lokalno = adresa s kojom je otvoreno */
@@ -501,6 +627,10 @@ final class Urednistvo
                 $this->posalji(200, $b, 'image/webp', ['Cache-Control' => 'private, max-age=3600']);
                 return;
             }
+            // Stripe potvrda plaćanja dolazi sa Stripea (bez Origina); vrijedi samo s ispravnim potpisom
+            if ($metoda === 'POST' && $podput === '/stripe/webhook') { $this->stripeWebhook(); return; }
+            // trgovina: javne rute za kupce (POST samo s naše stranice), greške u obliku API-CONTRACT §5
+            if (str_starts_with($podput, '/trgovina/')) { $this->trgovinaRuta($metoda, $podput); return; }
             if ($metoda !== 'GET' && !$this->istiIzvor()) throw new Greska(403, 'Zahtjev nije s ove stranice');
             $this->ruta($metoda, $podput);
         } catch (Greska $e) {

@@ -34,6 +34,8 @@ const IKONE = {
   objava: 'M12 3v12M7 8l5-5 5 5M4 15v4h16v-4',
   zvijezda: 'M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z',
   odrzavanje: 'M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.8-3.8a6 6 0 0 1-7.9 7.9l-6.9 6.9a2.1 2.1 0 0 1-3-3l6.9-6.9a6 6 0 0 1 7.9-7.9z',
+  narudzbe: 'M21 8l-9-5-9 5 9 5 9-5zM3 8v8l9 5 9-5V8M12 13v8',
+  placanje: 'M3 6h18v12H3zM3 10h18M7 15h3',
 };
 function ikona(ime) {
   const ns = 'http://www.w3.org/2000/svg';
@@ -595,11 +597,13 @@ async function spremi() {
   if (Object.keys(S.greske).length) { pokaziPrvuGresku(); return; }
   const gumb = $('#spremi'); if (gumb) { gumb.disabled = true; gumb.textContent = 'Spremam…'; }
   try {
-    const r = await api('PUT', '/katalog', { verzija: S.katalog.sadrzaj.verzija, katalog: S.radni, opis: opisPromjene() });
+    // prodajaSeq: do koje prodaje je zaliha u uredniku uračunata (prodaje nakon toga poslužitelj sam oduzme)
+    const r = await api('PUT', '/katalog', { verzija: S.katalog.sadrzaj.verzija, katalog: S.radni, opis: opisPromjene(), prodajaSeq: S.katalog.prodajaSeq });
     S.katalog.sadrzaj = r.sadrzaj; S.radni = kopija(r.sadrzaj);
+    if (typeof r.prodajaSeq === 'number') S.katalog.prodajaSeq = r.prodajaSeq;
     S.prljavo = false; S.sirovo = {}; S.greske = {}; S.novi = new Set();
     crtajUrednik();
-    obavijest('Spremljeno. Promjene su na stranici za 1–2 minute.', { trajanje: 8000 });
+    obavijest('Spremljeno. Cijene i zaliha su na stranici odmah, ostalo za nekoliko minuta.', { trajanje: 8000 });
     pratiObjavu(true);
   } catch (err) {
     if (err.status === 409) obavijest('Netko je u međuvremenu spremio promjene. Osvježi stranicu (tvoje promjene treba ponoviti).', { vrsta: 'greska', trajanje: 15000, akcija: { tekst: 'Osvježi', fn: () => location.reload() } });
@@ -642,7 +646,9 @@ function crtajVrh() {
   const stavka = (ik, tekst, fn) => h('button', { type: 'button', onclick: () => { zatvori(); fn(); } }, ikona(ik), tekst);
   const popis = h('div', { class: 'izbornik-popis', hidden: true, id: 'izbornik' },
     h('p', { class: 'ime' }, `Prijavljen: ${S.ime}${S.uloga === 'admin' ? ' (administrator)' : ''}`),
+    stavka('narudzbe', 'Narudžbe', dijalogNarudzbi),
     stavka('povijest', 'Povijest promjena', dijalogPovijesti),
+    S.uloga === 'admin' ? stavka('placanje', 'Plaćanje (Stripe)', dijalogPlacanja) : null,
     S.uloga === 'admin' ? stavka('korisnici', 'Korisnici', dijalogKorisnika) : null,
     S.uloga === 'admin' ? stavka('objava', 'Objava stranice', dijalogObjave) : null,
     S.uloga === 'admin' ? stavka('odrzavanje', 'Održavanje stranice', dijalogOdrzavanja) : null,
@@ -931,6 +937,93 @@ async function dijalogObjave() {
       dana < 0 ? 'GitHub token je istekao — objava ne radi dok ne upišeš novi.' : `GitHub token vrijedi do ${istjece.toLocaleDateString('hr-HR')} (još ${dana} ${mnozina(dana, ['dan', 'dana', 'dana'])}).`) : null,
     forma,
     h('div', { class: 'dva' }, ponovi, h('button', { class: 'gumb', type: 'button', onclick: () => d.close() }, 'Zatvori')));
+}
+
+// ----- narudžbe iz web trgovine (plaćanje preko Stripea; podaci kupaca su samo na poslužitelju) -----
+const centi = (c) => eur(typeof c === 'number' ? c / 100 : NaN);
+const STANJA_NARUDZBE = { paid: 'plaćeno', pending: 'čeka plaćanje', failed: 'neuspjelo', cancelled: 'otkazano' };
+
+async function dijalogNarudzbi() {
+  let r;
+  try { r = await api('GET', '/narudzbe'); } catch (err) { if (err.status !== 401) obavijest(err.message, { vrsta: 'greska' }); return; }
+  let sve = false;
+  const lista = h('ul', { class: 'narudzbe' });
+  const crtaj = () => {
+    const prikaz = r.narudzbe.filter((n) => sve || n.stanje === 'paid');
+    lista.replaceChildren(...(prikaz.length ? prikaz.map(stavkaNarudzbe) : [h('li', { class: 'prazno' }, sve ? 'Još nema narudžbi.' : 'Još nema plaćenih narudžbi.')]));
+  };
+  const stavkaNarudzbe = (n) => {
+    const k = n.kupac ?? {};
+    const a = n.adresa ?? {};
+    const poslano = h('button', { class: `gumb${n.poslano ? '' : ' glavni'}`, type: 'button', hidden: n.stanje !== 'paid', onclick: async () => {
+      try {
+        const o = await api('POST', '/narudzbe/poslano', { id: n.id, poslano: !n.poslano });
+        n.poslano = o.poslano; crtaj();
+      } catch (err) { obavijest(err.message, { vrsta: 'greska' }); }
+    } }, n.poslano ? `Poslano ${vrijeme(n.poslano)} (poništi)` : 'Označi kao poslano');
+    return h('li', { class: `narudzba stanje-${n.stanje}` },
+      h('details', {},
+        h('summary', {},
+          h('strong', {}, n.id), h('span', {}, `${vrijeme(n.placeno ?? n.stvoreno)} · ${centi(n.ukupno ?? n.medjuzbroj)}`),
+          h('span', { class: 'stanje' }, `${STANJA_NARUDZBE[n.stanje] ?? n.stanje}${n.nacin === 'test' ? ' · TEST' : ''}${n.poslano ? ' · poslano' : ''}`)),
+        n.manjak?.length ? h('p', { class: 'poruka greska' }, `Za ${n.manjak.join(', ')} nije bilo dovoljno zalihe u trenutku plaćanja. Javi se kupcu ili napravi povrat u Stripeu.`) : null,
+        n.stanje === 'paid' ? h('div', { class: 'podaci-narudzbe' },
+          h('p', {}, h('strong', {}, k.ime || a.ime || '—'), h('br'), k.email || '', k.telefon ? ` · ${k.telefon}` : ''),
+          k.tvrtka || k.oib ? h('p', {}, `R1 račun: ${[k.tvrtka, k.oib].filter(Boolean).join(' · ')}`) : null,
+          h('p', {}, `${n.dostava?.naziv ?? 'Dostava'}: `, [a.ime, a.ulica, [a.postanski, a.grad].filter(Boolean).join(' ')].filter(Boolean).join(', '),
+            n.paketomat ? h('span', {}, h('br'), `Paketomat: ${n.paketomat}`) : null),
+          n.mail && (!n.mail.kupac || !n.mail.trgovina) ? h('p', { class: 'poruka upozorenje' }, `Mail ${!n.mail.kupac ? 'kupcu' : 'trgovini'} nije poslan (provjeri e-mail u ☰ → Plaćanje).`) : null) : null,
+        h('ul', { class: 'stavke-narudzbe' }, (n.stavke ?? []).map((s) => h('li', {}, `${s.kol} × ${s.naziv}${s.pakiranje ? ` (${s.pakiranje})` : ''}`, h('span', {}, centi(s.iznos))))),
+        n.stanje === 'paid' ? h('p', { class: 'zbroj' }, `Proizvodi ${centi(n.medjuzbroj)} + dostava ${centi(n.dostava?.cijena ?? 0)} = `, h('strong', {}, centi(n.ukupno))) : null,
+        poslano));
+  };
+  const prekidac = h('label', { class: 'kvacica' }, h('input', { type: 'checkbox', onchange: (e) => { sve = e.target.checked; crtaj(); } }), 'Prikaži i neplaćene i otkazane');
+  crtaj();
+  const d = dijalog(h('h2', {}, 'Narudžbe'),
+    r.placanje?.ukljuceno
+      ? (r.placanje.nacin === 'test' ? h('p', { class: 'poruka upozorenje' }, 'Plaćanje je u TESTNOM načinu: narudžbe su probne i ništa se ne naplaćuje.') : null)
+      : h('p', { class: 'poruka upozorenje' }, `Plaćanje još nije uključeno${S.uloga === 'admin' ? ' (☰ → Plaćanje)' : ''}: kupci ne mogu platiti.`),
+    h('p', {}, 'Klikni narudžbu za kupca, adresu i stavke. Zaliha se sama smanji kad je narudžba plaćena. Povrat novca radi se u Stripeu (Payments → ⋯ → Refund).'),
+    prekidac, lista,
+    h('button', { class: 'gumb', type: 'button', onclick: () => d.close() }, 'Zatvori'));
+  $('.dijalog', d).classList.add('siroki');
+}
+
+// ----- plaćanje: Stripe ključ i mailovi (samo administrator) -----
+async function dijalogPlacanja() {
+  let p;
+  try { p = await api('GET', '/placanje'); } catch (err) { if (err.status !== 401) obavijest(err.message, { vrsta: 'greska' }); return; }
+  const greska = h('p', { class: 'poruka greska', role: 'alert', hidden: true });
+  const forma = h('form', { class: 'dijalog-forma', novalidate: true, onsubmit: async (e) => {
+    e.preventDefault(); porukaGreske(greska, '');
+    const gumb = $('button[type=submit]', forma); gumb.disabled = true; gumb.textContent = 'Provjeravam sa Stripeom…';
+    try {
+      const o = await api('POST', '/placanje', { kljuc: forma.kljuc.value, emailTrgovine: forma.emailTrgovine.value, posiljatelj: forma.posiljatelj.value });
+      d.close();
+      obavijest(o.ukljuceno ? `Plaćanje je uključeno (${o.nacin === 'live' ? 'PRAVI novac' : 'testni način'}). Webhook je postavljen u Stripeu.` : 'Postavke su spremljene.', { trajanje: 10000 });
+    } catch (err) { porukaGreske(greska, err.message); gumb.disabled = false; gumb.textContent = 'Spremi i provjeri'; }
+  } },
+  h('label', { class: 'polje' }, h('span', {}, 'Stripe ključ'),
+    h('input', { name: 'kljuc', type: 'password', autocomplete: 'off', spellcheck: 'false', placeholder: p.kljucKraj ? `postavljen (…${p.kljucKraj}) — upiši samo za zamjenu` : 'rk_live_… (ili rk_test_… za probu)' }),
+    h('small', {}, 'Ograničeni ključ (Developers → API keys → Create restricted key) s dozvolama: Checkout Sessions, Webhook Endpoints, Products, Prices i Shipping Rates na Write. Pri spremanju se ključ odmah isproba (ništa se ne naplaćuje), a webhook se u Stripeu napravi sam.')),
+  h('label', { class: 'polje' }, h('span', {}, 'E-mail trgovine (ovamo stižu narudžbe i poruke s kontakt obrasca)'),
+    h('input', { name: 'emailTrgovine', type: 'email', autocomplete: 'off', value: p.emailTrgovine ?? '', placeholder: 'info@camelliasinensis.eu' })),
+  h('label', { class: 'polje' }, h('span', {}, 'Pošiljatelj mailova kupcima'),
+    h('input', { name: 'posiljatelj', type: 'email', autocomplete: 'off', value: p.posiljatelj ?? '', placeholder: 'prazno = isti kao e-mail trgovine' }),
+    h('small', {}, 'Mora biti adresa na domeni camelliasinensis.eu otvorena u Hostingeru (Emails), inače mailovi završe u neželjenoj pošti ili se ne pošalju.')),
+  greska,
+  h('button', { class: 'gumb glavni', type: 'submit' }, 'Spremi i provjeri'));
+  const iskljuci = h('button', { class: 'gumb opasno', type: 'button', hidden: !p.kljucKraj, onclick: async () => {
+    if (!confirm('Isključiti plaćanje? Kupci tada ne mogu platiti, a webhook se briše iz Stripea.')) return;
+    try { await api('POST', '/placanje', { ukloni: true }); d.close(); obavijest('Plaćanje je isključeno.'); } catch (err) { obavijest(err.message, { vrsta: 'greska' }); }
+  } }, 'Isključi plaćanje');
+  const d = dijalog(h('h2', {}, 'Plaćanje (Stripe)'),
+    p.ukljuceno
+      ? h('p', { class: `poruka ${p.nacin === 'live' ? 'info' : 'upozorenje'}` }, `Uključeno: ${p.nacin === 'live' ? 'PRAVI novac (live)' : 'testni način (ništa se ne naplaćuje)'} · ${p.vrstaKljuca} ključ …${p.kljucKraj}${p.provjereno ? ` · provjereno ${vrijeme(p.provjereno)}` : ''}`)
+      : h('p', { class: 'poruka upozorenje' }, 'Plaćanje nije uključeno: kupci ne mogu platiti. Upiši Stripe ključ.'),
+    h('p', {}, 'Kupac plaća na Stripeovoj stranici (kartica, Apple Pay, Google Pay). Narudžba je plaćena tek kad Stripe to potvrdi; tada se smanji zaliha i pošalju mailovi kupcu i trgovini.'),
+    forma,
+    h('div', { class: 'dva' }, iskljuci, h('button', { class: 'gumb', type: 'button', onclick: () => d.close() }, 'Zatvori')));
 }
 
 // posjetitelji vide "Uskoro smo tu" (503), uredništvo radi normalno; administratorov preglednik može i dalje vidjeti stranicu

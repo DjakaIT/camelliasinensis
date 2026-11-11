@@ -134,10 +134,11 @@ Neprozirni, nepogodiv niz (≥ 128 bita slučajnosti), vezan uz jednu narudžbu,
 | --- | --- | --- | --- |
 | `demo` | Razvoj, testovi, demo za Saru | Sve u pregledniku nad `fixtures/products.json`, bez poslužitelja. Zalihu je moguće mijenjati iz konzole (`window.__cs.setStock(sku, qty)`) samo kad `NEXT_PUBLIC_DEMO=1` | **Lažna stranica za plaćanje** na `/dev/checkout/` s jasnom oznakom da je test; nema stvarnog plaćanja |
 | `devserver` | Razvoj plaćanja sa Stripe test načinom | Lokalni Node poslužitelj u `mock-server/` (§6) | **Stripe Checkout, test način** |
+| `hosting` | **Produkcija na Hostingeru** (11. 11. 2026.) | Ponuda iz `fixtures/` (katalog uredništva); `getLive`/`checkCart` u pregledniku nad `zivo.json` (piše ga uredništvo pri spremanju i prodaji) istim pravilima kao `engine.ts`; `startCheckout`/`getOrderStatus` na PHP `/urednistvo/api/trgovina/*` koji sve ponovno provjerava (`urednistvo/php/lib/trgovina.php`) | **Stripe Checkout** (live ili test, prema ključu u uredništvu); webhook `/urednistvo/api/stripe/webhook` s provjerom potpisa |
 | `woo` | Kad se odabere WooCommerce (STACK §5) | Store API za proizvode i `getLive`; `checkCart` i `startCheckout` preko našeg endpointa u MU-pluginu `cs-headless`, koji napuni Woo košaricu **na `shop.` strani** pa preusmjeri na Woo checkout | Woo checkout + Stripe dodatak |
 | *drugi backend* | Ako se WooCommerce napusti | Nova implementacija istog sučelja. **Nije istraženo**, pa ne pretpostavljamo kako bi se mapirala | Ovisi o backendu |
 
-Odabir adaptera: `NEXT_PUBLIC_BACKEND=demo|devserver|woo`. Nijedna komponenta ne smije pitati koji je adapter aktivan.
+Odabir adaptera: `NEXT_PUBLIC_BACKEND=demo|devserver|hosting` (`npm run build:hosting` gradi `hosting`). Nijedna komponenta ne smije pitati koji je adapter aktivan.
 
 **Zašto košarica u pregledniku i prijenos na plaćanje, a ne Woo košarica kroz API:** frontend i backend su na različitim hostovima. Woo kolačić sesije preko poddomena traži `SameSite` i ITP pažnju (Safari na iPhoneu). Ako se Woo košarica puni tek kad kupac već stoji na `shop.` stranici (kao prva, a ne treća strana), problem nestaje. To je ujedno način koji je neovisan o Wooa.
 

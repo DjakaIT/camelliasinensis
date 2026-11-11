@@ -20,6 +20,24 @@ if (!fs.existsSync(path.join(OUT, 'index.html'))) {
 
 fs.rmSync(IZLAZ, { recursive: true, force: true });
 fs.cpSync(OUT, IZLAZ, { recursive: true });
+
+// PAKET_PRIJELAZ=1 (jednom, ručno pokretanje workflowa "Objava" s prijelaz=da): bez datoteka s "$" u imenu.
+// Instalacija na hostingu prije 11. 11. 2026. odbija "$" (Next.js 16 ga stavlja u datoteke za prethodno učitavanje
+// dinamičkih stranica), pa ne bi postavila ni paket s popravkom. Ovaj paket postavi novu instalaciju; sljedeći su potpuni.
+if (process.env.PAKET_PRIJELAZ === '1') {
+  let maknuto = 0;
+  const makni = (d) => {
+    for (const f of fs.readdirSync(d, { withFileTypes: true })) {
+      const p = path.join(d, f.name);
+      if (f.name.includes('$')) {
+        fs.rmSync(p, { recursive: true, force: true });
+        maknuto++;
+      } else if (f.isDirectory()) makni(p);
+    }
+  };
+  makni(IZLAZ);
+  console.log(`[paket] PRIJELAZ: maknuto ${maknuto} datoteka/mapa s "$" u imenu`);
+}
 const U = path.join(IZLAZ, 'urednistvo');
 fs.mkdirSync(path.join(U, 'lib'), { recursive: true });
 fs.mkdirSync(path.join(U, 'static'), { recursive: true });

@@ -2,8 +2,8 @@ import type { NextConfig } from 'next';
 
 // Statični export (FRONTEND-ODLUKA §6): bez API ruta, Server Actions, middlewarea, ISR-a i dynamicParams.
 const backend = process.env.NEXT_PUBLIC_BACKEND ?? 'demo';
-if (!['demo', 'devserver'].includes(backend)) {
-  throw new Error(`NEXT_PUBLIC_BACKEND mora biti "demo" ili "devserver", a ne "${backend}"`);
+if (!['demo', 'devserver', 'hosting'].includes(backend)) {
+  throw new Error(`NEXT_PUBLIC_BACKEND mora biti "demo", "devserver" ili "hosting", a ne "${backend}"`);
 }
 
 const config: NextConfig = {
