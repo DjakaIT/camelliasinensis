@@ -42,7 +42,11 @@ fs.copyFileSync(path.join(ROOT, 'urednistvo/php/index.php'), path.join(U, 'index
 for (const f of fs.readdirSync(path.join(ROOT, 'urednistvo/php/lib'))) if (f.endsWith('.php')) fs.copyFileSync(path.join(ROOT, 'urednistvo/php/lib', f), path.join(U, 'lib', f));
 for (const f of ['index.html', 'app.js', 'app.css', 'ikona.svg', 'qrcode.mjs']) fs.copyFileSync(path.join(ROOT, 'urednistvo/sucelje', f), path.join(U, 'static', f));
 await pripremi(U, { origin: ORIGIN_STRANICE });
-fs.writeFileSync(path.join(T, 'router.php'), `<?php\nif (str_starts_with((string) parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/urednistvo')) { require ${JSON.stringify(path.join(U, 'index.php'))}; return true; }\nreturn false;\n`);
+// popis GLS paketomata iz paketa stranice (public/gls/paketomati.json)
+fs.mkdirSync(path.join(JAVNO, 'gls'), { recursive: true });
+fs.copyFileSync(path.join(ROOT, 'public/gls/paketomati.json'), path.join(JAVNO, 'gls/paketomati.json'));
+const PAKETOMAT = JSON.parse(fs.readFileSync(path.join(JAVNO, 'gls/paketomati.json'), 'utf8')).paketomati.find((p) => p[4] === 'Zagreb');
+fs.writeFileSync(path.join(T, 'router.php'), `<?php\n$p = (string) parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);\nif (str_starts_with($p, '/urednistvo') || str_starts_with($p, '/api/trgovina/')) { require ${JSON.stringify(path.join(U, 'index.php'))}; return true; }\nreturn false;\n`);
 
 const args = [...(process.env.PHP_INI ? ['-c', process.env.PHP_INI] : []), '-S', `127.0.0.1:${PORT}`, '-t', JAVNO, path.join(T, 'router.php')];
 const php = spawn(PHP, args, {
@@ -139,11 +143,31 @@ try {
     ok(r.j.error?.code === kod, `${opis} → ${kod}`);
   }
 
-  const start = await mora('POST', '/trgovina/narudzba', { lines: [{ sku: SKU, qty: 2, amount: 1, price: 1 }], urls });
-  ok(/^https:\/\/checkout\.stripe\.com\//.test(start.redirectUrl) && /^[0-9a-f]{48}$/.test(start.orderToken), 'Stripe Checkout sesija stvorena (klijentova cijena se zanemaruje)');
+  // dostava odabrana u košarici: samo ID paketomata, provjera po GLS popisu
+  for (const [opis, dostava] of [
+    ['nepostojeći paketomat', { nacin: 'gls-paketomat', paketomat: 'HR00000-NEMA' }],
+    ['paketomat bez ID-a', { nacin: 'gls-paketomat' }],
+    ['nepoznat način dostave', { nacin: 'dron' }],
+  ]) {
+    const r = await zahtjev('POST', '/trgovina/narudzba', { lines: [{ sku: SKU, qty: 1 }], urls, dostava });
+    ok(r.status === 400 && r.j.error?.code === 'INVALID_REQUEST', `${opis} → INVALID_REQUEST`);
+  }
+  const bezOdabira = await mora('POST', '/trgovina/narudzba', { lines: [{ sku: SKU, qty: 1 }], urls });
+  ok(bezOdabira.redirectUrl.startsWith('https://checkout.stripe.com/'), 'bez odabira dostave (stariji klijent) sesija se i dalje stvara');
+  const start = await mora('POST', '/trgovina/narudzba', { lines: [{ sku: SKU, qty: 2, amount: 1, price: 1 }], urls, dostava: { nacin: 'gls-paketomat', paketomat: PAKETOMAT[0], naziv: 'Lažni naziv' } });
+  ok(/^https:\/\/checkout\.stripe\.com\//.test(start.redirectUrl) && /^[0-9a-f]{48}$/.test(start.orderToken), 'Stripe Checkout sesija za paketomat stvorena (klijentova cijena i naziv se zanemaruju)');
   const prije = await mora('GET', `/trgovina/narudzba/${start.orderToken}`, undefined, { origin: null });
   ok(prije.status === 'pending', 'narudžba čeka plaćanje');
   const nepoznat = await mora('GET', `/trgovina/narudzba/${'0'.repeat(48)}`, undefined, { origin: null });
+  // javni put bez imena uredništva (public/.htaccess): radi isto, a rute uredništva njime nisu dostupne
+  const javni = await fetch(`${BASE}/api/trgovina/narudzba/${start.orderToken}`).then((r) => r.json());
+  ok(javni.status === 'pending', 'stanje narudžbe i preko /api/trgovina/');
+  const javniPost = await fetch(`${BASE}/api/trgovina/narudzba`, { method: 'POST', headers: { origin: BASE, 'sec-fetch-site': 'same-origin', 'content-type': 'application/json' }, body: '{}' });
+  ok(javniPost.status === 400 && (await javniPost.json()).error?.code === 'INVALID_REQUEST', 'plaćanje preko /api/trgovina/ prolazi iste provjere');
+  for (const put of ['/api/trgovina/../korisnici', '/api/trgovina/katalog', '/api/trgovina/narudzbe']) {
+    const r = await fetch(`${BASE}${put}`, { headers: { cookie: kolacic } });
+    ok(r.status >= 400 && !(await r.text()).includes('sadrzaj'), `${put} ne otvara rute uredništva (${r.status})`);
+  }
   ok(nepoznat.status === 'unknown', 'nepoznat token → unknown');
 
   // ---------- plaćanje testnom karticom na Stripeovoj stranici ----------
@@ -152,15 +176,10 @@ try {
   await str.route(`${ORIGIN_STRANICE}/**`, (r) => r.fulfill({ status: 200, contentType: 'text/html', body: '<p>povratak</p>' }));
   await str.goto(start.redirectUrl);
   await str.locator('#email').fill('kupac.test@example.com');
-  await str.locator('#shippingName').fill('Ana Kupac');
-  const zemlja = str.locator('#shippingCountry');
-  if (await zemlja.count()) await zemlja.selectOption('HR').catch(() => {});
-  await str.locator('#shippingAddressLine1').fill('Ilica 1');
-  await str.locator('#shippingPostalCode').fill('10000');
-  await str.locator('#shippingLocality').fill('Zagreb');
+  await str.getByText('Paket šaljemo u GLS paketomat').first().waitFor({ timeout: 20_000 });
+  ok((await str.locator('#shippingAddressLine1').count()) === 0 && (await str.locator('input[name="paketomat"]').count()) === 0, 'Stripe za paketomat ne traži adresu dostave ni upis paketomata, nego piše koji je paketomat');
   await str.locator('select[name="phoneNumberCountryCode"]').selectOption('HR').catch(() => {});
   await str.locator('#phoneNumber').fill('912345678');
-  await str.locator('input[name="paketomat"]').fill('GLS paketomat Ilica');
   // načini plaćanja: odaberi "Kartica" (polja kartice se tada otvore)
   // samo kartica: Stripe odmah prikaže polja; ako ipak ponudi više načina, odaberi karticu
   const kartica = str.locator('[data-testid="card-accordion-item-button"]');
@@ -169,8 +188,12 @@ try {
   await str.locator('#cardNumber').fill('4242424242424242');
   await str.locator('#cardExpiry').fill('12 / 34');
   await str.locator('#cardCvc').fill('123');
-  const ime = str.locator('#billingName');
-  if (await ime.count()) await ime.fill('Ana Kupac');
+  await str.locator('#billingName').fill('Ana Kupac');
+  const zemlja = str.locator('#billingCountry');
+  if (await zemlja.count()) await zemlja.selectOption('HR').catch(() => {});
+  await str.locator('#billingAddressLine1').fill('Ilica 1');
+  await str.locator('#billingPostalCode').fill('10000');
+  await str.locator('#billingLocality').fill('Zagreb');
   // bez Stripe Linka (inače traži SMS potvrdu)
   const link = str.locator('#enableStripePass');
   if ((await link.count()) && (await link.isChecked())) await link.uncheck().catch(() => {});
@@ -189,7 +212,8 @@ try {
   ok(st.status === 'paid' && /^CS-\d+$/.test(st.orderRef) && st.email === 'k***@example.com', `narudžba ${st.orderRef} plaćena, e-mail maskiran (${st.email})`);
 
   const nar = (await mora('GET', '/narudzbe')).narudzbe.find((n) => n.id === st.orderRef);
-  ok(nar.kupac.ime === 'Ana Kupac' && nar.adresa.grad === 'Zagreb' && nar.adresa.postanski === '10000', 'kupac i adresa dostave zapisani');
+  ok(nar.kupac.ime === 'Ana Kupac' && nar.adresa.grad === 'Zagreb' && nar.adresa.postanski === '10000', 'kupac i adresa za račun zapisani');
+  ok(nar.paketomat?.startsWith(`${PAKETOMAT[1]}, ${PAKETOMAT[2]}`) && nar.paketomat.includes(PAKETOMAT[0]) && !nar.paketomat.includes('Lažni') && nar.dostava.id === 'gls-paketomat', `paketomat iz GLS popisa: ${nar.paketomat}`);
   ok(nar.stavke[0].kol === 2 && nar.medjuzbroj === nar.stavke[0].cijena * 2 && nar.ukupno === nar.medjuzbroj + nar.dostava.cijena, `iznosi točni: ${nar.medjuzbroj} + dostava ${nar.dostava.cijena} (${nar.dostava.naziv}) = ${nar.ukupno} centi`);
   ok(!JSON.stringify(nar).includes(start.orderToken), 'popis narudžbi u uredništvu ne otkriva token');
 

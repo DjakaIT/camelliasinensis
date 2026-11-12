@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Faq } from '@/components/home/Faq';
+import { HERO_GRANA } from '@/components/home/heroGrana';
 import { Shelf } from '@/components/home/Shelf';
 import { TeinMeter } from '@/components/home/TeinMeter';
 import { IconArrow, IconGlobe, IconHand, IconLeaf, IconTruck } from '@/components/Icons';
@@ -52,11 +53,7 @@ export default async function Home() {
       <section className="bento" aria-label="Uvod">
         <div className="tile t-main">
           <div className="hbg" aria-hidden="true">
-            <picture>
-              <source type="image/avif" srcSet="/img/hero/hero-tea-640.avif 640w, /img/hero/hero-tea-1124.avif 1124w" sizes="(max-width: 760px) 100vw, 145vw" />
-              <source type="image/webp" srcSet="/img/hero/hero-tea-640.webp 640w, /img/hero/hero-tea-1124.webp 1124w" sizes="(max-width: 760px) 100vw, 145vw" />
-              <img src="/img/hero/hero-tea-1124.webp" alt="" width={1124} height={750} fetchPriority="high" decoding="async" />
-            </picture>
+            <div className="hgrana" dangerouslySetInnerHTML={{ __html: HERO_GRANA }} />
           </div>
           <div className="top">
             <span className="lbl">Camellia sinensis · Zagreb</span>

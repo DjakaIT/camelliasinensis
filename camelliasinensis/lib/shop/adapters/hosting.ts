@@ -10,7 +10,8 @@ import { ShopError } from '../errors';
 import type { CheckoutStart, OrderStatus, Product, ProductTypeInfo, ShopBackend } from '../types';
 import { loadZivo } from '../zivo';
 
-export const HOSTING_API = '/urednistvo/api/trgovina';
+/** javne rute trgovine; public/.htaccess ih predaje PHP-u (samo /api/trgovina/*), adresa uredništva se nigdje ne vidi */
+export const HOSTING_API = '/api/trgovina';
 const TIMEOUT_MS = 20_000; // stvaranje Stripe sesije na dijeljenom hostingu zna potrajati
 
 type Base = Omit<CatalogEntry, 'sku'>;
@@ -79,12 +80,13 @@ export function createHostingBackend(): ShopBackend {
         throw ShopError.from(e);
       }
     },
-    startCheckout: (lines, urls) =>
+    startCheckout: (lines, urls, delivery) =>
       call<CheckoutStart>('/narudzba', {
         method: 'POST',
         body: {
           lines: Array.isArray(lines) ? lines.map((l) => ({ sku: l?.sku, qty: l?.qty })) : lines,
           urls: { success: urls?.success, cancel: urls?.cancel },
+          ...(delivery ? { dostava: { nacin: delivery.method, ...(delivery.lockerId ? { paketomat: delivery.lockerId } : {}) } } : {}),
         },
       }),
     getOrderStatus: (token) =>

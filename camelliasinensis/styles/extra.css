@@ -163,3 +163,44 @@
   .x-faq-list details { padding: 2px 18px; }
   .x-faq-list h3 { font-size: 17px; }
 }
+
+/* dostava i GLS paketomat u košarici (components/cart/DeliveryPicker.tsx); --fld = pozadina polja prema podlozi */
+.x-df { --fld: #fff; max-height: 78%; overflow: auto; }
+.x-df > * { flex-shrink: 0; }
+.x-sum { --fld: var(--paper); }
+.x-dlv { border: 0; padding: 0; margin: 4px 0 0; min-width: 0; display: flex; flex-direction: column; gap: 8px; }
+.x-dlv legend { padding: 0; margin-bottom: 8px; font-size: 13px; font-weight: 600; }
+.x-dlv .x-radios { gap: 6px; }
+.x-dlv .x-radio { padding: 12px 14px; gap: 12px; background: var(--fld); }
+.x-dlv .x-radio:has(input:checked) { background: var(--fld); }
+.x-dlv .x-radio b { font-size: 14.5px; }
+.x-dlv .x-radio small { font-size: 12.5px; line-height: 1.35; }
+.x-dlv .x-radio em { font-size: 14px; }
+.x-lock { display: flex; flex-direction: column; gap: 8px; }
+.x-lock-sel { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; padding: 12px 14px; border-radius: 16px; background: var(--fld); font-size: 13.5px; line-height: 1.4; }
+.x-lock-sel small { display: block; font-size: 12px; color: var(--mute); }
+.x-lock-sel b { display: block; font-weight: 600; font-size: 14.5px; }
+.x-lock-sel .x-link { flex: none; font-size: 13px; }
+.x-lock-q { display: flex; gap: 8px; }
+.x-lock-q input {
+  flex: 1; min-width: 0; height: 46px; border: 0; border-radius: 14px; background: var(--fld); padding: 0 14px; font-size: 16px; outline: none;
+}
+.x-lock-q input:focus { box-shadow: inset 0 0 0 2px var(--ink); }
+.x-near {
+  flex: none; height: 46px; padding: 0 16px; border-radius: 23px; background: var(--ink); color: #fff; display: inline-flex; align-items: center;
+  gap: 6px; font-size: 13.5px; font-weight: 600; white-space: nowrap;
+}
+.x-near:disabled { opacity: 0.5; }
+.x-lock-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; max-height: 264px; overflow: auto; }
+.x-lock-list button {
+  width: 100%; text-align: left; display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 10px 14px;
+  border-radius: 14px; background: var(--fld); font-size: 13.5px; line-height: 1.35; cursor: pointer;
+}
+.x-lock-list button:hover { box-shadow: inset 0 0 0 1px var(--ink); }
+.x-lock-list button[aria-pressed="true"] { box-shadow: inset 0 0 0 2px var(--ink); }
+.x-lock-list b { display: block; font-weight: 600; }
+.x-lock-list button > span > span { color: var(--mute); }
+.x-lock-list em { font-style: normal; font-weight: 600; white-space: nowrap; font-size: 13px; }
+.x-lock .x-small:empty { display: none; }
+.x-lock-done { align-self: flex-start; font-size: 13px; }
+.x-lock-q input::-webkit-search-cancel-button { -webkit-appearance: none; appearance: none; }

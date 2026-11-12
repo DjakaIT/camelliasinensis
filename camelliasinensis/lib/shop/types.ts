@@ -1,4 +1,5 @@
 // Model podataka iz API-CONTRACT.md §2. Frontend poznaje samo ove tipove.
+import type { Delivery } from './shipping';
 
 export type Money = { amount: number; currency: 'EUR' }; // amount u centima, cijeli broj ≥ 0
 
@@ -73,7 +74,7 @@ export interface ShopBackend {
   // KLIJENT
   getLive(skus: string[]): Promise<LiveInfo[]>;
   checkCart(lines: CartLine[]): Promise<CartCheck>;
-  startCheckout(lines: CartLine[], urls: { success: string; cancel: string }): Promise<CheckoutStart>;
+  startCheckout(lines: CartLine[], urls: { success: string; cancel: string }, delivery?: Delivery): Promise<CheckoutStart>;
   getOrderStatus(orderToken: string): Promise<OrderStatus>;
 }
 

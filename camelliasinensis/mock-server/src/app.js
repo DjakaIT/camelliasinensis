@@ -6,6 +6,8 @@ import { checkLines, isAllowedReturnUrl, live, maskEmail, priceForCheckout, with
 import { ShopError } from '../../lib/shop/errors.ts';
 import { fakeCheckoutPage } from './fake-page.js';
 import { verifyWebhook } from './payments.js';
+import { validDelivery } from '../../lib/shop/shipping.ts';
+import { findLocker } from './lockers.js';
 
 const STATUS = { INVALID_REQUEST: 400, UNKNOWN_SKU: 409, OUT_OF_STOCK: 409, INSUFFICIENT_STOCK: 409, UNPUBLISHED: 409, PRICE_CHANGED: 409, CHECKOUT_UNAVAILABLE: 503, RATE_LIMITED: 429 };
 
@@ -70,7 +72,16 @@ export function createApp({ config, store, payments, log = () => {} }) {
       throw new ShopError('INVALID_REQUEST');
     }
     const priced = priceForCheckout(store.catalog(), body?.lines); // ignorira amount, priceId, price_data…
+    // dostava iz košarice: samo način i ID paketomata; paketomat mora postojati u public/gls/paketomati.json
+    let delivery = null;
+    if (body?.delivery !== undefined) {
+      delivery = validDelivery(body.delivery);
+      const locker = delivery?.lockerId ? findLocker(delivery.lockerId) : null;
+      if (!delivery || (delivery.method === 'gls-paketomat' && !locker)) throw new ShopError('INVALID_REQUEST');
+      delivery = { ...delivery, locker };
+    }
     const order = store.createOrder({ lines: priced.lines, total: priced.total, successUrl: '', cancelUrl: urls.cancel });
+    order.delivery = delivery;
     order.successUrl = withOrderToken(urls.success, order.token);
     try {
       const s = await payments.createSession(order);

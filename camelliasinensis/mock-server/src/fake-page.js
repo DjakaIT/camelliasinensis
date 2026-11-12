@@ -1,11 +1,11 @@
 // HTML lažne stranice za plaćanje (FAKE pružatelj). Jasno označeno kao test; ne prikuplja nikakve podatke.
-import { shippingMethod, shippingPrice } from '../../lib/shop/shipping.ts';
+import { lockerLabel, shippingMethod, shippingPrice } from '../../lib/shop/shipping.ts';
 
 const esc = (s) => String(s).replace(/[&<>"']/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[ch]);
 const eur = (cents) => `${(cents / 100).toFixed(2).replace('.', ',')}&nbsp;€`;
 
 export function fakeCheckoutPage(order) {
-  const ship = shippingMethod('gls-adresa');
+  const ship = shippingMethod(order?.delivery?.method ?? 'gls-adresa');
   const shipCost = order ? shippingPrice(ship, order.total.amount) : 0;
   const body = !order
     ? '<h1>Narudžba nije pronađena</h1><p>Ova testna poveznica ne vrijedi ili je istekla.</p>'
@@ -13,7 +13,7 @@ export function fakeCheckoutPage(order) {
 <h1>Plaćanje (test)</h1>
 <p class="small">Lažna stranica za plaćanje mock-servera. Ništa se ne naplaćuje, ne upisuju se kartica ni adresa.</p>
 <table>${order.lines.map((l) => `<tr><td>${l.qty} × ${esc(l.name)}</td><td>${eur(l.lineTotal.amount)}</td></tr>`).join('')}
-<tr><td>Dostava: ${esc(ship.name)}</td><td>${shipCost ? eur(shipCost) : 'Besplatno'}</td></tr>
+<tr><td>Dostava: ${esc(ship.name)}${order.delivery?.locker ? `<br><small>${esc(lockerLabel(order.delivery.locker))}</small>` : ''}</td><td>${shipCost ? eur(shipCost) : 'Besplatno'}</td></tr>
 <tr class="tot"><td>Ukupno</td><td>${eur(order.total.amount + shipCost)}</td></tr></table>
 <p>Status: <b data-testid="fake-status">${esc(order.status)}</b></p>
 <div class="btns">

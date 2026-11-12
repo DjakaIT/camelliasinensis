@@ -94,6 +94,8 @@ jobs:
       - run: npm ci
       # next build provjerava tipove i u tests/, a ugovorni test uvozi tipove iz mock-server/node_modules
       - run: npm --prefix mock-server ci
+      # svjež popis GLS paketomata (ako GLS nije dostupan, ostaje kopija iz repozitorija)
+      - run: node scripts/gls-paketomati.mjs
       # build:hosting = build:demo + čitanje zivo.json (živa cijena i zaliha koje uredništvo zapiše pri spremanju)
       - run: npm run build:hosting
         env:

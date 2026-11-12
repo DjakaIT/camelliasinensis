@@ -1,7 +1,7 @@
 // Pružatelji plaćanja: FAKE (bez ključeva, isto kao demo) i Stripe hosted Checkout u TEST načinu.
 import Stripe from 'stripe';
 import { maskEmail } from '../../lib/shop/engine.ts';
-import { SHIPPING_METHODS, shippingPrice } from '../../lib/shop/shipping.ts';
+import { lockerLabel, SHIPPING_METHODS, shippingPrice } from '../../lib/shop/shipping.ts';
 
 export function createFakePayments(config) {
   return {
@@ -16,9 +16,9 @@ export function createFakePayments(config) {
 }
 
 // GLS opcije iz lib/shop/shipping.ts; besplatno od 50 €. Cijene su PRIMJERI [ODLUKA: GLS ugovor] (API-CONTRACT §6).
-// Odabir konkretnog paketomata Stripe Checkout ne podržava; to dolazi s GLS integracijom na backendu.
-function glsOptions(subtotal) {
-  return SHIPPING_METHODS.map((m) => {
+// Paketomat se bira u košarici (order.delivery); Stripe tada nudi samo taj način.
+function glsOptions(subtotal, delivery) {
+  return SHIPPING_METHODS.filter((m) => !delivery || m.id === delivery.method).map((m) => {
     const amount = shippingPrice(m, subtotal);
     return {
       shipping_rate_data: {
@@ -50,8 +50,10 @@ export function createStripePayments(config) {
           locale: 'hr',
           client_reference_id: order.id,
           metadata: { orderId: order.id, skus: order.lines.map((l) => `${l.sku}x${l.qty}`).join(',').slice(0, 500) },
-          shipping_address_collection: { allowed_countries: ['HR'] },
-          shipping_options: glsOptions(order.total.amount),
+          ...(order.delivery?.locker
+            ? { billing_address_collection: 'required', custom_text: { submit: { message: `Paket šaljemo u GLS paketomat: ${lockerLabel(order.delivery.locker)}.` } } }
+            : { shipping_address_collection: { allowed_countries: ['HR'] } }),
+          shipping_options: glsOptions(order.total.amount, order.delivery),
           phone_number_collection: { enabled: true },
           success_url: order.successUrl, // sadrži naš orderToken, ne ID Stripe sesije
           cancel_url: order.cancelUrl,

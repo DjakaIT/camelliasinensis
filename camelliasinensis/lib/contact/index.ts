@@ -24,7 +24,7 @@ export async function sendContactMessage(m: ContactMessage): Promise<void> {
   if (backend === 'devserver' || backend === 'hosting') {
     // hosting: PHP na istoj domeni pošalje poruku na mail trgovine (urednistvo/php/lib/trgovina.php)
     const base =
-      backend === 'hosting' ? '/urednistvo/api/trgovina' : (process.env.NEXT_PUBLIC_DEVSERVER_URL ?? 'http://127.0.0.1:4000').replace(/\/+$/, '');
+      backend === 'hosting' ? '/api/trgovina' : (process.env.NEXT_PUBLIC_DEVSERVER_URL ?? 'http://127.0.0.1:4000').replace(/\/+$/, '');
     let res: Response;
     try {
       res = await fetch(`${base}/contact`, {

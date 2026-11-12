@@ -50,10 +50,10 @@ export function createDevserverBackend(baseUrl: string): ShopBackend {
       return call<LiveInfo[]>(`/live?skus=${encodeURIComponent(skus.join(','))}`);
     },
     checkCart: (lines) => call<CartCheck>('/cart/check', { method: 'POST', body: { lines: onlyLines(lines) } }),
-    startCheckout: (lines, urls) =>
+    startCheckout: (lines, urls, delivery) =>
       call<CheckoutStart>('/checkout/start', {
         method: 'POST',
-        body: { lines: onlyLines(lines), urls: { success: urls?.success, cancel: urls?.cancel } },
+        body: { lines: onlyLines(lines), urls: { success: urls?.success, cancel: urls?.cancel }, ...(delivery ? { delivery } : {}) },
       }),
     getOrderStatus: (token) =>
       typeof token === 'string' && token.length > 0 && token.length <= 256

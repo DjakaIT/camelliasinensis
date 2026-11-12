@@ -159,6 +159,34 @@ test('6b. uspješno plaćanje: potvrda tek kad je paid, košarica se tada briše
   expect(await cartLines(page)).toEqual([]);
 });
 
+test('6d. GLS paketomat se bira u košarici: pretraga, odabir, pamti se; bez odabira nema plaćanja', async ({ page, ctl }) => {
+  void ctl;
+  await page.goto(`/proizvod/${BAI.slug}/`);
+  await page.getByTestId('add-to-cart').click();
+  await expect(page.locator('.badge')).toHaveText('1');
+  let d = await openCart(page);
+  await d.getByRole('radio', { name: /GLS paketomat/ }).check();
+  await expect(d.getByRole('button', { name: /Na blagajnu/ })).toBeDisabled();
+  const q = d.getByRole('searchbox', { name: /Traži paketomat/ });
+  await expect(q).toBeEnabled();
+  await q.fill('zagreb ilica');
+  const prvi = d.getByTestId('paketomat').getByRole('listitem').first();
+  await expect(prvi).toContainText('Ilica');
+  const naziv = (await prvi.locator('b').innerText()).trim();
+  await prvi.getByRole('button').click();
+  await expect(d.getByText('Paket stiže u')).toBeVisible();
+  await expect(d.getByRole('button', { name: /Na blagajnu/ })).toBeEnabled();
+  // izbor ostaje nakon osvježavanja
+  await page.reload();
+  d = await openCart(page);
+  await expect(d.getByRole('radio', { name: /GLS paketomat/ })).toBeChecked();
+  await expect(d.getByTestId('paketomat')).toContainText(naziv);
+  await d.getByRole('button', { name: /Na blagajnu/ }).click();
+  await expectPaymentPage(page);
+  // mock-server: stranica plaćanja zna odabrani paketomat (demo blagajna ima vlastiti odabir)
+  if (!(await page.getByTestId('demo-checkout').count())) await expect(page.getByText(naziv)).toBeVisible();
+});
+
 test('6c. /narudzba/uspjeh/ bez valjanog tokena ne prikazuje potvrdu i ne briše košaricu', async ({ page, ctl }) => {
   void ctl;
   await page.goto(`/proizvod/${BAI.slug}/`);

@@ -52,7 +52,7 @@ final class Urednistvo
         $this->prodaja = new Prodaja($p['podaci']);
         $this->narudzbe = new Narudzbe($p['podaci']);
         $this->placanje = new Placanje($p['podaci'], $this->konf->origin, (bool) $p['lokalno']);
-        $this->trgovina = new Trgovina($this->spremiste, $this->prodaja, $this->narudzbe, $this->placanje, $this->zivo, $this->konf->trgovina, $this->konf->origin);
+        $this->trgovina = new Trgovina($this->spremiste, $this->prodaja, $this->narudzbe, $this->placanje, $this->zivo, $this->konf->trgovina, $this->konf->origin, new Paketomati($p['javno']));
     }
 
     // ---------------- zahtjev i odgovor ----------------
@@ -600,6 +600,8 @@ final class Urednistvo
             if (!in_array($metoda, ['GET', 'HEAD', 'POST', 'PUT'], true)) { $this->posalji(405, '', 'text/plain', ['Allow' => 'GET, HEAD, POST, PUT']); return; }
             // samo preko prave adrese (zaštita od DNS rebindinga)
             if (!$this->dopustenHost(self::zaglavlje('Host'))) { $this->posalji(421, '', 'text/plain'); return; }
+            // javne rute trgovine (public/.htaccess: /api/trgovina/* → ovaj index.php); ništa drugo iz uredništva nije dostupno ovim putem
+            if (str_starts_with($put, '/api/trgovina/')) { $this->trgovinaRuta($metoda, substr($put, strlen('/api'))); return; }
             if (str_starts_with($put, '/urednistvo/api/')) { $this->api($metoda, substr($put, strlen('/urednistvo/api'))); return; }
             if ($metoda !== 'GET' && $metoda !== 'HEAD') { $this->posalji(405, '', 'text/plain'); return; }
             if (preg_match('#^/urednistvo/static/([a-z0-9-]+\.(js|mjs|css|svg))$#', $put, $m)) {

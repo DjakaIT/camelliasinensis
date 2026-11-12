@@ -1,6 +1,7 @@
 // Polazak na plaćanje (API-CONTRACT §3.3, §3.4): checkCart neposredno prije, pa startCheckout i preusmjeravanje.
 // Košarica se ovdje NE briše; briše se tek kad je narudžba `paid` (/narudzba/uspjeh/).
 import { getShop, ShopError, type CartCheck } from '../shop';
+import type { Delivery } from '../shop/shipping';
 import { readCart, readSeenPrices } from './store';
 
 export const ORDER_TOKEN_KEY = 'cs.order.token';
@@ -10,7 +11,7 @@ export type CheckoutOutcome =
   | { kind: 'blocked'; check: CartCheck; reason: 'lines' | 'price' }
   | { kind: 'error'; error: ShopError };
 
-export async function beginCheckout(origin = window.location.origin): Promise<CheckoutOutcome> {
+export async function beginCheckout(delivery?: Delivery, origin = window.location.origin): Promise<CheckoutOutcome> {
   const lines = readCart();
   if (!lines.length) return { kind: 'error', error: new ShopError('INVALID_REQUEST') };
   const shop = getShop();
@@ -24,7 +25,7 @@ export async function beginCheckout(origin = window.location.origin): Promise<Ch
     const start = await shop.startCheckout(lines, {
       success: `${origin}/narudzba/uspjeh/`,
       cancel: `${origin}/kosarica/?otkazano=1`,
-    });
+    }, delivery);
     try {
       sessionStorage.setItem(ORDER_TOKEN_KEY, start.orderToken);
     } catch {

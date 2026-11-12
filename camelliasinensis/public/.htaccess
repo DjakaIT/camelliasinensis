@@ -33,6 +33,10 @@ RewriteRule ^ - [R=503,L]
 RewriteCond %{DOCUMENT_ROOT}/.odrzavanje !-f
 RewriteRule ^odrzavanje\.html$ - [R=404,L]
 
+# Javne rute trgovine (plaćanje, stanje narudžbe, kontakt) obrađuje PHP uredništva, ali preko neutralne adrese, da se
+# adresa uredništva ne vidi u kodu stranice. Samo /api/trgovina/*; PHP i ondje provjerava izvor zahtjeva i ograničenja.
+RewriteRule ^api/trgovina/ urednistvo/index.php [END]
+
 # zivo.json (živa cijena i zaliha) zapiše uredništvo pri prvom otvaranju kataloga i svakom spremanju; dok ga nema,
 # prazan odgovor umjesto 404, da posjetitelj nema grešku u konzoli (trgovina tada koristi podatke iz gradnje)
 RewriteCond %{REQUEST_FILENAME} !-f
@@ -43,7 +47,9 @@ RewriteRule ^zivo\.json$ - [R=204,L]
 Header always set Strict-Transport-Security "max-age=31536000"
 Header always set X-Content-Type-Options "nosniff"
 Header always set Referrer-Policy "strict-origin-when-cross-origin"
-Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()"
+# geolocation=(self): "Najbliži meni" kod odabira GLS paketomata (lokacija ostaje u pregledniku)
+Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(self), payment=(), usb=(), interest-cohort=()"
+Header always set Cross-Origin-Opener-Policy "same-origin"
 # CSP je podijeljen (docs/csp.md): default-src i script-src s SHA-256 hashevima inline skripti Next.js-a su u
 # <meta> svake stranice (scripts/postbuild.mjs). Ovdje su samo direktive koje <meta> ne podržava.
 # NE dodavati default-src ni script-src ovdje: politike se presijecaju i blokirale bi hashirane inline skripte.

@@ -123,6 +123,7 @@ export const legalPages: LegalPage[] = [
 <ul>
 <li><strong>cs.cart.v1</strong> (lokalna pohrana): sadržaj košarice, samo šifre proizvoda i količine.</li>
 <li><strong>cs.prices.v1</strong> (lokalna pohrana): cijene koje ste zadnje vidjeli, da vas upozorimo ako se promijene.</li>
+<li><strong>cs.delivery.v1</strong> (lokalna pohrana): odabrani način dostave i GLS paketomat. Lokaciju za "Najbliži meni" preglednik koristi samo za izračun udaljenosti i nikamo je ne šalje.</li>
 <li><strong>cs.order.token</strong> (pohrana sesije): oznaka narudžbe dok se plaćanje potvrđuje. Briše se zatvaranjem kartice.</li>
 <li><strong>cs.demo.v1</strong> (lokalna pohrana, samo u demo verziji): probna zaliha i narudžbe.</li>
 </ul>

@@ -1,22 +1,26 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { IconArrow } from '@/components/Icons';
 import { beginCheckout } from '@/lib/cart/checkout';
-import { FREE_SHIPPING_FROM, FREE_SHIPPING_GIFT, SHIPPING_FROM_PRICE } from '@/content/site';
+import { FREE_SHIPPING_FROM, FREE_SHIPPING_GIFT } from '@/content/site';
 import { formatMoney } from '@/lib/format';
 import { useCart } from './CartContext';
 import { useCatalogIndex } from './CatalogIndex';
+import { type DeliveryChoice, DeliveryPicker, readDeliveryChoice, toDelivery } from './DeliveryPicker';
 
 /**
- * Međuzbroj, upozorenja i "Na blagajnu". Dostavu obračunava backend na stranici za plaćanje; ovdje se samo
- * prikazuje koliko nedostaje do besplatne dostave (prag je poslovni podatak, ne šalje se backendu).
+ * Međuzbroj, upozorenja, način dostave (i paketomat) i "Na blagajnu". Cijenu dostave obračunava backend; ovdje se
+ * prikazuje koliko nedostaje do besplatne dostave, a backendu ide samo odabrani način i ID paketomata.
  */
 export function CheckoutPanel() {
   const { lines, checkState, changedPrices, acceptPrices, recheck } = useCart();
   const index = useCatalogIndex();
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
+  const [delivery, setDelivery] = useState<DeliveryChoice>({ method: 'gls-adresa', locker: null });
+  useEffect(() => setDelivery(readDeliveryChoice()), []);
+  const chosen = toDelivery(delivery);
 
   const check = 'check' in checkState ? checkState.check : undefined;
   const fresh = checkState.status === 'ready';
@@ -24,12 +28,12 @@ export function CheckoutPanel() {
   const hasChanged = Object.keys(changedPrices).length > 0;
   // Do odgovora backenda prikazujemo zbroj iz builda s jasnom napomenom.
   const subtotal = check ? check.subtotal.amount : lines.reduce((s, l) => s + (index[l.sku]?.price ?? 0) * l.qty, 0);
-  const canPay = fresh && badLines.length === 0 && !hasChanged && !busy;
+  const canPay = fresh && badLines.length === 0 && !hasChanged && !busy && chosen !== null;
 
   async function pay() {
     setBusy(true);
     setError('');
-    const r = await beginCheckout();
+    const r = await beginCheckout(chosen ?? undefined);
     if (r.kind === 'redirect') {
       window.location.assign(r.url);
       return;
@@ -87,10 +91,8 @@ export function CheckoutPanel() {
           </button>
         </div>
       )}
-      <div className="x-row x-small">
-        <span>Dostava GLS</span>
-        <span>{missing > 0 ? `od ${formatMoney(SHIPPING_FROM_PRICE)}, odabir na blagajni` : 'Besplatno'}</span>
-      </div>
+      <DeliveryPicker subtotal={subtotal} value={delivery} onChange={setDelivery} />
+      {!chosen && <p className="x-small">Odaberite paketomat za nastavak.</p>}
       <button type="button" className="x-btn x-wide" onClick={pay} disabled={!canPay} aria-busy={busy}>
         {busy ? 'Preusmjeravamo…' : 'Na blagajnu'} <IconArrow />
       </button>

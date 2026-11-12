@@ -44,6 +44,35 @@ function trg_maskiraj(?string $email): ?string
     return preg_match('/^([^@\s])[^@\s]*@([^@\s]+\.[^@\s]+)$/', trim($email), $m) ? "{$m[1]}***@{$m[2]}" : null;
 }
 
+// ---------------- GLS paketomati ----------------
+/**
+ * Popis paketomata je public_html/gls/paketomati.json iz paketa stranice (scripts/gls-paketomati.mjs, javni GLS popis).
+ * Kupac šalje samo ID; naziv i adresa za narudžbu, Stripe i mail uvijek se uzimaju odavde, nikad iz zahtjeva.
+ */
+final class Paketomati
+{
+    private ?array $indeks = null;
+
+    public function __construct(private string $javno) {}
+
+    /** @return ?array{id:string, naziv:string, ulica:string, postanski:string, grad:string} */
+    public function nadji(string $id): ?array
+    {
+        if (!preg_match('/^[A-Za-z0-9-]{3,40}$/', $id)) return null;
+        if ($this->indeks === null) {
+            $this->indeks = [];
+            $d = citaj_json(rtrim($this->javno, '/\\') . '/gls/paketomati.json', []);
+            foreach (is_array($d['paketomati'] ?? null) ? $d['paketomati'] : [] as $r) {
+                if (is_array($r) && isset($r[0], $r[1], $r[2], $r[3], $r[4]) && is_string($r[0])) $this->indeks[$r[0]] = $r;
+            }
+        }
+        $r = $this->indeks[$id] ?? null;
+        return $r ? ['id' => $id, 'naziv' => (string) $r[1], 'ulica' => (string) $r[2], 'postanski' => (string) $r[3], 'grad' => (string) $r[4]] : null;
+    }
+
+    public static function oznaka(array $p): string { return "{$p['naziv']}, {$p['ulica']}, {$p['postanski']} {$p['grad']}"; }
+}
+
 // ---------------- zaliha nakon prodaje ----------------
 /**
  * Prodaje ne mijenjaju verziju kataloga (inače bi uredništvo pri svakoj prodaji javilo "netko je spremio promjene").
@@ -374,6 +403,7 @@ final class Trgovina
         private Zivo $zivo,
         private array $pravila,
         private string $origin,
+        private ?Paketomati $paketomati = null,
     ) {}
 
     /** katalog sa stvarnom zalihom (nakon prodaja) */
@@ -445,25 +475,47 @@ final class Trgovina
         return $url . (str_contains($url, '?') ? '&' : '?') . 'narudzba=' . $token;
     }
 
+    /**
+     * Odabir iz košarice: { nacin, paketomat? }. null = stariji klijent bez odabira: kupac bira način na Stripeu, a
+     * paketomat se odabire najbliži adresi kupca. Paketomat mora postojati u GLS popisu.
+     * @return ?array{nacin:string, paketomat:?array}
+     */
+    private function odabirDostave(mixed $d): ?array
+    {
+        if ($d === null) return null;
+        if (!is_array($d) || !is_string($d['nacin'] ?? null)) throw new TrgovinaGreska('INVALID_REQUEST', 400);
+        $ids = array_map(fn ($x) => $x['id'], $this->pravila['dostava']);
+        if (!in_array($d['nacin'], $ids, true)) throw new TrgovinaGreska('INVALID_REQUEST', 400);
+        if ($d['nacin'] !== 'gls-paketomat') return ['nacin' => $d['nacin'], 'paketomat' => null];
+        $p = is_string($d['paketomat'] ?? null) && $this->paketomati ? $this->paketomati->nadji($d['paketomat']) : null;
+        if (!$p) throw new TrgovinaGreska('INVALID_REQUEST', 400, ['field' => 'paketomat']);
+        return ['nacin' => 'gls-paketomat', 'paketomat' => $p];
+    }
+
     /** startCheckout (API-CONTRACT §3.4): sve ponovno provjeri, stvori narudžbu i Stripe sesiju */
     public function zapocni(array $tijelo): array
     {
         $urls = is_array($tijelo['urls'] ?? null) ? $tijelo['urls'] : [];
         if (!$this->dopustenUrl($urls['success'] ?? null) || !$this->dopustenUrl($urls['cancel'] ?? null)) throw new TrgovinaGreska('INVALID_REQUEST', 400);
         $obr = $this->obracunaj($tijelo['lines'] ?? null);
+        $odabir = $this->odabirDostave($tijelo['dostava'] ?? null);
         $stripe = $this->placanje->stripe();
         if (!$stripe || !$this->placanje->tajne()) throw new TrgovinaGreska('CHECKOUT_UNAVAILABLE', 503);
 
         $besplatno = $obr['medjuzbroj'] >= $this->pravila['besplatnaDostavaOd'];
         $poklon = $besplatno && $this->pravila['poklon'] !== '' ? $this->pravila['poklon'] : null;
-        $n = $this->narudzbe->nova(['stavke' => $obr['stavke'], 'medjuzbroj' => $obr['medjuzbroj'], 'poklon' => $poklon]);
+        $paketomat = $odabir['paketomat'] ?? null;
+        $n = $this->narudzbe->nova(['stavke' => $obr['stavke'], 'medjuzbroj' => $obr['medjuzbroj'], 'poklon' => $poklon,
+            'paketomat' => $paketomat ? Paketomati::oznaka($paketomat) . " (GLS {$paketomat['id']})" : null]);
         $opcije = [];
         foreach ($this->pravila['dostava'] as $d) {
+            if ($odabir && $d['id'] !== $odabir['nacin']) continue; // samo način odabran u košarici
             $cijena = $besplatno ? 0 : (int) $d['price'];
             $opcije[] = ['shipping_rate_data' => [
                 'type' => 'fixed_amount',
                 'fixed_amount' => ['amount' => $cijena, 'currency' => 'eur'],
-                'display_name' => $besplatno ? "{$d['name']} (besplatno od " . trg_eur($this->pravila['besplatnaDostavaOd']) . ')' : $d['name'],
+                'display_name' => ($paketomat ? "{$d['name']}: {$paketomat['naziv']}, {$paketomat['grad']}" : (!$odabir && $d['id'] === 'gls-paketomat' ? "{$d['name']} najbliži vašoj adresi" : $d['name']))
+                    . ($besplatno ? ' (besplatno od ' . trg_eur($this->pravila['besplatnaDostavaOd']) . ')' : ''),
                 'metadata' => ['dostava' => $d['id']],
                 'delivery_estimate' => ['minimum' => ['unit' => 'business_day', 'value' => 1], 'maximum' => ['unit' => 'business_day', 'value' => $d['id'] === 'gls-adresa' ? 3 : 2]],
             ]];
@@ -502,11 +554,13 @@ final class Trgovina
                     'logo' => ['type' => 'url', 'url' => $this->origin . '/apple-touch-icon.png'],
                     'icon' => ['type' => 'url', 'url' => $this->origin . '/apple-touch-icon.png'],
                 ],
-                'shipping_address_collection' => ['allowed_countries' => ['HR']],
+                // paketomat: adresa samo za račun, paket ide u odabrani paketomat (piše iznad gumba za plaćanje)
+                ...($paketomat
+                    ? ['billing_address_collection' => 'required', 'custom_text' => ['submit' => ['message' => mb_substr('Paket šaljemo u GLS paketomat: ' . Paketomati::oznaka($paketomat) . '. GLS vam SMS-om javi kad stigne i pošalje kod za otvaranje.', 0, 1000)]]]
+                    : ['shipping_address_collection' => ['allowed_countries' => ['HR']]]),
                 'shipping_options' => $opcije,
                 'phone_number_collection' => ['enabled' => 'true'],
                 'tax_id_collection' => ['enabled' => 'true'], // tvrtke: naziv i OIB (PDV broj) za R1 račun
-                'custom_fields' => [['key' => 'paketomat', 'type' => 'text', 'optional' => 'true', 'label' => ['type' => 'custom', 'custom' => 'Paketomat (samo za dostavu u paketomat)']]],
                 'success_url' => self::sNarudzbom((string) $urls['success'], $n['token']), // naš token, ne ID Stripe sesije
                 'cancel_url' => (string) $urls['cancel'],
             ], 'cs-' . $n['id'] . '-' . substr($n['token'], 0, 16)); // jedinstveno i ako se brojač narudžbi ikad vrati
@@ -586,8 +640,7 @@ final class Trgovina
         $sd = is_array($ci['shipping_details'] ?? null) ? $ci['shipping_details'] : (is_array($s['shipping_details'] ?? null) ? $s['shipping_details'] : []);
         $adr = is_array($sd['address'] ?? null) ? $sd['address'] : [];
         $rate = $s['shipping_cost']['shipping_rate'] ?? null;
-        $paketomat = null;
-        foreach ($s['custom_fields'] ?? [] as $cf) if (($cf['key'] ?? '') === 'paketomat') $paketomat = trim((string) ($cf['text']['value'] ?? '')) ?: null;
+        if (!$adr && is_array($kd['address'] ?? null)) $adr = $kd['address']; // paketomat: adresa za račun
         $oib = [];
         foreach ($kd['tax_ids'] ?? [] as $t) if (is_string($t['value'] ?? null)) $oib[] = $t['value'];
         $podaci = [
@@ -605,7 +658,6 @@ final class Trgovina
                 'grad' => (string) ($adr['city'] ?? ''),
                 'drzava' => (string) ($adr['country'] ?? ''),
             ],
-            'paketomat' => $paketomat,
             'dostava' => [
                 'id' => is_array($rate) ? (string) ($rate['metadata']['dostava'] ?? '') : '',
                 'naziv' => is_array($rate) ? (string) ($rate['display_name'] ?? 'Dostava') : 'Dostava',
@@ -620,7 +672,9 @@ final class Trgovina
         $n = $this->narudzbe->izmijeni($id, function ($x) use ($podaci, $dogadajId, &$upravo) {
             if ($x['stanje'] === 'paid') return null;
             $upravo = true;
-            return [...$x, ...$podaci, 'stanje' => 'paid', 'dogadaji' => array_slice([...($x['dogadaji'] ?? []), $dogadajId], -20)];
+            // paketomat je zapisan pri stvaranju narudžbe; stariji klijent bez odabira: najbliži adresi kupca
+            $paketomat = $x['paketomat'] ?? (($podaci['dostava']['id'] ?? '') === 'gls-paketomat' ? 'najbliži adresi kupca (odaberi pri slanju)' : null);
+            return [...$x, ...$podaci, 'paketomat' => $paketomat, 'stanje' => 'paid', 'dogadaji' => array_slice([...($x['dogadaji'] ?? []), $dogadajId], -20)];
         });
         if (!$upravo || !$n) return null;
         // zaliha: jednom po narudžbi; ako je u međuvremenu netko kupio zadnje komade, narudžba je plaćena,
@@ -685,8 +739,9 @@ final class Trgovina
                 . '<td valign="top" style="padding:8px 0;font-size:14px;color:#272a20"><b>' . $e(mb_strtoupper(mb_substr($n['poklon'], 0, 1)) . mb_substr($n['poklon'], 1)) . '</b><br><span style="color:#8a6d14">poklon uz besplatnu dostavu</span></td>'
                 . '<td valign="top" align="right" style="padding:8px 0;font-size:14px;color:#272a20">0,00 €</td></tr>';
         }
-        $adresa = implode('<br>', array_map($e, array_filter([$a['ime'] ?? '', $a['ulica'] ?? '', trim(($a['postanski'] ?? '') . ' ' . ($a['grad'] ?? ''))])))
-            . (!empty($n['paketomat']) ? '<br><b>Paketomat:</b> ' . $e($n['paketomat']) : '');
+        $adresaKupca = implode('<br>', array_map($e, array_filter([$a['ime'] ?? '', $a['ulica'] ?? '', trim(($a['postanski'] ?? '') . ' ' . ($a['grad'] ?? ''))])));
+        $uPaketomat = !empty($n['paketomat']);
+        $adresa = $uPaketomat ? '<b>GLS paketomat:</b> ' . $e($n['paketomat']) . ($adresaKupca !== '' ? '<br><span style="color:#6b6b5f">Kupac: ' . $adresaKupca . '</span>' : '') : $adresaKupca;
 
         if ($zaTrgovinu) {
             $naslov = 'Nova narudžba ' . $e($n['id']) . ($test ? ' <span style="color:#8a6d14">(TEST)</span>' : '');
@@ -698,7 +753,7 @@ final class Trgovina
                 . '<p style="margin:0 0 4px;font-size:14px"><a href="mailto:' . $e($k['email'] ?? '') . '" style="color:#3b432e">' . $e($k['email'] ?? '') . '</a></p>'
                 . ($kupacTel !== '' ? '<p style="margin:0 0 4px;font-size:14px">Telefon: <a href="tel:' . $e(preg_replace('/[^0-9+]/', '', $kupacTel)) . '" style="color:#3b432e;font-weight:bold">' . $e($kupacTel) . '</a></p>' : '')
                 . (!empty($k['tvrtka']) || !empty($k['oib']) ? '<p style="margin:0 0 4px;font-size:14px">R1 račun: ' . $e(trim(($k['tvrtka'] ?? '') . ' ' . ($k['oib'] ?? ''))) . '</p>' : '');
-            $kraj = '<p style="margin:0;font-size:14px"><a href="' . $e($o) . '/urednistvo" style="color:#3b432e;font-weight:bold">Sve narudžbe u uredništvu</a> (☰ → Narudžbe)</p>';
+            $kraj = '<p style="margin:0;font-size:14px;color:#272a20">Odgovorom na ovaj e-mail pišete izravno kupcu.</p>';
         } else {
             $naslov = 'Hvala na narudžbi!';
             $uvod = '<p style="margin:0 0 4px;font-size:15px;color:#272a20">Narudžba <b>' . $e($n['id']) . '</b> je plaćena' . ($test ? ' (probna)' : '') . '. Javit ćemo vam se kad pošiljka krene.</p>';
@@ -721,7 +776,7 @@ final class Trgovina
             . $red('Dostava: ' . $e($n['dostava']['naziv'] ?? ''), (int) ($n['dostava']['cijena'] ?? 0) === 0 ? 'besplatno' : $e(trg_eur((int) $n['dostava']['cijena'])))
             . $red('Ukupno plaćeno', $e(trg_eur((int) $n['ukupno'])), true)
             . '</table>'
-            . '<p style="margin:20px 0 4px;font-size:13px;color:#6b6b5f;text-transform:uppercase;letter-spacing:.08em">Dostava na</p>'
+            . '<p style="margin:20px 0 4px;font-size:13px;color:#6b6b5f;text-transform:uppercase;letter-spacing:.08em">' . ($uPaketomat ? 'Dostava u paketomat' : 'Dostava na') . '</p>'
             . '<p style="margin:0 0 20px;font-size:14px;color:#272a20;line-height:1.5">' . $adresa . '</p>'
             . '<div style="border-top:1px solid #e2d9c6;padding-top:16px">' . $kraj . '</div>'
             . '</td></tr>'
@@ -733,7 +788,7 @@ final class Trgovina
     {
         $a = $n['adresa'] ?? [];
         $r = array_filter([$a['ime'] ?? '', $a['ulica'] ?? '', trim(($a['postanski'] ?? '') . ' ' . ($a['grad'] ?? ''))]);
-        if (!empty($n['paketomat'])) $r[] = "Paketomat: {$n['paketomat']}";
+        if (!empty($n['paketomat'])) array_unshift($r, "GLS paketomat: {$n['paketomat']}");
         return '  ' . implode("\n  ", $r);
     }
 
@@ -756,7 +811,7 @@ final class Trgovina
             . "\n\nNaručeno:\n" . implode("\n", array_map(fn ($s) => "  {$s['kol']} × {$s['naziv']} [{$s['sku']}] — " . trg_eur($s['iznos']), $n['stavke']))
             . (!empty($n['poklon']) ? "\n  1 × {$n['poklon']} — POKLON (stavi u paket)" : '')
             . "\n$dostava\nUkupno plaćeno: " . trg_eur((int) $n['ukupno'])
-            . "\n\nSve narudžbe: {$this->origin}/urednistvo (☰ → Narudžbe)\n";
+            . "\n";
         $okTrgovina = $posta->posalji($this->placanje->emailTrgovine(), "Nova narudžba {$n['id']} · " . trg_eur((int) $n['ukupno']) . $test, $trgovina, $k['email'] ?? null, $this->htmlMail($n, true));
         $this->narudzbe->izmijeni($n['id'], fn ($x) => [...$x, 'mail' => ['kupac' => $okKupac, 'trgovina' => $okTrgovina]]);
     }
