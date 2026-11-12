@@ -8,6 +8,9 @@ export type ShippingMethod = { id: ShippingMethodId; name: string; description: 
 /** Besplatna dostava za narudžbe od 50 € (Daniel, 2. 11. 2026.). Cijene dostave su PRIMJERI iz prototipa [ODLUKA: GLS ugovor]. */
 export const FREE_SHIPPING_FROM = 5000;
 
+/** Uz besplatnu dostavu (od FREE_SHIPPING_FROM) ide i poklon (Daniel, 12. 11. 2026.). Naziv vidi kupac na stranici, u Stripeu i u mailu. */
+export const FREE_SHIPPING_GIFT = 'platnena torba Camellia sinensis';
+
 export const SHIPPING_METHODS: readonly ShippingMethod[] = [
   { id: 'gls-paketomat', name: 'GLS paketomat', description: 'Preuzimanje u odabranom paketomatu, 1–2 radna dana', price: 390 },
   { id: 'gls-adresa', name: 'GLS na adresu', description: 'Dostava na kućnu ili poslovnu adresu, 1–3 radna dana', price: 490 },

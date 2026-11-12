@@ -12,13 +12,16 @@ import { Header } from '@/components/Header';
 import { Reveal } from '@/components/Reveal';
 import { DUMMY_CONTENT, hasContact, SHOP_NAME, SITE_URL } from '@/content/site';
 import { getCards } from '@/lib/catalog-server';
+import { storeJsonLd } from '@/lib/jsonld';
 import { isDemoBuild, isIndexable } from '@/lib/shop';
 import catalogFixture from '@/fixtures/products.json';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: { default: `${SHOP_NAME} | Čaj i pribor za čaj online, Zagreb`, template: `%s | ${SHOP_NAME}` },
+  title: { default: `Trgovina čaja u Zagrebu i čajevi online | ${SHOP_NAME}`, template: `%s | ${SHOP_NAME}` },
   applicationName: SHOP_NAME,
+  // zadana slika za dijeljenje (Facebook, WhatsApp, LinkedIn); stranice proizvoda imaju svoju fotografiju
+  openGraph: { type: 'website', locale: 'hr_HR', siteName: SHOP_NAME, images: [{ url: '/img/hero/hero-tea.jpg' }] },
   // Demo build se nikad ne indeksira (START-PROMPT M8).
   robots: isIndexable() ? { index: true, follow: true } : { index: false, follow: false },
   icons: { icon: [{ url: '/favicon.svg', type: 'image/svg+xml' }], apple: '/apple-touch-icon.png' },
@@ -71,6 +74,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           </CartProvider>
         </CatalogIndexProvider>
         <Reveal />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: storeJsonLd() }} />
       </body>
     </html>
   );

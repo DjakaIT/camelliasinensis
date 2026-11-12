@@ -1,19 +1,23 @@
 import Link from 'next/link';
+import { Faq } from '@/components/home/Faq';
 import { Shelf } from '@/components/home/Shelf';
 import { TeinMeter } from '@/components/home/TeinMeter';
 import { IconArrow, IconGlobe, IconHand, IconLeaf, IconTruck } from '@/components/Icons';
 import { Picture } from '@/components/Picture';
+import { FAQ } from '@/content/faq';
 import { brandStory, FEATURED_SKUS, FREE_SHIPPING_FROM } from '@/content/site';
 import { getCards } from '@/lib/catalog-server';
+import { faqJsonLd } from '@/lib/jsonld';
 import { formatMoney } from '@/lib/format';
 import { isDarkType, typeColor } from '@/lib/labels';
 import { getTypes } from '@/lib/shop/catalog';
 import { pageMeta } from '@/lib/seo';
 
 export const metadata = pageMeta({
-  title: 'Camellia sinensis | Čaj i pribor za čaj online, Zagreb',
+  // ciljani upiti: trgovina čaja Zagreb, čajevi online, čaj Hrvatska (naslov do ~60 znakova, opis do ~155)
+  title: 'Trgovina čaja u Zagrebu i čajevi online | Camellia sinensis',
   description:
-    "Camellia sinensis, trgovina čaja u Zagrebu: bijeli, zeleni, oolong, crni, pu'er i biljni čajevi te pribor za pripremu. Besplatna dostava od 50 €.",
+    "Rastresiti čajevi i pribor iz trgovine čaja u Zagrebu: bijeli, zeleni, oolong, crni, pu'er i biljni. Dostava po cijeloj Hrvatskoj, besplatna od 50 €.",
   path: '/',
 });
 
@@ -73,8 +77,8 @@ export default async function Home() {
           </h1>
           <div className="bottom">
             <p>
-              Bijeli, zeleni, oolong, crni, pu&apos;er i biljni čajevi te pribor za pripremu. Dostava GLS-om u cijelu Hrvatsku,
-              besplatna od {freeFrom}.
+              Trgovina čaja u Zagrebu: bijeli, zeleni, oolong, crni, pu&apos;er i biljni čajevi te pribor za pripremu. Dostava
+              GLS-om u cijelu Hrvatsku, besplatna od {freeFrom}.
             </p>
             <div className="btns">
               <Link href="/katalog/" className="pill gold">
@@ -201,11 +205,14 @@ export default async function Home() {
             </span>
             <span>
               <b>Besplatna dostava od {freeFrom}</b>
-              GLS na adresu ili u paketomat, u cijeloj Hrvatskoj
+              uz platnenu torbu na poklon; GLS na adresu ili u paketomat, u cijeloj Hrvatskoj
             </span>
           </div>
         </div>
       </section>
+
+      <Faq items={FAQ} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: faqJsonLd(FAQ) }} />
     </div>
   );
 }

@@ -76,7 +76,7 @@ test('podnožje: Instagram, kontakt i pravne stranice; sve vode na 200', async (
 test('pravne stranice imaju sadržaj i oznaku nacrta u demo/probnoj izvedbi', async ({ page }) => {
   await page.goto('/povrat/');
   await expect(page.getByRole('heading', { level: 1, name: 'Dostava i povrat' })).toBeVisible();
-  await expect(page.getByText('Besplatna dostava za narudžbe od 50 €.')).toBeVisible();
+  await expect(page.getByText('Besplatna dostava za narudžbe od 50 €, uz poklon (platnena torba Camellia sinensis).')).toBeVisible();
   await expect(page.getByText('Nacrt teksta za demo verziju', { exact: false })).toBeVisible();
 });
 

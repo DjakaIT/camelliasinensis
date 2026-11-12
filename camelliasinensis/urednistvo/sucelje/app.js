@@ -973,7 +973,8 @@ async function dijalogNarudzbi() {
           h('p', {}, `${n.dostava?.naziv ?? 'Dostava'}: `, [a.ime, a.ulica, [a.postanski, a.grad].filter(Boolean).join(' ')].filter(Boolean).join(', '),
             n.paketomat ? h('span', {}, h('br'), `Paketomat: ${n.paketomat}`) : null),
           n.mail && (!n.mail.kupac || !n.mail.trgovina) ? h('p', { class: 'poruka upozorenje' }, `Mail ${!n.mail.kupac ? 'kupcu' : 'trgovini'} nije poslan (provjeri e-mail u ☰ → Plaćanje).`) : null) : null,
-        h('ul', { class: 'stavke-narudzbe' }, (n.stavke ?? []).map((s) => h('li', {}, `${s.kol} × ${s.naziv}${s.pakiranje ? ` (${s.pakiranje})` : ''}`, h('span', {}, centi(s.iznos))))),
+        h('ul', { class: 'stavke-narudzbe' }, (n.stavke ?? []).map((s) => h('li', {}, `${s.kol} × ${s.naziv}${s.pakiranje ? ` (${s.pakiranje})` : ''}`, h('span', {}, centi(s.iznos)))),
+          n.poklon ? h('li', { class: 'poklon' }, h('strong', {}, `1 × ${n.poklon} — POKLON, stavi u paket`), h('span', {}, '0,00 €')) : null),
         n.stanje === 'paid' ? h('p', { class: 'zbroj' }, `Proizvodi ${centi(n.medjuzbroj)} + dostava ${centi(n.dostava?.cijena ?? 0)} = `, h('strong', {}, centi(n.ukupno))) : null,
         poslano));
   };
@@ -998,7 +999,7 @@ async function dijalogPlacanja() {
     e.preventDefault(); porukaGreske(greska, '');
     const gumb = $('button[type=submit]', forma); gumb.disabled = true; gumb.textContent = 'Provjeravam sa Stripeom…';
     try {
-      const o = await api('POST', '/placanje', { kljuc: forma.kljuc.value, emailTrgovine: forma.emailTrgovine.value, posiljatelj: forma.posiljatelj.value });
+      const o = await api('POST', '/placanje', { kljuc: forma.kljuc.value, emailTrgovine: forma.emailTrgovine.value, posiljatelj: forma.posiljatelj.value, telefonTrgovine: forma.telefonTrgovine.value });
       d.close();
       obavijest(o.ukljuceno ? `Plaćanje je uključeno (${o.nacin === 'live' ? 'PRAVI novac' : 'testni način'}). Webhook je postavljen u Stripeu.` : 'Postavke su spremljene.', { trajanje: 10000 });
     } catch (err) { porukaGreske(greska, err.message); gumb.disabled = false; gumb.textContent = 'Spremi i provjeri'; }
@@ -1011,6 +1012,8 @@ async function dijalogPlacanja() {
   h('label', { class: 'polje' }, h('span', {}, 'Pošiljatelj mailova kupcima'),
     h('input', { name: 'posiljatelj', type: 'email', autocomplete: 'off', value: p.posiljatelj ?? '', placeholder: 'prazno = isti kao e-mail trgovine' }),
     h('small', {}, 'Mora biti adresa na domeni camelliasinensis.eu otvorena u Hostingeru (Emails), inače mailovi završe u neželjenoj pošti ili se ne pošalju.')),
+  h('label', { class: 'polje' }, h('span', {}, 'Telefon trgovine (u mailu kupcu, za pitanja o narudžbi)'),
+    h('input', { name: 'telefonTrgovine', type: 'tel', autocomplete: 'off', value: p.telefonTrgovine ?? '', placeholder: 'npr. +385 1 234 5678' })),
   greska,
   h('button', { class: 'gumb glavni', type: 'submit' }, 'Spremi i provjeri'));
   const iskljuci = h('button', { class: 'gumb opasno', type: 'button', hidden: !p.kljucKraj, onclick: async () => {

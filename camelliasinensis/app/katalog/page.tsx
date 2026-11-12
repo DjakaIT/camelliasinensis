@@ -5,7 +5,7 @@ import { getTypes } from '@/lib/shop/catalog';
 import { pageMeta } from '@/lib/seo';
 
 export const metadata = pageMeta({
-  title: 'Katalog čaja i pribora',
+  title: 'Katalog čajeva: bijeli, zeleni, oolong, crni i pu’er čaj',
   description:
     "Katalog trgovine Camellia sinensis: bijeli, zeleni, oolong, crni, pu'er, aromatizirani i biljni čajevi te pribor. Filtrirajte po vrsti, okusu, teinu i namjeni.",
   path: '/katalog/',

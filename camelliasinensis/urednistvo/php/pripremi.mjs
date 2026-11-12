@@ -7,7 +7,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import sharp from 'sharp';
 import { CONTACT_TOPICS } from '../../lib/contact/topics.ts';
-import { FREE_SHIPPING_FROM, SHIPPING_METHODS } from '../../lib/shop/shipping.ts';
+import { FREE_SHIPPING_FROM, FREE_SHIPPING_GIFT, SHIPPING_METHODS } from '../../lib/shop/shipping.ts';
 import { NAJVISE_NA_POLICI, NAJVISE_PO_NARUDZBI, NAMJENE, OBLICI, OKUSI, OZNAKE, pocetniKatalog, TEIN } from '../katalog.mjs';
 import { ROOT } from '../lib/postavke.mjs';
 
@@ -31,6 +31,7 @@ export async function pripremi(izlaz, { origin = SITE_URL } = {}) {
         trgovina: {
           dostava: SHIPPING_METHODS.map((m) => ({ id: m.id, name: m.name, price: m.price })),
           besplatnaDostavaOd: FREE_SHIPPING_FROM,
+          poklon: FREE_SHIPPING_GIFT, // uz besplatnu dostavu
           najvisePoNarudzbi: NAJVISE_PO_NARUDZBI,
           kontaktTeme: CONTACT_TOPICS,
         },

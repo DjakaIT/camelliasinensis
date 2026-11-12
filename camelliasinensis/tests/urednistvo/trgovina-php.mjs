@@ -162,7 +162,9 @@ try {
   await str.locator('#phoneNumber').fill('912345678');
   await str.locator('input[name="paketomat"]').fill('GLS paketomat Ilica');
   // načini plaćanja: odaberi "Kartica" (polja kartice se tada otvore)
-  await str.locator('[data-testid="card-accordion-item-button"]').dispatchEvent('click'); // prozirni gumb preko retka
+  // samo kartica: Stripe odmah prikaže polja; ako ipak ponudi više načina, odaberi karticu
+  const kartica = str.locator('[data-testid="card-accordion-item-button"]');
+  if (await kartica.count()) await kartica.dispatchEvent('click');
   await str.locator('#cardNumber').waitFor({ timeout: 20_000 });
   await str.locator('#cardNumber').fill('4242424242424242');
   await str.locator('#cardExpiry').fill('12 / 34');

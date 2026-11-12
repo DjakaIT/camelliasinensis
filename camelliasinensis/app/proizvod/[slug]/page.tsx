@@ -11,7 +11,7 @@ import { CAFFEINE, FLAVORS, FORMS, typeColor } from '@/lib/labels';
 import { htmlToText, sanitizeDescription } from '@/lib/sanitize';
 import { absoluteUrl, pageMeta } from '@/lib/seo';
 import { getProductBySlug, getProducts, getType } from '@/lib/shop/catalog';
-import { productJsonLd } from '@/lib/jsonld';
+import { breadcrumbJsonLd, productJsonLd } from '@/lib/jsonld';
 
 export const dynamicParams = false;
 
@@ -107,7 +107,7 @@ export default async function ProductPage({ params }: Props) {
             <ul className="x-perks">
               <li>
                 <IconTruck />
-                Dostava GLS-om, besplatno od {formatMoney(FREE_SHIPPING_FROM)}
+                Dostava GLS-om, besplatno od {formatMoney(FREE_SHIPPING_FROM)} uz platnenu torbu na poklon
               </li>
               <li>
                 <IconCard />
@@ -186,6 +186,17 @@ export default async function ProductPage({ params }: Props) {
         )}
       </div>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd }} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: breadcrumbJsonLd([
+            { name: 'Početna', path: '/' },
+            { name: 'Katalog', path: '/katalog/' },
+            { name: typeName, path: `/katalog/${p.type}/` },
+            { name: p.name, path: `/proizvod/${p.slug}/` },
+          ]),
+        }}
+      />
     </section>
   );
 }

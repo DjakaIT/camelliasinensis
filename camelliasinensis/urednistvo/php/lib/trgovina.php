@@ -208,6 +208,7 @@ final class Placanje
     public function tajne(): array { return array_values(array_filter([$this->p()['webhookTajna'] ?? null], 'is_string')); }
     public function emailTrgovine(): ?string { $e = $this->p()['emailTrgovine'] ?? null; return is_string($e) && $e !== '' ? $e : null; }
     public function posiljatelj(): ?string { $e = $this->p()['posiljatelj'] ?? null; return is_string($e) && $e !== '' ? $e : $this->emailTrgovine(); }
+    public function telefon(): ?string { $t = $this->p()['telefonTrgovine'] ?? null; return is_string($t) && $t !== '' ? $t : null; }
     public function webhookUrl(): string { return $this->origin . '/urednistvo/api/stripe/webhook'; }
 
     /** za uredništvo: nikad ključ ni tajna, samo način i zadnja četiri znaka */
@@ -223,6 +224,7 @@ final class Placanje
             'webhookUrl' => $this->webhookUrl(),
             'emailTrgovine' => $p['emailTrgovine'] ?? '',
             'posiljatelj' => $p['posiljatelj'] ?? '',
+            'telefonTrgovine' => $p['telefonTrgovine'] ?? '',
             'provjereno' => $p['provjereno'] ?? null,
         ];
     }
@@ -244,6 +246,9 @@ final class Placanje
         $p = $this->p();
         $p['emailTrgovine'] = self::email($b['emailTrgovine'] ?? ($p['emailTrgovine'] ?? ''), 'E-mail trgovine');
         $p['posiljatelj'] = self::email($b['posiljatelj'] ?? ($p['posiljatelj'] ?? ''), 'Pošiljatelj');
+        $tel = is_string($b['telefonTrgovine'] ?? null) ? trim($b['telefonTrgovine']) : (string) ($p['telefonTrgovine'] ?? '');
+        if ($tel !== '' && !preg_match('#^\+?[0-9 ()/-]{6,30}$#', $tel)) throw new Greska(422, 'Telefon trgovine: samo brojke, razmaci, +, -, / i zagrade.');
+        $p['telefonTrgovine'] = $tel;
         $kljuc = is_string($b['kljuc'] ?? null) ? trim($b['kljuc']) : '';
         if ($kljuc !== '') {
             if (!Stripe::ispravanKljuc($kljuc)) throw new Greska(422, 'Ključ mora počinjati s rk_live_, rk_test_, sk_live_ ili sk_test_.');
@@ -325,22 +330,31 @@ final class Posta
         return is_string($a) && $a !== '' && !preg_match('/[\r\n]/', $a) && filter_var($a, FILTER_VALIDATE_EMAIL) ? $a : null;
     }
 
-    /** običan tekstualni mail (UTF-8); false ako ga poslužitelj nije prihvatio */
-    public function posalji(?string $za, string $naslov, string $tekst, ?string $odgovoriNa = null): bool
+    /** mail u UTF-8: običan tekst, a uz $html i HTML inačica (multipart/alternative); false ako ga poslužitelj nije prihvatio */
+    public function posalji(?string $za, string $naslov, string $tekst, ?string $odgovoriNa = null, ?string $html = null): bool
     {
         $za = self::adresa($za);
         $od = self::adresa($this->posiljatelj);
         if (!$za || !$od) return false;
+        $b64 = static fn (string $s): string => chunk_split(base64_encode(str_replace(["\r\n", "\n"], ["\n", "\r\n"], $s)));
         $zag = [
             'From: ' . mb_encode_mimeheader('Camellia sinensis', 'UTF-8', 'B') . " <$od>",
             'MIME-Version: 1.0',
-            'Content-Type: text/plain; charset=UTF-8',
-            'Content-Transfer-Encoding: base64',
             'X-Mailer: camellia-trgovina',
         ];
+        if ($html === null) {
+            $zag[] = 'Content-Type: text/plain; charset=UTF-8';
+            $zag[] = 'Content-Transfer-Encoding: base64';
+            $tijelo = $b64($tekst);
+        } else {
+            $granica = 'cs-' . bin2hex(random_bytes(12));
+            $zag[] = "Content-Type: multipart/alternative; boundary=\"$granica\"";
+            $tijelo = "--$granica\r\nContent-Type: text/plain; charset=UTF-8\r\nContent-Transfer-Encoding: base64\r\n\r\n" . $b64($tekst)
+                . "--$granica\r\nContent-Type: text/html; charset=UTF-8\r\nContent-Transfer-Encoding: base64\r\n\r\n" . $b64($html)
+                . "--$granica--\r\n";
+        }
         if ($r = self::adresa($odgovoriNa)) $zag[] = "Reply-To: $r";
         $naslov = mb_encode_mimeheader(str_replace(["\r", "\n"], ' ', $naslov), 'UTF-8', 'B');
-        $tijelo = chunk_split(base64_encode(str_replace("\n", "\r\n", $tekst)));
         $ok = @mail($za, $naslov, $tijelo, implode("\r\n", $zag), "-f$od");
         if (!$ok) $ok = @mail($za, $naslov, $tijelo, implode("\r\n", $zag)); // neki poslužitelji ne dopuštaju -f
         if (!$ok) error_log('[trgovina] mail nije poslan (' . substr(hash('sha256', $za), 0, 8) . ')');
@@ -408,7 +422,7 @@ final class Trgovina
             if ($kol > $ima) throw new TrgovinaGreska('INSUFFICIENT_STOCK', 409, ['sku' => $sku, 'availableQty' => $ima]);
             $cijena = (int) round(((float) $p['cijena']) * 100);
             if ($cijena <= 0) throw new TrgovinaGreska('UNPUBLISHED', 409, ['sku' => $sku, 'availableQty' => null]);
-            $stavke[] = ['sku' => $sku, 'naziv' => (string) $p['naziv'], 'pakiranje' => (string) ($p['pakiranje'] ?? ''), 'kol' => $kol, 'cijena' => $cijena, 'iznos' => $cijena * $kol];
+            $stavke[] = ['sku' => $sku, 'naziv' => (string) $p['naziv'], 'pakiranje' => (string) ($p['pakiranje'] ?? ''), 'kol' => $kol, 'cijena' => $cijena, 'iznos' => $cijena * $kol, 'slika' => !empty($p['slika'])];
             $medjuzbroj += $cijena * $kol;
         }
         return ['stavke' => $stavke, 'medjuzbroj' => $medjuzbroj];
@@ -422,6 +436,9 @@ final class Trgovina
         $izvor = strtolower("{$u['scheme']}://{$u['host']}" . (isset($u['port']) ? ":{$u['port']}" : ''));
         return $izvor === strtolower($this->origin);
     }
+
+    /** fotografija proizvoda (JPG, do ~50 KB) za Stripe i mailove; gradnja je uvijek izradi uz ostale verzije */
+    private function slikaProizvoda(string $sku): string { return $this->origin . '/img/p/' . rawurlencode($sku) . '.jpg'; }
 
     private static function sNarudzbom(string $url, string $token): string
     {
@@ -437,8 +454,9 @@ final class Trgovina
         $stripe = $this->placanje->stripe();
         if (!$stripe || !$this->placanje->tajne()) throw new TrgovinaGreska('CHECKOUT_UNAVAILABLE', 503);
 
-        $n = $this->narudzbe->nova(['stavke' => $obr['stavke'], 'medjuzbroj' => $obr['medjuzbroj']]);
         $besplatno = $obr['medjuzbroj'] >= $this->pravila['besplatnaDostavaOd'];
+        $poklon = $besplatno && $this->pravila['poklon'] !== '' ? $this->pravila['poklon'] : null;
+        $n = $this->narudzbe->nova(['stavke' => $obr['stavke'], 'medjuzbroj' => $obr['medjuzbroj'], 'poklon' => $poklon]);
         $opcije = [];
         foreach ($this->pravila['dostava'] as $d) {
             $cijena = $besplatno ? 0 : (int) $d['price'];
@@ -457,11 +475,33 @@ final class Trgovina
                 'client_reference_id' => $n['id'],
                 'metadata' => ['narudzba' => $n['id']],
                 'payment_intent_data' => ['metadata' => ['narudzba' => $n['id']]],
-                'line_items' => array_map(fn ($s) => ['quantity' => $s['kol'], 'price_data' => [
-                    'currency' => 'eur',
-                    'unit_amount' => $s['cijena'], // iz kataloga poslužitelja, nikad iz zahtjeva
-                    'product_data' => ['name' => mb_substr($s['naziv'] . ($s['pakiranje'] !== '' ? " ({$s['pakiranje']})" : ''), 0, 250), 'metadata' => ['sku' => $s['sku']]],
-                ]], $obr['stavke']),
+                'line_items' => [
+                    ...array_map(fn ($s) => ['quantity' => $s['kol'], 'price_data' => [
+                        'currency' => 'eur',
+                        'unit_amount' => $s['cijena'], // iz kataloga poslužitelja, nikad iz zahtjeva
+                        'product_data' => [
+                            'name' => mb_substr($s['naziv'] . ($s['pakiranje'] !== '' ? " ({$s['pakiranje']})" : ''), 0, 250),
+                            'metadata' => ['sku' => $s['sku']],
+                            ...($s['slika'] ? ['images' => [$this->slikaProizvoda($s['sku'])]] : []),
+                        ],
+                    ]], $obr['stavke']),
+                    // poklon uz besplatnu dostavu: stavka od 0 € da ga kupac vidi i na Stripeovoj stranici
+                    ...($poklon ? [['quantity' => 1, 'price_data' => ['currency' => 'eur', 'unit_amount' => 0, 'product_data' => ['name' => mb_strtoupper(mb_substr($poklon, 0, 1)) . mb_substr($poklon, 1) . ' (poklon)']]]] : []),
+                ],
+                // samo kartice (Visa, Mastercard, Maestro) s Apple Payem i Google Payem; bez Linka i ostalih načina
+                'payment_method_types' => ['card'],
+                'payment_method_options' => ['card' => ['restrictions' => ['brands_blocked' => ['american_express', 'discover_global_network']]]],
+                'wallet_options' => ['link' => ['display' => 'never']],
+                // izgled kao stranica: krem pozadina, maslinasti gumb, font Inter (podržava hrvatski), naš znak
+                'branding_settings' => [
+                    'display_name' => 'Camellia sinensis',
+                    'background_color' => '#f6f0e4',
+                    'button_color' => '#3b432e',
+                    'font_family' => 'inter',
+                    'border_style' => 'rounded',
+                    'logo' => ['type' => 'url', 'url' => $this->origin . '/apple-touch-icon.png'],
+                    'icon' => ['type' => 'url', 'url' => $this->origin . '/apple-touch-icon.png'],
+                ],
                 'shipping_address_collection' => ['allowed_countries' => ['HR']],
                 'shipping_options' => $opcije,
                 'phone_number_collection' => ['enabled' => 'true'],
@@ -607,7 +647,86 @@ final class Trgovina
     {
         $r = [];
         foreach ($n['stavke'] as $s) $r[] = "  {$s['kol']} × {$s['naziv']}" . ($s['pakiranje'] !== '' ? " ({$s['pakiranje']})" : '') . ' — ' . trg_eur($s['iznos']);
+        if (!empty($n['poklon'])) $r[] = "  1 × {$n['poklon']} — poklon";
         return implode("\n", $r);
+    }
+
+    /**
+     * HTML inačica maila (tablice i stilovi u retku, jer ih tako čitaju svi programi za poštu), u bojama stranice.
+     * Fotografije proizvoda su JPG s naše stranice; kontakt trgovine je na dnu (kupcu) ili kupac na vrhu (trgovini).
+     */
+    private function htmlMail(array $n, bool $zaTrgovinu): string
+    {
+        $e = static fn (mixed $s): string => htmlspecialchars((string) $s, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+        $o = $this->origin;
+        $k = $n['kupac'] ?? [];
+        $a = $n['adresa'] ?? [];
+        $tel = $this->placanje->telefon();
+        $mailTrg = $this->placanje->emailTrgovine();
+        $test = ($n['nacin'] ?? '') === 'test';
+        $red = static fn (string $lijevo, string $desno, bool $jako = false): string =>
+            '<tr><td style="padding:6px 0;font-size:14px;color:#3b432e' . ($jako ? ';font-weight:bold;font-size:16px' : '') . '">' . $lijevo . '</td>'
+            . '<td align="right" style="padding:6px 0;font-size:14px;color:#272a20;white-space:nowrap' . ($jako ? ';font-weight:bold;font-size:16px' : '') . '">' . $desno . '</td></tr>';
+
+        $stavke = '';
+        foreach ($n['stavke'] as $s) {
+            $slika = !empty($s['slika'])
+                ? '<img src="' . $e($this->slikaProizvoda($s['sku'])) . '" width="56" height="56" alt="" style="display:block;width:56px;height:56px;border-radius:10px;object-fit:cover;background:#ece4d2">'
+                : '<div style="width:56px;height:56px;border-radius:10px;background:#ece4d2"></div>';
+            $stavke .= '<tr><td width="68" valign="top" style="padding:8px 12px 8px 0">' . $slika . '</td>'
+                . '<td valign="top" style="padding:8px 0;font-size:14px;color:#272a20"><b>' . $e($s['naziv']) . '</b>'
+                . ($s['pakiranje'] !== '' ? '<br><span style="color:#6b6b5f">' . $e($s['pakiranje']) . '</span>' : '')
+                . ($zaTrgovinu ? '<br><span style="color:#6b6b5f">SKU ' . $e($s['sku']) . '</span>' : '')
+                . '<br><span style="color:#6b6b5f">' . (int) $s['kol'] . ' × ' . $e(trg_eur((int) $s['cijena'])) . '</span></td>'
+                . '<td valign="top" align="right" style="padding:8px 0;font-size:14px;color:#272a20;white-space:nowrap">' . $e(trg_eur((int) $s['iznos'])) . '</td></tr>';
+        }
+        if (!empty($n['poklon'])) {
+            $stavke .= '<tr><td width="68" valign="top" style="padding:8px 12px 8px 0"><div style="width:56px;height:56px;border-radius:10px;background:#3b432e;color:#d4af37;font-size:26px;line-height:56px;text-align:center">&#10047;</div></td>'
+                . '<td valign="top" style="padding:8px 0;font-size:14px;color:#272a20"><b>' . $e(mb_strtoupper(mb_substr($n['poklon'], 0, 1)) . mb_substr($n['poklon'], 1)) . '</b><br><span style="color:#8a6d14">poklon uz besplatnu dostavu</span></td>'
+                . '<td valign="top" align="right" style="padding:8px 0;font-size:14px;color:#272a20">0,00 €</td></tr>';
+        }
+        $adresa = implode('<br>', array_map($e, array_filter([$a['ime'] ?? '', $a['ulica'] ?? '', trim(($a['postanski'] ?? '') . ' ' . ($a['grad'] ?? ''))])))
+            . (!empty($n['paketomat']) ? '<br><b>Paketomat:</b> ' . $e($n['paketomat']) : '');
+
+        if ($zaTrgovinu) {
+            $naslov = 'Nova narudžba ' . $e($n['id']) . ($test ? ' <span style="color:#8a6d14">(TEST)</span>' : '');
+            $uvod = !empty($n['manjak'])
+                ? '<p style="margin:0 0 16px;padding:12px 14px;border-radius:10px;background:#f6e2dc;color:#8f2d1c;font-size:14px"><b>Pažnja:</b> za ' . $e(implode(', ', $n['manjak'])) . ' nije bilo dovoljno zalihe u trenutku plaćanja. Javi se kupcu ili napravi povrat u Stripeu.</p>'
+                : '';
+            $kupacTel = (string) ($k['telefon'] ?? '');
+            $uvod .= '<p style="margin:0 0 4px;font-size:15px;color:#272a20"><b>' . $e($k['ime'] ?? '') . '</b></p>'
+                . '<p style="margin:0 0 4px;font-size:14px"><a href="mailto:' . $e($k['email'] ?? '') . '" style="color:#3b432e">' . $e($k['email'] ?? '') . '</a></p>'
+                . ($kupacTel !== '' ? '<p style="margin:0 0 4px;font-size:14px">Telefon: <a href="tel:' . $e(preg_replace('/[^0-9+]/', '', $kupacTel)) . '" style="color:#3b432e;font-weight:bold">' . $e($kupacTel) . '</a></p>' : '')
+                . (!empty($k['tvrtka']) || !empty($k['oib']) ? '<p style="margin:0 0 4px;font-size:14px">R1 račun: ' . $e(trim(($k['tvrtka'] ?? '') . ' ' . ($k['oib'] ?? ''))) . '</p>' : '');
+            $kraj = '<p style="margin:0;font-size:14px"><a href="' . $e($o) . '/urednistvo" style="color:#3b432e;font-weight:bold">Sve narudžbe u uredništvu</a> (☰ → Narudžbe)</p>';
+        } else {
+            $naslov = 'Hvala na narudžbi!';
+            $uvod = '<p style="margin:0 0 4px;font-size:15px;color:#272a20">Narudžba <b>' . $e($n['id']) . '</b> je plaćena' . ($test ? ' (probna)' : '') . '. Javit ćemo vam se kad pošiljka krene.</p>';
+            $kraj = '<p style="margin:0 0 6px;font-size:14px;color:#272a20"><b>Pitanja o narudžbi?</b> Samo odgovorite na ovaj e-mail'
+                . ($tel ? ' ili nazovite <a href="tel:' . $e(preg_replace('/[^0-9+]/', '', $tel)) . '" style="color:#3b432e;font-weight:bold">' . $e($tel) . '</a>' : '') . '.</p>'
+                . ($mailTrg ? '<p style="margin:0;font-size:14px"><a href="mailto:' . $e($mailTrg) . '" style="color:#3b432e">' . $e($mailTrg) . '</a></p>' : '');
+        }
+
+        return '<!doctype html><html lang="hr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>' . strip_tags($naslov) . '</title></head>'
+            . '<body style="margin:0;padding:0;background:#f6f0e4;font-family:Helvetica,Arial,sans-serif">'
+            . '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f6f0e4"><tr><td align="center" style="padding:24px 12px">'
+            . '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px">'
+            . '<tr><td style="padding:0 4px 16px"><img src="' . $e($o) . '/apple-touch-icon.png" width="40" height="40" alt="" style="vertical-align:middle;border-radius:10px">'
+            . '<span style="vertical-align:middle;margin-left:10px;font-size:18px;font-weight:bold;color:#3b432e">Camellia sinensis</span></td></tr>'
+            . '<tr><td style="background:#fffdf8;border-radius:18px;padding:24px">'
+            . '<h1 style="margin:0 0 12px;font-size:22px;color:#3b432e">' . $naslov . '</h1>' . $uvod
+            . '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-top:16px;border-top:1px solid #e2d9c6">' . $stavke . '</table>'
+            . '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-top:8px;border-top:1px solid #e2d9c6">'
+            . $red('Proizvodi', $e(trg_eur((int) $n['medjuzbroj'])))
+            . $red('Dostava: ' . $e($n['dostava']['naziv'] ?? ''), (int) ($n['dostava']['cijena'] ?? 0) === 0 ? 'besplatno' : $e(trg_eur((int) $n['dostava']['cijena'])))
+            . $red('Ukupno plaćeno', $e(trg_eur((int) $n['ukupno'])), true)
+            . '</table>'
+            . '<p style="margin:20px 0 4px;font-size:13px;color:#6b6b5f;text-transform:uppercase;letter-spacing:.08em">Dostava na</p>'
+            . '<p style="margin:0 0 20px;font-size:14px;color:#272a20;line-height:1.5">' . $adresa . '</p>'
+            . '<div style="border-top:1px solid #e2d9c6;padding-top:16px">' . $kraj . '</div>'
+            . '</td></tr>'
+            . '<tr><td align="center" style="padding:16px 4px;font-size:12px;color:#6b6b5f"><a href="' . $e($o) . '" style="color:#6b6b5f">' . $e(preg_replace('#^https?://#', '', $o)) . '</a></td></tr>'
+            . '</table></td></tr></table></body></html>';
     }
 
     private function adresaTekst(array $n): string
@@ -623,10 +742,11 @@ final class Trgovina
         $posta = new Posta($this->placanje->posiljatelj());
         $test = ($n['nacin'] ?? '') === 'test' ? ' [TEST]' : '';
         $dostava = "Dostava: {$n['dostava']['naziv']} — " . trg_eur((int) $n['dostava']['cijena']);
+        $tel = $this->placanje->telefon();
         $kupac = "Hvala na narudžbi!\n\nBroj narudžbe: {$n['id']}\nPlaćeno: " . trg_eur((int) $n['ukupno']) . "\n\nNaručeno:\n" . $this->stavkeTekst($n)
             . "\n$dostava\nUkupno: " . trg_eur((int) $n['ukupno']) . "\n\nDostava na:\n" . $this->adresaTekst($n)
-            . "\n\nJavit ćemo vam se kad pošiljka krene. Za pitanja samo odgovorite na ovaj e-mail.\n\nCamellia sinensis\n{$this->origin}\n";
-        $okKupac = $posta->posalji($n['kupac']['email'] ?? null, "Narudžba {$n['id']} — Camellia sinensis$test", $kupac, $this->placanje->emailTrgovine());
+            . "\n\nJavit ćemo vam se kad pošiljka krene. Za pitanja samo odgovorite na ovaj e-mail" . ($tel ? " ili nazovite $tel" : '') . ".\n\nCamellia sinensis\n{$this->origin}\n";
+        $okKupac = $posta->posalji($n['kupac']['email'] ?? null, "Narudžba {$n['id']} — Camellia sinensis$test", $kupac, $this->placanje->emailTrgovine(), $this->htmlMail($n, false));
 
         $k = $n['kupac'];
         $upozorenje = !empty($n['manjak']) ? "\n!!! PAŽNJA: za " . implode(', ', $n['manjak']) . " nije bilo dovoljno zalihe u trenutku plaćanja (netko je kupio zadnje komade). Javi se kupcu ili napravi povrat u Stripeu.\n" : '';
@@ -634,9 +754,10 @@ final class Trgovina
             . (!empty($k['tvrtka']) || !empty($k['oib']) ? "\nR1 račun: " . trim(($k['tvrtka'] ?? '') . ' ' . ($k['oib'] ?? '')) : '')
             . "\n\nDostava ({$n['dostava']['naziv']}) na:\n" . $this->adresaTekst($n)
             . "\n\nNaručeno:\n" . implode("\n", array_map(fn ($s) => "  {$s['kol']} × {$s['naziv']} [{$s['sku']}] — " . trg_eur($s['iznos']), $n['stavke']))
+            . (!empty($n['poklon']) ? "\n  1 × {$n['poklon']} — POKLON (stavi u paket)" : '')
             . "\n$dostava\nUkupno plaćeno: " . trg_eur((int) $n['ukupno'])
             . "\n\nSve narudžbe: {$this->origin}/urednistvo (☰ → Narudžbe)\n";
-        $okTrgovina = $posta->posalji($this->placanje->emailTrgovine(), "Nova narudžba {$n['id']} · " . trg_eur((int) $n['ukupno']) . $test, $trgovina, $k['email'] ?? null);
+        $okTrgovina = $posta->posalji($this->placanje->emailTrgovine(), "Nova narudžba {$n['id']} · " . trg_eur((int) $n['ukupno']) . $test, $trgovina, $k['email'] ?? null, $this->htmlMail($n, true));
         $this->narudzbe->izmijeni($n['id'], fn ($x) => [...$x, 'mail' => ['kupac' => $okKupac, 'trgovina' => $okTrgovina]]);
     }
 

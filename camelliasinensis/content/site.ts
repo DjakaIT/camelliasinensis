@@ -4,11 +4,11 @@
 // da demo izgleda kao gotova stranica. Sve što je označeno s DUMMY treba zamijeniti Sarinim podacima.
 // Build koji se smije indeksirati (produkcija) RUŠI SE dok je ijedan DUMMY uključen (scripts/postbuild.mjs).
 import izdvojeno from '@/fixtures/izdvojeno.json';
-import { FREE_SHIPPING_FROM, SHIPPING_METHODS } from '@/lib/shop/shipping';
+import { FREE_SHIPPING_FROM, FREE_SHIPPING_GIFT, SHIPPING_METHODS } from '@/lib/shop/shipping';
 
 export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? 'https://camelliasinensis.eu').replace(/\/+$/, '');
 export const SHOP_NAME = 'Camellia sinensis';
-export { FREE_SHIPPING_FROM };
+export { FREE_SHIPPING_FROM, FREE_SHIPPING_GIFT };
 /** Najniža cijena dostave, za prikaz "od 3,90 €" (obračun radi backend). */
 export const SHIPPING_FROM_PRICE = Math.min(...SHIPPING_METHODS.map((m) => m.price));
 
@@ -74,7 +74,7 @@ export const legalPages: LegalPage[] = [
 <h2>4. Plaćanje</h2>
 <p>Plaćanje karticom (Visa, Mastercard, Maestro), Apple Payem ili Google Payem obrađuje Stripe. Podatke o kartici ne vidimo i ne spremamo.</p>
 <h2>5. Dostava</h2>
-<p>Narudžbe šaljemo GLS-om na adresu ili u paketomat diljem Hrvatske. Za narudžbe od ${shipFrom} dostava je besplatna. Detalji su na stranici <a href="/povrat/">Dostava i povrat</a>.</p>
+<p>Narudžbe šaljemo GLS-om na adresu ili u paketomat diljem Hrvatske. Za narudžbe od ${shipFrom} dostava je besplatna, uz poklon (${FREE_SHIPPING_GIFT}). Detalji su na stranici <a href="/povrat/">Dostava i povrat</a>.</p>
 <h2>6. Pravo na odustanak</h2>
 <p>Od kupnje možete odustati u roku od 14 dana od primitka pošiljke, bez navođenja razloga. Neotvorene proizvode vratite u originalnom pakiranju.</p>
 <h2>7. Reklamacije</h2>
@@ -99,13 +99,13 @@ export const legalPages: LegalPage[] = [
   {
     slug: 'povrat',
     title: 'Dostava i povrat',
-    description: 'Dostava GLS-om na adresu ili u paketomat, besplatna dostava od 50 €, povrat u 14 dana.',
+    description: 'Dostava GLS-om na adresu ili u paketomat, besplatna dostava i platnena torba na poklon od 50 €, povrat u 14 dana.',
     html: `
 <h2>Dostava</h2>
 <ul>
 <li>GLS paketomat: 3,90 €, obično 1–2 radna dana.</li>
 <li>GLS na adresu: 4,90 €, obično 1–3 radna dana.</li>
-<li><strong>Besplatna dostava za narudžbe od ${shipFrom}.</strong></li>
+<li><strong>Besplatna dostava za narudžbe od ${shipFrom}, uz poklon (${FREE_SHIPPING_GIFT}).</strong></li>
 </ul>
 <p>Narudžbe zaprimljene radnim danom do 13 h šaljemo isti dan. Kad GLS preuzme paket, dobit ćete poruku s poveznicom za praćenje.</p>
 <h2>Povrat</h2>

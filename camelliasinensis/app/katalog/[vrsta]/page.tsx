@@ -3,6 +3,7 @@ import { Catalog } from '@/components/catalog/Catalog';
 import { CatalogHead } from '@/components/catalog/CatalogHead';
 import { getCards } from '@/lib/catalog-server';
 import { getType, getTypes } from '@/lib/shop/catalog';
+import { breadcrumbJsonLd } from '@/lib/jsonld';
 import { pageMeta } from '@/lib/seo';
 
 export const dynamicParams = false;
@@ -18,8 +19,8 @@ export async function generateMetadata({ params }: Props) {
   const t = await getType(vrsta);
   if (!t) return {};
   return pageMeta({
-    title: `${t.name}: katalog`,
-    description: `${t.name} u trgovini Camellia sinensis. ${t.description}`,
+    title: `${t.name}: kupite online, dostava po Hrvatskoj`,
+    description: `${t.name} iz trgovine čaja Camellia sinensis u Zagrebu. ${t.description} Dostava GLS-om po cijeloj Hrvatskoj.`,
     path: `/katalog/${t.key}/`,
   });
 }
@@ -37,6 +38,16 @@ export default async function VrstaPage({ params }: Props) {
         crumbs={[{ href: '/', label: 'Početna' }, { href: '/katalog/', label: 'Katalog' }, { label: t.name }]}
       />
       <Catalog cards={cards} types={types} fixedType={t.key} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: breadcrumbJsonLd([
+            { name: 'Početna', path: '/' },
+            { name: 'Katalog', path: '/katalog/' },
+            { name: t.name, path: `/katalog/${t.key}/` },
+          ]),
+        }}
+      />
     </div>
   );
 }

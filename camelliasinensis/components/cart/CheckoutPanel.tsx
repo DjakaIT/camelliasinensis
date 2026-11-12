@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { IconArrow } from '@/components/Icons';
 import { beginCheckout } from '@/lib/cart/checkout';
-import { FREE_SHIPPING_FROM, SHIPPING_FROM_PRICE } from '@/content/site';
+import { FREE_SHIPPING_FROM, FREE_SHIPPING_GIFT, SHIPPING_FROM_PRICE } from '@/content/site';
 import { formatMoney } from '@/lib/format';
 import { useCart } from './CartContext';
 import { useCatalogIndex } from './CatalogIndex';
@@ -49,11 +49,11 @@ export function CheckoutPanel() {
         <p>
           {missing > 0 ? (
             <>
-              Još <b>{formatMoney(missing)}</b> do besplatne dostave
+              Još <b>{formatMoney(missing)}</b> do besplatne dostave i poklona: {FREE_SHIPPING_GIFT}
             </>
           ) : (
             <>
-              <b>Besplatna dostava</b> je uključena
+              <b>Besplatna dostava</b> je uključena, a na poklon dobivate: {FREE_SHIPPING_GIFT}
             </>
           )}
         </p>
