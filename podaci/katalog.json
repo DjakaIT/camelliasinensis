@@ -1,0 +1,2193 @@
+{
+    "format": 1,
+    "verzija": 2,
+    "azurirano": "2026-11-12T13:13:51.040Z",
+    "azurirao": "drajic",
+    "vrste": [
+        {
+            "kljuc": "bijeli",
+            "naziv": "Bijeli čaj",
+            "opis": "Najmanje obrađen, nježan i svijetao."
+        },
+        {
+            "kljuc": "zeleni",
+            "naziv": "Zeleni čaj",
+            "opis": "Svjež, travnat, bistar."
+        },
+        {
+            "kljuc": "oolong",
+            "naziv": "Oolong",
+            "opis": "Između zelenog i crnog, cvjetan ili pečen."
+        },
+        {
+            "kljuc": "crni",
+            "naziv": "Crni čaj",
+            "opis": "Pun, sladan, za jutro."
+        },
+        {
+            "kljuc": "puer",
+            "naziv": "Pu'er",
+            "opis": "Prešan u kolače, sazrijeva godinama."
+        },
+        {
+            "kljuc": "aroma",
+            "naziv": "Aromatizirani",
+            "opis": "Earl Grey, chai i voćne mješavine na bazi čaja."
+        },
+        {
+            "kljuc": "biljni",
+            "naziv": "Biljni i rooibos",
+            "opis": "Bez čajne biljke, većinom bez teina."
+        },
+        {
+            "kljuc": "pribor",
+            "naziv": "Pribor i knjige",
+            "opis": "Gaiwani, setovi za matchu, daske, knjiga."
+        }
+    ],
+    "proizvodi": [
+        {
+            "id": "ec14b7fe50de",
+            "sku": "CSTB-2",
+            "slug": "bai-mu-dan-wang",
+            "naziv": "Bai Mu Dan Wang",
+            "vrsta": "bijeli",
+            "podrijetlo": "Kina",
+            "tein": 1,
+            "okusi": [
+                "cvjetni",
+                "slatkasti"
+            ],
+            "oblik": "rastresiti",
+            "cijena": 11.9,
+            "pakiranje": "50 g",
+            "namjene": [
+                "opust",
+                "poklon"
+            ],
+            "oznake": [],
+            "priprema": {
+                "temp": "85 °C",
+                "vrijeme": "3–4 min",
+                "kolicina": "4 g / 250 ml"
+            },
+            "opis": "Klasični kineski bijeli čaj od mladih proljetnih izdanaka. Mekana, puna tekstura s cvjetnim notama djeteline i slatkim tonovima cimeta.",
+            "zaliha": 24,
+            "objavljeno": true,
+            "slika": "CSTB-2"
+        },
+        {
+            "id": "bf1768ec6df5",
+            "sku": "CSTVI-295",
+            "slug": "gong-mei-2018",
+            "naziv": "Gong Mei 2018",
+            "vrsta": "bijeli",
+            "podrijetlo": "Kina",
+            "tein": 1,
+            "okusi": [
+                "vocni",
+                "slatkasti"
+            ],
+            "oblik": "kolac",
+            "cijena": 24,
+            "pakiranje": "kolač 100 g",
+            "namjene": [
+                "opust",
+                "poklon"
+            ],
+            "oznake": [
+                "rijetko"
+            ],
+            "priprema": {
+                "temp": "85 °C",
+                "vrijeme": "3–4 min",
+                "kolicina": "4 g / 250 ml"
+            },
+            "opis": "Odležani bijeli čaj iz Fudinga (Fujian), sorta Fuding Da Bai. Okerasta, sirupasta šalica s notama suhe šljive, sijena i kamfora, bez gorčine.",
+            "zaliha": 24,
+            "objavljeno": true,
+            "slika": "CSTVI-295"
+        },
+        {
+            "id": "e998f3fb6b4c",
+            "sku": "CSTB-6",
+            "slug": "jingning-yin-zhen",
+            "naziv": "Jingning Yin Zhen",
+            "vrsta": "bijeli",
+            "podrijetlo": "Kina",
+            "tein": 1,
+            "okusi": [
+                "vocni",
+                "cvjetni"
+            ],
+            "oblik": "rastresiti",
+            "cijena": 18.5,
+            "pakiranje": "50 g",
+            "namjene": [
+                "opust",
+                "poklon"
+            ],
+            "oznake": [
+                "rijetko"
+            ],
+            "priprema": {
+                "temp": "85 °C",
+                "vrijeme": "3–4 min",
+                "kolicina": "4 g / 250 ml"
+            },
+            "opis": "Ujednačeni, fini pupoljci majstora He. Okusi zobi, zrele banane i cvijeća s blagim paprom, svjež mentolni završetak. Ekskluzivna serija.",
+            "zaliha": 24,
+            "objavljeno": true,
+            "slika": "CSTB-6"
+        },
+        {
+            "id": "dd4232459345",
+            "sku": "CSTVI-294",
+            "slug": "bai-mu-dan-2021",
+            "naziv": "Bai Mu Dan 2021",
+            "vrsta": "bijeli",
+            "podrijetlo": "Kina",
+            "tein": 1,
+            "okusi": [
+                "vocni",
+                "medeni"
+            ],
+            "oblik": "kolac",
+            "cijena": 16,
+            "pakiranje": "50 g (kockice 4 g)",
+            "namjene": [
+                "opust",
+                "poklon"
+            ],
+            "oznake": [],
+            "priprema": {
+                "temp": "85 °C",
+                "vrijeme": "3–4 min",
+                "kolicina": "4 g / 250 ml"
+            },
+            "opis": "Odležani bijeli čaj iz Fujiana prešan u male kockice od 4 g. Slatki okusi suhog tropskog voća i proljetnog meda.",
+            "zaliha": 24,
+            "objavljeno": true,
+            "slika": "CSTVI-294"
+        },
+        {
+            "id": "8c2efd0369e7",
+            "sku": "CSTV-178",
+            "slug": "bancha",
+            "naziv": "Bancha",
+            "vrsta": "zeleni",
+            "podrijetlo": "Japan",
+            "tein": 2,
+            "okusi": [
+                "travnati"
+            ],
+            "oblik": "rastresiti",
+            "cijena": 1,
+            "pakiranje": "50 g",
+            "namjene": [
+                "jutro"
+            ],
+            "oznake": [
+                "bio"
+            ],
+            "priprema": {
+                "temp": "70 °C",
+                "vrijeme": "1–2 min",
+                "kolicina": "4 g / 250 ml"
+            },
+            "opis": "Organska bancha iz Shizuoke, odličan svakodnevni zeleni čaj. Osvježavajuća, travnata šalica s morskim notama. Idealan prvi japanski čaj.",
+            "zaliha": 24,
+            "objavljeno": true,
+            "slika": "CSTV-178"
+        },
+        {
+            "id": "80f3bd6ebc06",
+            "sku": "CSTV-8",
+            "slug": "genmaicha",
+            "naziv": "Genmaicha",
+            "vrsta": "zeleni",
+            "podrijetlo": "Japan",
+            "tein": 1,
+            "okusi": [
+                "orasasti",
+                "slatkasti"
+            ],
+            "oblik": "rastresiti",
+            "cijena": 7.9,
+            "pakiranje": "50 g",
+            "namjene": [
+                "vecer",
+                "opust"
+            ],
+            "oznake": [
+                "bio"
+            ],
+            "priprema": {
+                "temp": "70 °C",
+                "vrijeme": "1–2 min",
+                "kolicina": "4 g / 250 ml"
+            },
+            "opis": "Tradicionalna japanska mješavina zelenog čaja s prženom i napuhanom rižom. Topla, utješna aroma i malo teina.",
+            "zaliha": 24,
+            "objavljeno": true,
+            "slika": "CSTV-8"
+        },
+        {
+            "id": "bed7810224d5",
+            "sku": "CSTV-10",
+            "slug": "gunpowder",
+            "naziv": "Gunpowder",
+            "vrsta": "zeleni",
+            "podrijetlo": "Kina",
+            "tein": 2,
+            "okusi": [
+                "travnati"
+            ],
+            "oblik": "rastresiti",
+            "cijena": 6.9,
+            "pakiranje": "50 g",
+            "namjene": [
+                "jutro",
+                "fokus"
+            ],
+            "oznake": [
+                "bio"
+            ],
+            "priprema": {
+                "temp": "80 °C",
+                "vrijeme": "2–3 min",
+                "kolicina": "4 g / 250 ml"
+            },
+            "opis": "Zeleni čaj snažnog okusa, temelj marokanskog čaja s mentom. Pije se sam ili sa svježim listovima mente.",
+            "zaliha": 24,
+            "objavljeno": true,
+            "slika": "CSTV-10"
+        },
+        {
+            "id": "0885daad4cf8",
+            "sku": "CSTV-22",
+            "slug": "kamairicha",
+            "naziv": "Kamairicha",
+            "vrsta": "zeleni",
+            "podrijetlo": "Japan",
+            "tein": 2,
+            "okusi": [
+                "orasasti",
+                "citrusni"
+            ],
+            "oblik": "rastresiti",
+            "cijena": 10.9,
+            "pakiranje": "50 g",
+            "namjene": [
+                "fokus"
+            ],
+            "oznake": [
+                "bio"
+            ],
+            "priprema": {
+                "temp": "70 °C",
+                "vrijeme": "1–2 min",
+                "kolicina": "4 g / 250 ml"
+            },
+            "opis": "Organski zeleni čaj s otoka Kyushu, pržen u tavi umjesto parenja. Orašaste note kestena i blago slatki citrusni završetak.",
+            "zaliha": 24,
+            "objavljeno": true,
+            "slika": "CSTV-22"
+        },
+        {
+            "id": "8ecdf9a02a0a",
+            "sku": "CSTV-88",
+            "slug": "gyokuro-okabe",
+            "naziv": "Gyokuro Okabe",
+            "vrsta": "zeleni",
+            "podrijetlo": "Japan",
+            "tein": 3,
+            "okusi": [
+                "travnati",
+                "slatkasti"
+            ],
+            "oblik": "rastresiti",
+            "cijena": 22,
+            "pakiranje": "50 g",
+            "namjene": [
+                "fokus",
+                "poklon"
+            ],
+            "oznake": [
+                "rijetko"
+            ],
+            "priprema": {
+                "temp": "70 °C",
+                "vrijeme": "1–2 min",
+                "kolicina": "4 g / 250 ml"
+            },
+            "opis": "Gyokuro, čaj uzgojen u sjeni. Miris maline, glatka šalica s povrtnim notama špinata i suncokretovih sjemenki.",
+            "zaliha": 24,
+            "objavljeno": true,
+            "slika": "CSTV-88"
+        },
+        {
+            "id": "e9f5ce53bed2",
+            "sku": "CSTV-18",
+            "slug": "huiming",
+            "naziv": "Huiming",
+            "vrsta": "zeleni",
+            "podrijetlo": "Kina",
+            "tein": 2,
+            "okusi": [
+                "cvjetni",
+                "vocni"
+            ],
+            "oblik": "rastresiti",
+            "cijena": 13.9,
+            "pakiranje": "50 g",
+            "namjene": [
+                "fokus"
+            ],
+            "oznake": [],
+            "priprema": {
+                "temp": "80 °C",
+                "vrijeme": "2–3 min",
+                "kolicina": "4 g / 250 ml"
+            },
+            "opis": "Zeleni čaj iz Zhejianga proizvođača He Wei Zhonga. Živahna, uljasta šalica s notama proljetnog cvijeća i breskve.",
+            "zaliha": 24,
+            "objavljeno": true,
+            "slika": "CSTV-18"
+        },
+        {
+            "id": "1f14814a0a1a",
+            "sku": "CSTV-68",
+            "slug": "long-jing-zhejiang",
+            "naziv": "Long Jing Zhejiang",
+            "vrsta": "zeleni",
+            "podrijetlo": "Kina",
+            "tein": 2,
+            "okusi": [
+                "orasasti",
+                "cvjetni"
+            ],
+            "oblik": "rastresiti",
+            "cijena": 12.9,
+            "pakiranje": "50 g",
+            "namjene": [
+                "fokus",
+                "jutro"
+            ],
+            "oznake": [],
+            "priprema": {
+                "temp": "80 °C",
+                "vrijeme": "2–3 min",
+                "kolicina": "4 g / 250 ml"
+            },
+            "opis": "Veliki kineski klasik, poznat kao Dragonwell. Svjež i ukusan, s cvjetnim i travnatim notama i dozom svježeg lješnjaka.",
+            "zaliha": 24,
+            "objavljeno": true,
+            "slika": "CSTV-68"
+        },
+        {
+            "id": "b9624aa63567",
+            "sku": "CSTV-40",
+            "slug": "sencha-mobata",
+            "naziv": "Sencha Mobata",
+            "vrsta": "zeleni",
+            "podrijetlo": "Japan",
+            "tein": 2,
+            "okusi": [
+                "travnati",
+                "cvjetni"
+            ],
+            "oblik": "rastresiti",
+            "cijena": 9.9,
+            "pakiranje": "50 g",
+            "namjene": [
+                "jutro",
+                "fokus"
+            ],
+            "oznake": [],
+            "priprema": {
+                "temp": "70 °C",
+                "vrijeme": "1–2 min",
+                "kolicina": "4 g / 250 ml"
+            },
+            "opis": "Sencha u tradicionalnom stilu Shizuoke. Snažan povrtni okus s blagom gorčinom i cvjetnim završetkom. Odličan svakodnevni čaj.",
+            "zaliha": 24,
+            "objavljeno": true,
+            "slika": "CSTV-40"
+        },
+        {
+            "id": "133009c71850",
+            "sku": "CSTV-41",
+            "slug": "sencha-nagashima",
+            "naziv": "Sencha Nagashima",
+            "vrsta": "zeleni",
+            "podrijetlo": "Japan",
+            "tein": 2,
+            "okusi": [
+                "travnati",
+                "vocni",
+                "orasasti"
+            ],
+            "oblik": "rastresiti",
+            "cijena": 11.9,
+            "pakiranje": "50 g",
+            "namjene": [
+                "jutro",
+                "fokus"
+            ],
+            "oznake": [
+                "bio"
+            ],
+            "priprema": {
+                "temp": "70 °C",
+                "vrijeme": "1–2 min",
+                "kolicina": "4 g / 250 ml"
+            },
+            "opis": "Sencha braće Morishita iz Shizuoke. Živahan okus, intenzivne biljne arome, voćne note i topli orašasti završetak.",
+            "zaliha": 24,
+            "objavljeno": true,
+            "slika": "CSTV-41"
+        },
+        {
+            "id": "e0d752e03b58",
+            "sku": "CSTV-121",
+            "slug": "matcha-sora",
+            "naziv": "Matcha Sora",
+            "vrsta": "zeleni",
+            "podrijetlo": "Japan",
+            "tein": 3,
+            "okusi": [
+                "travnati"
+            ],
+            "oblik": "prah",
+            "cijena": 19,
+            "pakiranje": "30 g",
+            "namjene": [
+                "fokus",
+                "jutro"
+            ],
+            "oznake": [],
+            "priprema": {
+                "temp": "75 °C",
+                "vrijeme": "pjenjenje metlicom",
+                "kolicina": "2 g / 70 ml"
+            },
+            "opis": "Matcha iz regije Uji, od proizvođača Koyame (16 generacija). Pristupačna i intenzivna, s okusom svježeg bilja. Odlična za latte.",
+            "zaliha": 24,
+            "objavljeno": true,
+            "slika": "CSTV-121"
+        },
+        {
+            "id": "908ba5228f92",
+            "sku": "CSTV-237",
+            "slug": "matcha-mizukaze",
+            "naziv": "Matcha Mizukaze",
+            "vrsta": "zeleni",
+            "podrijetlo": "Japan",
+            "tein": 3,
+            "okusi": [
+                "travnati",
+                "cvjetni"
+            ],
+            "oblik": "prah",
+            "cijena": 29,
+            "pakiranje": "30 g",
+            "namjene": [
+                "fokus",
+                "poklon"
+            ],
+            "oznake": [
+                "rijetko"
+            ],
+            "priprema": {
+                "temp": "75 °C",
+                "vrijeme": "pjenjenje metlicom",
+                "kolicina": "2 g / 70 ml"
+            },
+            "opis": "Ceremonijalna matcha iz Fujiede (Shizuoka). Kremasta, s jabučno zelenom pjenom, notama rikule i kakaa te cvjetnim završetkom.",
+            "zaliha": 24,
+            "objavljeno": true,
+            "slika": "CSTV-237"
+        },
+        {
+            "id": "8938ae7d55bd",
+            "sku": "CSTAD-561",
+            "slug": "matcha-uji",
+            "naziv": "Matcha Uji",
+            "vrsta": "zeleni",
+            "podrijetlo": "Japan",
+            "tein": 3,
+            "okusi": [
+                "travnati"
+            ],
+            "oblik": "prah",
+            "cijena": 39,
+            "pakiranje": "100 g",
+            "namjene": [
+                "fokus"
+            ],
+            "oznake": [
+                "novo"
+            ],
+            "priprema": {
+                "temp": "75 °C",
+                "vrijeme": "pjenjenje metlicom",
+                "kolicina": "2 g / 70 ml"
+            },
+            "opis": "Matcha iz regije Uji u Japanu, u pakiranju od 100 g. Za pripremu metlicom ili za matcha latte.",
+            "zaliha": 24,
+            "objavljeno": true,
+            "slika": "CSTAD-561"
+        },
+        {
+            "id": "5e0814b3d840",
+            "sku": "CSTN-1",
+            "slug": "assam-breakfast",
+            "naziv": "Assam Breakfast",
+            "vrsta": "crni",
+            "podrijetlo": "Indija",
+            "tein": 3,
+            "okusi": [
+                "sladni",
+                "vocni"
+            ],
+            "oblik": "rastresiti",
+            "cijena": 7.9,
+            "pakiranje": "50 g",
+            "namjene": [
+                "jutro"
+            ],
+            "oznake": [
+                "bio"
+            ],
+            "priprema": {
+                "temp": "95 °C",
+                "vrijeme": "3–4 min",
+                "kolicina": "3 g / 250 ml"
+            },
+            "opis": "Crni čaj iz vrta Banaspaty u Assamu. Puna, izravna šalica s notama duhana, slada i šljive, sa ili bez mlijeka.",
+            "zaliha": 24,
+            "objavljeno": true,
+            "slika": "CSTN-1"
+        },
+        {
+            "id": "3f5c338d8d37",
+            "sku": "CSTN-79",
+            "slug": "assam-halmari",
+            "naziv": "Assam Halmari",
+            "vrsta": "crni",
+            "podrijetlo": "Indija",
+            "tein": 3,
+            "okusi": [
+                "sladni",
+                "drvenasti"
+            ],
+            "oblik": "rastresiti",
+            "cijena": 12.9,
+            "pakiranje": "50 g",
+            "namjene": [
+                "jutro"
+            ],
+            "oznake": [],
+            "priprema": {
+                "temp": "95 °C",
+                "vrijeme": "3–4 min",
+                "kolicina": "3 g / 250 ml"
+            },
+            "opis": "Lijepo uvijeni listovi i pupoljci ortodoksne tradicije. Bakrena, svilenkasta i sladna šalica za ljubitelje jakog čaja.",
+            "zaliha": 24,
+            "objavljeno": true,
+            "slika": "CSTN-79"
+        },
+        {
+            "id": "3cc15f1b467a",
+            "sku": "CSTN-64",
+            "slug": "ceylon-new-vithanakande",
+            "naziv": "Ceylon New Vithanakande",
+            "vrsta": "crni",
+            "podrijetlo": "Šri Lanka",
+            "tein": 3,
+            "okusi": [
+                "sladni",
+                "vocni"
+            ],
+            "oblik": "rastresiti",
+            "cijena": 9.9,
+            "pakiranje": "50 g",
+            "namjene": [
+                "jutro"
+            ],
+            "oznake": [],
+            "priprema": {
+                "temp": "95 °C",
+                "vrijeme": "3–4 min",
+                "kolicina": "3 g / 250 ml"
+            },
+            "opis": "Crni čaj sa Šri Lanke sa srebrnim pupoljcima. Tamna, puna šalica, sladna i slatka, s notama suhe šljive.",
+            "zaliha": 24,
+            "objavljeno": true,
+            "slika": "CSTN-64"
+        },
+        {
+            "id": "c6d4b819d43c",
+            "sku": "CSTN-38",
+            "slug": "zhenghe-hong-gong-fu",
+            "naziv": "Zhenghe Hong Gong Fu",
+            "vrsta": "crni",
+            "podrijetlo": "Kina",
+            "tein": 3,
+            "okusi": [
+                "cvjetni",
+                "slatkasti"
+            ],
+            "oblik": "rastresiti",
+            "cijena": 13.9,
+            "pakiranje": "50 g",
+            "namjene": [
+                "opust"
+            ],
+            "oznake": [],
+            "priprema": {
+                "temp": "95 °C",
+                "vrijeme": "3–4 min",
+                "kolicina": "3 g / 250 ml"
+            },
+            "opis": "Crni čaj iz Fujiana s mirisima božura, mošusa i slatkih začina. Gibak i uravnotežen, s notama kakaa i kikirikija.",
+            "zaliha": 24,
+            "objavljeno": true,
+            "slika": "CSTN-38"
+        },
+        {
+            "id": "2a10b6f3e9a4",
+            "sku": "CSTN-126",
+            "slug": "darjeeling-autumn-thurbo",
+            "naziv": "Darjeeling Autumn Thurbo",
+            "vrsta": "crni",
+            "podrijetlo": "Indija",
+            "tein": 2,
+            "okusi": [
+                "vocni",
+                "cvjetni"
+            ],
+            "oblik": "rastresiti",
+            "cijena": 13.9,
+            "pakiranje": "50 g",
+            "namjene": [
+                "opust"
+            ],
+            "oznake": [],
+            "priprema": {
+                "temp": "95 °C",
+                "vrijeme": "3–4 min",
+                "kolicina": "3 g / 250 ml"
+            },
+            "opis": "Jesenska berba iz vrta Thurbo. Slatka i voćna šalica s aromom muškata i lavande te karameliziranim završetkom.",
+            "zaliha": 24,
+            "objavljeno": true,
+            "slika": "CSTN-126"
+        },
+        {
+            "id": "94d7e55000af",
+            "sku": "CSTN-97",
+            "slug": "darjeeling-first-flush-thurbo",
+            "naziv": "Darjeeling First Flush Thurbo",
+            "vrsta": "crni",
+            "podrijetlo": "Indija",
+            "tein": 2,
+            "okusi": [
+                "cvjetni",
+                "citrusni"
+            ],
+            "oblik": "rastresiti",
+            "cijena": 16.9,
+            "pakiranje": "50 g",
+            "namjene": [
+                "jutro",
+                "poklon"
+            ],
+            "oznake": [],
+            "priprema": {
+                "temp": "95 °C",
+                "vrijeme": "3–4 min",
+                "kolicina": "3 g / 250 ml"
+            },
+            "opis": "Prva berba s imanja Thurbo. Zlatna, nježna šalica s aromama narančine korice i bijelog cvijeća te kremastim završetkom.",
+            "zaliha": 24,
+            "objavljeno": true,
+            "slika": "CSTN-97"
+        },
+        {
+            "id": "5b729b56ea5c",
+            "sku": "CSTN-192",
+            "slug": "darjeeling-first-flush-jungpana",
+            "naziv": "Darjeeling First Flush Jungpana",
+            "vrsta": "crni",
+            "podrijetlo": "Indija",
+            "tein": 2,
+            "okusi": [
+                "vocni",
+                "cvjetni"
+            ],
+            "oblik": "rastresiti",
+            "cijena": 17.9,
+            "pakiranje": "50 g",
+            "namjene": [
+                "jutro",
+                "poklon"
+            ],
+            "oznake": [],
+            "priprema": {
+                "temp": "95 °C",
+                "vrijeme": "3–4 min",
+                "kolicina": "3 g / 250 ml"
+            },
+            "opis": "Prva berba poznatog himalajskog vrta Jungpana. Živahna šalica s notama muškata, jasmina i visoke trave.",
+            "zaliha": 24,
+            "objavljeno": true,
+            "slika": "CSTN-192"
+        },
+        {
+            "id": "ec4dfa22f2e7",
+            "sku": "CSTN-219",
+            "slug": "darjeeling-second-flush-selimbong",
+            "naziv": "Darjeeling Second Flush Selimbong",
+            "vrsta": "crni",
+            "podrijetlo": "Indija",
+            "tein": 3,
+            "okusi": [
+                "citrusni",
+                "drvenasti"
+            ],
+            "oblik": "rastresiti",
+            "cijena": 15.9,
+            "pakiranje": "50 g",
+            "namjene": [
+                "jutro"
+            ],
+            "oznake": [],
+            "priprema": {
+                "temp": "95 °C",
+                "vrijeme": "3–4 min",
+                "kolicina": "3 g / 250 ml"
+            },
+            "opis": "Ljetna berba obitelji Mohan. Ružičasto jantarna šalica, od javorovog sirupa do mandarine i drvenastih nota.",
+            "zaliha": 24,
+            "objavljeno": true,
+            "slika": "CSTN-219"
+        },
+        {
+            "id": "09f15d85f810",
+            "sku": "CSTN-25",
+            "slug": "jin-die",
+            "naziv": "Jin Die",
+            "vrsta": "crni",
+            "podrijetlo": "Kina",
+            "tein": 2,
+            "okusi": [
+                "slatkasti",
+                "zacinski"
+            ],
+            "oblik": "rastresiti",
+            "cijena": 15.9,
+            "pakiranje": "50 g",
+            "namjene": [
+                "opust",
+                "poklon"
+            ],
+            "oznake": [
+                "bio"
+            ],
+            "priprema": {
+                "temp": "95 °C",
+                "vrijeme": "3–4 min",
+                "kolicina": "3 g / 250 ml"
+            },
+            "opis": "Zlatni leptir iz Hunana, samo uvijeni zlatni pupoljci. Svilenkasta šalica s karamelom i blagim začinima.",
+            "zaliha": 24,
+            "objavljeno": true,
+            "slika": "CSTN-25"
+        },
+        {
+            "id": "51752b088dfd",
+            "sku": "CSTN-111",
+            "slug": "la-cumbre-bitaco",
+            "naziv": "La Cumbre Bitaco",
+            "vrsta": "crni",
+            "podrijetlo": "Kolumbija",
+            "tein": 3,
+            "okusi": [
+                "sladni",
+                "medeni"
+            ],
+            "oblik": "rastresiti",
+            "cijena": 11.9,
+            "pakiranje": "50 g",
+            "namjene": [
+                "jutro"
+            ],
+            "oznake": [
+                "bio"
+            ],
+            "priprema": {
+                "temp": "95 °C",
+                "vrijeme": "3–4 min",
+                "kolicina": "3 g / 250 ml"
+            },
+            "opis": "Organski crni čaj s Anda na 1800 m. Note ječma i drveta, uz slatkoću šećerne trske, kakaa i meda. Klasičan jutarnji čaj.",
+            "zaliha": 24,
+            "objavljeno": true,
+            "slika": "CSTN-111"
+        },
+        {
+            "id": "e0a0f35a4e62",
+            "sku": "CSTN-201",
+            "slug": "kevins-breakfast-blend",
+            "naziv": "Kevin's Breakfast Blend",
+            "vrsta": "crni",
+            "podrijetlo": "Mješavina",
+            "tein": 3,
+            "okusi": [
+                "sladni",
+                "slatkasti"
+            ],
+            "oblik": "rastresiti",
+            "cijena": 9.9,
+            "pakiranje": "50 g",
+            "namjene": [
+                "jutro"
+            ],
+            "oznake": [],
+            "priprema": {
+                "temp": "95 °C",
+                "vrijeme": "3–4 min",
+                "kolicina": "3 g / 250 ml"
+            },
+            "opis": "Doručak mješavina čajeva iz Indije, Šri Lanke, Ruande i Kolumbije. Svjež početak, sladni naglasci i note sladića.",
+            "zaliha": 24,
+            "objavljeno": true,
+            "slika": "CSTN-201"
+        },
+        {
+            "id": "64b212cb4255",
+            "sku": "CSTN-125",
+            "slug": "meghalaya-lakyrsiew-autumn",
+            "naziv": "Meghalaya Lakyrsiew Autumn",
+            "vrsta": "crni",
+            "podrijetlo": "Indija",
+            "tein": 2,
+            "okusi": [
+                "drvenasti",
+                "cvjetni"
+            ],
+            "oblik": "rastresiti",
+            "cijena": 14.9,
+            "pakiranje": "50 g",
+            "namjene": [
+                "opust"
+            ],
+            "oznake": [
+                "rijetko"
+            ],
+            "priprema": {
+                "temp": "95 °C",
+                "vrijeme": "3–4 min",
+                "kolicina": "3 g / 250 ml"
+            },
+            "opis": "Manje poznat terroir susjedan Assamu. Okrugla šalica s teksturom kakaa, drvenastim i karameliziranim notama.",
+            "zaliha": 24,
+            "objavljeno": true,
+            "slika": "CSTN-125"
+        },
+        {
+            "id": "0d0d483f6dc0",
+            "sku": "CSTN-93",
+            "slug": "yunnan-da-ye",
+            "naziv": "Yunnan Da Ye",
+            "vrsta": "crni",
+            "podrijetlo": "Kina",
+            "tein": 3,
+            "okusi": [
+                "drvenasti",
+                "zacinski"
+            ],
+            "oblik": "rastresiti",
+            "cijena": 11.9,
+            "pakiranje": "50 g",
+            "namjene": [
+                "jutro"
+            ],
+            "oznake": [
+                "bio"
+            ],
+            "priprema": {
+                "temp": "95 °C",
+                "vrijeme": "3–4 min",
+                "kolicina": "3 g / 250 ml"
+            },
+            "opis": "Veliki listovi iz Yunnana uvijeni u zlatne spirale. Jarko crvena šalica s notama smreke, začina, kože, citrusa i slada.",
+            "zaliha": 24,
+            "objavljeno": true,
+            "slika": "CSTN-93"
+        },
+        {
+            "id": "cd63de7b55e0",
+            "sku": "CSTN-220",
+            "slug": "shimada-whisky-dimljeni",
+            "naziv": "Shimada Whisky (dimljeni)",
+            "vrsta": "crni",
+            "podrijetlo": "Japan",
+            "tein": 2,
+            "okusi": [
+                "dimljeni",
+                "slatkasti"
+            ],
+            "oblik": "rastresiti",
+            "cijena": 18.9,
+            "pakiranje": "50 g",
+            "namjene": [
+                "opust",
+                "poklon"
+            ],
+            "oznake": [
+                "rijetko"
+            ],
+            "priprema": {
+                "temp": "95 °C",
+                "vrijeme": "3–4 min",
+                "kolicina": "3 g / 250 ml"
+            },
+            "opis": "Japanska rijetkost: crni čaj dimljen 6–8 sati drvom iz bačvi japanskog viskija. Bogata, slatka i tresetna šalica bez gorčine.",
+            "zaliha": 24,
+            "objavljeno": true,
+            "slika": "CSTN-220"
+        },
+        {
+            "id": "b0da799a04e7",
+            "sku": "CSTVI-298",
+            "slug": "puer-shou-2021-yongde",
+            "naziv": "Pu'er Shou 2021 Yongde",
+            "vrsta": "puer",
+            "podrijetlo": "Kina",
+            "tein": 2,
+            "okusi": [
+                "zemljani",
+                "drvenasti"
+            ],
+            "oblik": "rastresiti",
+            "cijena": 14.9,
+            "pakiranje": "50 g",
+            "namjene": [
+                "fokus",
+                "opust"
+            ],
+            "oznake": [
+                "rijetko"
+            ],
+            "priprema": {
+                "temp": "95 °C",
+                "vrijeme": "4 min (ili 20–30 s gongfu)",
+                "kolicina": "5 g / 250 ml"
+            },
+            "opis": "Shou pu'er iz 2021. godine iz regije Yongde u Yunnanu. Rastresiti listovi, tamna šalica zemljanog i mekog okusa.",
+            "zaliha": 24,
+            "objavljeno": true,
+            "slika": "CSTVI-298"
+        },
+        {
+            "id": "7cd199a451b6",
+            "sku": "CSTVI-281",
+            "slug": "puer-shou-2016-jingmai",
+            "naziv": "Pu'er Shou 2016 Jingmai",
+            "vrsta": "puer",
+            "podrijetlo": "Kina",
+            "tein": 2,
+            "okusi": [
+                "zemljani",
+                "drvenasti",
+                "vocni"
+            ],
+            "oblik": "rastresiti",
+            "cijena": 16.9,
+            "pakiranje": "50 g",
+            "namjene": [
+                "fokus",
+                "opust"
+            ],
+            "oznake": [
+                "bio",
+                "rijetko"
+            ],
+            "priprema": {
+                "temp": "95 °C",
+                "vrijeme": "4 min (ili 20–30 s gongfu)",
+                "kolicina": "5 g / 250 ml"
+            },
+            "opis": "Rastresiti shou pu'er s 1600 m iz regije Lincang. Vrlo tamna šalica s notama vlažne zemlje, hrasta i suhe šljive.",
+            "zaliha": 24,
+            "objavljeno": true,
+            "slika": null
+        },
+        {
+            "id": "aff368719031",
+            "sku": "CSTVI-282",
+            "slug": "puer-sheng-2023-zhengwan",
+            "naziv": "Pu'er Sheng 2023 Zhengwan",
+            "vrsta": "puer",
+            "podrijetlo": "Kina",
+            "tein": 2,
+            "okusi": [
+                "vocni",
+                "medeni"
+            ],
+            "oblik": "kolac",
+            "cijena": 34,
+            "pakiranje": "kolač 200 g",
+            "namjene": [
+                "fokus",
+                "poklon"
+            ],
+            "oznake": [
+                "bio",
+                "rijetko"
+            ],
+            "priprema": {
+                "temp": "95 °C",
+                "vrijeme": "4 min (ili 20–30 s gongfu)",
+                "kolicina": "5 g / 250 ml"
+            },
+            "opis": "Mladi sheng iz socijalnog projekta u Yunnanu, s drveća na 1300 m. Zlatna šalica s marelicom, kamforom i dugim medenim završetkom.",
+            "zaliha": 24,
+            "objavljeno": true,
+            "slika": "CSTVI-282"
+        },
+        {
+            "id": "73ae2f7dd204",
+            "sku": "CSTVI-276",
+            "slug": "puer-sheng-2023-yongde-da-shan",
+            "naziv": "Pu'er Sheng 2023 Yongde Da Shan",
+            "vrsta": "puer",
+            "podrijetlo": "Kina",
+            "tein": 2,
+            "okusi": [
+                "vocni",
+                "slatkasti"
+            ],
+            "oblik": "kolac",
+            "cijena": 38,
+            "pakiranje": "kolač 200 g",
+            "namjene": [
+                "fokus",
+                "poklon"
+            ],
+            "oznake": [
+                "rijetko"
+            ],
+            "priprema": {
+                "temp": "95 °C",
+                "vrijeme": "4 min (ili 20–30 s gongfu)",
+                "kolicina": "5 g / 250 ml"
+            },
+            "opis": "Mladi pu'er sa starih stabala (70 godina) u šumama Yongdea. Note slame i dinje, lagani tanini i sirupast završetak. Može i odležati.",
+            "zaliha": 24,
+            "objavljeno": true,
+            "slika": "CSTVI-276"
+        },
+        {
+            "id": "9f0b1628b3dc",
+            "sku": "CSTVI-150",
+            "slug": "puer-sheng-2007-yiwu-jing-long",
+            "naziv": "Pu'er Sheng 2007 Yiwu Jing Long",
+            "vrsta": "puer",
+            "podrijetlo": "Kina",
+            "tein": 2,
+            "okusi": [
+                "vocni",
+                "zacinski"
+            ],
+            "oblik": "kolac",
+            "cijena": 59,
+            "pakiranje": "kolač 250 g",
+            "namjene": [
+                "poklon"
+            ],
+            "oznake": [
+                "rijetko"
+            ],
+            "priprema": {
+                "temp": "95 °C",
+                "vrijeme": "4 min (ili 20–30 s gongfu)",
+                "kolicina": "5 g / 250 ml"
+            },
+            "opis": "Odležani sheng iz poznatog terroira Yiwu. Jantarna šalica s notama koprive, vanilije i kamfora, poput četinarske šume.",
+            "zaliha": 0,
+            "objavljeno": true,
+            "slika": null
+        },
+        {
+            "id": "872c085eaf4a",
+            "sku": "CSTW-1",
+            "slug": "ali-shan",
+            "naziv": "Ali Shan",
+            "vrsta": "oolong",
+            "podrijetlo": "Tajvan",
+            "tein": 2,
+            "okusi": [
+                "vocni",
+                "slatkasti"
+            ],
+            "oblik": "rastresiti",
+            "cijena": 15.9,
+            "pakiranje": "50 g",
+            "namjene": [
+                "opust",
+                "poklon"
+            ],
+            "oznake": [],
+            "priprema": {
+                "temp": "95 °C",
+                "vrijeme": "3–4 min",
+                "kolicina": "5 g / 250 ml"
+            },
+            "opis": "Visokoplaninski oolong s planine Ali (1400 m), majstora Chena. Note kokosa, egzotičnog voća i vanilije.",
+            "zaliha": 24,
+            "objavljeno": true,
+            "slika": "CSTW-1"
+        },
+        {
+            "id": "80da6bda925a",
+            "sku": "CSTW-11",
+            "slug": "gaba-cha",
+            "naziv": "Gaba Cha",
+            "vrsta": "oolong",
+            "podrijetlo": "Tajvan",
+            "tein": 2,
+            "okusi": [
+                "vocni",
+                "zacinski"
+            ],
+            "oblik": "rastresiti",
+            "cijena": 14.9,
+            "pakiranje": "50 g",
+            "namjene": [
+                "opust"
+            ],
+            "oznake": [
+                "novo"
+            ],
+            "priprema": {
+                "temp": "95 °C",
+                "vrijeme": "3–4 min",
+                "kolicina": "5 g / 250 ml"
+            },
+            "opis": "Suvremeni tajvanski oolong s povišenim GABA sadržajem. Bogata šalica s notama pečene jabuke, cimeta i muškatnog oraščića.",
+            "zaliha": 24,
+            "objavljeno": true,
+            "slika": "CSTW-11"
+        },
+        {
+            "id": "fe2173a00f88",
+            "sku": "CSTW-30",
+            "slug": "dong-ding-mr-nen-yu-peceni",
+            "naziv": "Dong Ding Mr. Nen Yu (pečeni)",
+            "vrsta": "oolong",
+            "podrijetlo": "Tajvan",
+            "tein": 2,
+            "okusi": [
+                "vocni",
+                "medeni"
+            ],
+            "oblik": "rastresiti",
+            "cijena": 16.9,
+            "pakiranje": "50 g",
+            "namjene": [
+                "opust",
+                "vecer"
+            ],
+            "oznake": [],
+            "priprema": {
+                "temp": "95 °C",
+                "vrijeme": "3–4 min",
+                "kolicina": "5 g / 250 ml"
+            },
+            "opis": "Pečeni Dong Ding majstora Nen Yua. Mirisi džema od maline, meda i tosta, kremasta šalica s ananasom na kraju.",
+            "zaliha": 24,
+            "objavljeno": true,
+            "slika": "CSTW-30"
+        },
+        {
+            "id": "7b1a4478a14e",
+            "sku": "CSTP-5",
+            "slug": "dunes-du-sahara-zeleni-s-mentom",
+            "naziv": "Dunes du Sahara (zeleni s mentom)",
+            "vrsta": "aroma",
+            "podrijetlo": "Mješavina",
+            "tein": 2,
+            "okusi": [
+                "mentolni",
+                "travnati"
+            ],
+            "oblik": "rastresiti",
+            "cijena": 7.9,
+            "pakiranje": "50 g",
+            "namjene": [
+                "jutro"
+            ],
+            "oznake": [
+                "bio"
+            ],
+            "priprema": {
+                "temp": "80 °C",
+                "vrijeme": "2–3 min",
+                "kolicina": "4 g / 250 ml"
+            },
+            "opis": "Kućna mješavina organskog gunpowdera i mente. Osvježavajuća i lagana, kao u sjevernoj Africi.",
+            "zaliha": 24,
+            "objavljeno": true,
+            "slika": "CSTP-5"
+        },
+        {
+            "id": "cc5ccbe504a9",
+            "sku": "CSTP-6",
+            "slug": "earl-grey",
+            "naziv": "Earl Grey",
+            "vrsta": "aroma",
+            "podrijetlo": "Indija",
+            "tein": 3,
+            "okusi": [
+                "citrusni"
+            ],
+            "oblik": "rastresiti",
+            "cijena": 8.9,
+            "pakiranje": "50 g",
+            "namjene": [
+                "jutro"
+            ],
+            "oznake": [
+                "bio"
+            ],
+            "priprema": {
+                "temp": "95 °C",
+                "vrijeme": "3–4 min",
+                "kolicina": "3 g / 250 ml"
+            },
+            "opis": "Kvalitetni crni čaj iz Dooarsa s prirodnom aromom talijanskog bergamota. Engleski klasik.",
+            "zaliha": 24,
+            "objavljeno": true,
+            "slika": "CSTP-6"
+        },
+        {
+            "id": "deebb231f951",
+            "sku": "CSTP-90",
+            "slug": "earl-grey-de-marie-antoinette",
+            "naziv": "Earl Grey de Marie-Antoinette",
+            "vrsta": "aroma",
+            "podrijetlo": "Mješavina",
+            "tein": 2,
+            "okusi": [
+                "citrusni",
+                "cvjetni"
+            ],
+            "oblik": "rastresiti",
+            "cijena": 10.9,
+            "pakiranje": "50 g",
+            "namjene": [
+                "opust",
+                "poklon"
+            ],
+            "oznake": [
+                "bio"
+            ],
+            "priprema": {
+                "temp": "90 °C",
+                "vrijeme": "3–4 min",
+                "kolicina": "4 g / 250 ml"
+            },
+            "opis": "Zeleni i crni čaj s bergamotom i laticama ruže. Intenzivan, cvjetni Earl Grey.",
+            "zaliha": 24,
+            "objavljeno": true,
+            "slika": "CSTP-90"
+        },
+        {
+            "id": "5d192966ce25",
+            "sku": "CSTP-7",
+            "slug": "green-earl-grey",
+            "naziv": "Green Earl Grey",
+            "vrsta": "aroma",
+            "podrijetlo": "Šri Lanka",
+            "tein": 2,
+            "okusi": [
+                "citrusni",
+                "travnati"
+            ],
+            "oblik": "rastresiti",
+            "cijena": 8.9,
+            "pakiranje": "50 g",
+            "namjene": [
+                "jutro"
+            ],
+            "oznake": [],
+            "priprema": {
+                "temp": "80 °C",
+                "vrijeme": "2–3 min",
+                "kolicina": "4 g / 250 ml"
+            },
+            "opis": "Earl Grey na bazi zelenog čaja sa Šri Lanke, s različkom i prirodnim bergamotom.",
+            "zaliha": 24,
+            "objavljeno": true,
+            "slika": "CSTP-7"
+        },
+        {
+            "id": "94c59042b897",
+            "sku": "CSTP-11",
+            "slug": "earl-grey-cream",
+            "naziv": "Earl Grey Cream",
+            "vrsta": "aroma",
+            "podrijetlo": "Šri Lanka",
+            "tein": 3,
+            "okusi": [
+                "citrusni",
+                "slatkasti"
+            ],
+            "oblik": "rastresiti",
+            "cijena": 9.9,
+            "pakiranje": "50 g",
+            "namjene": [
+                "jutro",
+                "poklon"
+            ],
+            "oznake": [],
+            "priprema": {
+                "temp": "95 °C",
+                "vrijeme": "3–4 min",
+                "kolicina": "3 g / 250 ml"
+            },
+            "opis": "Cejlonski crni čaj s bergamotom i vanilijom. Svilenkast sam ili s mlijekom kao London Fog.",
+            "zaliha": 24,
+            "objavljeno": true,
+            "slika": "CSTP-11"
+        },
+        {
+            "id": "ee0f0e2d4158",
+            "sku": "CSTP-51",
+            "slug": "lisbon-sunshine",
+            "naziv": "Lisbon Sunshine",
+            "vrsta": "aroma",
+            "podrijetlo": "Mješavina",
+            "tein": 3,
+            "okusi": [
+                "vocni",
+                "zacinski"
+            ],
+            "oblik": "rastresiti",
+            "cijena": 9.9,
+            "pakiranje": "50 g",
+            "namjene": [
+                "jutro"
+            ],
+            "oznake": [
+                "bio"
+            ],
+            "priprema": {
+                "temp": "95 °C",
+                "vrijeme": "3–4 min",
+                "kolicina": "3 g / 250 ml"
+            },
+            "opis": "Crni čaj s breskvom i đumbirom. Odličan topao ili kao hladni napitak na terasi.",
+            "zaliha": 24,
+            "objavljeno": true,
+            "slika": "CSTP-51"
+        },
+        {
+            "id": "56b2f5811b34",
+            "sku": "CSTG-68",
+            "slug": "memories-from-napoli",
+            "naziv": "Memories from Napoli",
+            "vrsta": "aroma",
+            "podrijetlo": "Mješavina",
+            "tein": 2,
+            "okusi": [
+                "citrusni",
+                "travnati"
+            ],
+            "oblik": "rastresiti",
+            "cijena": 9.9,
+            "pakiranje": "50 g",
+            "namjene": [
+                "jutro",
+                "opust"
+            ],
+            "oznake": [
+                "bio"
+            ],
+            "priprema": {
+                "temp": "80 °C",
+                "vrijeme": "2–3 min",
+                "kolicina": "4 g / 250 ml"
+            },
+            "opis": "Mediteranska mješavina zelenog čaja s ružmarinom i grejpom. Šarena i osvježavajuća.",
+            "zaliha": 24,
+            "objavljeno": true,
+            "slika": "CSTG-68"
+        },
+        {
+            "id": "9d2381bc3ea1",
+            "sku": "CSTP-25",
+            "slug": "moulin-rouge",
+            "naziv": "Moulin Rouge",
+            "vrsta": "aroma",
+            "podrijetlo": "Mješavina",
+            "tein": 1,
+            "okusi": [
+                "vocni",
+                "cvjetni"
+            ],
+            "oblik": "rastresiti",
+            "cijena": 10.9,
+            "pakiranje": "50 g",
+            "namjene": [
+                "opust",
+                "poklon"
+            ],
+            "oznake": [],
+            "priprema": {
+                "temp": "85 °C",
+                "vrijeme": "3–4 min",
+                "kolicina": "4 g / 250 ml"
+            },
+            "opis": "Bijeli čaj s cvijećem i voćem. Crvena šalica s kiselkastim hibiskusom i slatkoćom trešnje.",
+            "zaliha": 24,
+            "objavljeno": true,
+            "slika": "CSTP-25"
+        },
+        {
+            "id": "1e434ccc693b",
+            "sku": "CSTP-17",
+            "slug": "ombrelle-de-papier",
+            "naziv": "Ombrelle de Papier",
+            "vrsta": "aroma",
+            "podrijetlo": "Mješavina",
+            "tein": 1,
+            "okusi": [
+                "vocni"
+            ],
+            "oblik": "rastresiti",
+            "cijena": 10.9,
+            "pakiranje": "50 g",
+            "namjene": [
+                "opust"
+            ],
+            "oznake": [],
+            "priprema": {
+                "temp": "85 °C",
+                "vrijeme": "3–4 min",
+                "kolicina": "4 g / 250 ml"
+            },
+            "opis": "Bijeli i zeleni čaj s ananasom, rabarbarom i ličijem. Razigrana voćna mješavina.",
+            "zaliha": 24,
+            "objavljeno": true,
+            "slika": "CSTP-17"
+        },
+        {
+            "id": "a21dba4e5d3d",
+            "sku": "CSTP-81",
+            "slug": "raspberry-mimosa",
+            "naziv": "Raspberry Mimosa",
+            "vrsta": "aroma",
+            "podrijetlo": "Mješavina",
+            "tein": 2,
+            "okusi": [
+                "vocni"
+            ],
+            "oblik": "rastresiti",
+            "cijena": 8.9,
+            "pakiranje": "50 g",
+            "namjene": [
+                "opust"
+            ],
+            "oznake": [
+                "bio"
+            ],
+            "priprema": {
+                "temp": "80 °C",
+                "vrijeme": "2–3 min",
+                "kolicina": "4 g / 250 ml"
+            },
+            "opis": "Zeleni čaj s malinom i šipkom. Osvježavajuć, s nježnom voćnom notom.",
+            "zaliha": 24,
+            "objavljeno": true,
+            "slika": "CSTP-81"
+        },
+        {
+            "id": "23ba0eb6816f",
+            "sku": "CSTP-86",
+            "slug": "sencha-yuzu",
+            "naziv": "Sencha Yuzu",
+            "vrsta": "aroma",
+            "podrijetlo": "Japan",
+            "tein": 2,
+            "okusi": [
+                "citrusni",
+                "travnati"
+            ],
+            "oblik": "rastresiti",
+            "cijena": 12.9,
+            "pakiranje": "50 g",
+            "namjene": [
+                "jutro",
+                "fokus"
+            ],
+            "oznake": [
+                "bio"
+            ],
+            "priprema": {
+                "temp": "70 °C",
+                "vrijeme": "1–2 min",
+                "kolicina": "4 g / 250 ml"
+            },
+            "opis": "Japanska sencha s korom yuzua iz Tokushime. Uravnotežena i osvježavajuća, za ljubitelje čaja s limunom.",
+            "zaliha": 24,
+            "objavljeno": true,
+            "slika": "CSTP-86"
+        },
+        {
+            "id": "ed409ad25436",
+            "sku": "CSTP-88",
+            "slug": "fee-des-fleurs-jasmin",
+            "naziv": "Fée des Fleurs (jasmin)",
+            "vrsta": "aroma",
+            "podrijetlo": "Kina",
+            "tein": 2,
+            "okusi": [
+                "cvjetni",
+                "vocni"
+            ],
+            "oblik": "rastresiti",
+            "cijena": 15.9,
+            "pakiranje": "50 g",
+            "namjene": [
+                "opust",
+                "poklon"
+            ],
+            "oznake": [],
+            "priprema": {
+                "temp": "80 °C",
+                "vrijeme": "2–3 min",
+                "kolicina": "4 g / 250 ml"
+            },
+            "opis": "Zeleni čaj iz Sichuana mirisan jasminom u četiri navrata. Snažan miris jasmina s notom azijske kruške.",
+            "zaliha": 24,
+            "objavljeno": true,
+            "slika": "CSTP-88"
+        },
+        {
+            "id": "35ac920281d5",
+            "sku": "CSTP-36",
+            "slug": "cvjetni-caj-bozur-ljiljan-i-osmantus",
+            "naziv": "Cvjetni čaj: božur, ljiljan i osmantus",
+            "vrsta": "aroma",
+            "podrijetlo": "Kina",
+            "tein": 2,
+            "okusi": [
+                "cvjetni"
+            ],
+            "oblik": "rastresiti",
+            "cijena": 12.9,
+            "pakiranje": "50 g",
+            "namjene": [
+                "poklon"
+            ],
+            "oznake": [
+                "novo"
+            ],
+            "priprema": {
+                "temp": "80 °C",
+                "vrijeme": "2–3 min",
+                "kolicina": "4 g / 250 ml"
+            },
+            "opis": "Ručno vezani zeleni čaj s jasminom koji se u vodi otvara poput cvijeta. Najljepši u staklenom čajniku.",
+            "zaliha": 24,
+            "objavljeno": true,
+            "slika": "CSTP-36"
+        },
+        {
+            "id": "4bbe45aeb7a3",
+            "sku": "CSTP-92",
+            "slug": "verger-tropical",
+            "naziv": "Verger Tropical",
+            "vrsta": "aroma",
+            "podrijetlo": "Mješavina",
+            "tein": 2,
+            "okusi": [
+                "vocni"
+            ],
+            "oblik": "rastresiti",
+            "cijena": 9.9,
+            "pakiranje": "50 g",
+            "namjene": [
+                "opust"
+            ],
+            "oznake": [],
+            "priprema": {
+                "temp": "80 °C",
+                "vrijeme": "2–3 min",
+                "kolicina": "4 g / 250 ml"
+            },
+            "opis": "Zeleni čaj s voćem, limunskom travom i cvjetovima. Note breskve i kruške, kao šetnja voćnjakom.",
+            "zaliha": 24,
+            "objavljeno": true,
+            "slika": "CSTP-92"
+        },
+        {
+            "id": "f8fe4b15dbe8",
+            "sku": "CSTC-5",
+            "slug": "chai-camellia",
+            "naziv": "Chai Camellia",
+            "vrsta": "aroma",
+            "podrijetlo": "Mješavina",
+            "tein": 3,
+            "okusi": [
+                "zacinski"
+            ],
+            "oblik": "rastresiti",
+            "cijena": 8.9,
+            "pakiranje": "50 g",
+            "namjene": [
+                "jutro",
+                "vecer"
+            ],
+            "oznake": [
+                "bio"
+            ],
+            "priprema": {
+                "temp": "95 °C",
+                "vrijeme": "3–4 min",
+                "kolicina": "3 g / 250 ml"
+            },
+            "opis": "Kućni chai na bazi crnog čaja s kardamomom, cimetom, đumbirom i muškatnim oraščićem. S vodom ili tradicionalno s mlijekom.",
+            "zaliha": 24,
+            "objavljeno": true,
+            "slika": "CSTC-5"
+        },
+        {
+            "id": "1f8bfd39bb35",
+            "sku": "CSTC-13",
+            "slug": "celebration-chai",
+            "naziv": "Celebration Chai",
+            "vrsta": "aroma",
+            "podrijetlo": "Mješavina",
+            "tein": 3,
+            "okusi": [
+                "zacinski",
+                "citrusni"
+            ],
+            "oblik": "rastresiti",
+            "cijena": 9.9,
+            "pakiranje": "50 g",
+            "namjene": [
+                "poklon",
+                "vecer"
+            ],
+            "oznake": [
+                "bio"
+            ],
+            "priprema": {
+                "temp": "95 °C",
+                "vrijeme": "3–4 min",
+                "kolicina": "3 g / 250 ml"
+            },
+            "opis": "Svečani chai s narančom, zvjezdastim anisom, klinčićem i ružičastim paprom. Podsjeća na kuhano vino.",
+            "zaliha": 24,
+            "objavljeno": true,
+            "slika": "CSTC-13"
+        },
+        {
+            "id": "87eaef851ee1",
+            "sku": "CSTO-2",
+            "slug": "kamilica",
+            "naziv": "Kamilica",
+            "vrsta": "biljni",
+            "podrijetlo": "Egipat",
+            "tein": 0,
+            "okusi": [
+                "cvjetni",
+                "slatkasti"
+            ],
+            "oblik": "rastresiti",
+            "cijena": 6.9,
+            "pakiranje": "30 g",
+            "namjene": [
+                "vecer",
+                "opust"
+            ],
+            "oznake": [
+                "bio"
+            ],
+            "priprema": {
+                "temp": "100 °C",
+                "vrijeme": "5–7 min",
+                "kolicina": "3 g / 250 ml"
+            },
+            "opis": "Cvjetovi kamilice. Svijetlo žuta, mekana i svilenkasta šalica s dugim, slatkim cvjetnim završetkom.",
+            "zaliha": 24,
+            "objavljeno": true,
+            "slika": "CSTO-2"
+        },
+        {
+            "id": "af0ea740db1a",
+            "sku": "CSTO-41",
+            "slug": "menta",
+            "naziv": "Menta",
+            "vrsta": "biljni",
+            "podrijetlo": "Egipat",
+            "tein": 0,
+            "okusi": [
+                "mentolni"
+            ],
+            "oblik": "rastresiti",
+            "cijena": 6.9,
+            "pakiranje": "30 g",
+            "namjene": [
+                "vecer"
+            ],
+            "oznake": [
+                "bio"
+            ],
+            "priprema": {
+                "temp": "100 °C",
+                "vrijeme": "5–7 min",
+                "kolicina": "3 g / 250 ml"
+            },
+            "opis": "Kućna mješavina klasaste i paprene metvice. Osvježava ljeti, grije zimi.",
+            "zaliha": 24,
+            "objavljeno": true,
+            "slika": "CSTO-41"
+        },
+        {
+            "id": "e19b74b51daf",
+            "sku": "CSTO-23",
+            "slug": "la-provencale",
+            "naziv": "La Provençale",
+            "vrsta": "biljni",
+            "podrijetlo": "Mješavina",
+            "tein": 0,
+            "okusi": [
+                "mentolni",
+                "cvjetni"
+            ],
+            "oblik": "rastresiti",
+            "cijena": 8.9,
+            "pakiranje": "30 g",
+            "namjene": [
+                "vecer",
+                "opust"
+            ],
+            "oznake": [
+                "bio"
+            ],
+            "priprema": {
+                "temp": "100 °C",
+                "vrijeme": "5–7 min",
+                "kolicina": "3 g / 250 ml"
+            },
+            "opis": "Menta, ružmarin, matičnjak i lavanda. Aromatična provansalska mješavina, ugodna nakon jela.",
+            "zaliha": 24,
+            "objavljeno": true,
+            "slika": "CSTO-23"
+        },
+        {
+            "id": "5b2526874d46",
+            "sku": "CSTO-31",
+            "slug": "lemon-ginger-burst",
+            "naziv": "Lemon Ginger Burst",
+            "vrsta": "biljni",
+            "podrijetlo": "Mješavina",
+            "tein": 0,
+            "okusi": [
+                "citrusni",
+                "zacinski"
+            ],
+            "oblik": "rastresiti",
+            "cijena": 8.9,
+            "pakiranje": "50 g",
+            "namjene": [
+                "vecer"
+            ],
+            "oznake": [
+                "bio"
+            ],
+            "priprema": {
+                "temp": "100 °C",
+                "vrijeme": "5–7 min",
+                "kolicina": "3 g / 250 ml"
+            },
+            "opis": "Đumbir i limun s limunskom travom i hibiskusom. Ljut i kiselkast, idealan za hladne dane.",
+            "zaliha": 24,
+            "objavljeno": true,
+            "slika": "CSTO-31"
+        },
+        {
+            "id": "98fb2bcbdb96",
+            "sku": "CSTO-17",
+            "slug": "la-rose-pourpre",
+            "naziv": "La Rose Pourpre",
+            "vrsta": "biljni",
+            "podrijetlo": "Kanada",
+            "tein": 0,
+            "okusi": [
+                "cvjetni"
+            ],
+            "oblik": "rastresiti",
+            "cijena": 11.9,
+            "pakiranje": "30 g",
+            "namjene": [
+                "vecer",
+                "poklon"
+            ],
+            "oznake": [
+                "bio"
+            ],
+            "priprema": {
+                "temp": "100 °C",
+                "vrijeme": "5–7 min",
+                "kolicina": "3 g / 250 ml"
+            },
+            "opis": "Listovi maline, ljubičasti bosiljak i pupoljci divlje ruže iz Quebeca. Duboko ljubičasta, živahna šalica.",
+            "zaliha": 24,
+            "objavljeno": true,
+            "slika": null
+        },
+        {
+            "id": "121f54f60a21",
+            "sku": "CSTO-74",
+            "slug": "la-belle-humeur",
+            "naziv": "La Belle Humeur",
+            "vrsta": "biljni",
+            "podrijetlo": "Mješavina",
+            "tein": 0,
+            "okusi": [
+                "cvjetni"
+            ],
+            "oblik": "rastresiti",
+            "cijena": 10.9,
+            "pakiranje": "30 g",
+            "namjene": [
+                "vecer"
+            ],
+            "oznake": [
+                "bio"
+            ],
+            "priprema": {
+                "temp": "100 °C",
+                "vrijeme": "5–7 min",
+                "kolicina": "3 g / 250 ml"
+            },
+            "opis": "Organska biljna mješavina bez teina. Pije se toplo, u bilo koje doba dana.",
+            "zaliha": 24,
+            "objavljeno": true,
+            "slika": "CSTO-74"
+        },
+        {
+            "id": "1e2acfd12e00",
+            "sku": "CSTO-182",
+            "slug": "cerise-rubis",
+            "naziv": "Cerise Rubis",
+            "vrsta": "biljni",
+            "podrijetlo": "Mješavina",
+            "tein": 0,
+            "okusi": [
+                "vocni"
+            ],
+            "oblik": "rastresiti",
+            "cijena": 8.9,
+            "pakiranje": "50 g",
+            "namjene": [
+                "vecer",
+                "poklon"
+            ],
+            "oznake": [],
+            "priprema": {
+                "temp": "100 °C",
+                "vrijeme": "5–7 min",
+                "kolicina": "3 g / 250 ml"
+            },
+            "opis": "Voćni biljni čaj s jabukom, hibiskusom i višnjom. Okusi slatkiša i svježih jagoda.",
+            "zaliha": 24,
+            "objavljeno": true,
+            "slika": "CSTO-182"
+        },
+        {
+            "id": "8fd803e2895b",
+            "sku": "CSTO-33",
+            "slug": "wintergreen",
+            "naziv": "Wintergreen",
+            "vrsta": "biljni",
+            "podrijetlo": "Kanada",
+            "tein": 0,
+            "okusi": [
+                "mentolni"
+            ],
+            "oblik": "rastresiti",
+            "cijena": 9.9,
+            "pakiranje": "30 g",
+            "namjene": [
+                "vecer"
+            ],
+            "oznake": [
+                "rijetko"
+            ],
+            "priprema": {
+                "temp": "100 °C",
+                "vrijeme": "5–7 min",
+                "kolicina": "3 g / 250 ml"
+            },
+            "opis": "Listovi divlje gaulterije iz šuma Quebeca. Lagana, slatkasta šalica izrazitog osvježavajućeg okusa.",
+            "zaliha": 24,
+            "objavljeno": true,
+            "slika": "CSTO-33"
+        },
+        {
+            "id": "9f1a79efee88",
+            "sku": "CSTO-32",
+            "slug": "labradorski-caj",
+            "naziv": "Labradorski čaj",
+            "vrsta": "biljni",
+            "podrijetlo": "Kanada",
+            "tein": 0,
+            "okusi": [
+                "drvenasti"
+            ],
+            "oblik": "rastresiti",
+            "cijena": 11.9,
+            "pakiranje": "30 g",
+            "namjene": [
+                "vecer"
+            ],
+            "oznake": [
+                "rijetko"
+            ],
+            "priprema": {
+                "temp": "100 °C",
+                "vrijeme": "5–7 min",
+                "kolicina": "3 g / 250 ml"
+            },
+            "opis": "Divlje ubran ledon s područja Lac St-Jean. Kiselkast, biljni karakter s notama jele i kopra. Zbog tanina umjerena konzumacija.",
+            "zaliha": 24,
+            "objavljeno": true,
+            "slika": "CSTO-32"
+        },
+        {
+            "id": "f31fe32dd85d",
+            "sku": "CSTR-3",
+            "slug": "rooibos-wupperthal",
+            "naziv": "Rooibos Wupperthal",
+            "vrsta": "biljni",
+            "podrijetlo": "Južna Afrika",
+            "tein": 0,
+            "okusi": [
+                "vocni",
+                "sladni"
+            ],
+            "oblik": "rastresiti",
+            "cijena": 7.9,
+            "pakiranje": "50 g",
+            "namjene": [
+                "vecer"
+            ],
+            "oznake": [
+                "bio"
+            ],
+            "priprema": {
+                "temp": "100 °C",
+                "vrijeme": "5–7 min",
+                "kolicina": "3 g / 250 ml"
+            },
+            "opis": "Organski rooibos s planina Cederberg, bez teina. Jarko crvena šalica s notama kuhane trešnje i slada.",
+            "zaliha": 24,
+            "objavljeno": true,
+            "slika": "CSTR-3"
+        },
+        {
+            "id": "c5dd3e97c75d",
+            "sku": "CSTR-4",
+            "slug": "rooibos-zeste-eclair",
+            "naziv": "Rooibos Zeste Éclair",
+            "vrsta": "biljni",
+            "podrijetlo": "Južna Afrika",
+            "tein": 0,
+            "okusi": [
+                "citrusni",
+                "zacinski"
+            ],
+            "oblik": "rastresiti",
+            "cijena": 8.9,
+            "pakiranje": "50 g",
+            "namjene": [
+                "vecer"
+            ],
+            "oznake": [],
+            "priprema": {
+                "temp": "100 °C",
+                "vrijeme": "5–7 min",
+                "kolicina": "3 g / 250 ml"
+            },
+            "opis": "Rooibos s grejpom, limunskom travom i začinima. Osvježavajući, bez teina.",
+            "zaliha": 24,
+            "objavljeno": true,
+            "slika": "CSTR-4"
+        },
+        {
+            "id": "0ad385a5212d",
+            "sku": "CSTAD-592",
+            "slug": "yerba-mate",
+            "naziv": "Yerba Maté",
+            "vrsta": "biljni",
+            "podrijetlo": "Brazil",
+            "tein": 3,
+            "okusi": [
+                "travnati"
+            ],
+            "oblik": "rastresiti",
+            "cijena": 24,
+            "pakiranje": "1 kg",
+            "namjene": [
+                "jutro",
+                "fokus"
+            ],
+            "oznake": [
+                "bio"
+            ],
+            "priprema": {
+                "temp": "100 °C",
+                "vrijeme": "5–7 min",
+                "kolicina": "3 g / 250 ml"
+            },
+            "opis": "Južnoamerički napitak od biljke iz porodice božikovine, bogat teinom. Biljni, izravan i gorkast okus, sušen bez dima.",
+            "zaliha": 24,
+            "objavljeno": true,
+            "slika": "CSTAD-592"
+        },
+        {
+            "id": "5a875b0a5a80",
+            "sku": "CSTHG-32",
+            "slug": "staklena-gaiwan-echo",
+            "naziv": "Staklena gaiwan Echo",
+            "vrsta": "pribor",
+            "podrijetlo": "",
+            "tein": null,
+            "okusi": [],
+            "oblik": "pribor",
+            "cijena": 24,
+            "pakiranje": "kom",
+            "namjene": [
+                "poklon"
+            ],
+            "oznake": [],
+            "priprema": null,
+            "opis": "Staklena gaiwan za sve vrste čaja. Glatke stijenke za ugodan hvat i neutralno zalijevanje, a vidite kako se listovi otvaraju.",
+            "zaliha": 24,
+            "objavljeno": true,
+            "slika": "CSTHG-32"
+        },
+        {
+            "id": "0a0a5400f65d",
+            "sku": "CSTHJC-79",
+            "slug": "set-za-matchu-focus",
+            "naziv": "Set za matchu Focus",
+            "vrsta": "pribor",
+            "podrijetlo": "",
+            "tein": null,
+            "okusi": [],
+            "oblik": "pribor",
+            "cijena": 59,
+            "pakiranje": "set",
+            "namjene": [
+                "poklon"
+            ],
+            "oznake": [],
+            "priprema": null,
+            "opis": "Sve za savršenu matchu: bambusova metlica chasen, držač, zdjelica chawan i čelična žličica.",
+            "zaliha": 24,
+            "objavljeno": true,
+            "slika": "CSTHJC-79"
+        },
+        {
+            "id": "16411b597625",
+            "sku": "CSAC-516",
+            "slug": "zlicica-za-matchu",
+            "naziv": "Žličica za matchu",
+            "vrsta": "pribor",
+            "podrijetlo": "",
+            "tein": null,
+            "okusi": [],
+            "oblik": "pribor",
+            "cijena": 9.9,
+            "pakiranje": "kom",
+            "namjene": [
+                "poklon"
+            ],
+            "oznake": [],
+            "priprema": null,
+            "opis": "Mala žličica od nehrđajućeg čelika za točno odmjerenu matchu svaki put.",
+            "zaliha": 24,
+            "objavljeno": true,
+            "slika": "CSAC-516"
+        },
+        {
+            "id": "f4e9e209d426",
+            "sku": "CSAC-463",
+            "slug": "bambusova-cajna-daska-cabaret",
+            "naziv": "Bambusova čajna daska Cabaret",
+            "vrsta": "pribor",
+            "podrijetlo": "",
+            "tein": null,
+            "okusi": [],
+            "oblik": "pribor",
+            "cijena": 39,
+            "pakiranje": "kom",
+            "namjene": [
+                "poklon"
+            ],
+            "oznake": [],
+            "priprema": null,
+            "opis": "Bambusova daska za posluživanje koja skuplja vodu pri zalijevanju i ispiranju. Moderan i elegantan dizajn.",
+            "zaliha": 24,
+            "objavljeno": true,
+            "slika": "CSAC-463"
+        },
+        {
+            "id": "7df1a83b36de",
+            "sku": "CSLI-2",
+            "slug": "knjiga-tea-history-terroirs-varieties",
+            "naziv": "Knjiga: Tea – History, Terroirs, Varieties",
+            "vrsta": "pribor",
+            "podrijetlo": "",
+            "tein": null,
+            "okusi": [],
+            "oblik": "pribor",
+            "cijena": 34,
+            "pakiranje": "kom",
+            "namjene": [
+                "poklon"
+            ],
+            "oznake": [],
+            "priprema": null,
+            "opis": "Knjiga kuće Camellia Sinensis (treće izdanje, engleski): povijest, terroiri i vrste čaja.",
+            "zaliha": 2,
+            "objavljeno": true,
+            "slika": "CSLI-2"
+        }
+    ],
+    "izdvojeno": {
+        "polica": [
+            "CSTVI-282",
+            "CSTV-237",
+            "CSTN-220",
+            "CSTW-1",
+            "CSTB-6",
+            "CSTP-88",
+            "CSTHJC-79",
+            "CSTN-97",
+            "CSTO-2"
+        ]
+    }
+}
