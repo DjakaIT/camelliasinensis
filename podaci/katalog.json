@@ -1,7 +1,7 @@
 {
     "format": 1,
-    "verzija": 3,
-    "azurirano": "2026-11-12T13:45:20.951Z",
+    "verzija": 4,
+    "azurirano": "2026-11-12T19:51:48.690Z",
     "azurirao": "drajic",
     "vrste": [
         {
@@ -182,7 +182,7 @@
                 "travnati"
             ],
             "oblik": "rastresiti",
-            "cijena": 7.9,
+            "cijena": 1,
             "pakiranje": "50 g",
             "namjene": [
                 "jutro"
