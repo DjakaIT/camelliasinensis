@@ -206,7 +206,7 @@ export default async function Home() {
               >
                 <path d="M4 14c3-1 5-4 6-8 2 4 6 6 10 6-2 5-6 8-11 8a5 5 0 0 1-5-6z" />
               </svg>
-              <b>Rastresiti listovi</b>
+              <b>Priroda u paketu</b>
               <span>bez vrećica i punila</span>
             </li>
           </ul>
