@@ -1,7 +1,7 @@
 {
     "format": 1,
-    "verzija": 6,
-    "azurirano": "2026-11-13T13:10:12.328Z",
+    "verzija": 7,
+    "azurirano": "2026-11-13T13:10:35.216Z",
     "azurirao": "drajic",
     "vrste": [
         {
@@ -72,7 +72,7 @@
                 "kolicina": "4 g / 250 ml"
             },
             "opis": "Klasični kineski bijeli čaj od mladih proljetnih izdanaka. Mekana, puna tekstura s cvjetnim notama djeteline i slatkim tonovima cimeta.",
-            "zaliha": 24,
+            "zaliha": null,
             "objavljeno": true,
             "slika": "CSTB-2"
         },
