@@ -1,8 +1,8 @@
 {
     "format": 1,
-    "verzija": 7,
-    "azurirano": "2026-11-13T13:10:35.216Z",
-    "azurirao": "drajic",
+    "verzija": 8,
+    "azurirano": "2026-11-13T13:52:00.022Z",
+    "azurirao": "stepsa",
     "vrste": [
         {
             "kljuc": "bijeli",
@@ -307,7 +307,7 @@
                 "slatkasti"
             ],
             "oblik": "rastresiti",
-            "cijena": 22,
+            "cijena": 20,
             "pakiranje": "50 g",
             "namjene": [
                 "fokus",
@@ -321,7 +321,7 @@
                 "vrijeme": "1–2 min",
                 "kolicina": "4 g / 250 ml"
             },
-            "opis": "Gyokuro, čaj uzgojen u sjeni. Miris maline, glatka šalica s povrtnim notama špinata i suncokretovih sjemenki.",
+            "opis": "Gyokuro, čaj uzgojen u sjeni ( nedostatak svjetlosti stvara zahtjevnije uvjete za biljku ,čija se molekularna struktura mijenja kako bi se stvorio prostor za šećere ,aminokiseline i aromatske spojeve )-rezultat manje gorčine . Tamne boje i opojnog mirisa .Miris maline, glatka šalica s povrtnim notama špinata i suncokretovih sjemenki.",
             "zaliha": 24,
             "objavljeno": true,
             "slika": "CSTV-88"
