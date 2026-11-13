@@ -1,7 +1,7 @@
 {
     "format": 1,
-    "verzija": 4,
-    "azurirano": "2026-11-12T19:51:48.690Z",
+    "verzija": 5,
+    "azurirano": "2026-11-13T13:09:34.828Z",
     "azurirao": "drajic",
     "vrste": [
         {
@@ -196,7 +196,7 @@
                 "kolicina": "4 g / 250 ml"
             },
             "opis": "Organska bancha iz Shizuoke, odličan svakodnevni zeleni čaj. Osvježavajuća, travnata šalica s morskim notama. Idealan prvi japanski čaj.",
-            "zaliha": 23,
+            "zaliha": 21,
             "objavljeno": true,
             "slika": "CSTV-178"
         },
@@ -490,7 +490,7 @@
                 "cvjetni"
             ],
             "oblik": "prah",
-            "cijena": 29,
+            "cijena": 35,
             "pakiranje": "30 g",
             "namjene": [
                 "fokus",
