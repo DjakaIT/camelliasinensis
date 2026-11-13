@@ -67,7 +67,7 @@ export function Footer({ note }: { note: string | null }) {
         <span>© 2026 Camellia sinensis</span>
         <span>{PAYMENT_METHODS.join(' · ')}</span>
         {note && <span data-testid="demo-note">{note}</span>}
-        <span>Izrada: Perasma</span>
+        <span>Izrada: <a href="https://perasma.dev" target="_blank" rel="noopener">Perasma</a></span>
       </div>
     </footer>
   );
