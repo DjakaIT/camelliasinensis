@@ -49,7 +49,7 @@ AddDefaultCharset UTF-8
 Header always set X-Content-Type-Options "nosniff"
 Header always set Referrer-Policy "strict-origin-when-cross-origin"
 # geolocation=(self): "Najbliži meni" kod odabira GLS paketomata (lokacija ostaje u pregledniku)
-Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(self), payment=(), usb=(), interest-cohort=()"
+Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(self), payment=(self "https://js.stripe.com" "https://checkout.stripe.com"), usb=(), interest-cohort=()"
 Header always set Cross-Origin-Opener-Policy "same-origin"
 # CSP je podijeljen (docs/csp.md): default-src i script-src s SHA-256 hashevima inline skripti Next.js-a su u
 # <meta> svake stranice (scripts/postbuild.mjs). Ovdje su samo direktive koje <meta> ne podržava.
