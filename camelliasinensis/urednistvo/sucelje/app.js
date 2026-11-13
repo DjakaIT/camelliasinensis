@@ -399,7 +399,16 @@ function obrazacProizvoda(p) {
       const t = e.target.value.trim();
       p.zaliha = t === '' ? null : /^\d{1,6}$/.test(t) ? Number(t) : p.zaliha;
       S.sirovo[`${id}:zaliha`] = t; oznaciPromjenu(); ocistiGresku(`${id}:zaliha`); osvjeziSazetak(id);
+      nemaNaZalihi.checked = p.zaliha === 0;
     } });
+  // "Nema na zalihi" (Daniel, 13. 11. 2026.): zaliha 0; na stranici se preko fotografije pokaže oznaka. Kad se kvačica makne,
+  // vraća se zaliha upisana prije (ako je bila veća od 0), inače se zaliha ne broji.
+  let zalihaPrije = p.zaliha;
+  const nemaNaZalihi = h('input', { type: 'checkbox', checked: p.zaliha === 0, 'data-testid': 'nema-na-zalihi', onchange: (e) => {
+    if (e.target.checked) { zalihaPrije = p.zaliha; p.zaliha = 0; } else p.zaliha = zalihaPrije > 0 ? zalihaPrije : null;
+    zaliha.value = p.zaliha ?? ''; S.sirovo[`${id}:zaliha`] = String(p.zaliha ?? '');
+    oznaciPromjenu(); ocistiGresku(`${id}:zaliha`); osvjeziSazetak(id);
+  } });
   const priprema = p.priprema ?? { temp: '', vrijeme: '', kolicina: '' };
   const pripremaPolje = (k, oznaka, mjesto) => tekstPolje(priprema, k, oznaka, { id, putanja: `${id}:priprema`, mjesto });
   // priprema se sprema samo ako je upisano barem jedno polje
@@ -413,7 +422,9 @@ function obrazacProizvoda(p) {
     h('div', { class: 'cijene' }, poljeCijene(p, 'cijena', 'Cijena (€)'), tekst('pakiranje', 'Pakiranje', { mjesto: 'npr. 50 g' })),
     h('div', { class: 'dva' },
       h('label', { class: 'polje' }, h('span', {}, 'Zaliha (komada)'), zaliha, h('small', {}, '0 = rasprodano, prazno = zaliha se ne broji')),
-      h('label', { class: 'kvacica dno' }, h('input', { type: 'checkbox', checked: p.objavljeno, onchange: (e) => { p.objavljeno = e.target.checked; oznaciPromjenu(); osvjeziSazetak(id); } }), 'Objavljeno na stranici')),
+      h('div', { class: 'kvacice-stup' },
+        h('label', { class: 'kvacica' }, nemaNaZalihi, h('span', {}, 'Nema na zalihi', h('small', {}, 'Na stranici se preko fotografije pokaže „Nema na zalihi“.'))),
+        h('label', { class: 'kvacica' }, h('input', { type: 'checkbox', checked: p.objavljeno, onchange: (e) => { p.objavljeno = e.target.checked; oznaciPromjenu(); osvjeziSazetak(id); } }), 'Objavljeno na stranici'))),
     tekstPolje(p, 'opis', 'Opis', { visered: true, id, putanja: `${id}:opis`, opis: 'Prazan red = novi odlomak.' }),
     poljeSlike(p, 'slika', 'Fotografija', { id, ukloni: true, opis: 'Klikni ili dovuci fotografiju. Može ravno s mobitela: sama se smanji, a stranica radi manje verzije.' }),
     h('div', { class: 'dva' },

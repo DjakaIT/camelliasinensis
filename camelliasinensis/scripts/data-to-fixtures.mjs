@@ -6,7 +6,7 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { relative, resolve } from 'node:path';
 import sharp from 'sharp';
-import { pocetniKatalog, provjeri, uOblikStranice } from '../urednistvo/katalog.mjs';
+import { pocetniKatalog, provjeri, uOblikStranice, uskladi } from '../urednistvo/katalog.mjs';
 
 const ROOT = resolve('.');
 const PODACI = process.env.UREDNISTVO_PODACI ? resolve(process.env.UREDNISTVO_PODACI) : null;
@@ -17,7 +17,8 @@ const IZ_UREDNISTVA = Boolean(PODACI && existsSync(resolve(PODACI, 'katalog.json
 const izvorSlike = (kljuc) =>
   kljuc.startsWith('n-') ? resolve(PODACI ?? 'podaci', 'slike', `${kljuc}.webp`) : resolve('design-reference/img', `${kljuc}.jpg`);
 
-const katalog = IZ_UREDNISTVA ? JSON.parse(readFileSync(resolve(PODACI, 'katalog.json'), 'utf8')) : pocetniKatalog(ROOT);
+// uskladi: katalog spremljen prije 13. 11. 2026. ("Pribor i knjige", objavljena knjiga) usklađuje se ovdje i u uredništvu
+const katalog = uskladi(IZ_UREDNISTVA ? JSON.parse(readFileSync(resolve(PODACI, 'katalog.json'), 'utf8')) : pocetniKatalog(ROOT));
 const r = provjeri(katalog, (k) => existsSync(izvorSlike(k)));
 if (!r.ok) {
   console.error(

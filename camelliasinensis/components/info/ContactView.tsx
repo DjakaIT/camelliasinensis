@@ -27,7 +27,7 @@ export function ContactView({ contact, demo }: { contact: Contact; demo: boolean
           <div className="x-ct-info">
             {(a || contact.hours) && (
               <div className="x-ct-card">
-                <h2>Sjedište</h2>
+                <h2>Trgovina</h2>
                 {a && (
                   <div className="ci">
                     <IconPin />

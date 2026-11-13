@@ -285,6 +285,8 @@ dialog:has(.dijalog.siroki) { width: min(760px, calc(100% - 24px)); }
 .kvacice { border: 0; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 8px 18px; }
 .kvacice legend { width: 100%; margin-bottom: 6px; }
 .kvacica.dno { align-self: end; min-height: 44px; align-items: center; }
+.kvacice-stup { display: flex; flex-direction: column; gap: 10px; align-self: end; }
+.kvacice-stup .kvacica small { display: block; color: var(--tekst-3); font-size: 13px; margin-top: 2px; }
 .priprema { border: 0; padding: 0; margin: 0; }
 .priprema legend { margin-bottom: 6px; }
 .tri { display: grid; gap: 12px; grid-template-columns: repeat(3, 1fr); }

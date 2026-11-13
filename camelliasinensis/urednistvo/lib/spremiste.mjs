@@ -3,7 +3,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { citajJson, pisiJson, brava } from './datoteke.mjs';
-import { provjeri, pocetniKatalog } from '../katalog.mjs';
+import { provjeri, pocetniKatalog, uskladi } from '../katalog.mjs';
 import { ROOT } from './postavke.mjs';
 
 const ZADRZI_VERZIJA = 60;
@@ -32,7 +32,7 @@ export function spremiste(podaciDir, { slikaPostoji }) {
   /** trenutni katalog; prvi put se stvara iz prototipa (design-reference/src/data.js) */
   function ucitaj() {
     const s = citajJson(datoteka);
-    if (s) return s;
+    if (s) return uskladi(s);
     const pocetni = pocetniKatalog(ROOT);
     pisiJson(datoteka, pocetni);
     snimiVerziju(pocetni, 'Početni sadržaj');
@@ -57,7 +57,7 @@ export function spremiste(podaciDir, { slikaPostoji }) {
       if (trenutni.verzija !== baznaVerzija) throw new Greska(409, 'Katalog je u međuvremenu promijenjen', { verzija: trenutni.verzija });
       if (!katalog || typeof katalog !== 'object') throw new Greska(422, 'Sadržaj nije ispravan', { greske: [] });
       const novi = { ...katalog, format: trenutni.format, verzija: trenutni.verzija + 1, azurirano: new Date().toISOString(), azurirao: ime };
-      return spremi(novi, ime, String(opis || 'Promjena kataloga').slice(0, 120));
+      return spremi(uskladi(novi), ime, String(opis || 'Promjena kataloga').slice(0, 120));
     }),
     povijest() {
       if (!fs.existsSync(povijestDir)) return [];

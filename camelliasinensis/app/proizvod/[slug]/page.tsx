@@ -4,6 +4,7 @@ import { IconArrow, IconCard, IconClock, IconReturn, IconScale, IconThermo, Icon
 import { FREE_SHIPPING_FROM, legalPage } from '@/content/site';
 import { formatMoney } from '@/lib/format';
 import { NoImage, Picture } from '@/components/Picture';
+import { SoldOutMark } from '@/components/SoldOutMark';
 import { ProductCard } from '@/components/ProductCard';
 import { BuyRow, LivePrice } from '@/components/product/BuyBox';
 import { getCards } from '@/lib/catalog-server';
@@ -71,6 +72,7 @@ export default async function ProductPage({ params }: Props) {
         <div className="x-pgrid">
           <div className="x-pimg" style={{ ['--pc' as string]: typeColor(p.type) }}>
             {img ? <Picture src={img.src} alt={img.alt || p.name} sizes="(max-width: 820px) 78vw, 40vw" priority /> : <NoImage />}
+            <SoldOutMark sku={p.sku} status={p.stock.status} className="big" />
             {flags.length > 0 && (
               <div className="x-flags">
                 {flags.map((f) => (

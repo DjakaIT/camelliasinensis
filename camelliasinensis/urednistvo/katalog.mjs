@@ -81,7 +81,7 @@ export function pocetniKatalog(root) {
       slika: fs.existsSync(path.join(root, 'design-reference/img', `${sku}.jpg`)) ? sku : null,
     };
   });
-  return {
+  return uskladi({
     format: FORMAT,
     verzija: 1,
     azurirano: new Date().toISOString(),
@@ -89,6 +89,31 @@ export function pocetniKatalog(root) {
     vrste: Object.entries(TYPES).map(([kljuc, t]) => ({ kljuc, naziv: t.n, opis: uTein(t.d) })),
     proizvodi,
     izdvojeno: { polica: POCETNA_POLICA.filter((s) => proizvodi.some((p) => p.sku === s)) },
+  });
+}
+
+// ---------------- usklađivanje starijih kataloga ----------------
+// 13. 11. 2026. (Daniel): vrsta "pribor" zove se samo "Pribor", knjige nisu u ponudi.
+const PRIBOR_STARO = { naziv: 'Pribor i knjige', opis: 'Gaiwani, setovi za matchu, daske, knjiga.' };
+const PRIBOR_NOVO = { naziv: 'Pribor', opis: 'Gaiwani, setovi za matchu i čajne daske.' };
+const jeKnjiga = (p) => p?.vrsta === 'pribor' && (/^knjiga\b/i.test(String(p.naziv ?? '')) || String(p.slug ?? '').startsWith('knjiga-'));
+
+/**
+ * Katalog spremljen prije 13. 11. 2026. ima vrstu "Pribor i knjige" i objavljenu knjigu. Usklađuje se pri čitanju
+ * (gradnja stranice, uredništvo), pa ga ne treba ručno mijenjati: vrsta postaje "Pribor", knjiga se skida s objave
+ * (ne briše se; urednik je može ponovno objaviti) i s police. Radi samo dok vrsta ima stari naziv, a novi katalog
+ * vraća nepromijenjen. Ista pravila: uskladi_katalog() u urednistvo/php/lib/sadrzaj.php.
+ */
+export function uskladi(k) {
+  if (!k || typeof k !== 'object' || !Array.isArray(k.vrste) || !Array.isArray(k.proizvodi)) return k;
+  const v = k.vrste.find((x) => x?.kljuc === 'pribor');
+  if (!v || v.naziv !== PRIBOR_STARO.naziv) return k;
+  const knjige = new Set(k.proizvodi.filter(jeKnjiga).map((p) => p.sku));
+  return {
+    ...k,
+    vrste: k.vrste.map((x) => (x === v ? { ...x, naziv: PRIBOR_NOVO.naziv, opis: x.opis === PRIBOR_STARO.opis ? PRIBOR_NOVO.opis : x.opis } : x)),
+    proizvodi: k.proizvodi.map((p) => (jeKnjiga(p) ? { ...p, objavljeno: false } : p)),
+    izdvojeno: { ...k.izdvojeno, polica: Array.isArray(k.izdvojeno?.polica) ? k.izdvojeno.polica.filter((s) => !knjige.has(s)) : k.izdvojeno?.polica },
   };
 }
 

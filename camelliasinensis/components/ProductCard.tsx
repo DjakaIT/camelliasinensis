@@ -5,6 +5,7 @@ import { AddButton } from './AddButton';
 import { CardPrice } from './CardPrice';
 import { CaffeineBars } from './Icons';
 import { NoImage, Picture } from './Picture';
+import { SoldOutMark } from './SoldOutMark';
 
 /** Kartica u boji vrste čaja (dizajn B). Cijena iz builda, zamijeni je živa iz uredništva; potvrđuje se u košarici. */
 export function ProductCard({
@@ -28,7 +29,10 @@ export function ProductCard({
         {flag && <span className="rare lbl">{flag}</span>}
       </div>
       <Link className="phl" href={href} tabIndex={-1} aria-hidden="true" prefetch={false}>
-        <span className="ph">{p.image ? <Picture src={p.image.src} alt={`${p.name} (${p.typeName})`} sizes={sizes} priority={priority} /> : <NoImage />}</span>
+        <span className="ph">
+          {p.image ? <Picture src={p.image.src} alt={`${p.name} (${p.typeName})`} sizes={sizes} priority={priority} /> : <NoImage />}
+          <SoldOutMark sku={p.sku} status={p.stock.status} />
+        </span>
       </Link>
       <div>
         <Link className="nm" href={href} prefetch={false}>

@@ -22,7 +22,8 @@ export const metadata = pageMeta({
   path: '/',
 });
 
-const H1 = ['Dobro', 'došli.', '|', 'Izaberite', 'čaj', '|', 'po', 'trenutku', 'dana.'];
+// riječi naslova; '|' je novi red, '*' ispred riječi = zlatna (Daniel, 13. 11. 2026.)
+const H1 = ['Dobrodošli', 'u', '|', 'najunikatniju', '|', '*kuću', '*čaja', '*u', '|', '*Hrvatskoj.'];
 
 export default async function Home() {
   const [cards, types] = await Promise.all([getCards(), getTypes()]);
@@ -65,18 +66,21 @@ export default async function Home() {
               const delay = { animationDelay: `${0.1 + k++ * 0.06}s` };
               return (
                 <span key={i}>
-                  <span className={`w${i >= 6 ? ' g' : ''}`} style={delay}>
-                    {w}
+                  <span className={`w${w.startsWith('*') ? ' g' : ''}`} style={delay}>
+                    {w.replace(/^\*/, '')}
                   </span>{' '}
                 </span>
               );
             })}
           </h1>
           <div className="bottom">
-            <p>
-              Dobro došli u trgovinu čaja u Zagrebu. Izaberite čaj za trenutak dana: bijeli, zeleni, oolong, crni, pu&apos;er ili
-              biljni, uz pribor za pripremu. Dostava GLS-om u cijelu Hrvatsku, besplatna od {freeFrom}.
-            </p>
+            <blockquote className="hq">
+              <p>
+                „Ako vam je hladno, čaj će vas ugrijati. Ako je vruće, čaj će vas rashladiti. Ako ste depresivni, čaj će vas
+                razveseliti. Ako ste uzbuđeni, čaj će vas smiriti.“
+              </p>
+              <footer>– William Gladstone</footer>
+            </blockquote>
             <div className="btns">
               <Link href="/katalog/" className="pill gold">
                 Otvori katalog <IconArrow />
@@ -165,13 +169,11 @@ export default async function Home() {
             <path d="M60 360c10-120 90-200 230-210-10 130-90 200-230 210z" />
             <path d="M60 360c50-70 110-130 200-180" />
           </svg>
-          <span className="lbl">Camellia sinensis · Zagreb</span>
           <h2 className="d" id="hl-h">
             {brandStory.title.split(' ').slice(0, 3).join(' ')}
             <br />
             <span className="g">{brandStory.title.split(' ').slice(3).join(' ')}</span>
           </h2>
-          <p>{brandStory.text}</p>
           <ul className="hl-grid">
             <li>
               <IconLeaf />

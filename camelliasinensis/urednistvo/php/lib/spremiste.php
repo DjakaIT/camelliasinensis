@@ -69,11 +69,11 @@ final class Spremiste
     public function ucitaj(): array
     {
         $s = citaj_json($this->datoteka);
-        if (is_array($s)) return ($s);
+        if (is_array($s)) return uskladi_katalog($s);
         return s_bravom($this->dir, function () {
             $s = citaj_json($this->datoteka);
-            if (is_array($s)) return ($s);
-            $pocetni = array_merge($this->konf->pocetni(), ['verzija' => 1, 'azurirano' => iso_vrijeme(), 'azurirao' => 'početni sadržaj']);
+            if (is_array($s)) return uskladi_katalog($s);
+            $pocetni = array_merge(uskladi_katalog($this->konf->pocetni()), ['verzija' => 1, 'azurirano' => iso_vrijeme(), 'azurirao' => 'početni sadržaj']);
             pisi_json($this->datoteka, $pocetni);
             $this->snimiVerziju($pocetni, 'Početni sadržaj');
             return $pocetni;
@@ -99,7 +99,7 @@ final class Spremiste
             if ($trenutni['verzija'] !== $baznaVerzija) throw new Greska(409, 'Katalog je u međuvremenu promijenjen', ['verzija' => $trenutni['verzija']]);
             if (!is_array($katalog)) throw new Greska(422, 'Sadržaj nije ispravan', ['greske' => []]);
             $novi = array_merge($katalog, ['format' => $trenutni['format'], 'verzija' => $trenutni['verzija'] + 1, 'azurirano' => iso_vrijeme(), 'azurirao' => $ime]);
-            return $this->spremi($novi, $ime, mb_substr($opis !== '' ? $opis : 'Promjena kataloga', 0, 120));
+            return $this->spremi(uskladi_katalog($novi), $ime, mb_substr($opis !== '' ? $opis : 'Promjena kataloga', 0, 120));
         });
     }
 

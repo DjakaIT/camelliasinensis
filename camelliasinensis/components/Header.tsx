@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useCart } from './cart/CartContext';
 import { IconSearch } from './Icons';
 
@@ -12,6 +12,33 @@ export function Header({ nav }: { nav: { href: string; label: string }[] }) {
   const pathname = usePathname() ?? '/';
   const { count, bump, openCart } = useCart();
   const badge = useRef<HTMLSpanElement>(null);
+  // Mobitel (Daniel, 13. 11. 2026.): traka je gore, pri listanju prema dolje se skriva, a pokretom prema gore vraća
+  // (CSS samo do 820 px; na računalu je uvijek vidljiva). Pri vrhu stranice i na novoj stranici uvijek se vidi.
+  const [hidden, setHidden] = useState(false);
+  useEffect(() => {
+    let last = window.scrollY;
+    let raf = 0;
+    const onScroll = () => {
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        raf = 0;
+        const y = window.scrollY;
+        if (y < 80) {
+          setHidden(false);
+          last = y;
+        } else if (Math.abs(y - last) > 8) {
+          setHidden(y > last);
+          last = y;
+        }
+      });
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      cancelAnimationFrame(raf);
+    };
+  }, []);
+  useEffect(() => setHidden(false), [pathname]);
 
   useEffect(() => {
     if (!bump || !badge.current) return;
@@ -25,7 +52,7 @@ export function Header({ nav }: { nav: { href: string; label: string }[] }) {
     href === '/' ? pathname === '/' : pathname.startsWith(href) || (href === '/katalog/' && pathname.startsWith('/proizvod/'));
 
   return (
-    <header className="bar">
+    <header className={`bar${hidden ? ' skriven' : ''}`}>
       <Link href="/" className="logo" aria-label="Camellia sinensis, početna">
         <img src="/brand/logo-vodoravni.svg" alt="Camellia sinensis" width={137} height={44} />
       </Link>

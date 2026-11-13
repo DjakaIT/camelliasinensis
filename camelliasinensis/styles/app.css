@@ -106,6 +106,10 @@ h1, h2, h3, h4 { font-weight: 700; }
 @keyframes wup { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: none; } }
 .t-main .bottom { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; position: relative; }
 .t-main p { max-width: 440px; color: #efe4d0; font-size: 17px; }
+/* citat ispod naslova (Daniel, 13. 11. 2026.) */
+.t-main .hq { margin: 0; max-width: 470px; }
+.t-main .hq p { max-width: none; font-style: italic; line-height: 1.5; }
+.t-main .hq footer { margin-top: 10px; color: var(--gold); font-size: 14px; font-weight: 600; letter-spacing: 0.02em; }
 .btns { display: flex; gap: 10px; flex-wrap: wrap; }
 .pill {
   height: 54px; padding: 0 26px; border-radius: 27px; display: inline-flex; align-items: center; gap: 10px;
@@ -400,6 +404,13 @@ h1, h2, h3, h4 { font-weight: 700; }
 }
 .x-pimg:hover img { transform: rotate(-6deg) scale(1.03); }
 .x-pimg .x-noimg { inset: 11%; border-radius: 50%; }
+/* "Nema na zalihi" preko fotografije (components/SoldOutMark.tsx) */
+.x-soldout {
+  position: absolute; inset: 0; border-radius: 50%; display: grid; place-items: center; text-align: center; padding: 18%;
+  background: rgba(38, 45, 29, 0.62); color: #fff; font-weight: 700; font-size: 15px; letter-spacing: 0.06em; text-transform: uppercase;
+  line-height: 1.2; pointer-events: none;
+}
+.x-soldout.big { inset: 11%; font-size: clamp(18px, 2.2vw, 28px); }
 .x-flags { position: absolute; top: 20px; left: 20px; display: flex; gap: 8px; }
 .x-flags span { background: var(--ink); color: var(--gold); font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; padding: 6px 12px; border-radius: 14px; }
 .x-pinfo { background: #fff; border-radius: var(--r); padding: 34px 36px; }
@@ -535,6 +546,8 @@ h1, h2, h3, h4 { font-weight: 700; }
 .x-ab-acts .x-ghost { background: rgba(255, 255, 255, 0.12); color: #fff; }
 .x-ab-photo { margin: 0; border-radius: var(--r); overflow: hidden; position: relative; min-height: 420px; background: var(--t-bijeli); }
 .x-ab-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.x-ab-soon { display: grid; place-items: center; background: var(--t-oolong); }
+.x-ab-soon p { font-family: var(--f-display); font-weight: 700; letter-spacing: -0.02em; font-size: clamp(30px, 3.4vw, 46px); color: var(--ink); }
 .x-ab-photo figcaption {
   position: absolute; left: 12px; bottom: 12px; background: rgba(38, 45, 29, 0.82); color: #f6ebd6; border-radius: 12px; padding: 6px 10px;
   font-size: 11.5px;
@@ -582,13 +595,16 @@ h1, h2, h3, h4 { font-weight: 700; }
   .x-catgrid { grid-template-columns: 260px minmax(0, 1fr); }
 }
 @media (max-width: 820px) {
-  .links {
-    position: fixed; left: 12px; right: 12px; bottom: 12px; justify-content: space-between; background: rgba(38, 45, 29, 0.95);
-    -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); border-radius: 999px; padding: 6px;
-    box-shadow: 0 10px 30px -12px rgba(39, 42, 32, 0.4); z-index: 70;
+  /* mobitel: navigacija je drugi red gornje trake (ne dolje); traka se skriva pri listanju prema dolje (Header.tsx) */
+  .bar {
+    top: 10px; left: 10px; right: 10px; flex-wrap: wrap; row-gap: 6px; border-radius: 26px; padding: 8px 8px 6px 16px;
+    transition: transform 0.35s var(--ease), box-shadow 0.35s;
   }
-  .links a { flex: 1; justify-content: center; padding: 0 6px; font-size: 13px; height: 44px; border-radius: 22px; }
-  .bar { padding-left: 16px; }
+  .bar.skriven:not(:focus-within) { transform: translateY(calc(-100% - 16px)); box-shadow: none; }
+  .links { order: 3; flex-basis: 100%; justify-content: space-between; margin-left: -8px; }
+  .links a { flex: 1; justify-content: center; padding: 0 6px; font-size: 13px; height: 40px; border-radius: 20px; }
+  .bento, .x-cathead { padding-top: 136px; }
+  .x-prod, .x-co, .x-page { padding-top: 136px; }
   .cartp .t { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
   .cartp { padding: 0 8px; }
   .t-main { padding: 28px 24px; min-height: 520px; }
@@ -599,7 +615,7 @@ h1, h2, h3, h4 { font-weight: 700; }
   .shelf .pc, .more { flex-basis: 270px; }
   .fg { grid-template-columns: 1fr 1fr; }
   .fg a { line-height: 1.3; min-height: 44px; display: flex; align-items: center; }
-  .foot { padding: 40px 22px 100px; }
+  .foot { padding: 40px 22px 40px; }
   .sh { margin-top: 80px; }
   .x-catgrid { grid-template-columns: 1fr; }
   .x-filters {
@@ -628,7 +644,6 @@ h1, h2, h3, h4 { font-weight: 700; }
   .x-colist { padding: 8px 18px; }
   .x-colist .x-di { grid-template-columns: 70px 1fr auto; }
   .x-colist .x-dimg { width: 70px; height: 70px; }
-  .x-toast { bottom: 84px; }
   .x-brew3 { grid-template-columns: 1fr; }
 }
 @media (prefers-reduced-motion: reduce) {

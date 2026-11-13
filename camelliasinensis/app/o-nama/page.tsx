@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { Picture } from '@/components/Picture';
 import { hasContact } from '@/content/site';
 import { getCards } from '@/lib/catalog-server';
 import { pageMeta } from '@/lib/seo';
@@ -15,7 +14,6 @@ export default async function ONamaPage() {
   const teas = cards.filter((c) => c.type !== 'pribor').length;
   const puer = cards.filter((c) => c.type === 'puer').length;
   const countries = new Set(cards.map((c) => c.origin).filter((o) => o && o !== 'Mješavina')).size;
-  const withBrew = cards.some((c) => c.brewTemp);
 
   return (
     <section className="x-page x-about">
@@ -49,10 +47,9 @@ export default async function ONamaPage() {
               )}
             </div>
           </div>
-          <figure className="x-ab-photo">
-            <Picture src="/img/foto/o-nama-ilustracija.jpg" alt="Unutrašnjost stare trgovine čaja s policama limenki" sizes="(max-width: 820px) 100vw, 45vw" />
-            <figcaption>Ilustracija · Foto: Ib Rasmussen, javna domena</figcaption>
-          </figure>
+          <div className="x-ab-photo x-ab-soon">
+            <p>Uskoro dolazi</p>
+          </div>
         </div>
         <div className="x-ab3">
           <div>
@@ -68,14 +65,6 @@ export default async function ONamaPage() {
             <span>zemalja podrijetla</span>
           </div>
         </div>
-        {withBrew && (
-          <div className="x-ab-vals">
-            <div>
-              <h2>Priprema uz svaki čaj</h2>
-              <p>Temperatura vode, vrijeme i količina navedeni su uz svaki čaj.</p>
-            </div>
-          </div>
-        )}
       </div>
     </section>
   );

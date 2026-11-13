@@ -8,7 +8,7 @@ const SOLD = { sku: 'CSTVI-150', slug: 'puer-sheng-2007-yiwu-jing-long' };
 test('1. naslovnica bez grešaka u konzoli; linkovi navigacije vode na 200', async ({ page, ctl, consoleErrors, request }) => {
   void ctl;
   await page.goto('/');
-  await expect(page.getByRole('heading', { level: 1 })).toContainText('Dobro došli');
+  await expect(page.getByRole('heading', { level: 1 })).toContainText('Dobrodošli');
   const hrefs = await page.getByRole('navigation', { name: 'Glavna navigacija' }).getByRole('link').evaluateAll((as) => as.map((a) => a.getAttribute('href')));
   expect(hrefs.length).toBeGreaterThanOrEqual(3);
   for (const h of hrefs) expect((await request.get(h!)).status(), h!).toBe(200);
@@ -20,7 +20,7 @@ test('2. katalog: vrsta i okus sužavaju, URL se ažurira, "Očisti" vraća sve'
   void ctl;
   await page.goto('/katalog/');
   const count = page.locator('.x-count');
-  await expect(count).toHaveText('Prikazano 1–12 od 71');
+  await expect(count).toHaveText('Prikazano 1–12 od 70');
   await page.getByRole('checkbox', { name: /Zeleni čaj/ }).check();
   await expect(count).toHaveText('Prikazano 1–12 od 12');
   await expect(page).toHaveURL(/vrsta=zeleni/);
@@ -31,7 +31,7 @@ test('2. katalog: vrsta i okus sužavaju, URL se ažurira, "Očisti" vraća sve'
   expect(n).toBeGreaterThan(0);
   await expect(page.getByRole('button', { name: 'Ukloni filtar: Cvjetni' })).toBeVisible();
   await page.getByRole('button', { name: 'Očisti', exact: true }).click();
-  await expect(count).toHaveText('Prikazano 1–12 od 71');
+  await expect(count).toHaveText('Prikazano 1–12 od 70');
   await expect(page).toHaveURL(/\/katalog\/$/);
 });
 
@@ -44,7 +44,7 @@ test('2b. direktno otvaranje /katalog/zeleni/ i filtra iz URL-a', async ({ page,
   await expect(page.locator('.x-grid .pc').first()).toBeVisible();
   const n = Number((await page.locator('.x-count').textContent())!.match(/od (\d+)/)![1]);
   expect(n).toBeGreaterThan(0);
-  expect(n).toBeLessThan(71);
+  expect(n).toBeLessThan(70);
 });
 
 test('3. proizvod: cijena i zaliha; HTML ima sadržaj bez JavaScripta', async ({ page, ctl, request }) => {

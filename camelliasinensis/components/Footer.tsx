@@ -26,7 +26,7 @@ export function Footer({ note }: { note: string | null }) {
             Pu&apos;er
           </Link>
           <Link href="/katalog/pribor/" prefetch={false}>
-            Pribor i knjige
+            Pribor
           </Link>
           <Link href="/katalog/?namjena=poklon" prefetch={false}>
             Pokloni

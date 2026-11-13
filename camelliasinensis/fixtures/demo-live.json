@@ -922,7 +922,7 @@
         "quantity": 2,
         "maxPerOrder": 20
       },
-      "published": true
+      "published": false
     }
   }
 }

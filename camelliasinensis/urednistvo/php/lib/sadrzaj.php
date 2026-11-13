@@ -8,6 +8,32 @@ const FORMAT_KATALOGA = 1;
 const KLJUC_SLIKE = '/^(?:[A-Za-z0-9._-]{1,64}|n-[a-f0-9]{24})$/';
 const VRSTE_CAJA = ['bijeli', 'zeleni', 'oolong', 'crni', 'puer', 'aroma', 'biljni', 'pribor'];
 
+/**
+ * Katalog spremljen prije 13. 11. 2026. ima vrstu "Pribor i knjige" i objavljenu knjigu (Daniel: vrsta je samo "Pribor",
+ * knjige nisu u ponudi). Usklađuje se pri čitanju i spremanju: vrsta postaje "Pribor", knjiga se skida s objave (ne briše
+ * se) i s police. Radi samo dok vrsta ima stari naziv. Ista pravila: uskladi() u urednistvo/katalog.mjs.
+ */
+function uskladi_katalog(array $k): array
+{
+    if (!is_array($k['vrste'] ?? null) || !array_is_list($k['vrste']) || !is_array($k['proizvodi'] ?? null) || !array_is_list($k['proizvodi'])) return $k;
+    $i = null;
+    foreach ($k['vrste'] as $j => $v) if (is_array($v) && ($v['kljuc'] ?? null) === 'pribor') { $i = $j; break; }
+    if ($i === null || ($k['vrste'][$i]['naziv'] ?? null) !== 'Pribor i knjige') return $k;
+    $k['vrste'][$i]['naziv'] = 'Pribor';
+    if (($k['vrste'][$i]['opis'] ?? null) === 'Gaiwani, setovi za matchu, daske, knjiga.') $k['vrste'][$i]['opis'] = 'Gaiwani, setovi za matchu i čajne daske.';
+    $knjige = [];
+    foreach ($k['proizvodi'] as $j => $p) {
+        if (!is_array($p) || ($p['vrsta'] ?? null) !== 'pribor') continue;
+        if (!preg_match('/^knjiga\b/iu', (string) ($p['naziv'] ?? '')) && !str_starts_with((string) ($p['slug'] ?? ''), 'knjiga-')) continue;
+        $k['proizvodi'][$j]['objavljeno'] = false;
+        if (is_string($p['sku'] ?? null)) $knjige[$p['sku']] = true;
+    }
+    if (is_array($k['izdvojeno']['polica'] ?? null) && array_is_list($k['izdvojeno']['polica'])) {
+        $k['izdvojeno']['polica'] = array_values(array_filter($k['izdvojeno']['polica'], fn ($s) => !is_string($s) || !isset($knjige[$s])));
+    }
+    return $k;
+}
+
 /** tekst najviše $max znakova (UTF-8) */
 function k_tekst(mixed $v, int $max): bool { return is_string($v) && mb_strlen(trim($v)) <= $max; }
 function k_lista(mixed $v): bool { return is_array($v) && array_is_list($v); }

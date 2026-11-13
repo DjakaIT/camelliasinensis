@@ -27,7 +27,7 @@ describe.each(ADAPTERS)('ShopBackend: $name', ({ backend, controls }) => {
   describe('listProducts / listTypes (build)', () => {
     it('vraća sve objavljene proizvode s jedinstvenim nepraznim SKU-om i cijenom > 0', async () => {
       const ps = await backend.listProducts();
-      expect(ps).toHaveLength(71);
+      expect(ps).toHaveLength(70); // 71 u katalogu, knjiga nije objavljena (13. 11. 2026.)
       const skus = new Set(ps.map((p) => p.sku));
       expect(skus.size).toBe(ps.length);
       for (const p of ps) {

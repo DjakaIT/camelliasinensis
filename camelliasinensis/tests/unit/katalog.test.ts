@@ -1,6 +1,6 @@
 // Pravila kataloga iz uredništva (urednistvo/katalog.mjs): ista provjera vrijedi za uredništvo i za build.
 import { describe, expect, it } from 'vitest';
-import { pocetniKatalog, provjeri, uOblikStranice } from '../../urednistvo/katalog.mjs';
+import { pocetniKatalog, provjeri, uOblikStranice, uskladi } from '../../urednistvo/katalog.mjs';
 
 type Kat = ReturnType<typeof pocetniKatalog>;
 const pocetni: Kat = pocetniKatalog(process.cwd());
@@ -36,5 +36,24 @@ describe('katalog uredništva', () => {
     const o = uOblikStranice(provjeri(k).sadrzaj, () => null);
     expect(o.products.slice(0, 3).map((p) => p.stock.status)).toEqual(['outofstock', 'low', 'instock']);
     expect(o.products[2].stock.quantity).toBeNull();
+  });
+  it('stari katalog ("Pribor i knjige", objavljena knjiga) usklađuje se i prolazi provjeru; novi ostaje isti', () => {
+    const stari = structuredClone(pocetni);
+    const pribor = stari.vrste.find((v: Kat) => v.kljuc === 'pribor');
+    Object.assign(pribor, { naziv: 'Pribor i knjige', opis: 'Gaiwani, setovi za matchu, daske, knjiga.' });
+    const knjiga = stari.proizvodi.find((p: Kat) => p.slug.startsWith('knjiga-'));
+    knjiga.objavljeno = true;
+    stari.izdvojeno.polica.push(knjiga.sku);
+    const u = uskladi(stari);
+    expect(provjeri(u).ok).toBe(true);
+    expect(u.vrste.find((v: Kat) => v.kljuc === 'pribor')).toMatchObject({ naziv: 'Pribor', opis: 'Gaiwani, setovi za matchu i čajne daske.' });
+    expect(u.proizvodi.find((p: Kat) => p.sku === knjiga.sku).objavljeno).toBe(false);
+    expect(u.proizvodi.filter((p: Kat) => p.vrsta === 'pribor' && p.objavljeno)).toHaveLength(4);
+    expect(u.izdvojeno.polica).not.toContain(knjiga.sku);
+    expect(uskladi(u)).toBe(u);
+    // urednik smije knjigu ponovno objaviti: novi naziv vrste, pa se više ne dira
+    const ponovno = structuredClone(u);
+    ponovno.proizvodi.find((p: Kat) => p.sku === knjiga.sku).objavljeno = true;
+    expect(uskladi(ponovno)).toBe(ponovno);
   });
 });
