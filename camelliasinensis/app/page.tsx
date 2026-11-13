@@ -45,7 +45,11 @@ export default async function Home() {
   const photosFor = (key: string) =>
     cards
       .filter((c) => c.type === key && c.image)
-      .sort((a, b) => Number(FEATURED_SKUS.includes(b.sku)) - Number(FEATURED_SKUS.includes(a.sku)) || Number(b.rare) - Number(a.rare))
+      .sort(
+        (a, b) =>
+          Number(FEATURED_SKUS.includes(b.sku)) - Number(FEATURED_SKUS.includes(a.sku)) ||
+          Number(b.rare) - Number(a.rare),
+      )
       .slice(0, 3);
 
   let k = 0;
@@ -76,8 +80,8 @@ export default async function Home() {
           <div className="bottom">
             <blockquote className="hq">
               <p>
-                „Ako vam je hladno, čaj će vas ugrijati. Ako je vruće, čaj će vas rashladiti. Ako ste depresivni, čaj će vas
-                razveseliti. Ako ste uzbuđeni, čaj će vas smiriti.“
+                „Ako vam je hladno, čaj će vas ugrijati. Ako je vruće, čaj će vas rashladiti. Ako ste depresivni, čaj će
+                vas razveseliti. Ako ste uzbuđeni, čaj će vas smiriti.“
               </p>
               <footer>– William Gladstone</footer>
             </blockquote>
@@ -143,8 +147,8 @@ export default async function Home() {
             <span className="g">Prešan i odležan.</span>
           </h2>
           <p>
-            Čaj iz kineske pokrajine Yunnan, prešan u kolače. Sheng s vremenom sazrijeva, a shou je spreman za pijenje odmah. U
-            Hrvatskoj ga je teško naći.
+            Čaj iz kineske pokrajine Yunnan, prešan u kolače. Sheng s vremenom sazrijeva, a shou je spreman za pijenje
+            odmah. U Hrvatskoj ga je teško naći, srećom - kod nas je odmah dostupan.
           </p>
           <div className="two">
             <div>
@@ -191,7 +195,15 @@ export default async function Home() {
               <span>obiteljski vrtovi i majstori čaja</span>
             </li>
             <li>
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
+              <svg
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                aria-hidden="true"
+              >
                 <path d="M4 14c3-1 5-4 6-8 2 4 6 6 10 6-2 5-6 8-11 8a5 5 0 0 1-5-6z" />
               </svg>
               <b>Rastresiti listovi</b>
