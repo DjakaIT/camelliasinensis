@@ -1,8 +1,8 @@
 // Sadržaj stranice koji NIJE dio ugovora s backendom (API-CONTRACT §1.8).
 //
-// DUMMY: Daniel je 2. 11. 2026. tražio uvjerljive probne podatke (kontakt, Instagram, pravni tekstovi, priča brenda)
-// da demo izgleda kao gotova stranica. Sve što je označeno s DUMMY treba zamijeniti Sarinim podacima.
-// Build koji se smije indeksirati (produkcija) RUŠI SE dok je ijedan DUMMY uključen (scripts/postbuild.mjs).
+// Probni (DUMMY) podaci su uklonjeni 13. 11. 2026. kad je Daniel otvorio indeksiranje: adresa, telefon, radno vrijeme i Instagram
+// nisu bili stvarni pa su maknuti, a ne zamijenjeni drugim izmišljenima. Kad Sara potvrdi podatke, upišu se u `contact` i `social`.
+// Ako se ikad opet doda izmišljen sadržaj, upiši ga u DUMMY_CONTENT: build koji se smije indeksirati tada puca (app/layout.tsx).
 import izdvojeno from '@/fixtures/izdvojeno.json';
 import { FREE_SHIPPING_FROM, FREE_SHIPPING_GIFT, SHIPPING_METHODS } from '@/lib/shop/shipping';
 
@@ -12,15 +12,8 @@ export { FREE_SHIPPING_FROM, FREE_SHIPPING_GIFT };
 /** Najniža cijena dostave, za prikaz "od 3,90 €" (obračun radi backend). */
 export const SHIPPING_FROM_PRICE = Math.min(...SHIPPING_METHODS.map((m) => m.price));
 
-/** Popis svega što je izmišljeno za demo. Prazan popis = spremno za produkciju. */
-export const DUMMY_CONTENT: string[] = [
-  'kontakt: adresa, telefon, e-mail, radno vrijeme',
-  'instagram profil',
-  'pravni tekstovi (uvjeti kupnje, privatnost, dostava i povrat, kolačići)',
-  'priča brenda na naslovnici',
-  'cijene dostave GLS (prag 50 € je potvrđen)',
-  'popis GLS paketomata na demo blagajni',
-];
+/** Popis svega što je izmišljeno za demo. Prazan popis = smije se indeksirati. */
+export const DUMMY_CONTENT: string[] = [];
 
 export type Contact = {
   email: string | null;
@@ -30,35 +23,35 @@ export type Contact = {
   hours: string[] | null;
 };
 
-/** DUMMY */
+/** Samo potvrđeno: e-mail na domeni trgovine. Adresa, telefon i radno vrijeme dodaju se kad ih Sara potvrdi. */
 export const contact: Contact = {
   email: 'info@camelliasinensis.eu',
-  phone: '+385 1 4567 890',
-  address: { street: 'Tkalčićeva ulica 18', postalCode: '10000', city: 'Zagreb' },
-  hours: ['Ponedjeljak – petak: 10 – 20 h', 'Subota: 9 – 14 h', 'Nedjeljom i blagdanima zatvoreno'],
+  phone: null,
+  address: null,
+  hours: null,
 };
 
 export const hasContact = () => Boolean(contact.email || contact.phone || contact.address);
 
-/** DUMMY: Sara potvrđuje točan profil. */
-export const social = { instagram: 'https://www.instagram.com/camelliasinensis.zagreb/' as string | null };
+/** Instagram se upisuje kad Sara potvrdi točan profil. */
+export const social = { instagram: null as string | null };
 
 /** Načini plaćanja koje nudi Stripe Checkout (kartice; Apple Pay i Google Pay ovisno o uređaju). */
 export const PAYMENT_METHODS = ['Visa', 'Mastercard', 'Maestro', 'Apple Pay', 'Google Pay'];
 
-/** DUMMY: kratka priča brenda za naslovnicu. */
+/** Kratka priča brenda za naslovnicu (općenita, bez tvrdnji o podrijetlu koje trgovina nije potvrdila). */
 export const brandStory = {
-  title: 'Čaj s imenom i podrijetlom.',
+  title: 'Rastresiti čaj iz Zagreba.',
   text:
-    'Camellia sinensis je mala zagrebačka trgovina čaja. Biramo čajeve čiji znamo vrt, berbu i proizvođača: od obiteljskih ' +
-    'vrtova u Darjeelingu do majstora bijelog čaja u Fujianu. Rastresiti listovi, bez vrećica i bez punila.',
+    'Camellia sinensis je zagrebačka trgovina čaja. U ponudi su rastresiti bijeli, zeleni, oolong, crni, pu’er i biljni čajevi ' +
+    'te pribor za pripremu, s dostavom po cijeloj Hrvatskoj.',
 };
 
 export type LegalPage = { slug: string; title: string; description: string; html: string | null };
 
 const shipFrom = `${FREE_SHIPPING_FROM / 100} €`;
 
-/** DUMMY nacrti pravnih tekstova. Konačne tekstove priprema Sara s pravnikom prije otvaranja. */
+/** Nacrti pravnih tekstova. Sara ih prije pravog poslovanja pregledava s pravnikom i dopunjuje podacima tvrtke (naziv, OIB, adresa). */
 export const legalPages: LegalPage[] = [
   {
     slug: 'uvjeti-kupnje',
@@ -66,7 +59,7 @@ export const legalPages: LegalPage[] = [
     description: 'Uvjeti kupnje u web trgovini Camellia sinensis: narudžba, cijene, plaćanje, dostava i pravo na odustanak.',
     html: `
 <h2>1. Prodavatelj</h2>
-<p>Web trgovinu camelliasinensis.eu vodi Camellia sinensis, Tkalčićeva ulica 18, 10000 Zagreb. Kontakt: info@camelliasinensis.eu.</p>
+<p>Web trgovinu camelliasinensis.eu vodi Camellia sinensis, Zagreb. Kontakt: info@camelliasinensis.eu.</p>
 <h2>2. Narudžba</h2>
 <p>Narudžba je zaprimljena kad plaćanje bude potvrđeno. Potvrdu narudžbe šaljemo na e-mail adresu koju ste upisali pri plaćanju.</p>
 <h2>3. Cijene</h2>

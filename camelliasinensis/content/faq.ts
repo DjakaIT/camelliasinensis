@@ -15,7 +15,7 @@ export const FAQ: FaqItem[] = [
     a:
       `${SHOP_NAME} je specijalizirana trgovina čaja u Zagrebu` +
       (hasContact() && contact.address ? ` (${contact.address.street}, ${contact.address.city})` : '') +
-      ". Čajeve možete kupiti u trgovini ili online, s dostavom po cijeloj Hrvatskoj. U ponudi su rastresiti bijeli, zeleni, oolong, crni, pu'er, aromatizirani i biljni čajevi te pribor za pripremu.",
+      ". Čajeve možete naručiti online, s dostavom po cijeloj Hrvatskoj. U ponudi su rastresiti bijeli, zeleni, oolong, crni, pu'er, aromatizirani i biljni čajevi te pribor za pripremu.",
   },
   {
     q: 'Dostavljate li čaj po cijeloj Hrvatskoj i koliko košta dostava?',

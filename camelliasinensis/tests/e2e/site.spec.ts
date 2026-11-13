@@ -42,7 +42,7 @@ test('košarica pokazuje koliko nedostaje do besplatne dostave', async ({ page, 
 test('kontakt: forma s provjerom i potvrdom slanja', async ({ page }) => {
   await page.goto('/kontakt/');
   await expect(page.getByRole('heading', { level: 1, name: 'Kontakt' })).toBeVisible();
-  await expect(page.locator('#sadrzaj').getByText('Tkalčićeva ulica 18')).toBeVisible();
+  await expect(page.locator('#sadrzaj').getByText('info@camelliasinensis.eu').first()).toBeVisible();
   await page.getByRole('button', { name: 'Pošalji poruku' }).click();
   await expect(page.getByLabel('Ime')).toBeFocused();
   await expect(page.getByText('Upišite ime.')).toBeVisible();

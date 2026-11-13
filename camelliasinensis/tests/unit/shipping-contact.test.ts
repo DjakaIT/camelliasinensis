@@ -58,9 +58,9 @@ describe('kontakt forma', () => {
   });
 });
 
-describe('DUMMY sadržaj', () => {
-  it('je popisan (produkcijski build se ruši dok popis nije prazan)', () => {
-    expect(DUMMY_CONTENT.length).toBeGreaterThan(0);
+describe('probni sadržaj', () => {
+  it('nema izmišljenih podataka (inače se build za indeksiranje ruši)', () => {
+    expect(DUMMY_CONTENT).toEqual([]);
   });
   it('pravne stranice imaju tekst', () => {
     expect(legalPages.every((p) => (p.html ?? '').length > 200)).toBe(true);
