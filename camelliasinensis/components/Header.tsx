@@ -27,7 +27,7 @@ export function Header({ nav }: { nav: { href: string; label: string }[] }) {
   return (
     <header className="bar">
       <Link href="/" className="logo" aria-label="Camellia sinensis, početna">
-        <img src="/brand/logo-vodoravni.svg" alt="" width={137} height={44} />
+        <img src="/brand/logo-vodoravni.svg" alt="Camellia sinensis" width={137} height={44} />
       </Link>
       <nav className="links" aria-label="Glavna navigacija">
         {nav.map((n) => (
@@ -37,8 +37,9 @@ export function Header({ nav }: { nav: { href: string; label: string }[] }) {
         ))}
       </nav>
       <div className="bar-r">
-        <Link className="ib" href="/katalog/?trazi=1" aria-label="Pretraži katalog">
+        <Link className="ib" href="/katalog/?trazi=1">
           <IconSearch />
+          <span className="sr">Pretraži katalog</span>
         </Link>
         {/* Ime gumba nastaje iz vidljivog teksta ("Košarica, artikala: 2"), pa se poklapa s onim što se vidi. */}
         <button type="button" className="cartp" onClick={openCart} aria-haspopup="dialog">

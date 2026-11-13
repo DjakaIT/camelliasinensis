@@ -74,8 +74,8 @@ export default async function Home() {
           </h1>
           <div className="bottom">
             <p>
-              Trgovina čaja u Zagrebu: bijeli, zeleni, oolong, crni, pu&apos;er i biljni čajevi te pribor za pripremu. Dostava
-              GLS-om u cijelu Hrvatsku, besplatna od {freeFrom}.
+              Dobro došli u trgovinu čaja u Zagrebu. Izaberite čaj za trenutak dana: bijeli, zeleni, oolong, crni, pu&apos;er ili
+              biljni, uz pribor za pripremu. Dostava GLS-om u cijelu Hrvatsku, besplatna od {freeFrom}.
             </p>
             <div className="btns">
               <Link href="/katalog/" className="pill gold">
@@ -119,7 +119,7 @@ export default async function Home() {
                 <span className="ty-ph" aria-hidden="true">
                   {photos.map((p) => (
                     <span key={p.sku}>
-                      <Picture src={p.image!.src} alt="" sizes="110px" />
+                      <Picture src={p.image!.src} alt={p.name} sizes="110px" />
                     </span>
                   ))}
                 </span>

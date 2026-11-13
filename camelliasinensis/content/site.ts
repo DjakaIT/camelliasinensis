@@ -12,6 +12,9 @@ export { FREE_SHIPPING_FROM, FREE_SHIPPING_GIFT };
 /** Najniža cijena dostave, za prikaz "od 3,90 €" (obračun radi backend). */
 export const SHIPPING_FROM_PRICE = Math.min(...SHIPPING_METHODS.map((m) => m.price));
 
+/** Podaci tvrtke iz sudskog registra (Fina, 13. 11. 2026.). */
+export const COMPANY = { name: 'Natalija Tea d.o.o. za trgovinu i usluge', oib: '88806978705', mbs: '081740344', court: 'Trgovački sud u Zagrebu' };
+
 /** Popis svega što je izmišljeno za demo. Prazan popis = smije se indeksirati. */
 export const DUMMY_CONTENT: string[] = [];
 
@@ -23,11 +26,11 @@ export type Contact = {
   hours: string[] | null;
 };
 
-/** Samo potvrđeno: e-mail na domeni trgovine. Adresa, telefon i radno vrijeme dodaju se kad ih Sara potvrdi. */
+/** Adresa je sjedište tvrtke prema sudskom registru (Fina, 13. 11. 2026.). Telefon i radno vrijeme dodaju se kad ih Sara potvrdi. */
 export const contact: Contact = {
   email: 'info@camelliasinensis.eu',
   phone: null,
-  address: null,
+  address: { street: 'Ulica grada Chicaga 2B', postalCode: '10000', city: 'Zagreb' },
   hours: null,
 };
 
@@ -51,7 +54,7 @@ export type LegalPage = { slug: string; title: string; description: string; html
 
 const shipFrom = `${FREE_SHIPPING_FROM / 100} €`;
 
-/** Nacrti pravnih tekstova. Sara ih prije pravog poslovanja pregledava s pravnikom i dopunjuje podacima tvrtke (naziv, OIB, adresa). */
+/** Nacrti pravnih tekstova s podacima tvrtke iz registra. Sara ih prije pravog poslovanja pregledava s pravnikom. */
 export const legalPages: LegalPage[] = [
   {
     slug: 'uvjeti-kupnje',
@@ -59,7 +62,7 @@ export const legalPages: LegalPage[] = [
     description: 'Uvjeti kupnje u web trgovini Camellia sinensis: narudžba, cijene, plaćanje, dostava i pravo na odustanak.',
     html: `
 <h2>1. Prodavatelj</h2>
-<p>Web trgovinu camelliasinensis.eu vodi Camellia sinensis, Zagreb. Kontakt: info@camelliasinensis.eu.</p>
+<p>Web trgovinu camelliasinensis.eu vodi ${COMPANY.name}, Ulica grada Chicaga 2B, 10000 Zagreb (OIB: ${COMPANY.oib}, MBS: ${COMPANY.mbs}, upisana u sudski registar: ${COMPANY.court}). Kontakt: info@camelliasinensis.eu.</p>
 <h2>2. Narudžba</h2>
 <p>Narudžba je zaprimljena kad plaćanje bude potvrđeno. Potvrdu narudžbe šaljemo na e-mail adresu koju ste upisali pri plaćanju.</p>
 <h2>3. Cijene</h2>
@@ -78,6 +81,8 @@ export const legalPages: LegalPage[] = [
     title: 'Pravila privatnosti',
     description: 'Kako Camellia sinensis prikuplja, koristi i štiti osobne podatke kupaca.',
     html: `
+<h2>Voditelj obrade</h2>
+<p>${COMPANY.name}, Ulica grada Chicaga 2B, 10000 Zagreb, OIB: ${COMPANY.oib}. Kontakt: info@camelliasinensis.eu.</p>
 <h2>Koje podatke prikupljamo</h2>
 <p>Pri narudžbi: ime i prezime, e-mail, adresu dostave i broj mobitela (za obavijest GLS-a). Podatke o kartici obrađuje Stripe i mi ih ne vidimo.</p>
 <h2>Zašto</h2>

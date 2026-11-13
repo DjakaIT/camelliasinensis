@@ -28,7 +28,7 @@ export function ProductCard({
         {flag && <span className="rare lbl">{flag}</span>}
       </div>
       <Link className="phl" href={href} tabIndex={-1} aria-hidden="true" prefetch={false}>
-        <span className="ph">{p.image ? <Picture src={p.image.src} alt="" sizes={sizes} priority={priority} /> : <NoImage />}</span>
+        <span className="ph">{p.image ? <Picture src={p.image.src} alt={`${p.name} (${p.typeName})`} sizes={sizes} priority={priority} /> : <NoImage />}</span>
       </Link>
       <div>
         <Link className="nm" href={href} prefetch={false}>

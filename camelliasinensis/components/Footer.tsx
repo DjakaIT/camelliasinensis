@@ -16,7 +16,7 @@ export function Footer({ note }: { note: string | null }) {
       <div className="fg">
         <div>
           <Link href="/" className="logo" aria-label="Camellia sinensis, početna">
-            <img src="/brand/logo-okomiti.svg" alt="" width={80} height={84} loading="lazy" />
+            <img src="/brand/logo-okomiti.svg" alt="Camellia sinensis" width={80} height={84} loading="lazy" />
           </Link>
         </div>
         <nav aria-labelledby="f-shop">
