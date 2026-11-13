@@ -64,7 +64,7 @@ test('3b. rasprodan proizvod ima onemogućen gumb; malo zalihe se jasno vidi', a
   await page.goto(`/proizvod/${SOLD.slug}/`);
   await expect(page.getByTestId('stock')).toHaveText('Nema na zalihi');
   await expect(page.getByTestId('add-to-cart')).toBeDisabled();
-  await page.goto('/proizvod/knjiga-tea-history-terroirs-varieties/');
+  await page.goto('/proizvod/staklena-gaiwan-echo/');
   await expect(page.getByTestId('stock')).toHaveText('Zadnja 2 komada');
 });
 
@@ -206,12 +206,20 @@ test('7. nepoznata putanja vraća aplikaciju s 404 stranicom', async ({ page }) 
   await expect(page.getByRole('navigation', { name: 'Glavna navigacija' })).toBeVisible();
 });
 
-test('8. mobitel 390 px: donja navigacija, hero čitljiv, ciljevi dodira ≥ 44 px', async ({ page }) => {
+test('8. mobitel 390 px: navigacija gore (skriva se pri listanju dolje), hero čitljiv, ciljevi dodira ≥ 44 px', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/');
   const nav = page.getByRole('navigation', { name: 'Glavna navigacija' });
   const box = (await nav.boundingBox())!;
-  expect(box.y + box.height).toBeGreaterThan(844 - 40); // pri dnu zaslona
+  expect(box.y).toBeLessThan(140); // u gornjoj traci (Daniel, 13. 11. 2026.)
+  const bar = page.locator('header.bar');
+  await page.mouse.wheel(0, 900);
+  await expect(bar).toHaveClass(/skriven/);
+  await expect(bar).not.toBeInViewport();
+  await page.mouse.wheel(0, -300);
+  await expect(bar).not.toHaveClass(/skriven/);
+  await expect(nav).toBeInViewport();
+  await page.evaluate(() => window.scrollTo(0, 0));
   await expect(page.getByRole('heading', { level: 1 })).toBeInViewport();
   const small = await page.evaluate(() => {
     const out: string[] = [];

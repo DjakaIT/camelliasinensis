@@ -47,7 +47,7 @@ export function slugify(name) {
 export const uTein = (s) => String(s ?? '').replace(/([Kk])ofein/g, (_, k) => (k === 'K' ? 'Tein' : 'tein'));
 
 // ---------------- početni sadržaj iz prototipa (design-reference/src/data.js) ----------------
-const DEMO_ZALIHA = { 'CSTVI-150': 0, 'CSLI-2': 2 };
+const DEMO_ZALIHA = { 'CSTVI-150': 0, 'CSTHG-32': 2 }; // samo demo; knjiga (CSLI-2) više nije objavljena
 const POCETNA_POLICA = ['CSTVI-282', 'CSTV-237', 'CSTN-220', 'CSTW-1', 'CSTB-6', 'CSTP-88', 'CSTHJC-79', 'CSTN-97', 'CSTO-2'];
 
 export function pocetniKatalog(root) {

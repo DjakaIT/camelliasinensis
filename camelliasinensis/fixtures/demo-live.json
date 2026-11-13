@@ -866,8 +866,8 @@
         "currency": "EUR"
       },
       "stock": {
-        "status": "instock",
-        "quantity": 24,
+        "status": "low",
+        "quantity": 2,
         "maxPerOrder": 20
       },
       "published": true
@@ -918,8 +918,8 @@
         "currency": "EUR"
       },
       "stock": {
-        "status": "low",
-        "quantity": 2,
+        "status": "instock",
+        "quantity": 24,
         "maxPerOrder": 20
       },
       "published": false

@@ -12,7 +12,8 @@ test('klizač teina: bez automatskog pomicanja, mijenja se samo ručno', async (
   await meter.getByRole('button', { name: 'Puno' }).click();
   await expect(meter.locator('.now b')).toHaveText('Puno teina');
   await expect(meter.getByRole('link', { name: /Svih \d+: puno teina/ })).toHaveAttribute('href', '/katalog/?tein=3');
-  expect(await page.locator('body').innerText()).not.toMatch(/kofein/i);
+  // mjerač govori o teinu; samo FAQ ("Imaju li čajevi kofein?") namjerno objašnjava da je tein isto što i kofein
+  expect(await meter.innerText()).not.toMatch(/kofein/i);
 });
 
 test('vrste čaja imaju fotografije', async ({ page }) => {
@@ -62,10 +63,10 @@ test('karta se učitava tek na klik', async ({ page }) => {
   await expect(page.locator('iframe[title^="Karta"]')).toHaveCount(1);
 });
 
-test('podnožje: Instagram, kontakt i pravne stranice; sve vode na 200', async ({ page, request }) => {
+test('podnožje: kontakt i pravne stranice; sve vode na 200', async ({ page, request }) => {
   await page.goto('/');
   const foot = page.locator('footer');
-  await expect(foot.getByRole('link', { name: 'Instagram' })).toHaveAttribute('href', /instagram\.com/);
+  // Instagram se prikazuje tek kad Sara potvrdi profil (content/site.ts, social.instagram)
   for (const name of ['Kontakt', 'Uvjeti kupnje', 'Pravila privatnosti', 'Dostava i povrat', 'Kolačići']) {
     const href = await foot.getByRole('link', { name, exact: true }).getAttribute('href');
     expect((await request.get(href!)).status(), name).toBe(200);
