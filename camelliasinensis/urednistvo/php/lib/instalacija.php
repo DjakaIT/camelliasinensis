@@ -2,8 +2,9 @@
 // Postavljanje izgrađene stranice na hosting bez FTP-a (infonet pušta FTP samo s ručno dopuštenih IP adresa):
 // GitHub Actions spremi paket kao artefakt "hosting" (.github/workflows/objava.yml), a ovdje se preuzme istim tokenom
 // i kopira u public_html — redom: nove datoteke (slike, CSS/JS s hashom, fontovi), uredništvo, pa HTML/XML/TXT i na kraju
-// .htaccess, da stranica nikad ne pokazuje na datoteku koje još nema. Ništa se ne briše (kao i prije), iste datoteke se ne
-// prepisuju (ETag ostaje), a podaci uredništva su izvan public_html. Prihvaćaju se samo izgradnje s grane main ovog
+// .htaccess, da stranica nikad ne pokazuje na datoteku koje još nema. Brišu se samo stranice proizvoda i vrsta kojih više
+// nema u paketu (pocisti); ostalo ostaje (stari CSS/JS trebaju otvorenim karticama), iste datoteke se ne prepisuju (ETag
+// ostaje), a podaci uredništva su izvan public_html. Prihvaćaju se samo izgradnje s grane main ovog
 // repozitorija (ne pull requestovi) i samo uobičajena imena datoteka (bez "..", apsolutnih putanja i sl.).
 declare(strict_types=1);
 
@@ -58,8 +59,9 @@ final class Instalacija
             obrisi_mapu($mapa);
             $this->raspakiraj($zip, $mapa);
             if (!is_file("$mapa/index.html")) throw new Greska(502, 'Paket stranice nema index.html.');
-            $this->kopiraj($mapa);
-            pisi_json($this->datoteka, ['run' => (int) $run['id'], 'broj' => (int) $run['run_number'], 'sha' => (string) ($run['head_sha'] ?? ''), 'vrijeme' => iso_vrijeme()]);
+            $sve = $this->kopiraj($mapa);
+            $obrisano = $this->pocisti($sve);
+            pisi_json($this->datoteka, ['run' => (int) $run['id'], 'broj' => (int) $run['run_number'], 'sha' => (string) ($run['head_sha'] ?? ''), 'vrijeme' => iso_vrijeme(), 'obrisano' => $obrisano]);
             return true;
         } finally {
             @unlink($zip);
@@ -106,7 +108,41 @@ final class Instalacija
         }
     }
 
-    private function kopiraj(string $mapa): void
+    /**
+     * Stranice proizvoda i vrsta kojih više nema u paketu (proizvod skinut s objave, obrisan ili preimenovan) brišu se,
+     * da stara adresa ne prikazuje zastarjelu stranicu (Daniel, 13. 11. 2026.). Samo mape proizvod/<adresa>/ i
+     * katalog/<vrsta>/ s našom stranicom (index.html); ostalo (slike, CSS/JS s hashom, uredništvo, zivo.json) se ne dira.
+     * Zaštita: paket bez tih stranica ili brisanje više od polovice postojećih znači da nešto nije u redu, pa se ne briše ništa.
+     * @param string[] $sve datoteke iz paketa (relativne putanje)
+     * @return string[] obrisane mape
+     */
+    private function pocisti(array $sve): array
+    {
+        $obrisano = [];
+        foreach (['proizvod', 'katalog'] as $korijen) {
+            $dir = $this->javno . "/$korijen";
+            if (!is_dir($dir) || is_link($dir)) continue;
+            $uPaketu = [];
+            foreach ($sve as $r) if (preg_match('#^' . $korijen . '/([^/]+)/#', $r, $m)) $uPaketu[$m[1]] = true;
+            if (!$uPaketu) continue;
+            $visak = [];
+            foreach (scandir($dir) ?: [] as $ime) {
+                if ($ime === '.' || $ime === '..' || isset($uPaketu[$ime]) || !self::ispravnoIme($ime)) continue;
+                $put = "$dir/$ime";
+                if (is_link($put) || !is_dir($put) || !is_file("$put/index.html")) continue;
+                $visak[] = $ime;
+            }
+            if (count($visak) > count($uPaketu) / 2) continue;
+            foreach ($visak as $ime) {
+                obrisi_mapu("$dir/$ime");
+                $obrisano[] = "$korijen/$ime";
+            }
+        }
+        return $obrisano;
+    }
+
+    /** @return string[] sve datoteke paketa (relativne putanje) */
+    private function kopiraj(string $mapa): array
     {
         $sve = [];
         $it = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($mapa, FilesystemIterator::SKIP_DOTS));
@@ -119,6 +155,7 @@ final class Instalacija
         foreach ([array_filter($sve, static fn ($r) => !$uredn($r) && !$zadnje($r)), array_filter($sve, $uredn), $stranice] as $skupina) {
             foreach ($skupina as $r) $this->kopirajDatoteku("$mapa/$r", $this->javno . "/$r");
         }
+        return $sve;
     }
 
     private function kopirajDatoteku(string $izvor, string $cilj): void
@@ -133,7 +170,7 @@ final class Instalacija
     }
 }
 
-/** briše mapu sa svim sadržajem (samo privremene mape uredništva u camellia-podaci) */
+/** briše mapu sa svim sadržajem (privremene mape uredništva u camellia-podaci i zastarjele stranice, Instalacija::pocisti) */
 function obrisi_mapu(string $mapa): void
 {
     if (!is_dir($mapa)) return;
