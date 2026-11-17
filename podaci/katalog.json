@@ -1,7 +1,7 @@
 {
     "format": 1,
-    "verzija": 13,
-    "azurirano": "2026-11-17T11:04:10.533Z",
+    "verzija": 14,
+    "azurirano": "2026-11-17T11:16:02.846Z",
     "azurirao": "stepsa",
     "vrste": [
         {
@@ -150,10 +150,11 @@
             "tein": 1,
             "okusi": [
                 "vocni",
-                "medeni"
+                "medeni",
+                "travnati"
             ],
             "oblik": "kolac",
-            "cijena": 16,
+            "cijena": 13.5,
             "pakiranje": "50 g (kockice 4 g)",
             "namjene": [
                 "opust",
@@ -165,7 +166,7 @@
                 "vrijeme": "3–4 min",
                 "kolicina": "4 g / 250 ml"
             },
-            "opis": "Odležani bijeli čaj iz Fujiana prešan u male kockice od 4 g. Slatki okusi suhog tropskog voća i proljetnog meda.",
+            "opis": "Odležani bijeli čaj iz Fujiana prešan u male kockice od 4 g. Slatki okusi suhog tropskog voća i proljetnog meda.Bogatog karaktera i izvrsno gasi žeđ.",
             "zaliha": 24,
             "objavljeno": true,
             "slika": "CSTVI-294"
