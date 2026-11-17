@@ -1,7 +1,7 @@
 {
     "format": 1,
-    "verzija": 11,
-    "azurirano": "2026-11-17T10:47:04.984Z",
+    "verzija": 12,
+    "azurirano": "2026-11-17T10:58:18.973Z",
     "azurirao": "stepsa",
     "vrste": [
         {
@@ -89,7 +89,7 @@
                 "slatkasti"
             ],
             "oblik": "kolac",
-            "cijena": 24,
+            "cijena": 35,
             "pakiranje": "kolač 100 g",
             "namjene": [
                 "opust",
@@ -103,8 +103,8 @@
                 "vrijeme": "3–4 min",
                 "kolicina": "4 g / 250 ml"
             },
-            "opis": "Odležani bijeli čaj iz Fudinga (Fujian), sorta Fuding Da Bai. Okerasta, sirupasta šalica s notama suhe šljive, sijena i kamfora, bez gorčine.",
-            "zaliha": 24,
+            "opis": "Uzgojen na nadmorskoj visini od 400 m u blizini Fudinga u kineskoj pokrajini Fujian. Pločica se sastoji od prešanih listova i pupoljaka . Jedan komadić je dovoljan za pripremu obilnog napitka od dvije šalice (500ml). Okerasta, sirupasta šalica s notama suhe šljive, sijena i kamfora, bez gorčine.",
+            "zaliha": 5,
             "objavljeno": true,
             "slika": "CSTVI-295"
         },
