@@ -1,7 +1,7 @@
 {
     "format": 1,
-    "verzija": 16,
-    "azurirano": "2026-11-17T11:51:23.680Z",
+    "verzija": 17,
+    "azurirano": "2026-11-17T12:03:43.063Z",
     "azurirao": "stepsa",
     "vrste": [
         {
@@ -242,10 +242,12 @@
             "podrijetlo": "Kina",
             "tein": 2,
             "okusi": [
-                "travnati"
+                "travnati",
+                "zemljani",
+                "drvenasti"
             ],
             "oblik": "rastresiti",
-            "cijena": 6.9,
+            "cijena": 8,
             "pakiranje": "50 g",
             "namjene": [
                 "jutro",
@@ -259,7 +261,7 @@
                 "vrijeme": "2–3 min",
                 "kolicina": "4 g / 250 ml"
             },
-            "opis": "Zeleni čaj snažnog okusa, temelj marokanskog čaja s mentom. Pije se sam ili sa svježim listovima mente.",
+            "opis": "Poznat po svom snažnom okusu . Već se više od  dva stoljeća koristi za pripremu poznatog čaja od mente . Ovaj čaj dolazi iz organskog uzgoja u pokrajini Hunan (China). Pije se sam ili sa svježim listovima mente za nešto blaži doživljaj.",
             "zaliha": 24,
             "objavljeno": true,
             "slika": "CSTV-10"
