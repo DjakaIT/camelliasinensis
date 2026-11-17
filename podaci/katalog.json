@@ -1,7 +1,7 @@
 {
     "format": 1,
-    "verzija": 15,
-    "azurirano": "2026-11-17T11:20:10.672Z",
+    "verzija": 16,
+    "azurirano": "2026-11-17T11:51:23.680Z",
     "azurirao": "stepsa",
     "vrste": [
         {
@@ -214,7 +214,7 @@
                 "slatkasti"
             ],
             "oblik": "rastresiti",
-            "cijena": 7.9,
+            "cijena": 6,
             "pakiranje": "50 g",
             "namjene": [
                 "vecer",
