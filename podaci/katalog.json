@@ -1,7 +1,7 @@
 {
     "format": 1,
-    "verzija": 10,
-    "azurirano": "2026-11-13T13:59:50.438Z",
+    "verzija": 11,
+    "azurirano": "2026-11-17T10:47:04.984Z",
     "azurirao": "stepsa",
     "vrste": [
         {
@@ -41,8 +41,8 @@
         },
         {
             "kljuc": "pribor",
-            "naziv": "Pribor i knjige",
-            "opis": "Gaiwani, setovi za matchu, daske, knjiga."
+            "naziv": "Pribor",
+            "opis": "Gaiwani, setovi za matchu i čajne daske."
         }
     ],
     "proizvodi": [
@@ -59,7 +59,7 @@
                 "slatkasti"
             ],
             "oblik": "rastresiti",
-            "cijena": 25,
+            "cijena": 13,
             "pakiranje": "50 g",
             "namjene": [
                 "opust",
@@ -2173,7 +2173,7 @@
             "priprema": null,
             "opis": "Knjiga kuće Camellia Sinensis (treće izdanje, engleski): povijest, terroiri i vrste čaja.",
             "zaliha": 2,
-            "objavljeno": true,
+            "objavljeno": false,
             "slika": "CSLI-2"
         }
     ],
