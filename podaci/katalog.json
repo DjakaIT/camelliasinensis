@@ -1,7 +1,7 @@
 {
     "format": 1,
-    "verzija": 14,
-    "azurirano": "2026-11-17T11:16:02.846Z",
+    "verzija": 15,
+    "azurirano": "2026-11-17T11:20:10.672Z",
     "azurirao": "stepsa",
     "vrste": [
         {
@@ -178,12 +178,12 @@
             "naziv": "Bancha",
             "vrsta": "zeleni",
             "podrijetlo": "Japan",
-            "tein": 2,
+            "tein": 1,
             "okusi": [
                 "travnati"
             ],
             "oblik": "rastresiti",
-            "cijena": 1,
+            "cijena": 6,
             "pakiranje": "50 g",
             "namjene": [
                 "jutro"
@@ -196,8 +196,8 @@
                 "vrijeme": "1–2 min",
                 "kolicina": "4 g / 250 ml"
             },
-            "opis": "Organska bancha iz Shizuoke, odličan svakodnevni zeleni čaj. Osvježavajuća, travnata šalica s morskim notama. Idealan prvi japanski čaj.",
-            "zaliha": 21,
+            "opis": "Organska bancha iz Shizuoke, odličan svakodnevni zeleni čaj. Osvježavajuća, travnata šalica s morskim notama. Idealan izbor za prvi susret s japanskim čajevima .",
+            "zaliha": null,
             "objavljeno": true,
             "slika": "CSTV-178"
         },
