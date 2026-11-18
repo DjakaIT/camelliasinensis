@@ -1,7 +1,7 @@
 {
     "format": 1,
-    "verzija": 76,
-    "azurirano": "2026-11-18T20:00:25.800Z",
+    "verzija": 77,
+    "azurirano": "2026-11-18T20:02:00.042Z",
     "azurirao": "stepsa",
     "vrste": [
         {
@@ -1954,8 +1954,8 @@
                 "travnati"
             ],
             "oblik": "rastresiti",
-            "cijena": 24,
-            "pakiranje": "1 kg",
+            "cijena": 4.5,
+            "pakiranje": "50 g",
             "namjene": [
                 "jutro",
                 "fokus"
