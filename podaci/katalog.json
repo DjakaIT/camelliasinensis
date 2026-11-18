@@ -1,7 +1,7 @@
 {
     "format": 1,
-    "verzija": 47,
-    "azurirano": "2026-11-18T19:11:53.507Z",
+    "verzija": 48,
+    "azurirano": "2026-11-18T19:20:01.284Z",
     "azurirao": "stepsa",
     "vrste": [
         {
@@ -1011,7 +1011,7 @@
                 "medeni"
             ],
             "oblik": "kolac",
-            "cijena": 34,
+            "cijena": 55,
             "pakiranje": "kolač 200 g",
             "namjene": [
                 "fokus",
@@ -1026,7 +1026,7 @@
                 "vrijeme": "4 min (ili 20–30 s gongfu)",
                 "kolicina": "5 g / 250 ml"
             },
-            "opis": "Mladi sheng iz socijalnog projekta u Yunnanu, s drveća na 1300 m. Zlatna šalica s marelicom, kamforom i dugim medenim završetkom.",
+            "opis": "Mladi sheng iz socijalnog projekta u Yunnanu koji okuplja poljoprivrednike iz susjednih sela ,  ubran sa stabala koja rastu na 1300 metara nadmorske visine . Zlatna šalica s marelicom, kamforom i dugim medenim završetkom.",
             "zaliha": 24,
             "objavljeno": true,
             "slika": "CSTVI-282"
