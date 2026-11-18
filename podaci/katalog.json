@@ -1,7 +1,7 @@
 {
     "format": 1,
-    "verzija": 31,
-    "azurirano": "2026-11-18T18:37:41.860Z",
+    "verzija": 32,
+    "azurirano": "2026-11-18T18:38:29.790Z",
     "azurirao": "stepsa",
     "vrste": [
         {
@@ -670,7 +670,7 @@
                 "citrusni"
             ],
             "oblik": "rastresiti",
-            "cijena": 16.9,
+            "cijena": 12,
             "pakiranje": "50 g",
             "namjene": [
                 "jutro",
