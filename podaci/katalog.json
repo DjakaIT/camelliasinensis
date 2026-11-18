@@ -1,7 +1,7 @@
 {
     "format": 1,
-    "verzija": 34,
-    "azurirano": "2026-11-18T18:41:21.020Z",
+    "verzija": 35,
+    "azurirano": "2026-11-18T18:42:27.211Z",
     "azurirao": "stepsa",
     "vrste": [
         {
@@ -730,7 +730,7 @@
                 "drvenasti"
             ],
             "oblik": "rastresiti",
-            "cijena": 15.9,
+            "cijena": 16,
             "pakiranje": "50 g",
             "namjene": [
                 "jutro"
