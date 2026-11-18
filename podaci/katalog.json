@@ -1,7 +1,7 @@
 {
     "format": 1,
-    "verzija": 72,
-    "azurirano": "2026-11-18T19:42:13.878Z",
+    "verzija": 73,
+    "azurirano": "2026-11-18T19:48:05.677Z",
     "azurirao": "stepsa",
     "vrste": [
         {
@@ -1775,8 +1775,8 @@
                 "cvjetni"
             ],
             "oblik": "rastresiti",
-            "cijena": 10.9,
-            "pakiranje": "30 g",
+            "cijena": 13,
+            "pakiranje": "50 g",
             "namjene": [
                 "vecer"
             ],
@@ -1788,7 +1788,7 @@
                 "vrijeme": "5–7 min",
                 "kolicina": "3 g / 250 ml"
             },
-            "opis": "Organska biljna mješavina bez teina. Pije se toplo, u bilo koje doba dana.",
+            "opis": "Ukusan i šaren biljni čaj ,ručno bran . Napitak je topao i svilenkast ,nježnog okusa podsjeća na vedre ljetne dane , Idealan za održavanje koncentracije i smirenosti ,također pomaže probavi. Konzumiranje ovog biljnog čaja ne preporučuje se tijekom trudnoće .",
             "zaliha": 24,
             "objavljeno": true,
             "slika": "CSTO-74"
