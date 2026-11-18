@@ -1,7 +1,7 @@
 {
     "format": 1,
-    "verzija": 65,
-    "azurirano": "2026-11-18T19:36:13.686Z",
+    "verzija": 66,
+    "azurirano": "2026-11-18T19:37:41.935Z",
     "azurirao": "stepsa",
     "vrste": [
         {
@@ -1651,8 +1651,8 @@
                 "mentolni"
             ],
             "oblik": "rastresiti",
-            "cijena": 6.9,
-            "pakiranje": "30 g",
+            "cijena": 4.5,
+            "pakiranje": "50g",
             "namjene": [
                 "vecer"
             ],
