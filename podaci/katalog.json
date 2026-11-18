@@ -1,7 +1,7 @@
 {
     "format": 1,
-    "verzija": 45,
-    "azurirano": "2026-11-18T18:56:11.599Z",
+    "verzija": 46,
+    "azurirano": "2026-11-18T19:09:27.568Z",
     "azurirao": "stepsa",
     "vrste": [
         {
@@ -1044,7 +1044,7 @@
                 "slatkasti"
             ],
             "oblik": "kolac",
-            "cijena": 38,
+            "cijena": 55,
             "pakiranje": "kolač 200 g",
             "namjene": [
                 "fokus",
@@ -1058,7 +1058,7 @@
                 "vrijeme": "4 min (ili 20–30 s gongfu)",
                 "kolicina": "5 g / 250 ml"
             },
-            "opis": "Mladi pu'er sa starih stabala (70 godina) u šumama Yongdea. Note slame i dinje, lagani tanini i sirupast završetak. Može i odležati.",
+            "opis": "Mladi Pu-erh čaj iz udaljenih šuma Yongdea ,pokrajine Yunnan . Ubran sa 70 godina starih grmova čaja našeg proizvođača Yanga Wen Bina , ovaj se čaj može piti odmah ili odložiti za odležavanje.  Note slame i dinje, lagani tanini i sirupast završetak.",
             "zaliha": 24,
             "objavljeno": true,
             "slika": "CSTVI-276"
