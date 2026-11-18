@@ -1,7 +1,7 @@
 {
     "format": 1,
-    "verzija": 24,
-    "azurirano": "2026-11-18T18:31:40.771Z",
+    "verzija": 25,
+    "azurirano": "2026-11-18T18:32:07.249Z",
     "azurirao": "stepsa",
     "vrste": [
         {
@@ -1140,7 +1140,8 @@
             "cijena": 16.5,
             "pakiranje": "50 g",
             "namjene": [
-                "opust"
+                "opust",
+                "fokus"
             ],
             "oznake": [
                 "novo"
