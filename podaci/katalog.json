@@ -1,7 +1,7 @@
 {
     "format": 1,
-    "verzija": 32,
-    "azurirano": "2026-11-18T18:38:29.790Z",
+    "verzija": 33,
+    "azurirano": "2026-11-18T18:40:56.686Z",
     "azurirao": "stepsa",
     "vrste": [
         {
@@ -713,7 +713,7 @@
                 "kolicina": "3 g / 250 ml"
             },
             "opis": "Prva berba poznatog himalajskog vrta Jungpana. Živahna šalica s notama muškata, jasmina i visoke trave.",
-            "zaliha": 24,
+            "zaliha": 0,
             "objavljeno": true,
             "slika": "CSTN-192"
         },
