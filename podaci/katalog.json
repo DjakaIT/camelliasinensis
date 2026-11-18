@@ -1,7 +1,7 @@
 {
     "format": 1,
-    "verzija": 46,
-    "azurirano": "2026-11-18T19:09:27.568Z",
+    "verzija": 47,
+    "azurirano": "2026-11-18T19:11:53.507Z",
     "azurirao": "stepsa",
     "vrste": [
         {
@@ -1044,7 +1044,7 @@
                 "slatkasti"
             ],
             "oblik": "kolac",
-            "cijena": 55,
+            "cijena": 48,
             "pakiranje": "kolač 200 g",
             "namjene": [
                 "fokus",
