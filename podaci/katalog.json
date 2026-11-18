@@ -1,7 +1,7 @@
 {
     "format": 1,
-    "verzija": 83,
-    "azurirano": "2026-11-18T20:06:05.477Z",
+    "verzija": 84,
+    "azurirano": "2026-11-18T20:14:19.177Z",
     "azurirao": "stepsa",
     "vrste": [
         {
@@ -2060,28 +2060,6 @@
             "zaliha": 24,
             "objavljeno": true,
             "slika": "CSAC-463"
-        },
-        {
-            "id": "7df1a83b36de",
-            "sku": "CSLI-2",
-            "slug": "knjiga-tea-history-terroirs-varieties",
-            "naziv": "Knjiga: Tea – History, Terroirs, Varieties",
-            "vrsta": "pribor",
-            "podrijetlo": "",
-            "tein": null,
-            "okusi": [],
-            "oblik": "pribor",
-            "cijena": 34,
-            "pakiranje": "kom",
-            "namjene": [
-                "poklon"
-            ],
-            "oznake": [],
-            "priprema": null,
-            "opis": "Knjiga kuće Camellia Sinensis (treće izdanje, engleski): povijest, terroiri i vrste čaja.",
-            "zaliha": 2,
-            "objavljeno": false,
-            "slika": "CSLI-2"
         }
     ],
     "izdvojeno": {
