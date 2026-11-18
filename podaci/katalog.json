@@ -1,7 +1,7 @@
 {
     "format": 1,
-    "verzija": 20,
-    "azurirano": "2026-11-18T18:03:08.192Z",
+    "verzija": 21,
+    "azurirano": "2026-11-18T18:13:06.549Z",
     "azurirao": "stepsa",
     "vrste": [
         {
@@ -524,7 +524,7 @@
                 "travnati"
             ],
             "oblik": "prah",
-            "cijena": 39,
+            "cijena": 48,
             "pakiranje": "100 g",
             "namjene": [
                 "fokus"
@@ -537,7 +537,7 @@
                 "vrijeme": "pjenjenje metlicom",
                 "kolicina": "2 g / 70 ml"
             },
-            "opis": "Matcha iz regije Uji u Japanu, u pakiranju od 100 g. Za pripremu metlicom ili za matcha latte.",
+            "opis": "Izvrsna ceremonijalna matcha ,koju nam donose braća Osafumi ,proizvođaci druge generacije . Ova matcha dolazi iz mitske regije Uji .Njezina svježa i ukusna emulzija pruža baršunastu teksturu i blago gorko-slatki okus , s notama uljaste trave i mladog graška šećerca . Dašak nježnog joda škaklja nepce i nadvaladava sve ostale note.",
             "zaliha": 24,
             "objavljeno": true,
             "slika": "CSTAD-561"
