@@ -1,7 +1,7 @@
 {
     "format": 1,
-    "verzija": 48,
-    "azurirano": "2026-11-18T19:20:01.284Z",
+    "verzija": 49,
+    "azurirano": "2026-11-18T19:22:42.831Z",
     "azurirao": "stepsa",
     "vrste": [
         {
@@ -965,40 +965,6 @@
             "slika": "CSTVI-298"
         },
         {
-            "id": "7cd199a451b6",
-            "sku": "CSTVI-281",
-            "slug": "puer-shou-2016-jingmai",
-            "naziv": "Pu'er Shou 2016 Jingmai",
-            "vrsta": "puer",
-            "podrijetlo": "Kina",
-            "tein": 2,
-            "okusi": [
-                "zemljani",
-                "drvenasti",
-                "vocni"
-            ],
-            "oblik": "rastresiti",
-            "cijena": 16.9,
-            "pakiranje": "50 g",
-            "namjene": [
-                "fokus",
-                "opust"
-            ],
-            "oznake": [
-                "bio",
-                "rijetko"
-            ],
-            "priprema": {
-                "temp": "95 °C",
-                "vrijeme": "4 min (ili 20–30 s gongfu)",
-                "kolicina": "5 g / 250 ml"
-            },
-            "opis": "Rastresiti shou pu'er s 1600 m iz regije Lincang. Vrlo tamna šalica s notama vlažne zemlje, hrasta i suhe šljive.",
-            "zaliha": 24,
-            "objavljeno": true,
-            "slika": null
-        },
-        {
             "id": "aff368719031",
             "sku": "CSTVI-282",
             "slug": "puer-sheng-2023-zhengwan",
@@ -1062,37 +1028,6 @@
             "zaliha": 24,
             "objavljeno": true,
             "slika": "CSTVI-276"
-        },
-        {
-            "id": "9f0b1628b3dc",
-            "sku": "CSTVI-150",
-            "slug": "puer-sheng-2007-yiwu-jing-long",
-            "naziv": "Pu'er Sheng 2007 Yiwu Jing Long",
-            "vrsta": "puer",
-            "podrijetlo": "Kina",
-            "tein": 2,
-            "okusi": [
-                "vocni",
-                "zacinski"
-            ],
-            "oblik": "kolac",
-            "cijena": 59,
-            "pakiranje": "kolač 250 g",
-            "namjene": [
-                "poklon"
-            ],
-            "oznake": [
-                "rijetko"
-            ],
-            "priprema": {
-                "temp": "95 °C",
-                "vrijeme": "4 min (ili 20–30 s gongfu)",
-                "kolicina": "5 g / 250 ml"
-            },
-            "opis": "Odležani sheng iz poznatog terroira Yiwu. Jantarna šalica s notama koprive, vanilije i kamfora, poput četinarske šume.",
-            "zaliha": 0,
-            "objavljeno": true,
-            "slika": null
         },
         {
             "id": "872c085eaf4a",
@@ -1199,7 +1134,7 @@
                 "travnati"
             ],
             "oblik": "rastresiti",
-            "cijena": 7.9,
+            "cijena": 6,
             "pakiranje": "50 g",
             "namjene": [
                 "jutro"
