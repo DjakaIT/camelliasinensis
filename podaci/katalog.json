@@ -1,7 +1,7 @@
 {
     "format": 1,
-    "verzija": 18,
-    "azurirano": "2026-11-18T17:52:27.243Z",
+    "verzija": 19,
+    "azurirano": "2026-11-18T18:01:31.510Z",
     "azurirao": "stepsa",
     "vrste": [
         {
@@ -371,7 +371,7 @@
                 "cvjetni"
             ],
             "oblik": "rastresiti",
-            "cijena": 12.9,
+            "cijena": 9,
             "pakiranje": "50 g",
             "namjene": [
                 "fokus",
@@ -383,7 +383,7 @@
                 "vrijeme": "2–3 min",
                 "kolicina": "4 g / 250 ml"
             },
-            "opis": "Veliki kineski klasik, poznat kao Dragonwell. Svjež i ukusan, s cvjetnim i travnatim notama i dozom svježeg lješnjaka.",
+            "opis": "Veliki kineski klasik, u cijelom listu sa svijetlom nijansom žada .Bistar zeleni napitak , svjež i ukusan ,s elegantnim cvjetnim i travnatim notama koje su lijepo zaokružene daškom svežeg lješnjaka .",
             "zaliha": 24,
             "objavljeno": true,
             "slika": "CSTV-68"
