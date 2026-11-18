@@ -1,7 +1,7 @@
 {
     "format": 1,
-    "verzija": 21,
-    "azurirano": "2026-11-18T18:13:06.549Z",
+    "verzija": 22,
+    "azurirano": "2026-11-18T18:21:44.955Z",
     "azurirao": "stepsa",
     "vrste": [
         {
@@ -463,8 +463,8 @@
                 "travnati"
             ],
             "oblik": "prah",
-            "cijena": 19,
-            "pakiranje": "30 g",
+            "cijena": 39,
+            "pakiranje": "100g",
             "namjene": [
                 "fokus",
                 "jutro"
@@ -475,42 +475,10 @@
                 "vrijeme": "pjenjenje metlicom",
                 "kolicina": "2 g / 70 ml"
             },
-            "opis": "Matcha iz regije Uji, od proizvođača Koyame (16 generacija). Pristupačna i intenzivna, s okusom svježeg bilja. Odlična za latte.",
+            "opis": "Matcha iz regije Uji, od proizvođača g. Koyame (16 generacija). Pristupačna i intenzivna,proizvedena od biljaka čaja uzgojenih u sjeni čiji su listovi mljeveni na kamenu , s okusom svježeg bilja. Odlična za latte ili kad se u njoj uživa samoj.",
             "zaliha": 24,
             "objavljeno": true,
             "slika": "CSTV-121"
-        },
-        {
-            "id": "908ba5228f92",
-            "sku": "CSTV-237",
-            "slug": "matcha-mizukaze",
-            "naziv": "Matcha Mizukaze",
-            "vrsta": "zeleni",
-            "podrijetlo": "Japan",
-            "tein": 3,
-            "okusi": [
-                "travnati",
-                "cvjetni"
-            ],
-            "oblik": "prah",
-            "cijena": 35,
-            "pakiranje": "30 g",
-            "namjene": [
-                "fokus",
-                "poklon"
-            ],
-            "oznake": [
-                "rijetko"
-            ],
-            "priprema": {
-                "temp": "75 °C",
-                "vrijeme": "pjenjenje metlicom",
-                "kolicina": "2 g / 70 ml"
-            },
-            "opis": "Ceremonijalna matcha iz Fujiede (Shizuoka). Kremasta, s jabučno zelenom pjenom, notama rikule i kakaa te cvjetnim završetkom.",
-            "zaliha": 24,
-            "objavljeno": true,
-            "slika": "CSTV-237"
         },
         {
             "id": "8938ae7d55bd",
@@ -2183,7 +2151,6 @@
     "izdvojeno": {
         "polica": [
             "CSTVI-282",
-            "CSTV-237",
             "CSTN-220",
             "CSTW-1",
             "CSTB-6",
