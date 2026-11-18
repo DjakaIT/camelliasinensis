@@ -1,7 +1,7 @@
 {
     "format": 1,
-    "verzija": 23,
-    "azurirano": "2026-11-18T18:23:42.300Z",
+    "verzija": 24,
+    "azurirano": "2026-11-18T18:31:40.771Z",
     "azurirao": "stepsa",
     "vrste": [
         {
@@ -1137,7 +1137,7 @@
                 "zacinski"
             ],
             "oblik": "rastresiti",
-            "cijena": 14.9,
+            "cijena": 16.5,
             "pakiranje": "50 g",
             "namjene": [
                 "opust"
@@ -1150,7 +1150,7 @@
                 "vrijeme": "3–4 min",
                 "kolicina": "5 g / 250 ml"
             },
-            "opis": "Suvremeni tajvanski oolong s povišenim GABA sadržajem. Bogata šalica s notama pečene jabuke, cimeta i muškatnog oraščića.",
+            "opis": "Suvremeni tajvanski oolong s povišenim GABA(važna aminokiselina koja djeluje kao neurotransmiter u središnjem živčanom sustavu) molekulama .Ovom čaju u narodu se pripisuju tvrdnje : izuzetno dobar za pamćenje ,liječenje mamurluka ,mršavljenje ,opuštanje i borbi protiv depresije .  Bogata šalica s notama pečene jabuke, cimeta i muškatnog oraščića.",
             "zaliha": 24,
             "objavljeno": true,
             "slika": "CSTW-11"
