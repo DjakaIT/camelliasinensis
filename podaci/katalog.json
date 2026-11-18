@@ -1,7 +1,7 @@
 {
     "format": 1,
-    "verzija": 43,
-    "azurirano": "2026-11-18T18:52:27.381Z",
+    "verzija": 44,
+    "azurirano": "2026-11-18T18:55:47.146Z",
     "azurirao": "stepsa",
     "vrste": [
         {
@@ -945,7 +945,7 @@
                 "drvenasti"
             ],
             "oblik": "rastresiti",
-            "cijena": 14.9,
+            "cijena": 7,
             "pakiranje": "50 g",
             "namjene": [
                 "fokus",
