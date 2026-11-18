@@ -1,7 +1,7 @@
 {
     "format": 1,
-    "verzija": 35,
-    "azurirano": "2026-11-18T18:42:27.211Z",
+    "verzija": 36,
+    "azurirano": "2026-11-18T18:43:22.586Z",
     "azurirao": "stepsa",
     "vrste": [
         {
@@ -759,7 +759,7 @@
                 "zacinski"
             ],
             "oblik": "rastresiti",
-            "cijena": 15.9,
+            "cijena": 9,
             "pakiranje": "50 g",
             "namjene": [
                 "opust",
