@@ -1,7 +1,7 @@
 {
     "format": 1,
-    "verzija": 80,
-    "azurirano": "2026-11-18T20:04:09.312Z",
+    "verzija": 81,
+    "azurirano": "2026-11-18T20:04:42.715Z",
     "azurirao": "stepsa",
     "vrste": [
         {
@@ -2005,7 +2005,7 @@
             "tein": null,
             "okusi": [],
             "oblik": "pribor",
-            "cijena": 59,
+            "cijena": 70,
             "pakiranje": "set",
             "namjene": [
                 "poklon"
