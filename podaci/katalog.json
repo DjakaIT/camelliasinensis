@@ -1,7 +1,7 @@
 {
     "format": 1,
-    "verzija": 74,
-    "azurirano": "2026-11-18T19:48:47.001Z",
+    "verzija": 75,
+    "azurirano": "2026-11-18T19:54:59.516Z",
     "azurirao": "stepsa",
     "vrste": [
         {
@@ -1834,8 +1834,8 @@
                 "mentolni"
             ],
             "oblik": "rastresiti",
-            "cijena": 9.9,
-            "pakiranje": "30 g",
+            "cijena": 17.5,
+            "pakiranje": "50 g",
             "namjene": [
                 "vecer"
             ],
@@ -1847,7 +1847,7 @@
                 "vrijeme": "5–7 min",
                 "kolicina": "3 g / 250 ml"
             },
-            "opis": "Listovi divlje gaulterije iz šuma Quebeca. Lagana, slatkasta šalica izrazitog osvježavajućeg okusa.",
+            "opis": "Listovi divlje gaulterije iz šuma Quebeca. Lagana, slatkasta šalica izrazitog osvježavajućeg okusa. Prikladno dočarava osvježavajući učinak koji može pružiti kod različitih vrsta upala (vrućice,bolnih zglobova).",
             "zaliha": 24,
             "objavljeno": true,
             "slika": "CSTO-33"
