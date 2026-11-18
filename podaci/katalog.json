@@ -1,7 +1,7 @@
 {
     "format": 1,
-    "verzija": 78,
-    "azurirano": "2026-11-18T20:02:36.415Z",
+    "verzija": 79,
+    "azurirano": "2026-11-18T20:03:32.101Z",
     "azurirao": "stepsa",
     "vrste": [
         {
@@ -1886,7 +1886,7 @@
             "id": "f31fe32dd85d",
             "sku": "CSTR-3",
             "slug": "rooibos-wupperthal",
-            "naziv": "Rooibos Wupperthal",
+            "naziv": "Rooibos Organic",
             "vrsta": "biljni",
             "podrijetlo": "Južna Afrika",
             "tein": 0,
@@ -1895,7 +1895,7 @@
                 "sladni"
             ],
             "oblik": "rastresiti",
-            "cijena": 7.9,
+            "cijena": 5,
             "pakiranje": "50 g",
             "namjene": [
                 "vecer"
