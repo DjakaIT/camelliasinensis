@@ -204,3 +204,10 @@
 .x-lock .x-small:empty { display: none; }
 .x-lock-done { align-self: flex-start; font-size: 13px; }
 .x-lock-q input::-webkit-search-cancel-button { -webkit-appearance: none; appearance: none; }
+
+/* bazna (sidrena) cijena (components/BasePrice.tsx): 6 px ispod cijene, apsolutno, pa ne mijenja raspored (Daniel, 19. 11. 2026.) */
+.pc .price, .x-pprice, .x-dinfo .x-unit { position: relative; }
+small.bz, .pc .price small.bz, .x-grid .pc .price small.bz, .x-dinfo small.bz {
+  position: absolute; left: 0; top: 100%; margin-top: 1px; display: block;
+  font: 400 6px/1 var(--f-body); letter-spacing: 0.02em; white-space: nowrap; color: inherit;
+}

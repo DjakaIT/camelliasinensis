@@ -35,6 +35,9 @@ Lijevo su vrste čaja (na mobitelu izbornik **Odjeljak** na vrhu). Broj pokraj v
 **Klikni na proizvod** da se otvori.
 
 - **Cijena**: kao na etiketi, npr. `11,90`.
+- **Bazna cijena** (ispod cijene, samo za čitanje): po Pravilniku o isticanju bazne cijene (od 17. 11. 2026.) uz svaku
+  cijenu na stranici sitno piše cijena s dana kad je proizvod prvi put ponuđen. Novi proizvod je dobije pri prvom spremanju,
+  a promjena cijene je ne mijenja. Ako je neki čaj bio u ponudi u dućanu već 2. 5. 2025., javi Danielu tadašnju cijenu.
 - **Zaliha**: broj komada. `0` = rasprodano (gumb "Dodaj u košaricu" se ugasi), do 3 komada stranica piše
   "Zadnja 2 komada". **Prazno** = zaliha se ne broji (uvijek dostupno).
 - **Objavljeno na stranici**: makni kvačicu ako proizvod privremeno ne želiš prikazivati.

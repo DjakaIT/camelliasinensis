@@ -91,6 +91,7 @@ export default async function ProductPage({ params }: Props) {
               sku={p.sku}
               unitLabel={p.unitLabel}
               buildPrice={p.price.amount}
+              base={p.basePrice ?? null}
               caffeine={a.caffeine != null ? CAFFEINE[a.caffeine] : null}
               caffeineLevel={a.caffeine ?? null}
             />

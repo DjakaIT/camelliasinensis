@@ -31,14 +31,14 @@ test('validacija: prazna forma pokazuje greške i ne plaća', async ({ page, ctl
   expect(await cartLines(page)).toEqual([{ sku: BAI.sku, qty: 1 }]);
 });
 
-test('dostava: paketomat 3,90 €, adresa 4,90 €, ukupno se mijenja', async ({ page, ctl }) => {
+test('dostava: paketomat i adresa po 5,00 € (Sara, 19. 11. 2026.)', async ({ page, ctl }) => {
   void ctl;
   await toCheckout(page, BAI.slug);
-  await expect(page.getByTestId('co-shipping')).toHaveText(/3,90/);
-  await expect(page.getByTestId('co-total')).toHaveText(/15,80/);
+  await expect(page.getByTestId('co-shipping')).toHaveText(/5,00/);
+  await expect(page.getByTestId('co-total')).toHaveText(/16,90/);
   await page.getByRole('radio', { name: /GLS na adresu/ }).check();
-  await expect(page.getByTestId('co-shipping')).toHaveText(/4,90/);
-  await expect(page.getByTestId('co-total')).toHaveText(/16,80/);
+  await expect(page.getByTestId('co-shipping')).toHaveText(/5,00/);
+  await expect(page.getByTestId('co-total')).toHaveText(/16,90/);
   await expect(page.getByText('do besplatne dostave', { exact: false }).first()).toBeVisible();
 });
 
@@ -53,7 +53,7 @@ test('uspješno plaćanje karticom: potvrda s maskiranim e-mailom, košarica pra
   void ctl;
   await toCheckout(page, BAI.slug, 2);
   await fillDemoCheckout(page);
-  await page.getByRole('button', { name: /^Plati karticom · 28,70/ }).click(); // 2 × 11,90 + 4,90
+  await page.getByRole('button', { name: /^Plati karticom · 28,80/ }).click(); // 2 × 11,90 + 5,00
   await expect(page).toHaveURL(/\/narudzba\/uspjeh\/\?narudzba=/);
   await expect(page.getByRole('heading', { name: 'Hvala na narudžbi!' })).toBeVisible();
   await expect(page.getByText('a***@example.com')).toBeVisible();

@@ -3,7 +3,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { citajJson, pisiJson, brava } from './datoteke.mjs';
-import { provjeri, pocetniKatalog, uskladi } from '../katalog.mjs';
+import { provjeri, pocetniKatalog, popuniBazne, uskladi } from '../katalog.mjs';
 import { ROOT } from './postavke.mjs';
 
 const ZADRZI_VERZIJA = 60;
@@ -57,7 +57,8 @@ export function spremiste(podaciDir, { slikaPostoji }) {
       if (trenutni.verzija !== baznaVerzija) throw new Greska(409, 'Katalog je u međuvremenu promijenjen', { verzija: trenutni.verzija });
       if (!katalog || typeof katalog !== 'object') throw new Greska(422, 'Sadržaj nije ispravan', { greske: [] });
       const novi = { ...katalog, format: trenutni.format, verzija: trenutni.verzija + 1, azurirano: new Date().toISOString(), azurirao: ime };
-      return spremi(uskladi(novi), ime, String(opis || 'Promjena kataloga').slice(0, 120));
+      // bazne cijene: novi proizvod dobije današnju, postojeći zadrži svoju (promjena cijene je ne mijenja)
+      return spremi(popuniBazne(uskladi(novi), trenutni), ime, String(opis || 'Promjena kataloga').slice(0, 120));
     }),
     povijest() {
       if (!fs.existsSync(povijestDir)) return [];
@@ -73,7 +74,7 @@ export function spremiste(podaciDir, { slikaPostoji }) {
       const stara = citajJson(path.join(povijestDir, `${String(Number(verzija)).padStart(6, '0')}.json`));
       if (!stara || !Number.isInteger(Number(verzija))) throw new Greska(404, 'Verzija ne postoji');
       const novi = { ...stara.sadrzaj, verzija: trenutni.verzija + 1, azurirano: new Date().toISOString(), azurirao: ime };
-      return spremi(novi, ime, `Vraćena verzija ${verzija}`);
+      return spremi(popuniBazne(novi, trenutni), ime, `Vraćena verzija ${verzija}`);
     }),
   };
 }

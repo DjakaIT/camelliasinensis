@@ -34,6 +34,31 @@ function uskladi_katalog(array $k): array
     return $k;
 }
 
+/** današnji datum u Hrvatskoj (YYYY-MM-DD) */
+function danas_hr(): string { return (new DateTimeImmutable('now', new DateTimeZone('Europe/Zagreb')))->format('Y-m-d'); }
+
+/**
+ * Bazna (sidrena) cijena, Pravilnik o isticanju bazne cijene proizvoda (NN 132/2026): uredništvo je ne mijenja.
+ * Postojeći proizvod (isti id) zadrži onu iz trenutnog kataloga, novi dobije svoju cijenu i današnji datum, a proizvod
+ * koji ju je ranije imao bez bazne (katalog prije 19. 11. 2026.) dobije cijenu s kojom je bio ponuđen.
+ * Ista pravila: popuniBazne() u urednistvo/katalog.mjs.
+ */
+function popuni_bazne(array $novi, ?array $trenutni, ?string $dan = null): array
+{
+    if (!is_array($novi['proizvodi'] ?? null)) return $novi;
+    $dan ??= danas_hr();
+    $stari = [];
+    foreach (($trenutni['proizvodi'] ?? []) as $p) if (is_array($p) && is_string($p['id'] ?? null)) $stari[$p['id']] = $p;
+    foreach ($novi['proizvodi'] as $i => $p) {
+        if (!is_array($p)) continue;
+        $s = is_string($p['id'] ?? null) ? ($stari[$p['id']] ?? null) : null;
+        if (is_array($s['bazna'] ?? null)) { $novi['proizvodi'][$i]['bazna'] = $s['bazna']; continue; }
+        $c = $s !== null && (is_int($s['cijena'] ?? null) || is_float($s['cijena'] ?? null)) ? $s['cijena'] : ($p['cijena'] ?? null);
+        $novi['proizvodi'][$i]['bazna'] = ['cijena' => $c, 'datum' => $dan];
+    }
+    return $novi;
+}
+
 /** tekst najviše $max znakova (UTF-8) */
 function k_tekst(mixed $v, int $max): bool { return is_string($v) && mb_strlen(trim($v)) <= $max; }
 function k_lista(mixed $v): bool { return is_array($v) && array_is_list($v); }
@@ -99,6 +124,10 @@ function provjeri_katalog(mixed $k, array $oznake, int $najviseNaPolici, Closure
         if (!is_bool($p['objavljeno'] ?? null)) $greska($P('objavljeno'), 'Neispravno');
         $sl = $ili('slika');
         if (!($sl === null || (is_string($sl) && preg_match(KLJUC_SLIKE, $sl) && $slikaPostoji($sl)))) $greska($P('slika'), 'Fotografija ne postoji');
+        $b = $p['bazna'] ?? null;
+        $bc = is_array($b) ? ($b['cijena'] ?? null) : null;
+        if (!($b === null || (is_array($b) && (is_int($bc) || is_float($bc)) && $bc > 0 && $bc <= 9999 && abs(round($bc * 100) - $bc * 100) <= 1e-6
+            && is_string($b['datum'] ?? null) && preg_match('/^\d{4}-\d{2}-\d{2}$/', $b['datum'])))) $greska($P('bazna'), 'Neispravna bazna cijena');
     }
     if (!array_filter($proizvodi, fn ($p) => is_array($p) && ($p['objavljeno'] ?? false) === true)) $greska(['proizvodi'], 'Barem jedan proizvod mora biti objavljen');
 
@@ -130,6 +159,7 @@ function provjeri_katalog(mixed $k, array $oznake, int $najviseNaPolici, Closure
             'namjene' => $jedinstveno($p['namjene']), 'oznake' => $jedinstveno($p['oznake']),
             'priprema' => $p['priprema'] === null ? null : ['temp' => $t($p['priprema']['temp']), 'vrijeme' => $t($p['priprema']['vrijeme']), 'kolicina' => $t($p['priprema']['kolicina'])],
             'opis' => $t($p['opis']), 'zaliha' => $p['zaliha'], 'objavljeno' => $p['objavljeno'], 'slika' => $p['slika'],
+            'bazna' => is_array($p['bazna'] ?? null) ? ['cijena' => round((float) $p['bazna']['cijena'], 2), 'datum' => $p['bazna']['datum']] : null,
         ], $proizvodi),
         'izdvojeno' => ['polica' => array_values($polica)],
     ]];

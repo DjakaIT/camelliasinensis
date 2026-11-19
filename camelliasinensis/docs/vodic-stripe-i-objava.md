@@ -389,7 +389,7 @@ u popisu kod naredbe s `osvjezi` klikni **Delete**. Cijena i zaliha ionako ne č
 | 3 | Pravi kontakt podaci, Instagram i priča brenda umjesto probnih. Build za Google se ruši dok je ijedan probni podatak uključen. | Sara daje podatke, Daniel mijenja |
 | 4 | Pravni tekstovi (uvjeti kupnje, privatnost, dostava i povrat, kolačići). Pravnik ih napiše ili Sara odobri nacrt. | Sara |
 | 5 | **Fiskalizacija:** od 1. 1. 2026. svaki račun krajnjem kupcu fiskalizira se neovisno o načinu plaćanja, pa tako i plaćanje karticom preko Stripea. Stripe sam ne fiskalizira. Tri načina: (a) ručno u Thoru za svaku plaćenu narudžbu; (b) automatski preko Thorovog API-ja, ako ga Thor ima (pitati Thor); (c) automatski preko zasebne aplikacije za račune (Stripe navodi Solo, Webracun i Minimax kao preporuke korisnika, ali ih nije sam provjerio). | Sara s knjigovođom, Daniel pita Thor |
-| 6 | GLS: ugovor, cijene dostave (sada 3,90 € paketomat, 4,90 € adresa, besplatno od 50 €) i tko pakira | Sara |
+| 6 | GLS: ugovor, cijene dostave (sada 5,00 € s PDV-om, paketomat i adresa, besplatno od 50 €) i tko pakira | Sara |
 | 7 | Prave cijene i zalihe svih proizvoda u uredništvu (ili uvoz iz Thora) | Sara |
 | 8 | Probna kupnja pravom karticom pa povrat novca (A11), prije otvaranja | Daniel |
 | 9 | Otvaranje: blagajna je već prava (Stripe). Za Google: varijabla repozitorija `STRANICA_JAVNA = da` (Settings → Secrets and variables → Actions → Variables), pa uredništvo → ☰ → Održavanje stranice → **Isključi održavanje**. Gradnja se sama ruši dok je u `content/site.ts` probni sadržaj. | Daniel |

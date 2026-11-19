@@ -9,7 +9,7 @@ import { FREE_SHIPPING_FROM, FREE_SHIPPING_GIFT, SHIPPING_METHODS } from '@/lib/
 export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? 'https://camelliasinensis.eu').replace(/\/+$/, '');
 export const SHOP_NAME = 'Camellia sinensis';
 export { FREE_SHIPPING_FROM, FREE_SHIPPING_GIFT };
-/** Najniža cijena dostave, za prikaz "od 3,90 €" (obračun radi backend). */
+/** Najniža cijena dostave (obračun radi backend). */
 export const SHIPPING_FROM_PRICE = Math.min(...SHIPPING_METHODS.map((m) => m.price));
 
 /** Podaci tvrtke iz sudskog registra (Fina, 13. 11. 2026.). */
@@ -98,8 +98,8 @@ export const legalPages: LegalPage[] = [
     html: `
 <h2>Dostava</h2>
 <ul>
-<li>GLS paketomat: 3,90 €, obično 1–2 radna dana.</li>
-<li>GLS na adresu: 4,90 €, obično 1–3 radna dana.</li>
+<li>GLS paketomat: 5,00 €, obično 1–2 radna dana.</li>
+<li>GLS na adresu: 5,00 €, obično 1–3 radna dana.</li>
 <li><strong>Besplatna dostava za narudžbe od ${shipFrom}, uz poklon (${FREE_SHIPPING_GIFT}).</strong></li>
 </ul>
 <p>Narudžbe zaprimljene radnim danom do 13 h šaljemo isti dan. Kad GLS preuzme paket, dobit ćete poruku s poveznicom za praćenje.</p>

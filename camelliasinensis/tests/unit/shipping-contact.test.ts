@@ -11,8 +11,8 @@ describe('dostava', () => {
   const adr = shippingMethod('gls-adresa')!;
   it('besplatna od 50 €, inače cijena metode', () => {
     expect(FREE_SHIPPING_FROM).toBe(5000);
-    expect(shippingPrice(pak, 4999)).toBe(390);
-    expect(shippingPrice(adr, 1190)).toBe(490);
+    expect(shippingPrice(pak, 4999)).toBe(500);
+    expect(shippingPrice(adr, 1190)).toBe(500);
     expect(shippingPrice(adr, 5000)).toBe(0);
     expect(SHIPPING_FROM_PRICE).toBe(Math.min(...SHIPPING_METHODS.map((m) => m.price)));
     expect(shippingMethod('dron')).toBeNull();
@@ -24,8 +24,8 @@ describe('dostava', () => {
     const urls = { success: 'http://localhost:3000/narudzba/uspjeh/', cancel: 'http://localhost:3000/kosarica/?otkazano=1' };
     const r = await shop.startCheckout([{ sku: 'CSTB-2', qty: 2 }], urls);
     const o = demoControls.pay(r.orderToken, { shipping: 'gls-paketomat', email: 'marko.horvat@gmail.com' });
-    expect(o.shipping).toMatchObject({ id: 'gls-paketomat', price: 390 });
-    expect(o.grandTotal?.amount).toBe(2 * 1190 + 390);
+    expect(o.shipping).toMatchObject({ id: 'gls-paketomat', price: 500 });
+    expect(o.grandTotal?.amount).toBe(2 * 1190 + 500);
     expect(await shop.getOrderStatus(r.orderToken)).toMatchObject({ status: 'paid', email: 'm***@gmail.com' });
     expect(JSON.stringify(o)).not.toContain('marko.horvat');
   });

@@ -42,6 +42,7 @@ type Product = {
   type: ProductType;             // 'bijeli' | 'zeleni' | 'oolong' | 'crni' | 'puer' | 'aroma' | 'biljni' | 'pribor'
   unitLabel: string;             // npr. "50 g", "kolač 100 g"
   price: Money;
+  basePrice?: { amount: number; date: string }; // bazna (sidrena) cijena i dan (YYYY-MM-DD), NN 132/2026; iz uredništva, ne mijenja se s cijenom
   taxIncluded: true;
   descriptionHtml: string;       // SIROV HTML iz backenda; sanitizira se pri buildu (GUIDE §5)
   images: { src: string; alt: string; width: number; height: number }[];

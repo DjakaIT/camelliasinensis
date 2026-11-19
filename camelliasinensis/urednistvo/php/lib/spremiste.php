@@ -99,7 +99,23 @@ final class Spremiste
             if ($trenutni['verzija'] !== $baznaVerzija) throw new Greska(409, 'Katalog je u međuvremenu promijenjen', ['verzija' => $trenutni['verzija']]);
             if (!is_array($katalog)) throw new Greska(422, 'Sadržaj nije ispravan', ['greske' => []]);
             $novi = array_merge($katalog, ['format' => $trenutni['format'], 'verzija' => $trenutni['verzija'] + 1, 'azurirano' => iso_vrijeme(), 'azurirao' => $ime]);
-            return $this->spremi(uskladi_katalog($novi), $ime, mb_substr($opis !== '' ? $opis : 'Promjena kataloga', 0, 120));
+            // bazne cijene: novi proizvod dobije današnju, postojeći zadrži svoju (promjena cijene je ne mijenja)
+            return $this->spremi(popuni_bazne(uskladi_katalog($novi), $trenutni), $ime, mb_substr($opis !== '' ? $opis : 'Promjena kataloga', 0, 120));
+        });
+    }
+
+    /**
+     * Katalog objavljen izravno na grani sadrzaj (administrator, mimo uredništva) postaje trenutni kad je noviji od
+     * lokalnog: inače bi ga prvo sljedeće spremanje u uredništvu prepisalo. Provjera kao kod spremanja; null = ništa novo.
+     * Prodaje nakon zadnjeg spremanja ostaju zapisane (Prodaja) i dalje se oduzimaju od zalihe.
+     */
+    public function uvezi(mixed $s): ?array
+    {
+        if (!is_array($s) || !is_int($s['verzija'] ?? null)) return null;
+        $this->ucitaj();
+        return s_bravom($this->dir, function () use ($s) {
+            if ($s['verzija'] <= (int) (citaj_json($this->datoteka)['verzija'] ?? 0)) return null;
+            return $this->spremi(uskladi_katalog($s), 'GitHub', "Objavljeno izravno na GitHubu (verzija {$s['verzija']})");
         });
     }
 
@@ -123,7 +139,7 @@ final class Spremiste
             $stara = citaj_json(sprintf('%s/%06d.json', $this->povijestDir, $verzija));
             if (!$stara) throw new Greska(404, 'Verzija ne postoji');
             $novi = array_merge(($stara['sadrzaj']), ['verzija' => $trenutni['verzija'] + 1, 'azurirano' => iso_vrijeme(), 'azurirao' => $ime]);
-            return $this->spremi($novi, $ime, "Vraćena verzija $verzija");
+            return $this->spremi(popuni_bazne($novi, $trenutni), $ime, "Vraćena verzija $verzija");
         });
     }
 }

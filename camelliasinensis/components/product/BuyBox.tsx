@@ -1,17 +1,27 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { BasePrice } from '@/components/BasePrice';
 import { useCart } from '@/components/cart/CartContext';
 import { CaffeineDots } from '@/components/Icons';
 import { allowedFrom, stockText } from '@/lib/cart/stock-text';
 import { useLive } from '@/lib/cart/live';
 import { qtyOf, rememberPrices } from '@/lib/cart/store';
 import { formatMoney } from '@/lib/format';
+import type { BasePrice as Base } from '@/lib/shop/types';
 
-type Props = { sku: string; name: string; unitLabel: string; buildPrice: number; caffeine: string | null; caffeineLevel: number | null };
+type Props = {
+  sku: string;
+  name: string;
+  unitLabel: string;
+  buildPrice: number;
+  base?: Base | null;
+  caffeine: string | null;
+  caffeineLevel: number | null;
+};
 
 /** Cijena (iz builda dok getLive ne odgovori). Ako getLive ne uspije, ostaje cijena iz builda s napomenom. */
-export function LivePrice({ sku, unitLabel, buildPrice, caffeine, caffeineLevel }: Omit<Props, 'name'>) {
+export function LivePrice({ sku, unitLabel, buildPrice, base, caffeine, caffeineLevel }: Omit<Props, 'name'>) {
   const { state } = useLive(sku);
   const price = state.status === 'ok' ? state.info.price.amount : buildPrice;
   useEffect(() => {
@@ -22,6 +32,7 @@ export function LivePrice({ sku, unitLabel, buildPrice, caffeine, caffeineLevel 
       <div className="x-pprice">
         <b data-testid="price">{formatMoney(price)}</b>
         <small>/ {unitLabel}</small>
+        <BasePrice base={base} />
         {caffeine && caffeineLevel != null && (
           <span className="x-pkf">
             <CaffeineDots level={caffeineLevel} /> {caffeine}

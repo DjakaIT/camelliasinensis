@@ -1,5 +1,5 @@
 // Lagani oblik proizvoda za klijentske komponente (kartice, filtri), da se opisi ne šalju u bundle.
-import type { Product, ProductImage, ProductType, Stock } from './shop/types';
+import type { BasePrice, Product, ProductImage, ProductType, Stock } from './shop/types';
 
 export type CardProduct = {
   sku: string;
@@ -9,6 +9,7 @@ export type CardProduct = {
   typeName: string;
   unitLabel: string;
   price: number; // centi, iz builda (prikaz do potvrde getLive/checkCart)
+  base: BasePrice | null;
   image: ProductImage | null;
   origin: string | null;
   caffeine: number | null;
@@ -33,6 +34,7 @@ export function toCard(p: Product, typeName: string, plainDescription = ''): Car
     typeName,
     unitLabel: p.unitLabel,
     price: p.price.amount,
+    base: p.basePrice ?? null,
     image: p.images[0] ?? null,
     origin: a.origin ?? null,
     caffeine: a.caffeine ?? null,

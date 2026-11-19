@@ -348,7 +348,10 @@ final class Urednistvo
 
             // cPanel Cron Job (svakih 5 min): postavi novu izgradnju s GitHuba (promjene koda, zatvoren preglednik); bez prijave
             case 'GET /osvjezi': {
-                $this->json(200, $this->objava->osvjezi());
+                $r = $this->objava->osvjezi();
+                $this->json(200, $r);
+                // GitHub se pita kad i za izgradnje (ne pri svakom pozivu): noviji katalog s grane sadrzaj
+                if (!in_array($r['stanje'] ?? '', ['pricekaj', 'nije-postavljeno'], true)) $this->nakonOdgovora(fn () => $this->uvezi());
                 return;
             }
 
@@ -580,6 +583,22 @@ final class Urednistvo
     {
         return $this->produkcija ? $this->konf->origin : 'http://' . self::zaglavlje('Host');
     }
+    /**
+     * Katalog objavljen izravno na grani sadrzaj (administrator, mimo uredništva) uredništvo preuzme kad je noviji od
+     * svog: tada ga i pokazuje, a sljedeće spremanje gradi na njemu umjesto da ga prepiše. Stranica ga već ima.
+     */
+    private function uvezi(): void
+    {
+        try {
+            $g = $this->objava->sadrzajSGrane();
+            if (!$g) return;
+            $s = $this->prodaja->sBravom(fn () => $this->spremiste->uvezi($g));
+            if ($s) $this->trgovina->osvjeziZivo(); // cijena i zaliha (s prodajama nakon zadnjeg spremanja) odmah
+        } catch (Throwable $e) {
+            error_log('[uredništvo] uvoz kataloga s grane sadrzaj: ' . $e->getMessage());
+        }
+    }
+
     /** odgovor ide pregledniku odmah, a slanje na GitHub radi se poslije (traje nekoliko sekundi) */
     private function nakonOdgovora(callable $fn): void
     {

@@ -1,6 +1,6 @@
 // Pravila kataloga iz uredništva (urednistvo/katalog.mjs): ista provjera vrijedi za uredništvo i za build.
 import { describe, expect, it } from 'vitest';
-import { pocetniKatalog, provjeri, uOblikStranice, uskladi } from '../../urednistvo/katalog.mjs';
+import { pocetniKatalog, popuniBazne, provjeri, uOblikStranice, uskladi } from '../../urednistvo/katalog.mjs';
 
 type Kat = ReturnType<typeof pocetniKatalog>;
 const pocetni: Kat = pocetniKatalog(process.cwd());
@@ -21,12 +21,29 @@ describe('katalog uredništva', () => {
     ['negativna zaliha', (k: Kat) => (k.proizvodi[0].zaliha = -1), /Zaliha/],
     ['polica s neobjavljenim', (k: Kat) => (k.proizvodi.find((p: Kat) => p.sku === k.izdvojeno.polica[0]).objavljeno = false), /nije objavljen/],
     ['nepostojeća vrsta', (k: Kat) => (k.vrste = k.vrste.slice(1)), /Vrste čaja/],
+    ['bazna cijena bez datuma', (k: Kat) => (k.proizvodi[0].bazna = { cijena: 11.9, datum: '18.11.2026' }), /bazna/],
   ])('odbija: %s', (_, pokvari, poruka) => {
     const k = structuredClone(pocetni);
     pokvari(k);
     const r = provjeri(k);
     expect(r.ok).toBe(false);
     expect(r.greske.map((g) => g.poruka).join(' ')).toMatch(poruka);
+  });
+  it('bazna cijena: novi proizvod dobije cijenu i datum, postojeći zadrži svoju i kad se cijena promijeni', () => {
+    const trenutni = structuredClone(pocetni);
+    trenutni.proizvodi[0].bazna = { cijena: 11.9, datum: '2026-11-18' };
+    const novi = structuredClone(trenutni);
+    novi.proizvodi[0].cijena = 9.9; // nova cijena ne mijenja baznu
+    novi.proizvodi[0].bazna = { cijena: 1, datum: '2020-01-01' }; // ni ono što pošalje preglednik
+    novi.proizvodi.push({ ...structuredClone(novi.proizvodi[1]), id: 'abcdef123456', sku: 'NOVI-1', slug: 'novi-1', cijena: 7.5, bazna: null });
+    const k = popuniBazne(novi, trenutni, '2026-11-19');
+    expect(k.proizvodi[0].bazna).toEqual({ cijena: 11.9, datum: '2026-11-18' });
+    expect(k.proizvodi[1].bazna).toEqual({ cijena: trenutni.proizvodi[1].cijena, datum: '2026-11-19' }); // bez bazne do sada
+    expect(k.proizvodi.at(-1).bazna).toEqual({ cijena: 7.5, datum: '2026-11-19' });
+    const r = provjeri(k);
+    expect(r.ok).toBe(true);
+    const o = uOblikStranice(r.sadrzaj, () => null);
+    expect(o.products.find((p) => p.sku === trenutni.proizvodi[0].sku)!.basePrice).toEqual({ amount: 1190, date: '2026-11-18' });
   });
   it('zaliha: 0 = rasprodano, ≤ 3 = malo, prazno = ne broji se', () => {
     const k = structuredClone(pocetni);

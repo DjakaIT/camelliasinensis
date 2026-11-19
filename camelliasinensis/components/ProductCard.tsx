@@ -53,7 +53,7 @@ export function ProductCard({
         </div>
       )}
       <div className="buy">
-        <CardPrice sku={p.sku} price={p.price} unitLabel={p.unitLabel} />
+        <CardPrice sku={p.sku} price={p.price} unitLabel={p.unitLabel} base={p.base} />
         {/* Zaliha iz builda je zastarjela (GUIDE §2), pa gumb ostaje aktivan; dodavanje provjerava zalihu uživo. */}
         <AddButton sku={p.sku} name={p.name} price={p.price} />
       </div>

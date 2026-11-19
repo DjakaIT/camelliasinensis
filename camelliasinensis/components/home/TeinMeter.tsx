@@ -88,6 +88,7 @@ export function TeinMeter({ items }: { items: MeterItem[] }) {
           ))}
         </div>
       </div>
+      {/* četiri prijedloga, svaki u svom stupcu (Daniel, 19. 11. 2026.: bez poveznice "Svih …", simetrično) */}
       <div className="caf-res" aria-live="polite">
         <div className="lst">
           {top.map((p, k) => (
@@ -96,9 +97,6 @@ export function TeinMeter({ items }: { items: MeterItem[] }) {
             </Link>
           ))}
         </div>
-        <Link className="all" href={`/katalog/?tein=${level}`} prefetch={false}>
-          Svih {all.length}: {(CAFFEINE[level] ?? '').toLowerCase()} →
-        </Link>
       </div>
     </div>
   );

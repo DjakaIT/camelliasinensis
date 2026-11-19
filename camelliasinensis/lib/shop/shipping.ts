@@ -5,15 +5,15 @@
 export type ShippingMethodId = 'gls-paketomat' | 'gls-adresa';
 export type ShippingMethod = { id: ShippingMethodId; name: string; description: string; price: number };
 
-/** Besplatna dostava za narudžbe od 50 € (Daniel, 2. 11. 2026.). Cijene dostave su PRIMJERI iz prototipa [ODLUKA: GLS ugovor]. */
+/** Besplatna dostava za narudžbe od 50 € (Daniel, 2. 11. 2026.). Dostava je točno 5,00 € s PDV-om, i u paketomat i na adresu (Sara, 19. 11. 2026.). */
 export const FREE_SHIPPING_FROM = 5000;
 
 /** Uz besplatnu dostavu (od FREE_SHIPPING_FROM) ide i poklon (Daniel, 12. 11. 2026.). Naziv vidi kupac na stranici, u Stripeu i u mailu. */
 export const FREE_SHIPPING_GIFT = 'platnena torba Camellia sinensis';
 
 export const SHIPPING_METHODS: readonly ShippingMethod[] = [
-  { id: 'gls-paketomat', name: 'GLS paketomat', description: 'U paketomat po izboru, 1–2 radna dana', price: 390 },
-  { id: 'gls-adresa', name: 'GLS na adresu', description: 'Na kućnu ili poslovnu adresu, 1–3 radna dana', price: 490 },
+  { id: 'gls-paketomat', name: 'GLS paketomat', description: 'U paketomat po izboru, 1–2 radna dana', price: 500 },
+  { id: 'gls-adresa', name: 'GLS na adresu', description: 'Na kućnu ili poslovnu adresu, 1–3 radna dana', price: 500 },
 ];
 
 export function shippingMethod(id: unknown): ShippingMethod | null {

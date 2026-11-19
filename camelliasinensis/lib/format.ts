@@ -25,6 +25,12 @@ export function lastPieces(n: number): string {
   return `Zadnja ${n} komada`;
 }
 
+/** bazna cijena: "2026-11-18" → "18. 11. 2026." (bez pretvorbe vremenske zone) */
+export function formatIsoDate(iso: string): string {
+  const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(iso);
+  return m ? `${Number(m[3])}. ${Number(m[2])}. ${m[1]}.` : iso;
+}
+
 /** 30. 10. 2026. */
 export function formatDate(d: Date): string {
   return `${d.getDate()}. ${d.getMonth() + 1}. ${d.getFullYear()}.`;

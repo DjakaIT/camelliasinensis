@@ -206,19 +206,31 @@ test('7. nepoznata putanja vraća aplikaciju s 404 stranicom', async ({ page }) 
   await expect(page.getByRole('navigation', { name: 'Glavna navigacija' })).toBeVisible();
 });
 
-test('8. mobitel 390 px: navigacija gore (skriva se pri listanju dolje), hero čitljiv, ciljevi dodira ≥ 44 px', async ({ page }) => {
+test('8. mobitel 390 px: traka s logom, tražilicom i izbornikom (skriva se pri listanju dolje), hero čitljiv, ciljevi dodira ≥ 44 px', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/');
-  const nav = page.getByRole('navigation', { name: 'Glavna navigacija' });
-  const box = (await nav.boundingBox())!;
-  expect(box.y).toBeLessThan(140); // u gornjoj traci (Daniel, 13. 11. 2026.)
+  // Daniel, 19. 11. 2026.: u traci su samo logo, tražilica i izbornik; stranice i košarica su u izborniku
   const bar = page.locator('header.bar');
-  await page.mouse.wheel(0, 900);
+  const burger = bar.getByRole('button', { name: 'Izbornik' });
+  await expect(burger).toBeVisible();
+  await expect(page.getByRole('navigation', { name: 'Glavna navigacija' })).toBeHidden();
+  await expect(bar.locator('.cartp')).toBeHidden();
+  expect((await bar.boundingBox())!.height).toBeLessThanOrEqual(60);
+  await burger.click();
+  const menu = page.getByRole('navigation', { name: 'Izbornik' });
+  for (const l of ['Početna', 'Katalog', 'O nama']) await expect(menu.getByRole('link', { name: l })).toBeVisible();
+  await expect(bar.getByRole('button', { name: /^Košarica/ })).toBeVisible();
+  await page.keyboard.press('Escape');
+  await expect(menu).toBeHidden();
+  // tipkovnica drži traku vidljivom dok je fokus u njoj; dodirom se fokus ne vidi
+  await page.evaluate(() => (document.activeElement as HTMLElement | null)?.blur());
+  await page.mouse.wheel(0, 120); // traka nestaje čim se krene prema dolje
   await expect(bar).toHaveClass(/skriven/);
+  await page.mouse.wheel(0, 900);
   await expect(bar).not.toBeInViewport();
   await page.mouse.wheel(0, -300);
   await expect(bar).not.toHaveClass(/skriven/);
-  await expect(nav).toBeInViewport();
+  await expect(burger).toBeInViewport();
   await page.evaluate(() => window.scrollTo(0, 0));
   await expect(page.getByRole('heading', { level: 1 })).toBeInViewport();
   const small = await page.evaluate(() => {
@@ -231,6 +243,27 @@ test('8. mobitel 390 px: navigacija gore (skriva se pri listanju dolje), hero č
   });
   expect(small).toEqual([]);
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(390);
+});
+
+test('8b. računalo: traka se skriva pri listanju dolje i vraća pri listanju gore', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto('/');
+  const bar = page.locator('header.bar');
+  await expect(page.getByRole('navigation', { name: 'Glavna navigacija' })).toBeVisible();
+  await expect(bar.getByRole('button', { name: 'Izbornik' })).toBeHidden(); // izbornik je samo na mobitelu
+  await page.mouse.wheel(0, 120);
+  await expect(bar).toHaveClass(/skriven/);
+  await page.mouse.wheel(0, -60);
+  await expect(bar).not.toHaveClass(/skriven/);
+});
+
+test('9. bazna cijena stoji uz cijenu na kartici, na stranici proizvoda i ne mijenja raspored', async ({ page }) => {
+  await page.goto('/katalog/');
+  const card = page.locator('.x-grid .pc').first();
+  await expect(card.getByTestId('bazna')).toHaveText(/^Bazna cijena \d{1,2}\. \d{1,2}\. \d{4}\.: \d+,\d{2}\s€$/);
+  expect(await card.getByTestId('bazna').evaluate((e) => getComputedStyle(e).position)).toBe('absolute');
+  await page.goto(`/proizvod/${BAI.slug}/`);
+  await expect(page.locator('.x-pprice').getByTestId('bazna')).toBeVisible();
 });
 
 test('demo build nikad nije za indeksiranje', async ({ request }) => {

@@ -46,6 +46,8 @@ function ikona(ime) {
   return svg;
 }
 
+/** 2026-11-18 → 18. 11. 2026. */
+const datumHr = (d) => { const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(d ?? '')); return m ? `${+m[3]}. ${+m[2]}. ${m[1]}.` : ''; };
 const eur = (n) => (typeof n === 'number' && Number.isFinite(n) ? `${n.toFixed(2).replace('.', ',')} €` : '—');
 const brojUTekst = (n) => (typeof n === 'number' && Number.isFinite(n) ? n.toFixed(2).replace('.', ',') : '');
 /** "8,90" / "8.90" / "8" -> 8.9; null ako nije broj */
@@ -420,6 +422,10 @@ function obrazacProizvoda(p) {
         : h('label', { class: 'polje' }, h('span', {}, 'Šifra (SKU)'), h('input', { type: 'text', value: p.sku, readonly: true }), h('small', {}, 'Šifra se ne mijenja (veže košaricu i narudžbe).')),
       tekst('slug', 'Adresa na stranici', { opis: `camelliasinensis.eu/proizvod/${p.slug || '…'}/` })),
     h('div', { class: 'cijene' }, poljeCijene(p, 'cijena', 'Cijena (€)'), tekst('pakiranje', 'Pakiranje', { mjesto: 'npr. 50 g' })),
+    // bazna (sidrena) cijena se samo prikazuje: ne mijenja se s cijenom (Pravilnik NN 132/2026, poslužitelj je čuva)
+    h('p', { class: 'bazna-info', 'data-testid': 'bazna' }, p.bazna
+      ? `Bazna cijena: ${eur(p.bazna.cijena)} (od ${datumHr(p.bazna.datum)}). Ne mijenja se s cijenom, a na stranici stoji sitno uz cijenu.`
+      : 'Bazna cijena: cijena s kojom proizvod prvi put spremiš, uz današnji datum. Kasnije se ne mijenja.'),
     h('div', { class: 'dva' },
       h('label', { class: 'polje' }, h('span', {}, 'Zaliha (komada)'), zaliha, h('small', {}, '0 = rasprodano, prazno = zaliha se ne broji')),
       h('div', { class: 'kvacice-stup' },
@@ -460,7 +466,7 @@ function osvjeziSazetak(id) {
 function noviId() { const b = new Uint8Array(6); crypto.getRandomValues(b); return Array.from(b, (x) => x.toString(16).padStart(2, '0')).join(''); }
 function dodajProizvod(k) {
   const p = { id: noviId(), sku: '', slug: '', naziv: '', vrsta: k, podrijetlo: '', tein: k === 'pribor' ? null : 1, okusi: [], oblik: k === 'pribor' ? 'pribor' : 'rastresiti',
-    cijena: null, pakiranje: k === 'pribor' ? 'kom' : '50 g', namjene: [], oznake: [], priprema: null, opis: '', zaliha: 0, objavljeno: false, slika: null };
+    cijena: null, pakiranje: k === 'pribor' ? 'kom' : '50 g', namjene: [], oznake: [], priprema: null, opis: '', zaliha: 0, objavljeno: false, slika: null, bazna: null };
   S.radni.proizvodi.push(p); S.novi.add(p.id); S.otvoreno.add(p.id); oznaciPromjenu(); crtajUrednik();
   const li = $(`#stavka-${p.id}`); li?.scrollIntoView({ block: 'center', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
   $('input, textarea', li)?.focus();

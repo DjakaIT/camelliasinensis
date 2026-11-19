@@ -13,6 +13,9 @@ export type Stock = {
   maxPerOrder: number;
 };
 
+/** bazna (sidrena) cijena: cijena na dan date (YYYY-MM-DD), Pravilnik o isticanju bazne cijene proizvoda (NN 132/2026) */
+export type BasePrice = { amount: number; date: string };
+
 export type ProductImage = { src: string; alt: string; width: number; height: number };
 
 export type Product = {
@@ -23,6 +26,7 @@ export type Product = {
   type: ProductType;
   unitLabel: string;
   price: Money;
+  basePrice?: BasePrice;
   taxIncluded: true;
   descriptionHtml: string; // SIROV HTML iz backenda; sanitizira se pri buildu
   images: ProductImage[];

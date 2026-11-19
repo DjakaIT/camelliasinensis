@@ -55,6 +55,10 @@
         "amount": 1190,
         "currency": "EUR"
       },
+      "basePrice": {
+        "amount": 1190,
+        "date": "2026-11-19"
+      },
       "taxIncluded": true,
       "descriptionHtml": "<p>Klasični kineski bijeli čaj od mladih proljetnih izdanaka. Mekana, puna tekstura s cvjetnim notama djeteline i slatkim tonovima cimeta.</p>",
       "images": [
@@ -90,7 +94,7 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-13T14:18:49.040Z"
+      "updatedAt": "2026-11-19T11:21:45.169Z"
     },
     {
       "id": "cs-bf1768ec6df5",
@@ -102,6 +106,10 @@
       "price": {
         "amount": 2400,
         "currency": "EUR"
+      },
+      "basePrice": {
+        "amount": 2400,
+        "date": "2026-11-19"
       },
       "taxIncluded": true,
       "descriptionHtml": "<p>Odležani bijeli čaj iz Fudinga (Fujian), sorta Fuding Da Bai. Okerasta, sirupasta šalica s notama suhe šljive, sijena i kamfora, bez gorčine.</p>",
@@ -140,7 +148,7 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-13T14:18:49.040Z"
+      "updatedAt": "2026-11-19T11:21:45.169Z"
     },
     {
       "id": "cs-e998f3fb6b4c",
@@ -152,6 +160,10 @@
       "price": {
         "amount": 1850,
         "currency": "EUR"
+      },
+      "basePrice": {
+        "amount": 1850,
+        "date": "2026-11-19"
       },
       "taxIncluded": true,
       "descriptionHtml": "<p>Ujednačeni, fini pupoljci majstora He. Okusi zobi, zrele banane i cvijeća s blagim paprom, svjež mentolni završetak. Ekskluzivna serija.</p>",
@@ -190,7 +202,7 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-13T14:18:49.040Z"
+      "updatedAt": "2026-11-19T11:21:45.169Z"
     },
     {
       "id": "cs-dd4232459345",
@@ -202,6 +214,10 @@
       "price": {
         "amount": 1600,
         "currency": "EUR"
+      },
+      "basePrice": {
+        "amount": 1600,
+        "date": "2026-11-19"
       },
       "taxIncluded": true,
       "descriptionHtml": "<p>Odležani bijeli čaj iz Fujiana prešan u male kockice od 4 g. Slatki okusi suhog tropskog voća i proljetnog meda.</p>",
@@ -238,7 +254,7 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-13T14:18:49.040Z"
+      "updatedAt": "2026-11-19T11:21:45.169Z"
     },
     {
       "id": "cs-8c2efd0369e7",
@@ -250,6 +266,10 @@
       "price": {
         "amount": 790,
         "currency": "EUR"
+      },
+      "basePrice": {
+        "amount": 790,
+        "date": "2026-11-19"
       },
       "taxIncluded": true,
       "descriptionHtml": "<p>Organska bancha iz Shizuoke, odličan svakodnevni zeleni čaj. Osvježavajuća, travnata šalica s morskim notama. Idealan prvi japanski čaj.</p>",
@@ -286,7 +306,7 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-13T14:18:49.040Z"
+      "updatedAt": "2026-11-19T11:21:45.169Z"
     },
     {
       "id": "cs-80f3bd6ebc06",
@@ -298,6 +318,10 @@
       "price": {
         "amount": 790,
         "currency": "EUR"
+      },
+      "basePrice": {
+        "amount": 790,
+        "date": "2026-11-19"
       },
       "taxIncluded": true,
       "descriptionHtml": "<p>Tradicionalna japanska mješavina zelenog čaja s prženom i napuhanom rižom. Topla, utješna aroma i malo teina.</p>",
@@ -336,7 +360,7 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-13T14:18:49.040Z"
+      "updatedAt": "2026-11-19T11:21:45.169Z"
     },
     {
       "id": "cs-bed7810224d5",
@@ -348,6 +372,10 @@
       "price": {
         "amount": 690,
         "currency": "EUR"
+      },
+      "basePrice": {
+        "amount": 690,
+        "date": "2026-11-19"
       },
       "taxIncluded": true,
       "descriptionHtml": "<p>Zeleni čaj snažnog okusa, temelj marokanskog čaja s mentom. Pije se sam ili sa svježim listovima mente.</p>",
@@ -385,7 +413,7 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-13T14:18:49.040Z"
+      "updatedAt": "2026-11-19T11:21:45.169Z"
     },
     {
       "id": "cs-0885daad4cf8",
@@ -397,6 +425,10 @@
       "price": {
         "amount": 1090,
         "currency": "EUR"
+      },
+      "basePrice": {
+        "amount": 1090,
+        "date": "2026-11-19"
       },
       "taxIncluded": true,
       "descriptionHtml": "<p>Organski zeleni čaj s otoka Kyushu, pržen u tavi umjesto parenja. Orašaste note kestena i blago slatki citrusni završetak.</p>",
@@ -434,7 +466,7 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-13T14:18:49.040Z"
+      "updatedAt": "2026-11-19T11:21:45.169Z"
     },
     {
       "id": "cs-8ecdf9a02a0a",
@@ -446,6 +478,10 @@
       "price": {
         "amount": 2200,
         "currency": "EUR"
+      },
+      "basePrice": {
+        "amount": 2200,
+        "date": "2026-11-19"
       },
       "taxIncluded": true,
       "descriptionHtml": "<p>Gyokuro, čaj uzgojen u sjeni. Miris maline, glatka šalica s povrtnim notama špinata i suncokretovih sjemenki.</p>",
@@ -484,7 +520,7 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-13T14:18:49.040Z"
+      "updatedAt": "2026-11-19T11:21:45.169Z"
     },
     {
       "id": "cs-e9f5ce53bed2",
@@ -496,6 +532,10 @@
       "price": {
         "amount": 1390,
         "currency": "EUR"
+      },
+      "basePrice": {
+        "amount": 1390,
+        "date": "2026-11-19"
       },
       "taxIncluded": true,
       "descriptionHtml": "<p>Zeleni čaj iz Zhejianga proizvođača He Wei Zhonga. Živahna, uljasta šalica s notama proljetnog cvijeća i breskve.</p>",
@@ -531,7 +571,7 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-13T14:18:49.040Z"
+      "updatedAt": "2026-11-19T11:21:45.169Z"
     },
     {
       "id": "cs-1f14814a0a1a",
@@ -543,6 +583,10 @@
       "price": {
         "amount": 1290,
         "currency": "EUR"
+      },
+      "basePrice": {
+        "amount": 1290,
+        "date": "2026-11-19"
       },
       "taxIncluded": true,
       "descriptionHtml": "<p>Veliki kineski klasik, poznat kao Dragonwell. Svjež i ukusan, s cvjetnim i travnatim notama i dozom svježeg lješnjaka.</p>",
@@ -579,7 +623,7 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-13T14:18:49.040Z"
+      "updatedAt": "2026-11-19T11:21:45.169Z"
     },
     {
       "id": "cs-b9624aa63567",
@@ -591,6 +635,10 @@
       "price": {
         "amount": 990,
         "currency": "EUR"
+      },
+      "basePrice": {
+        "amount": 990,
+        "date": "2026-11-19"
       },
       "taxIncluded": true,
       "descriptionHtml": "<p>Sencha u tradicionalnom stilu Shizuoke. Snažan povrtni okus s blagom gorčinom i cvjetnim završetkom. Odličan svakodnevni čaj.</p>",
@@ -627,7 +675,7 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-13T14:18:49.040Z"
+      "updatedAt": "2026-11-19T11:21:45.169Z"
     },
     {
       "id": "cs-133009c71850",
@@ -639,6 +687,10 @@
       "price": {
         "amount": 1190,
         "currency": "EUR"
+      },
+      "basePrice": {
+        "amount": 1190,
+        "date": "2026-11-19"
       },
       "taxIncluded": true,
       "descriptionHtml": "<p>Sencha braće Morishita iz Shizuoke. Živahan okus, intenzivne biljne arome, voćne note i topli orašasti završetak.</p>",
@@ -678,7 +730,7 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-13T14:18:49.040Z"
+      "updatedAt": "2026-11-19T11:21:45.169Z"
     },
     {
       "id": "cs-e0d752e03b58",
@@ -690,6 +742,10 @@
       "price": {
         "amount": 1900,
         "currency": "EUR"
+      },
+      "basePrice": {
+        "amount": 1900,
+        "date": "2026-11-19"
       },
       "taxIncluded": true,
       "descriptionHtml": "<p>Matcha iz regije Uji, od proizvođača Koyame (16 generacija). Pristupačna i intenzivna, s okusom svježeg bilja. Odlična za latte.</p>",
@@ -725,7 +781,7 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-13T14:18:49.040Z"
+      "updatedAt": "2026-11-19T11:21:45.169Z"
     },
     {
       "id": "cs-908ba5228f92",
@@ -737,6 +793,10 @@
       "price": {
         "amount": 2900,
         "currency": "EUR"
+      },
+      "basePrice": {
+        "amount": 2900,
+        "date": "2026-11-19"
       },
       "taxIncluded": true,
       "descriptionHtml": "<p>Ceremonijalna matcha iz Fujiede (Shizuoka). Kremasta, s jabučno zelenom pjenom, notama rikule i kakaa te cvjetnim završetkom.</p>",
@@ -775,7 +835,7 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-13T14:18:49.040Z"
+      "updatedAt": "2026-11-19T11:21:45.169Z"
     },
     {
       "id": "cs-8938ae7d55bd",
@@ -787,6 +847,10 @@
       "price": {
         "amount": 3900,
         "currency": "EUR"
+      },
+      "basePrice": {
+        "amount": 3900,
+        "date": "2026-11-19"
       },
       "taxIncluded": true,
       "descriptionHtml": "<p>Matcha iz regije Uji u Japanu, u pakiranju od 100 g. Za pripremu metlicom ili za matcha latte.</p>",
@@ -823,7 +887,7 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-13T14:18:49.040Z"
+      "updatedAt": "2026-11-19T11:21:45.169Z"
     },
     {
       "id": "cs-872c085eaf4a",
@@ -835,6 +899,10 @@
       "price": {
         "amount": 1590,
         "currency": "EUR"
+      },
+      "basePrice": {
+        "amount": 1590,
+        "date": "2026-11-19"
       },
       "taxIncluded": true,
       "descriptionHtml": "<p>Visokoplaninski oolong s planine Ali (1400 m), majstora Chena. Note kokosa, egzotičnog voća i vanilije.</p>",
@@ -871,7 +939,7 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-13T14:18:49.040Z"
+      "updatedAt": "2026-11-19T11:21:45.169Z"
     },
     {
       "id": "cs-80da6bda925a",
@@ -883,6 +951,10 @@
       "price": {
         "amount": 1490,
         "currency": "EUR"
+      },
+      "basePrice": {
+        "amount": 1490,
+        "date": "2026-11-19"
       },
       "taxIncluded": true,
       "descriptionHtml": "<p>Suvremeni tajvanski oolong s povišenim GABA sadržajem. Bogata šalica s notama pečene jabuke, cimeta i muškatnog oraščića.</p>",
@@ -920,7 +992,7 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-13T14:18:49.040Z"
+      "updatedAt": "2026-11-19T11:21:45.169Z"
     },
     {
       "id": "cs-fe2173a00f88",
@@ -932,6 +1004,10 @@
       "price": {
         "amount": 1690,
         "currency": "EUR"
+      },
+      "basePrice": {
+        "amount": 1690,
+        "date": "2026-11-19"
       },
       "taxIncluded": true,
       "descriptionHtml": "<p>Pečeni Dong Ding majstora Nen Yua. Mirisi džema od maline, meda i tosta, kremasta šalica s ananasom na kraju.</p>",
@@ -968,7 +1044,7 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-13T14:18:49.040Z"
+      "updatedAt": "2026-11-19T11:21:45.169Z"
     },
     {
       "id": "cs-5e0814b3d840",
@@ -980,6 +1056,10 @@
       "price": {
         "amount": 790,
         "currency": "EUR"
+      },
+      "basePrice": {
+        "amount": 790,
+        "date": "2026-11-19"
       },
       "taxIncluded": true,
       "descriptionHtml": "<p>Crni čaj iz vrta Banaspaty u Assamu. Puna, izravna šalica s notama duhana, slada i šljive, sa ili bez mlijeka.</p>",
@@ -1017,7 +1097,7 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-13T14:18:49.040Z"
+      "updatedAt": "2026-11-19T11:21:45.169Z"
     },
     {
       "id": "cs-3f5c338d8d37",
@@ -1029,6 +1109,10 @@
       "price": {
         "amount": 1290,
         "currency": "EUR"
+      },
+      "basePrice": {
+        "amount": 1290,
+        "date": "2026-11-19"
       },
       "taxIncluded": true,
       "descriptionHtml": "<p>Lijepo uvijeni listovi i pupoljci ortodoksne tradicije. Bakrena, svilenkasta i sladna šalica za ljubitelje jakog čaja.</p>",
@@ -1064,7 +1148,7 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-13T14:18:49.040Z"
+      "updatedAt": "2026-11-19T11:21:45.169Z"
     },
     {
       "id": "cs-3cc15f1b467a",
@@ -1076,6 +1160,10 @@
       "price": {
         "amount": 990,
         "currency": "EUR"
+      },
+      "basePrice": {
+        "amount": 990,
+        "date": "2026-11-19"
       },
       "taxIncluded": true,
       "descriptionHtml": "<p>Crni čaj sa Šri Lanke sa srebrnim pupoljcima. Tamna, puna šalica, sladna i slatka, s notama suhe šljive.</p>",
@@ -1111,7 +1199,7 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-13T14:18:49.040Z"
+      "updatedAt": "2026-11-19T11:21:45.169Z"
     },
     {
       "id": "cs-c6d4b819d43c",
@@ -1123,6 +1211,10 @@
       "price": {
         "amount": 1390,
         "currency": "EUR"
+      },
+      "basePrice": {
+        "amount": 1390,
+        "date": "2026-11-19"
       },
       "taxIncluded": true,
       "descriptionHtml": "<p>Crni čaj iz Fujiana s mirisima božura, mošusa i slatkih začina. Gibak i uravnotežen, s notama kakaa i kikirikija.</p>",
@@ -1158,7 +1250,7 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-13T14:18:49.040Z"
+      "updatedAt": "2026-11-19T11:21:45.169Z"
     },
     {
       "id": "cs-2a10b6f3e9a4",
@@ -1170,6 +1262,10 @@
       "price": {
         "amount": 1390,
         "currency": "EUR"
+      },
+      "basePrice": {
+        "amount": 1390,
+        "date": "2026-11-19"
       },
       "taxIncluded": true,
       "descriptionHtml": "<p>Jesenska berba iz vrta Thurbo. Slatka i voćna šalica s aromom muškata i lavande te karameliziranim završetkom.</p>",
@@ -1205,7 +1301,7 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-13T14:18:49.040Z"
+      "updatedAt": "2026-11-19T11:21:45.169Z"
     },
     {
       "id": "cs-94d7e55000af",
@@ -1217,6 +1313,10 @@
       "price": {
         "amount": 1690,
         "currency": "EUR"
+      },
+      "basePrice": {
+        "amount": 1690,
+        "date": "2026-11-19"
       },
       "taxIncluded": true,
       "descriptionHtml": "<p>Prva berba s imanja Thurbo. Zlatna, nježna šalica s aromama narančine korice i bijelog cvijeća te kremastim završetkom.</p>",
@@ -1253,7 +1353,7 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-13T14:18:49.040Z"
+      "updatedAt": "2026-11-19T11:21:45.169Z"
     },
     {
       "id": "cs-5b729b56ea5c",
@@ -1265,6 +1365,10 @@
       "price": {
         "amount": 1790,
         "currency": "EUR"
+      },
+      "basePrice": {
+        "amount": 1790,
+        "date": "2026-11-19"
       },
       "taxIncluded": true,
       "descriptionHtml": "<p>Prva berba poznatog himalajskog vrta Jungpana. Živahna šalica s notama muškata, jasmina i visoke trave.</p>",
@@ -1301,7 +1405,7 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-13T14:18:49.040Z"
+      "updatedAt": "2026-11-19T11:21:45.169Z"
     },
     {
       "id": "cs-ec4dfa22f2e7",
@@ -1313,6 +1417,10 @@
       "price": {
         "amount": 1590,
         "currency": "EUR"
+      },
+      "basePrice": {
+        "amount": 1590,
+        "date": "2026-11-19"
       },
       "taxIncluded": true,
       "descriptionHtml": "<p>Ljetna berba obitelji Mohan. Ružičasto jantarna šalica, od javorovog sirupa do mandarine i drvenastih nota.</p>",
@@ -1348,7 +1456,7 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-13T14:18:49.040Z"
+      "updatedAt": "2026-11-19T11:21:45.169Z"
     },
     {
       "id": "cs-09f15d85f810",
@@ -1360,6 +1468,10 @@
       "price": {
         "amount": 1590,
         "currency": "EUR"
+      },
+      "basePrice": {
+        "amount": 1590,
+        "date": "2026-11-19"
       },
       "taxIncluded": true,
       "descriptionHtml": "<p>Zlatni leptir iz Hunana, samo uvijeni zlatni pupoljci. Svilenkasta šalica s karamelom i blagim začinima.</p>",
@@ -1398,7 +1510,7 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-13T14:18:49.040Z"
+      "updatedAt": "2026-11-19T11:21:45.169Z"
     },
     {
       "id": "cs-51752b088dfd",
@@ -1410,6 +1522,10 @@
       "price": {
         "amount": 1190,
         "currency": "EUR"
+      },
+      "basePrice": {
+        "amount": 1190,
+        "date": "2026-11-19"
       },
       "taxIncluded": true,
       "descriptionHtml": "<p>Organski crni čaj s Anda na 1800 m. Note ječma i drveta, uz slatkoću šećerne trske, kakaa i meda. Klasičan jutarnji čaj.</p>",
@@ -1447,7 +1563,7 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-13T14:18:49.040Z"
+      "updatedAt": "2026-11-19T11:21:45.169Z"
     },
     {
       "id": "cs-e0a0f35a4e62",
@@ -1459,6 +1575,10 @@
       "price": {
         "amount": 990,
         "currency": "EUR"
+      },
+      "basePrice": {
+        "amount": 990,
+        "date": "2026-11-19"
       },
       "taxIncluded": true,
       "descriptionHtml": "<p>Doručak mješavina čajeva iz Indije, Šri Lanke, Ruande i Kolumbije. Svjež početak, sladni naglasci i note sladića.</p>",
@@ -1494,7 +1614,7 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-13T14:18:49.040Z"
+      "updatedAt": "2026-11-19T11:21:45.169Z"
     },
     {
       "id": "cs-64b212cb4255",
@@ -1506,6 +1626,10 @@
       "price": {
         "amount": 1490,
         "currency": "EUR"
+      },
+      "basePrice": {
+        "amount": 1490,
+        "date": "2026-11-19"
       },
       "taxIncluded": true,
       "descriptionHtml": "<p>Manje poznat terroir susjedan Assamu. Okrugla šalica s teksturom kakaa, drvenastim i karameliziranim notama.</p>",
@@ -1543,7 +1667,7 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-13T14:18:49.040Z"
+      "updatedAt": "2026-11-19T11:21:45.169Z"
     },
     {
       "id": "cs-0d0d483f6dc0",
@@ -1555,6 +1679,10 @@
       "price": {
         "amount": 1190,
         "currency": "EUR"
+      },
+      "basePrice": {
+        "amount": 1190,
+        "date": "2026-11-19"
       },
       "taxIncluded": true,
       "descriptionHtml": "<p>Veliki listovi iz Yunnana uvijeni u zlatne spirale. Jarko crvena šalica s notama smreke, začina, kože, citrusa i slada.</p>",
@@ -1592,7 +1720,7 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-13T14:18:49.040Z"
+      "updatedAt": "2026-11-19T11:21:45.169Z"
     },
     {
       "id": "cs-cd63de7b55e0",
@@ -1604,6 +1732,10 @@
       "price": {
         "amount": 1890,
         "currency": "EUR"
+      },
+      "basePrice": {
+        "amount": 1890,
+        "date": "2026-11-19"
       },
       "taxIncluded": true,
       "descriptionHtml": "<p>Japanska rijetkost: crni čaj dimljen 6–8 sati drvom iz bačvi japanskog viskija. Bogata, slatka i tresetna šalica bez gorčine.</p>",
@@ -1642,7 +1774,7 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-13T14:18:49.040Z"
+      "updatedAt": "2026-11-19T11:21:45.169Z"
     },
     {
       "id": "cs-b0da799a04e7",
@@ -1654,6 +1786,10 @@
       "price": {
         "amount": 1490,
         "currency": "EUR"
+      },
+      "basePrice": {
+        "amount": 1490,
+        "date": "2026-11-19"
       },
       "taxIncluded": true,
       "descriptionHtml": "<p>Shou pu'er iz 2021. godine iz regije Yongde u Yunnanu. Rastresiti listovi, tamna šalica zemljanog i mekog okusa.</p>",
@@ -1692,7 +1828,7 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-13T14:18:49.040Z"
+      "updatedAt": "2026-11-19T11:21:45.169Z"
     },
     {
       "id": "cs-7cd199a451b6",
@@ -1704,6 +1840,10 @@
       "price": {
         "amount": 1690,
         "currency": "EUR"
+      },
+      "basePrice": {
+        "amount": 1690,
+        "date": "2026-11-19"
       },
       "taxIncluded": true,
       "descriptionHtml": "<p>Rastresiti shou pu'er s 1600 m iz regije Lincang. Vrlo tamna šalica s notama vlažne zemlje, hrasta i suhe šljive.</p>",
@@ -1737,7 +1877,7 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-13T14:18:49.040Z"
+      "updatedAt": "2026-11-19T11:21:45.169Z"
     },
     {
       "id": "cs-aff368719031",
@@ -1749,6 +1889,10 @@
       "price": {
         "amount": 3400,
         "currency": "EUR"
+      },
+      "basePrice": {
+        "amount": 3400,
+        "date": "2026-11-19"
       },
       "taxIncluded": true,
       "descriptionHtml": "<p>Mladi sheng iz socijalnog projekta u Yunnanu, s drveća na 1300 m. Zlatna šalica s marelicom, kamforom i dugim medenim završetkom.</p>",
@@ -1788,7 +1932,7 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-13T14:18:49.040Z"
+      "updatedAt": "2026-11-19T11:21:45.169Z"
     },
     {
       "id": "cs-73ae2f7dd204",
@@ -1800,6 +1944,10 @@
       "price": {
         "amount": 3800,
         "currency": "EUR"
+      },
+      "basePrice": {
+        "amount": 3800,
+        "date": "2026-11-19"
       },
       "taxIncluded": true,
       "descriptionHtml": "<p>Mladi pu'er sa starih stabala (70 godina) u šumama Yongdea. Note slame i dinje, lagani tanini i sirupast završetak. Može i odležati.</p>",
@@ -1838,7 +1986,7 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-13T14:18:49.040Z"
+      "updatedAt": "2026-11-19T11:21:45.169Z"
     },
     {
       "id": "cs-9f0b1628b3dc",
@@ -1850,6 +1998,10 @@
       "price": {
         "amount": 5900,
         "currency": "EUR"
+      },
+      "basePrice": {
+        "amount": 5900,
+        "date": "2026-11-19"
       },
       "taxIncluded": true,
       "descriptionHtml": "<p>Odležani sheng iz poznatog terroira Yiwu. Jantarna šalica s notama koprive, vanilije i kamfora, poput četinarske šume.</p>",
@@ -1880,7 +2032,7 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-13T14:18:49.040Z"
+      "updatedAt": "2026-11-19T11:21:45.169Z"
     },
     {
       "id": "cs-7b1a4478a14e",
@@ -1892,6 +2044,10 @@
       "price": {
         "amount": 790,
         "currency": "EUR"
+      },
+      "basePrice": {
+        "amount": 790,
+        "date": "2026-11-19"
       },
       "taxIncluded": true,
       "descriptionHtml": "<p>Kućna mješavina organskog gunpowdera i mente. Osvježavajuća i lagana, kao u sjevernoj Africi.</p>",
@@ -1929,7 +2085,7 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-13T14:18:49.040Z"
+      "updatedAt": "2026-11-19T11:21:45.169Z"
     },
     {
       "id": "cs-cc5ccbe504a9",
@@ -1941,6 +2097,10 @@
       "price": {
         "amount": 890,
         "currency": "EUR"
+      },
+      "basePrice": {
+        "amount": 890,
+        "date": "2026-11-19"
       },
       "taxIncluded": true,
       "descriptionHtml": "<p>Kvalitetni crni čaj iz Dooarsa s prirodnom aromom talijanskog bergamota. Engleski klasik.</p>",
@@ -1977,7 +2137,7 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-13T14:18:49.040Z"
+      "updatedAt": "2026-11-19T11:21:45.169Z"
     },
     {
       "id": "cs-deebb231f951",
@@ -1989,6 +2149,10 @@
       "price": {
         "amount": 1090,
         "currency": "EUR"
+      },
+      "basePrice": {
+        "amount": 1090,
+        "date": "2026-11-19"
       },
       "taxIncluded": true,
       "descriptionHtml": "<p>Zeleni i crni čaj s bergamotom i laticama ruže. Intenzivan, cvjetni Earl Grey.</p>",
@@ -2027,7 +2191,7 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-13T14:18:49.040Z"
+      "updatedAt": "2026-11-19T11:21:45.169Z"
     },
     {
       "id": "cs-5d192966ce25",
@@ -2039,6 +2203,10 @@
       "price": {
         "amount": 890,
         "currency": "EUR"
+      },
+      "basePrice": {
+        "amount": 890,
+        "date": "2026-11-19"
       },
       "taxIncluded": true,
       "descriptionHtml": "<p>Earl Grey na bazi zelenog čaja sa Šri Lanke, s različkom i prirodnim bergamotom.</p>",
@@ -2074,7 +2242,7 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-13T14:18:49.040Z"
+      "updatedAt": "2026-11-19T11:21:45.169Z"
     },
     {
       "id": "cs-94c59042b897",
@@ -2086,6 +2254,10 @@
       "price": {
         "amount": 990,
         "currency": "EUR"
+      },
+      "basePrice": {
+        "amount": 990,
+        "date": "2026-11-19"
       },
       "taxIncluded": true,
       "descriptionHtml": "<p>Cejlonski crni čaj s bergamotom i vanilijom. Svilenkast sam ili s mlijekom kao London Fog.</p>",
@@ -2122,7 +2294,7 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-13T14:18:49.040Z"
+      "updatedAt": "2026-11-19T11:21:45.169Z"
     },
     {
       "id": "cs-ee0f0e2d4158",
@@ -2134,6 +2306,10 @@
       "price": {
         "amount": 990,
         "currency": "EUR"
+      },
+      "basePrice": {
+        "amount": 990,
+        "date": "2026-11-19"
       },
       "taxIncluded": true,
       "descriptionHtml": "<p>Crni čaj s breskvom i đumbirom. Odličan topao ili kao hladni napitak na terasi.</p>",
@@ -2171,7 +2347,7 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-13T14:18:49.040Z"
+      "updatedAt": "2026-11-19T11:21:45.169Z"
     },
     {
       "id": "cs-56b2f5811b34",
@@ -2183,6 +2359,10 @@
       "price": {
         "amount": 990,
         "currency": "EUR"
+      },
+      "basePrice": {
+        "amount": 990,
+        "date": "2026-11-19"
       },
       "taxIncluded": true,
       "descriptionHtml": "<p>Mediteranska mješavina zelenog čaja s ružmarinom i grejpom. Šarena i osvježavajuća.</p>",
@@ -2221,7 +2401,7 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-13T14:18:49.040Z"
+      "updatedAt": "2026-11-19T11:21:45.169Z"
     },
     {
       "id": "cs-9d2381bc3ea1",
@@ -2233,6 +2413,10 @@
       "price": {
         "amount": 1090,
         "currency": "EUR"
+      },
+      "basePrice": {
+        "amount": 1090,
+        "date": "2026-11-19"
       },
       "taxIncluded": true,
       "descriptionHtml": "<p>Bijeli čaj s cvijećem i voćem. Crvena šalica s kiselkastim hibiskusom i slatkoćom trešnje.</p>",
@@ -2269,7 +2453,7 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-13T14:18:49.040Z"
+      "updatedAt": "2026-11-19T11:21:45.169Z"
     },
     {
       "id": "cs-1e434ccc693b",
@@ -2281,6 +2465,10 @@
       "price": {
         "amount": 1090,
         "currency": "EUR"
+      },
+      "basePrice": {
+        "amount": 1090,
+        "date": "2026-11-19"
       },
       "taxIncluded": true,
       "descriptionHtml": "<p>Bijeli i zeleni čaj s ananasom, rabarbarom i ličijem. Razigrana voćna mješavina.</p>",
@@ -2315,7 +2503,7 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-13T14:18:49.040Z"
+      "updatedAt": "2026-11-19T11:21:45.169Z"
     },
     {
       "id": "cs-a21dba4e5d3d",
@@ -2327,6 +2515,10 @@
       "price": {
         "amount": 890,
         "currency": "EUR"
+      },
+      "basePrice": {
+        "amount": 890,
+        "date": "2026-11-19"
       },
       "taxIncluded": true,
       "descriptionHtml": "<p>Zeleni čaj s malinom i šipkom. Osvježavajuć, s nježnom voćnom notom.</p>",
@@ -2363,7 +2555,7 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-13T14:18:49.040Z"
+      "updatedAt": "2026-11-19T11:21:45.169Z"
     },
     {
       "id": "cs-23ba0eb6816f",
@@ -2375,6 +2567,10 @@
       "price": {
         "amount": 1290,
         "currency": "EUR"
+      },
+      "basePrice": {
+        "amount": 1290,
+        "date": "2026-11-19"
       },
       "taxIncluded": true,
       "descriptionHtml": "<p>Japanska sencha s korom yuzua iz Tokushime. Uravnotežena i osvježavajuća, za ljubitelje čaja s limunom.</p>",
@@ -2413,7 +2609,7 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-13T14:18:49.040Z"
+      "updatedAt": "2026-11-19T11:21:45.169Z"
     },
     {
       "id": "cs-ed409ad25436",
@@ -2425,6 +2621,10 @@
       "price": {
         "amount": 1590,
         "currency": "EUR"
+      },
+      "basePrice": {
+        "amount": 1590,
+        "date": "2026-11-19"
       },
       "taxIncluded": true,
       "descriptionHtml": "<p>Zeleni čaj iz Sichuana mirisan jasminom u četiri navrata. Snažan miris jasmina s notom azijske kruške.</p>",
@@ -2461,7 +2661,7 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-13T14:18:49.040Z"
+      "updatedAt": "2026-11-19T11:21:45.169Z"
     },
     {
       "id": "cs-35ac920281d5",
@@ -2473,6 +2673,10 @@
       "price": {
         "amount": 1290,
         "currency": "EUR"
+      },
+      "basePrice": {
+        "amount": 1290,
+        "date": "2026-11-19"
       },
       "taxIncluded": true,
       "descriptionHtml": "<p>Ručno vezani zeleni čaj s jasminom koji se u vodi otvara poput cvijeta. Najljepši u staklenom čajniku.</p>",
@@ -2509,7 +2713,7 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-13T14:18:49.040Z"
+      "updatedAt": "2026-11-19T11:21:45.169Z"
     },
     {
       "id": "cs-4bbe45aeb7a3",
@@ -2521,6 +2725,10 @@
       "price": {
         "amount": 990,
         "currency": "EUR"
+      },
+      "basePrice": {
+        "amount": 990,
+        "date": "2026-11-19"
       },
       "taxIncluded": true,
       "descriptionHtml": "<p>Zeleni čaj s voćem, limunskom travom i cvjetovima. Note breskve i kruške, kao šetnja voćnjakom.</p>",
@@ -2555,7 +2763,7 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-13T14:18:49.040Z"
+      "updatedAt": "2026-11-19T11:21:45.169Z"
     },
     {
       "id": "cs-f8fe4b15dbe8",
@@ -2567,6 +2775,10 @@
       "price": {
         "amount": 890,
         "currency": "EUR"
+      },
+      "basePrice": {
+        "amount": 890,
+        "date": "2026-11-19"
       },
       "taxIncluded": true,
       "descriptionHtml": "<p>Kućni chai na bazi crnog čaja s kardamomom, cimetom, đumbirom i muškatnim oraščićem. S vodom ili tradicionalno s mlijekom.</p>",
@@ -2604,7 +2816,7 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-13T14:18:49.040Z"
+      "updatedAt": "2026-11-19T11:21:45.169Z"
     },
     {
       "id": "cs-1f8bfd39bb35",
@@ -2616,6 +2828,10 @@
       "price": {
         "amount": 990,
         "currency": "EUR"
+      },
+      "basePrice": {
+        "amount": 990,
+        "date": "2026-11-19"
       },
       "taxIncluded": true,
       "descriptionHtml": "<p>Svečani chai s narančom, zvjezdastim anisom, klinčićem i ružičastim paprom. Podsjeća na kuhano vino.</p>",
@@ -2654,7 +2870,7 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-13T14:18:49.040Z"
+      "updatedAt": "2026-11-19T11:21:45.169Z"
     },
     {
       "id": "cs-87eaef851ee1",
@@ -2666,6 +2882,10 @@
       "price": {
         "amount": 690,
         "currency": "EUR"
+      },
+      "basePrice": {
+        "amount": 690,
+        "date": "2026-11-19"
       },
       "taxIncluded": true,
       "descriptionHtml": "<p>Cvjetovi kamilice. Svijetlo žuta, mekana i svilenkasta šalica s dugim, slatkim cvjetnim završetkom.</p>",
@@ -2704,7 +2924,7 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-13T14:18:49.040Z"
+      "updatedAt": "2026-11-19T11:21:45.169Z"
     },
     {
       "id": "cs-af0ea740db1a",
@@ -2716,6 +2936,10 @@
       "price": {
         "amount": 690,
         "currency": "EUR"
+      },
+      "basePrice": {
+        "amount": 690,
+        "date": "2026-11-19"
       },
       "taxIncluded": true,
       "descriptionHtml": "<p>Kućna mješavina klasaste i paprene metvice. Osvježava ljeti, grije zimi.</p>",
@@ -2752,7 +2976,7 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-13T14:18:49.040Z"
+      "updatedAt": "2026-11-19T11:21:45.169Z"
     },
     {
       "id": "cs-e19b74b51daf",
@@ -2764,6 +2988,10 @@
       "price": {
         "amount": 890,
         "currency": "EUR"
+      },
+      "basePrice": {
+        "amount": 890,
+        "date": "2026-11-19"
       },
       "taxIncluded": true,
       "descriptionHtml": "<p>Menta, ružmarin, matičnjak i lavanda. Aromatična provansalska mješavina, ugodna nakon jela.</p>",
@@ -2802,7 +3030,7 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-13T14:18:49.040Z"
+      "updatedAt": "2026-11-19T11:21:45.169Z"
     },
     {
       "id": "cs-5b2526874d46",
@@ -2814,6 +3042,10 @@
       "price": {
         "amount": 890,
         "currency": "EUR"
+      },
+      "basePrice": {
+        "amount": 890,
+        "date": "2026-11-19"
       },
       "taxIncluded": true,
       "descriptionHtml": "<p>Đumbir i limun s limunskom travom i hibiskusom. Ljut i kiselkast, idealan za hladne dane.</p>",
@@ -2851,7 +3083,7 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-13T14:18:49.040Z"
+      "updatedAt": "2026-11-19T11:21:45.169Z"
     },
     {
       "id": "cs-98fb2bcbdb96",
@@ -2863,6 +3095,10 @@
       "price": {
         "amount": 1190,
         "currency": "EUR"
+      },
+      "basePrice": {
+        "amount": 1190,
+        "date": "2026-11-19"
       },
       "taxIncluded": true,
       "descriptionHtml": "<p>Listovi maline, ljubičasti bosiljak i pupoljci divlje ruže iz Quebeca. Duboko ljubičasta, živahna šalica.</p>",
@@ -2893,7 +3129,7 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-13T14:18:49.040Z"
+      "updatedAt": "2026-11-19T11:21:45.169Z"
     },
     {
       "id": "cs-121f54f60a21",
@@ -2905,6 +3141,10 @@
       "price": {
         "amount": 1090,
         "currency": "EUR"
+      },
+      "basePrice": {
+        "amount": 1090,
+        "date": "2026-11-19"
       },
       "taxIncluded": true,
       "descriptionHtml": "<p>Organska biljna mješavina bez teina. Pije se toplo, u bilo koje doba dana.</p>",
@@ -2941,7 +3181,7 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-13T14:18:49.040Z"
+      "updatedAt": "2026-11-19T11:21:45.169Z"
     },
     {
       "id": "cs-1e2acfd12e00",
@@ -2953,6 +3193,10 @@
       "price": {
         "amount": 890,
         "currency": "EUR"
+      },
+      "basePrice": {
+        "amount": 890,
+        "date": "2026-11-19"
       },
       "taxIncluded": true,
       "descriptionHtml": "<p>Voćni biljni čaj s jabukom, hibiskusom i višnjom. Okusi slatkiša i svježih jagoda.</p>",
@@ -2988,7 +3232,7 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-13T14:18:49.040Z"
+      "updatedAt": "2026-11-19T11:21:45.169Z"
     },
     {
       "id": "cs-8fd803e2895b",
@@ -3000,6 +3244,10 @@
       "price": {
         "amount": 990,
         "currency": "EUR"
+      },
+      "basePrice": {
+        "amount": 990,
+        "date": "2026-11-19"
       },
       "taxIncluded": true,
       "descriptionHtml": "<p>Listovi divlje gaulterije iz šuma Quebeca. Lagana, slatkasta šalica izrazitog osvježavajućeg okusa.</p>",
@@ -3036,7 +3284,7 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-13T14:18:49.040Z"
+      "updatedAt": "2026-11-19T11:21:45.169Z"
     },
     {
       "id": "cs-9f1a79efee88",
@@ -3048,6 +3296,10 @@
       "price": {
         "amount": 1190,
         "currency": "EUR"
+      },
+      "basePrice": {
+        "amount": 1190,
+        "date": "2026-11-19"
       },
       "taxIncluded": true,
       "descriptionHtml": "<p>Divlje ubran ledon s područja Lac St-Jean. Kiselkast, biljni karakter s notama jele i kopra. Zbog tanina umjerena konzumacija.</p>",
@@ -3084,7 +3336,7 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-13T14:18:49.040Z"
+      "updatedAt": "2026-11-19T11:21:45.169Z"
     },
     {
       "id": "cs-f31fe32dd85d",
@@ -3096,6 +3348,10 @@
       "price": {
         "amount": 790,
         "currency": "EUR"
+      },
+      "basePrice": {
+        "amount": 790,
+        "date": "2026-11-19"
       },
       "taxIncluded": true,
       "descriptionHtml": "<p>Organski rooibos s planina Cederberg, bez teina. Jarko crvena šalica s notama kuhane trešnje i slada.</p>",
@@ -3133,7 +3389,7 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-13T14:18:49.040Z"
+      "updatedAt": "2026-11-19T11:21:45.169Z"
     },
     {
       "id": "cs-c5dd3e97c75d",
@@ -3145,6 +3401,10 @@
       "price": {
         "amount": 890,
         "currency": "EUR"
+      },
+      "basePrice": {
+        "amount": 890,
+        "date": "2026-11-19"
       },
       "taxIncluded": true,
       "descriptionHtml": "<p>Rooibos s grejpom, limunskom travom i začinima. Osvježavajući, bez teina.</p>",
@@ -3180,7 +3440,7 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-13T14:18:49.040Z"
+      "updatedAt": "2026-11-19T11:21:45.169Z"
     },
     {
       "id": "cs-0ad385a5212d",
@@ -3192,6 +3452,10 @@
       "price": {
         "amount": 2400,
         "currency": "EUR"
+      },
+      "basePrice": {
+        "amount": 2400,
+        "date": "2026-11-19"
       },
       "taxIncluded": true,
       "descriptionHtml": "<p>Južnoamerički napitak od biljke iz porodice božikovine, bogat teinom. Biljni, izravan i gorkast okus, sušen bez dima.</p>",
@@ -3229,7 +3493,7 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-13T14:18:49.040Z"
+      "updatedAt": "2026-11-19T11:21:45.169Z"
     },
     {
       "id": "cs-5a875b0a5a80",
@@ -3241,6 +3505,10 @@
       "price": {
         "amount": 2400,
         "currency": "EUR"
+      },
+      "basePrice": {
+        "amount": 2400,
+        "date": "2026-11-19"
       },
       "taxIncluded": true,
       "descriptionHtml": "<p>Staklena gaiwan za sve vrste čaja. Glatke stijenke za ugodan hvat i neutralno zalijevanje, a vidite kako se listovi otvaraju.</p>",
@@ -3266,7 +3534,7 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-13T14:18:49.040Z"
+      "updatedAt": "2026-11-19T11:21:45.169Z"
     },
     {
       "id": "cs-0a0a5400f65d",
@@ -3278,6 +3546,10 @@
       "price": {
         "amount": 5900,
         "currency": "EUR"
+      },
+      "basePrice": {
+        "amount": 5900,
+        "date": "2026-11-19"
       },
       "taxIncluded": true,
       "descriptionHtml": "<p>Sve za savršenu matchu: bambusova metlica chasen, držač, zdjelica chawan i čelična žličica.</p>",
@@ -3303,7 +3575,7 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-13T14:18:49.040Z"
+      "updatedAt": "2026-11-19T11:21:45.169Z"
     },
     {
       "id": "cs-16411b597625",
@@ -3315,6 +3587,10 @@
       "price": {
         "amount": 990,
         "currency": "EUR"
+      },
+      "basePrice": {
+        "amount": 990,
+        "date": "2026-11-19"
       },
       "taxIncluded": true,
       "descriptionHtml": "<p>Mala žličica od nehrđajućeg čelika za točno odmjerenu matchu svaki put.</p>",
@@ -3340,7 +3616,7 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-13T14:18:49.040Z"
+      "updatedAt": "2026-11-19T11:21:45.169Z"
     },
     {
       "id": "cs-f4e9e209d426",
@@ -3352,6 +3628,10 @@
       "price": {
         "amount": 3900,
         "currency": "EUR"
+      },
+      "basePrice": {
+        "amount": 3900,
+        "date": "2026-11-19"
       },
       "taxIncluded": true,
       "descriptionHtml": "<p>Bambusova daska za posluživanje koja skuplja vodu pri zalijevanju i ispiranju. Moderan i elegantan dizajn.</p>",
@@ -3377,7 +3657,7 @@
         "maxPerOrder": 20
       },
       "published": true,
-      "updatedAt": "2026-11-13T14:18:49.040Z"
+      "updatedAt": "2026-11-19T11:21:45.169Z"
     },
     {
       "id": "cs-7df1a83b36de",
@@ -3389,6 +3669,10 @@
       "price": {
         "amount": 3400,
         "currency": "EUR"
+      },
+      "basePrice": {
+        "amount": 3400,
+        "date": "2026-11-19"
       },
       "taxIncluded": true,
       "descriptionHtml": "<p>Knjiga kuće Camellia Sinensis (treće izdanje, engleski): povijest, terroiri i vrste čaja.</p>",
@@ -3414,7 +3698,7 @@
         "maxPerOrder": 20
       },
       "published": false,
-      "updatedAt": "2026-11-13T14:18:49.040Z"
+      "updatedAt": "2026-11-19T11:21:45.169Z"
     }
   ]
 }

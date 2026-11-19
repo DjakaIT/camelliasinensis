@@ -11,7 +11,11 @@ test('klizač teina: bez automatskog pomicanja, mijenja se samo ručno', async (
   await expect(meter.locator('.now b')).toHaveText('Malo teina');
   await meter.getByRole('button', { name: 'Puno' }).click();
   await expect(meter.locator('.now b')).toHaveText('Puno teina');
-  await expect(meter.getByRole('link', { name: /Svih \d+: puno teina/ })).toHaveAttribute('href', '/katalog/?tein=3');
+  // bez poveznice "Svih …" (Daniel, 19. 11. 2026.); četiri prijedloga u jednakim stupcima
+  await expect(meter.getByRole('link', { name: /^Svih/ })).toHaveCount(0);
+  await expect(meter.locator('.lst a.c')).toHaveCount(4);
+  const w = await meter.locator('.lst a.c').evaluateAll((a) => a.map((e) => Math.round(e.getBoundingClientRect().width)));
+  expect(new Set(w).size).toBe(1);
   // mjerač govori o teinu; samo FAQ ("Imaju li čajevi kofein?") namjerno objašnjava da je tein isto što i kofein
   expect(await meter.innerText()).not.toMatch(/kofein/i);
 });

@@ -36,6 +36,12 @@ export const IconX = ({ size = 16 }: P) => (
     <path d="M6 6l12 12M18 6L6 18" />
   </svg>
 );
+/** izbornik na mobitelu: tri crte (zatvoren) ili križić (otvoren) */
+export const IconMenu = ({ size = 22, open = false }: P & { open?: boolean }) => (
+  <svg {...base(size)} strokeLinecap="round">
+    {open ? <path d="M6 6l12 12M18 6L6 18" /> : <path d="M4 7h16M4 12h16M4 17h16" />}
+  </svg>
+);
 export const IconSearch = ({ size = 20 }: P) => (
   <svg {...base(size, 1.8)}>
     <circle cx="11" cy="11" r="7" />

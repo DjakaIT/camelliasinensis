@@ -44,6 +44,10 @@ h1, h2, h3, h4 { font-weight: 700; }
   display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 10px 10px 10px 22px;
   border-radius: 999px; box-shadow: 0 12px 30px -16px rgba(38, 45, 29, 0.55);
 }
+/* na svim uređajima traka se skriva pri listanju prema dolje, a vraća pokretom prema gore (Header.tsx); tipkovnica je zadrži */
+.bar { transition: transform 0.35s var(--ease), box-shadow 0.35s; }
+.bar.skriven:not(:has(:focus-visible)) { transform: translateY(calc(-100% - 20px)); box-shadow: none; }
+.bar .burger, .mmenu { display: none; }
 .bar::before {
   content: ''; position: absolute; inset: 0; border-radius: inherit; z-index: -1; background: rgba(38, 45, 29, 0.92);
   -webkit-backdrop-filter: blur(14px) saturate(1.4); backdrop-filter: blur(14px) saturate(1.4);
@@ -90,10 +94,10 @@ h1, h2, h3, h4 { font-weight: 700; }
 @keyframes lrast { from { opacity: 0; transform: translateY(18px); } }
 .t-main::before { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgba(24, 30, 17, 0.32) 0%, rgba(24, 30, 17, 0) 55%); }
 @media (max-width: 760px) {
-  /* mobitel: grana u vlastitoj traci iznad naslova */
-  .hbg { background: radial-gradient(90% 60% at 72% 18%, #46503a 0%, var(--olive) 75%); }
-  .hgrana { width: 340px; right: -8px; top: 38px; }
-  .t-main h1.d { margin-top: 186px; }
+  /* mobitel (Daniel, 19. 11. 2026.): kompaktno, grana manja u gornjem desnom kutu i izlazi preko ruba, naslov odmah ispod;
+     razmaci i veličine su u bloku "mobitel: kompaktni hero" na kraju datoteke */
+  .hbg { background: radial-gradient(80% 50% at 82% 10%, #46503a 0%, var(--olive) 72%); }
+  .hgrana { width: 270px; right: -70px; top: -40px; }
 }
 .t-main .top { display: flex; justify-content: space-between; gap: 20px; position: relative; }
 .t-main .top .lbl { color: #e3d3b8; }
@@ -130,12 +134,16 @@ h1, h2, h3, h4 { font-weight: 700; }
 .dark .plus { background: var(--gold); color: var(--ink); }
 
 /* mjerač kofeina */
+/* prijedlozi su red ispod klizača, četiri jednaka stupca (Daniel, 19. 11. 2026.) */
 .t-caf {
   grid-column: 1/13; background: var(--t-zeleni); padding: 26px 30px; display: grid;
-  grid-template-columns: minmax(220px, 0.8fr) 140px minmax(0, 1.6fr) minmax(0, 1.3fr); gap: 34px; align-items: center;
+  grid-template-columns: minmax(220px, 0.8fr) 140px minmax(0, 2.9fr); grid-template-areas: 'h c m' 'h c r'; gap: 18px 34px; align-items: center;
   transition: background-color 0.8s var(--ease);
 }
-.t-caf h2 { font-size: 32px; font-weight: 700; line-height: 1; }
+.t-caf h2 { font-size: 32px; font-weight: 700; line-height: 1; grid-area: h; }
+.t-caf .cupv { grid-area: c; }
+.t-caf .meter { grid-area: m; }
+.t-caf .caf-res { grid-area: r; }
 .t-caf h2 small {
   display: block; font-family: var(--f-body); font-weight: 400; font-size: 14px; letter-spacing: 0; color: rgba(39, 42, 32, 0.82);
   margin-top: 8px;
@@ -175,14 +183,13 @@ h1, h2, h3, h4 { font-weight: 700; }
 .ticks { display: flex; justify-content: space-between; font-size: 13px; font-weight: 500; }
 .ticks button { color: rgba(39, 42, 32, 0.78); transition: color 0.2s; min-height: 32px; padding: 0 4px; }
 .ticks button.on { color: var(--ink); font-weight: 600; }
-.caf-res { display: flex; flex-direction: column; gap: 8px; }
-.caf-res .lst { display: flex; gap: 8px; flex-wrap: wrap; }
+.caf-res .lst { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
 .caf-res a.c {
-  height: 40px; padding: 0 16px; border-radius: 20px; background: rgba(255, 255, 255, 0.75); display: flex; align-items: center;
-  text-decoration: none; font-weight: 500; font-size: 14px; animation: cin 0.5s var(--ease) both; transition: background 0.2s;
+  min-height: 44px; padding: 6px 12px; border-radius: 22px; background: rgba(255, 255, 255, 0.75); display: flex; align-items: center;
+  justify-content: center; text-align: center; line-height: 1.2; text-decoration: none; font-weight: 500; font-size: 14px;
+  animation: cin 0.5s var(--ease) both; transition: background 0.2s;
 }
 .caf-res a.c:hover { background: #fff; }
-.caf-res a.all { font-weight: 600; font-size: 14px; text-decoration: none; border-bottom: 1.5px solid currentColor; align-self: flex-start; }
 @keyframes cin { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
 
 /* sekcije naslovnice */
@@ -276,6 +283,8 @@ h1, h2, h3, h4 { font-weight: 700; }
 .puer .two { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .puer .two div { border-radius: 18px; background: rgba(255, 255, 255, 0.08); padding: 16px; }
 .puer .two b { font-family: var(--f-display); font-size: 22px; display: block; color: #fff; }
+/* gumb je širok kao oba kvadrata iznad njega (Daniel, 19. 11. 2026.) */
+.puer .txt .pill { display: flex; width: 100%; justify-content: center; }
 .puer .img { border-radius: var(--r); background: #3a2a22; min-height: 480px; position: relative; overflow: hidden; }
 .puer .img > picture img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .pmini {
@@ -585,37 +594,53 @@ h1, h2, h3, h4 { font-weight: 700; }
 @media (max-width: 1180px) {
   .t-main { grid-column: 1/13; min-height: 520px; }
   .t-caf { grid-template-columns: 1fr 120px; grid-template-areas: 'h c' 'm m' 'r r'; }
-  .t-caf h2 { grid-area: h; }
-  .cupv { grid-area: c; width: 120px; height: 100px; }
-  .meter { grid-area: m; }
-  .caf-res { grid-area: r; }
+  .cupv { width: 120px; height: 100px; }
   .types { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .x-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .x-rel { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .x-catgrid { grid-template-columns: 260px minmax(0, 1fr); }
 }
 @media (max-width: 820px) {
-  /* mobitel: navigacija je drugi red gornje trake (ne dolje); traka se skriva pri listanju prema dolje (Header.tsx) */
-  .bar {
-    top: 10px; left: 10px; right: 10px; flex-wrap: wrap; row-gap: 6px; border-radius: 26px; padding: 8px 8px 6px 16px;
-    transition: transform 0.35s var(--ease), box-shadow 0.35s;
+  /* mobitel (Daniel, 19. 11. 2026.): jedan red, samo logo, tražilica i izbornik; stranice i košarica su u izborniku */
+  .bar { top: 10px; left: 10px; right: 10px; gap: 8px; border-radius: 24px; padding: 6px 6px 6px 16px; }
+  .bar .logo { height: 44px; display: flex; align-items: center; }
+  .bar .logo img { height: 34px; }
+  .links, .cartp { display: none; }
+  .bar-r { gap: 0; }
+  .bar .burger { display: grid; }
+  .mmenu:not([hidden]) { display: block; }
+  .mmenu {
+    position: absolute; left: 0; right: 0; top: calc(100% + 8px); padding: 8px; border-radius: 22px;
+    background: var(--olive-d); box-shadow: 0 18px 40px -18px rgba(38, 45, 29, 0.6);
   }
-  .bar.skriven:not(:focus-within) { transform: translateY(calc(-100% - 16px)); box-shadow: none; }
-  .links { order: 3; flex-basis: 100%; justify-content: space-between; margin-left: -8px; }
-  .links a { flex: 1; justify-content: center; padding: 0 6px; font-size: 13px; height: 44px; border-radius: 22px; }
-  .bento, .x-cathead { padding-top: 136px; }
-  .x-prod, .x-co, .x-page { padding-top: 136px; }
-  .cartp .t { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-  .cartp { padding: 0 8px; }
+  .mmenu nav { display: flex; flex-direction: column; gap: 2px; }
+  .mmenu a, .mmenu .mcart {
+    width: 100%; height: 52px; padding: 0 12px 0 18px; border-radius: 16px; display: flex; align-items: center; justify-content: space-between;
+    color: #f6ebd6; font-size: 17px; font-weight: 500; text-decoration: none;
+  }
+  .mmenu a.on { background: var(--gold); color: var(--olive-d); }
+  .mmenu .mcart { margin-top: 8px; background: rgba(255, 255, 255, 0.08); }
+  .mmenu .mbadge {
+    min-width: 28px; height: 28px; border-radius: 14px; background: var(--gold); color: var(--olive-d);
+    display: grid; place-items: center; font-size: 13px; font-weight: 600; padding: 0 6px;
+  }
+  .bento, .x-cathead { padding-top: 76px; }
+  .x-prod, .x-co, .x-page { padding-top: 76px; }
   .t-main { padding: 28px 24px; min-height: 520px; }
   .t-main .top .lbl:last-child { display: none; }
   .puer { grid-template-columns: 1fr; }
   .puer .txt { padding: 28px; }
   .types { grid-template-columns: 1fr; }
   .shelf .pc, .more { flex-basis: 270px; }
-  .fg { grid-template-columns: 1fr 1fr; }
+  /* podnožje na mobitelu (Daniel, 19. 11. 2026.): logo u svom retku, pa Trgovina i Informacije jedna uz drugu, Zagreb ispod */
+  .fg { grid-template-columns: 1fr 1fr; gap: 4px 20px; }
+  .fg > div:first-child, .fg > div:last-child { grid-column: 1 / -1; }
+  .fg .logo { height: 60px; margin-bottom: 6px; }
+  .fg h2 { margin: 10px 0 0; }
   .fg a { line-height: 1.3; min-height: 44px; display: flex; align-items: center; }
-  .foot { padding: 40px 22px 40px; }
+  .fg .f-addr { margin: 10px 0 0; }
+  .foot { margin-top: 56px; padding: 26px 22px 26px; }
+  .fb { margin-top: 18px; padding-top: 14px; gap: 6px 16px; }
   .sh { margin-top: 80px; }
   .x-catgrid { grid-template-columns: 1fr; }
   .x-filters {
@@ -645,6 +670,19 @@ h1, h2, h3, h4 { font-weight: 700; }
   .x-colist .x-di { grid-template-columns: 70px 1fr auto; }
   .x-colist .x-dimg { width: 70px; height: 70px; }
   .x-brew3 { grid-template-columns: 1fr; }
+}
+@media (max-width: 760px) {
+  /* mobitel: kompaktni hero (iza bloka do 820 px, da ga nadjača) */
+  .t-main { padding: 22px 22px 24px; min-height: 0; }
+  .t-main h1 { font-size: 42px; margin: 58px 0 16px; }
+  .t-main .hq p { font-size: 14.5px; line-height: 1.45; }
+  .t-main .hq footer { margin-top: 6px; font-size: 13px; }
+  .t-main .bottom { gap: 18px; }
+  .t-main .pill { height: 48px; padding: 0 22px; }
+}
+@media (max-width: 560px) {
+  /* "Koliko teina?" na mobitelu: četiri prijedloga u dva jednaka stupca */
+  .caf-res .lst { grid-template-columns: 1fr 1fr; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

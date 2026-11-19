@@ -47,6 +47,9 @@ export const test = base.extend<Fixtures>({
 export { expect };
 
 export async function openCart(page: Page) {
+  // traka se skriva pri listanju prema dolje (Header.tsx), pa se košarica otvara s vrha stranice
+  await page.evaluate(() => window.scrollTo(0, 0));
+  await expect(page.locator('header.bar')).not.toHaveClass(/skriven/);
   await page.locator('.cartp').click();
   const d = page.getByRole('dialog', { name: /Košarica/ });
   await expect(d).toBeVisible();

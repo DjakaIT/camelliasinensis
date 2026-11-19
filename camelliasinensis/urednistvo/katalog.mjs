@@ -6,8 +6,12 @@
 // { format: 1, verzija, azurirano, azurirao,
 //   vrste: [{ kljuc, naziv, opis }],                     redoslijed = redoslijed na stranici; ključevi su stalni
 //   proizvodi: [{ id, sku, slug, naziv, vrsta, podrijetlo, tein, okusi, oblik, cijena, pakiranje, namjene,
-//                 oznake, priprema, opis, zaliha, objavljeno, slika }],
+//                 oznake, priprema, opis, zaliha, objavljeno, slika, bazna }],
 //   izdvojeno: { polica: [sku, …] } }
+//
+// bazna = { cijena, datum: 'YYYY-MM-DD' } | null: bazna (sidrena) cijena, Pravilnik o isticanju bazne cijene proizvoda
+// (NN 132/2026, od 17. 11. 2026.). Za robu ponuđenu nakon 2. 5. 2025. to je cijena s dana kad je prvi put ponuđena.
+// Uredništvo je ne mijenja: novi proizvod je dobije pri prvom spremanju (popuniBazne), a promjena cijene je ne dira.
 import crypto from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -79,6 +83,7 @@ export function pocetniKatalog(root) {
       zaliha: DEMO_ZALIHA[sku] ?? 24,
       objavljeno: true,
       slika: fs.existsSync(path.join(root, 'design-reference/img', `${sku}.jpg`)) ? sku : null,
+      bazna: null,
     };
   });
   return uskladi({
@@ -117,9 +122,34 @@ export function uskladi(k) {
   };
 }
 
+// ---------------- bazne cijene ----------------
+/** današnji datum u Hrvatskoj (YYYY-MM-DD) */
+export const danas = (d = new Date()) => new Intl.DateTimeFormat('sv-SE', { timeZone: 'Europe/Zagreb' }).format(d);
+
+/**
+ * Bazna cijena se u uredništvu ne mijenja: postojeći proizvod (isti id) zadrži onu iz trenutnog kataloga, a novi dobije
+ * svoju cijenu i današnji datum. Proizvod koji ju je ranije imao bez bazne (katalog prije 19. 11. 2026.) dobije cijenu
+ * s kojom je bio ponuđen. Ista pravila: popuni_bazne() u urednistvo/php/lib/sadrzaj.php.
+ */
+export function popuniBazne(novi, trenutni, dan = danas()) {
+  if (!novi || !Array.isArray(novi.proizvodi)) return novi;
+  const stari = new Map((Array.isArray(trenutni?.proizvodi) ? trenutni.proizvodi : []).map((p) => [p?.id, p]));
+  return {
+    ...novi,
+    proizvodi: novi.proizvodi.map((p) => {
+      if (!p || typeof p !== 'object') return p;
+      const s = stari.get(p.id);
+      if (s?.bazna) return { ...p, bazna: s.bazna };
+      const cijena = typeof s?.cijena === 'number' ? s.cijena : p.cijena;
+      return { ...p, bazna: { cijena, datum: dan } };
+    }),
+  };
+}
+
 // ---------------- provjera ----------------
 const tekst = (v, max) => typeof v === 'string' && v.trim().length <= max;
 const dvijeDecimale = (v) => Math.abs(Math.round(v * 100) - v * 100) < 1e-6;
+const DATUM = /^\d{4}-\d{2}-\d{2}$/;
 
 /**
  * Provjerava i normalizira katalog. Vraća { ok, sadrzaj, greske: [{ putanja, poruka }] }.
@@ -172,6 +202,8 @@ export function provjeri(k, slikaPostoji = () => true) {
     if (!(p.zaliha === null || (Number.isInteger(p.zaliha) && p.zaliha >= 0 && p.zaliha <= 100000))) greska(P('zaliha'), 'Zaliha je cijeli broj ≥ 0 (ili prazno = ne broji se)');
     if (typeof p.objavljeno !== 'boolean') greska(P('objavljeno'), 'Neispravno');
     if (!(p.slika === null || (typeof p.slika === 'string' && KLJUC_SLIKE.test(p.slika) && slikaPostoji(p.slika)))) greska(P('slika'), 'Fotografija ne postoji');
+    const b = p.bazna;
+    if (!(b == null || (typeof b === 'object' && typeof b.cijena === 'number' && b.cijena > 0 && b.cijena <= 9999 && dvijeDecimale(b.cijena) && typeof b.datum === 'string' && DATUM.test(b.datum)))) greska(P('bazna'), 'Neispravna bazna cijena');
   });
   if (!proizvodi.some((p) => p?.objavljeno)) greska(['proizvodi'], 'Barem jedan proizvod mora biti objavljen');
 
@@ -201,6 +233,7 @@ export function provjeri(k, slikaPostoji = () => true) {
       namjene: [...new Set(p.namjene)], oznake: [...new Set(p.oznake)],
       priprema: p.priprema ? { temp: trim(p.priprema.temp), vrijeme: trim(p.priprema.vrijeme), kolicina: trim(p.priprema.kolicina) } : null,
       opis: trim(p.opis), zaliha: p.zaliha, objavljeno: p.objavljeno, slika: p.slika,
+      bazna: p.bazna ? { cijena: Math.round(p.bazna.cijena * 100) / 100, datum: p.bazna.datum } : null,
     })),
     izdvojeno: { polica: [...polica] },
   };
@@ -228,6 +261,8 @@ export function uOblikStranice(k, dimenzije) {
     .sort((a, b) => redVrste[a.p.vrsta] - redVrste[b.p.vrsta] || a.i - b.i)
     .map(({ p }) => {
       const dim = p.slika ? dimenzije(p) : null;
+      // katalog bez bazne cijene (početni sadržaj, stariji katalog): sadašnja cijena na dan zadnje izmjene
+      const b = p.bazna ?? { cijena: p.cijena, datum: String(k.azurirano || '').slice(0, 10) || danas() };
       return {
         id: `cs-${p.id}`,
         sku: p.sku,
@@ -236,6 +271,7 @@ export function uOblikStranice(k, dimenzije) {
         type: p.vrsta,
         unitLabel: p.pakiranje,
         price: { amount: Math.round(p.cijena * 100), currency: 'EUR' },
+        basePrice: { amount: Math.round(b.cijena * 100), date: b.datum },
         taxIncluded: true,
         descriptionHtml: p.opis.split(/\n{2,}/).map((x) => `<p>${escapeHtml(x.trim())}</p>`).join(''),
         images: dim ? [{ src: `/img/p/${p.sku}.jpg`, alt: p.naziv, width: dim.width, height: dim.height }] : [],

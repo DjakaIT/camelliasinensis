@@ -46,7 +46,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const index: Record<string, IndexEntry> = Object.fromEntries(
     cards.map((c) => [
       c.sku,
-      { sku: c.sku, slug: c.slug, name: c.name, unitLabel: c.unitLabel, price: c.price, image: c.image, type: c.type, typeName: c.typeName },
+      { sku: c.sku, slug: c.slug, name: c.name, unitLabel: c.unitLabel, price: c.price, base: c.base, image: c.image, type: c.type, typeName: c.typeName },
     ]),
   );
   return (

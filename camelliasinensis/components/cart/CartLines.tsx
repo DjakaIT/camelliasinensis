@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { BasePrice } from '@/components/BasePrice';
 import { NoImage, Picture } from '@/components/Picture';
 import { productHref } from '@/lib/catalog-view';
 import { formatMoney } from '@/lib/format';
@@ -47,9 +48,10 @@ export function CartLines({ onNavigate, big }: Props) {
               ) : (
                 <b>{name}</b>
               )}
-              <small>
+              <small className="x-unit">
                 {p?.unitLabel}
                 {unit != null ? ` · ${formatMoney(unit)}` : ''}
+                <BasePrice base={p?.base} />
               </small>
               {changed && (
                 <p className="x-lmsg warn">
