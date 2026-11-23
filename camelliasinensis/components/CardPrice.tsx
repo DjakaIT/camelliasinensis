@@ -22,7 +22,9 @@ export function CardPrice({ sku, price, unitLabel, base }: { sku: string; price:
   }, [sku]);
   return (
     <span className="price">
-      {formatMoney(amount)} <small>/ {unitLabel}</small>
+      <span className="amt">
+        {formatMoney(amount)} <small>/ {unitLabel}</small>
+      </span>
       <BasePrice base={base} />
     </span>
   );
